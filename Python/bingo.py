@@ -109,5 +109,6 @@ while len(listageneralnumeros) != 25:
             listajug100.remove(juegabingonumrandom)
             listageneralnumeros.append(juegabingonumrandom)
     print(listajug100)                
-print("BINGO")    
+print("BINGO")
+print("prueba") 
     
