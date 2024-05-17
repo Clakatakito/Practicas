@@ -110,5 +110,4 @@ while len(listageneralnumeros) != 25:
             listageneralnumeros.append(juegabingonumrandom)
     print(listajug100)                
 print("BINGO")
-print("prueba") 
     
