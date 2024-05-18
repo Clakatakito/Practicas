@@ -47,7 +47,7 @@ while (cont != rondas):
         print ("Empate tijera con tijera, No hay ganador")
     if jug1==4 or jug2==4:
         break
-    cont = cont + 1 # cont+=1      cont++
+    cont+=1
 
 print ("Gracias por jugar :)")                 
         
