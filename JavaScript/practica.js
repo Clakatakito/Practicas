@@ -72,6 +72,7 @@ document.write("<br>")
 var palabra69 = "     Hola     5"
 document.write(palabra69.trimStart())//para quitar espacios del lado izquierdo, el end para el derecho i el trim solo ambos
 document.write("<br>")
+document.weite("<br>")
 
 //corta la palabra
 document.write(palabra1con.split("ra"))
