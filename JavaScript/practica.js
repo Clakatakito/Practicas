@@ -77,6 +77,7 @@ document.weite("<br>")
 document.weite("<br>")
 document.weite("<br>")
 document.weite("<br>")
+document.weite("<br>")
 
 //corta la palabra
 document.write(palabra1con.split("ra"))
