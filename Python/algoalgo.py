@@ -1,1 +1,0 @@
-print("algoalgo3")
