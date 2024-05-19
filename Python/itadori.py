@@ -1,1 +1,1 @@
-print("itadoririri679999999")
+print("itadoriri")
