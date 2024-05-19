@@ -1,1 +1,1 @@
-print("itadori")
+print("itadoriri")
