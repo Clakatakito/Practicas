@@ -83,4 +83,4 @@ document.write("<br>")
 
 //Lo contrario al .sort(), el reverse
 var reverse = ["alex" , "neumatico" , "zorra"]
-    document.write(reverse.reverse( ))
+    document.write(reverse.reverse())
