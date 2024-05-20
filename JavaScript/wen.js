@@ -1,1 +1,0 @@
-document.write("wen imbecil")
