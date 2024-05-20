@@ -1,2 +1,2 @@
 document.write("fronted")
-document.write("algo")
+document.write("algo super tope guay")
