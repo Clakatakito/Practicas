@@ -22,7 +22,7 @@ document.write("<br>")
 document.write("<br>")
 
 //ir al ultimo valor de un array
-document.write("Ultimo vaor de la cadena array " , array[array.length-1]);
+document.write("Ultimo valor de la cadena array " , array[array.length-1]);
 document.write("<br>")
 document.write("<br>")
 
@@ -83,4 +83,11 @@ document.write("<br>")
 
 //Lo contrario al .sort(), el reverse
 var reverse = ["alex" , "neumatico" , "zorra"]
-    document.write(reverse.reverse())
+document.write("Lista al reves " , reverse.reverse())
+document.write("<br>")
+document.write("<br>")
+
+//sustituir el len[x] por otro valor
+ var coches = ["Honda", "Toyota", "Mercedes"]
+ coches[0] = "picnic"
+ document.write(coches)
