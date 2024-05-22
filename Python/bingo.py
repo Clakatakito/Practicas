@@ -76,35 +76,35 @@ while len(listageneralnumeros) != 25:
     time.sleep(7)
     if juegabingonumrandom in listajug20:
         if juegabingonumrandom in listageneralnumeros:
-            print(".")
+            pass
         else:    
             listajug20.remove(juegabingonumrandom)
             listageneralnumeros.append(juegabingonumrandom)
     print(listajug20)
     if juegabingonumrandom in listajug40:
         if juegabingonumrandom in listageneralnumeros:
-            print(".")
+            pass
         else:    
             listajug40.remove(juegabingonumrandom)
             listageneralnumeros.append(juegabingonumrandom)
     print(listajug40)
     if juegabingonumrandom in listajug60:
         if juegabingonumrandom in listageneralnumeros:
-            print(".")
+            pass
         else:    
             listajug60.remove(juegabingonumrandom)
             listageneralnumeros.append(juegabingonumrandom)
     print(listajug60)
     if juegabingonumrandom in listajug80:
         if juegabingonumrandom in listageneralnumeros:
-            print(".")
+            pass
         else:    
             listajug80.remove(juegabingonumrandom)
             listageneralnumeros.append(juegabingonumrandom)
     print(listajug80)
     if juegabingonumrandom in listajug100:
         if juegabingonumrandom in listageneralnumeros:
-            print(".")
+            pass
         else:
             listajug100.remove(juegabingonumrandom)
             listageneralnumeros.append(juegabingonumrandom)
