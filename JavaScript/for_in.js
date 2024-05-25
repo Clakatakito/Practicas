@@ -13,10 +13,10 @@ document.write("<br>");
 document.write("<br>");
 
 var pregunta = prompt("Ingresa una palabra:");
-var vocal = 0;
+var cont = 0;
 for(var x in pregunta){
-    if (pregunta[x]/*x*/ == "a" || pregunta[x]/*x*/ == "e" || pregunta[x]/*x*/ == "i" || pregunta[x]/*x*/ == "o" || pregunta[x]/*x*/ == "a") {
-        vocal++;
+    if (pregunta[x]/*x*/ == "a" || pregunta[x]/*x*/ == "e" || pregunta[x]/*x*/ == "i" || pregunta[x]/*x*/ == "o" || pregunta[x]/*x*/ == "u") {
+        cont++;
     }
 }
 document.write("Tu palabra tiene " , vocal);
