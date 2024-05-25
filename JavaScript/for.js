@@ -3,18 +3,18 @@
 
 for (let variable = 10; variable <= 20; variable++) {
     if (variable == 15) {
-        document.write("va por la ", variable)
-        document.write("<br>") 
+        document.write("va por la ", variable);
+        document.write("<br>"); 
     } 
-    document.write(variable)
-    document.write("<br>")
+    document.write(variable);
+    document.write("<br>");
 }
-document.write("<br>")
-document.write("<br>")
-document.write("<br>")
-document.write("<br>")
-document.write("<br>")
-document.write("<br>")
+document.write("<br>");
+document.write("<br>");
+document.write("<br>");
+document.write("<br>");
+document.write("<br>");
+document.write("<br>");
 
 //for con array i muy chula
 
