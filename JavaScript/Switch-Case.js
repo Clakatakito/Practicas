@@ -7,10 +7,9 @@ switch (valor) {
     case 1:
         document.write("1");
         break;
-        case 2:
-            document.write("2");
-            break;
-
+    case 2:
+        document.write("2");
+        break;
     default:
         document.write("valor no valido");
         break;
