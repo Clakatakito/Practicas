@@ -1,5 +1,5 @@
 
-//Funciones
+//Funciones declarativas
 var veces = parseInt(prompt("Cuantas veces quieres ver la funcion:"));
 var cont = 0;
 alert("Esto es mio");
