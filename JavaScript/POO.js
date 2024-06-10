@@ -1,0 +1,4 @@
+
+//PROGRAMACION ORIENTADA A OBJETOS
+
+class comida
