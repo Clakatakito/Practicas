@@ -11,7 +11,7 @@ class Coche {
 }
 
 // Crear el objeto que tomara la platilla Coche
-const miCoche = new Coche('Toyota', 'Corolla');
+const miCoche = new Coche("Toyota", "Corolla");
 
 // Usar la instancia para mostrar la información
 document.write(`El coche ${miCoche.marca} con modelo ${miCoche.modelo} está arrancando.`);
