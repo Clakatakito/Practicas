@@ -1,11 +1,11 @@
 LDAP ACCOUNT MANAGER
 
-El servicio LDAP, nos facilita el control de acceso entre usuarios a la red, para poder utilizar a los usuarios en diferentes máquinas conectados a la red guardando los datos de cada uno y facilita la gestión de permisos de los alumnos, profesores y trabajadores del instituto , lo hemos implementado de la siguiente manera:
+El servicio LDAP, nos facilita el control de acceso entre usuarios en la red, para poder utilizar a los usuarios en diferentes máquinas conectados a la red guardando los datos de cada uno y facilita la gestión de los usuarios, lo implementaremos de la siguiente manera:
 
 Configuración hecha en el servidor
 
-Empezamos utilizando el siguiente pedido, para asegurarnos de que todo esté bien actualizado y no dé problemas:
-    -sudo apt update + upgrade
+Empezamos utilizando la siguiente comanda para asegurarnos de que todo esté bien actualizado y no dé problemas:
+    -sudo apt update && sudo apt upgrade
 
 Instalamos los paquetes necesarios
     -sudo apt install apache2 php php-cgi libapache2-mod-php php-mbstring php-common php-pear ldap-utils
@@ -16,29 +16,30 @@ Para saber qué versión de apache2 tienes
 Activamos la configuración php
     -sudo a2enconf php8.(la version de php que tengas)-cgi
 
-Cargamos el servicio apache2 para recoger las configuraciones
+Reiniciamos el servicio apache2 para recoger las configuraciones
     -sudo systemctl reload apache2
 
-Instalamos ldap y la GUI de ldap cuando nos pida la contraseña pondremos la deseada para entrar en el ldap
+Instalamos LDAP y la GUI de ldap cuando nos pida la contraseña pondremos la deseada para entrar en el servidor LDAP
     -sudo apt install slapd ldap-accountmanager
 
     -sudo nano /etc/apache2/conf-enabled/ldap-account-manager.conf
-En la parte de Requere ip ponemos la ip de 
-localhost y la ip desde la maquina que queremos entrar a LDAP
+
+En la parte de Requere ip pondremos la ip de 
+localhost y la ip desde la maquina que queremos entrar al servidor LDAP
 
     -Require ip 127.0.0.1 (direccion_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX/XX))
 
 
 
-Configuración hecha al cliente
+Configuración hecha en el cliente
 
 Empezamos utilizando el siguiente pedido, para asegurarnos de que todo esté bien actualizado y no dé problemas:
-    -sudo apt update + upgrade
+    -sudo apt update && sudo apt upgrade
 
-Instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio ldap
+Instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP
     -sudo apt install libnss-ldap libpam-ldap ldap-utils
 
-Accederemos a este archivo de configuración y le diremos que coja las contraseñas y grupos
+Accederemos a este archivo de configuración y le diremos que coja las contraseñas y grupos de LDAP
     -sudo nano /etc/nsswitch.conf
 
     -passwd:        files ldap
@@ -48,7 +49,7 @@ Accederemos a este archivo de configuración y le diremos que coja las contrase�
 
     -sudo nano /etc/pam.d/common-session
 
-Al final del archivo ponemos:
+Al final del archivo pondremos:
 
     -session optional pam_mkhomedir.so skel=/etc/skel umask=077
 
