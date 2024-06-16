@@ -22,4 +22,11 @@ subnet 192.168.0.0 netmask 255.255.255.0 # Configuración de la subred {
   max-lease-time 7200; # Tiempo máximo de arrendamiento en segundos
 }
 
+Salimos del archivo guardandolo y reiniciamos el servicio:
+  -sudo systemctl restart isc-dhcp-server
+
+I podemos comprobar si esta activo:
+  -sudo systemctl status isc-dhcp-server
+
+
 No te olvides de que tienes que poner ; despues de cada linea para indicar que saltas de lineas
