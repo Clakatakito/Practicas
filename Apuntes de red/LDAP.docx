@@ -7,25 +7,24 @@ Configuración hecha en el servidor
 Empezamos utilizando la siguiente comanda para asegurarnos de que todo esté bien actualizado y no dé problemas:
     -sudo apt update && sudo apt upgrade
 
-Instalamos los paquetes necesarios
+Instalamos los paquetes necesarios:
     -sudo apt install apache2 php php-cgi libapache2-mod-php php-mbstring php-common php-pear ldap-utils
 
-Para saber qué versión de apache2 tienes
+Para saber qué versión de apache2 tienes:
     -sudo php -v
 
-Activamos la configuración php
+Activamos la configuración php:
     -sudo a2enconf php8.(la version de php que tengas)-cgi
 
-Reiniciamos el servicio apache2 para recoger las configuraciones
+Reiniciamos el servicio apache2 para recoger las configuraciones:
     -sudo systemctl reload apache2
 
-Instalamos LDAP y la GUI de ldap cuando nos pida la contraseña pondremos la deseada para entrar en el servidor LDAP
+Instalamos LDAP y la GUI de ldap cuando nos pida la contraseña pondremos la deseada para entrar en el servidor LDAP:
     -sudo apt install slapd ldap-accountmanager
 
     -sudo nano /etc/apache2/conf-enabled/ldap-account-manager.conf
 
-En la parte de Requere ip pondremos la ip de 
-localhost y la ip desde la maquina que queremos entrar al servidor LDAP
+En la parte de Requere ip pondremos la ip de localhost y la ip desde la maquina que queremos entrar al servidor LDAP:
 
     -Require ip 127.0.0.1 (direccion_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX/XX))
 
@@ -36,10 +35,16 @@ Configuración hecha en el cliente
 Empezamos utilizando el siguiente pedido, para asegurarnos de que todo esté bien actualizado y no dé problemas:
     -sudo apt update && sudo apt upgrade
 
-Instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP
+En tu navegador web de confianza buscamos la dirección ip del servidor seguido de lam:
+
+  -192.168.0.1/lam
+
+Nos saldra es login de ACCOUNT MANAGER y iremos a
+
+Instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP:
     -sudo apt install libnss-ldap libpam-ldap ldap-utils
 
-Accederemos a este archivo de configuración y le diremos que coja las contraseñas y grupos de LDAP
+Accederemos a este archivo de configuración y le diremos que coja las contraseñas y grupos de LDAP:
     -sudo nano /etc/nsswitch.conf
 
     -passwd:        files ldap
