@@ -28,8 +28,6 @@ En la parte de Requere ip pondremos la ip de localhost y la ip desde la maquina 
 
     -Require ip 127.0.0.1 (direccion_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX/XX))
 
-
-
 Configuración hecha en el cliente
 
 Empezamos utilizando el siguiente pedido, para asegurarnos de que todo esté bien actualizado y no dé problemas:
@@ -39,7 +37,16 @@ En tu navegador web de confianza buscamos la dirección ip del servidor seguido 
 
   -192.168.0.1/lam
 
-Nos saldra es login de ACCOUNT MANAGER y iremos a
+Nos saldra es login de ACCOUNT MANAGER y iremos arriba a la derecha ha "LAM configuration" y a "Edit general settings" con la contraseña "lam", aqui bajamos asta abajo del todo a "Change master password" y pondremos
+la que mas nos interese, normalmete la misma que la del slapd
+
+I haremos lo mismo, iremos a "LAM configuration" y ha "Edit server profile" con la contraseña "lam": nos configuraremos el lenguaje en "Languaje settings" del que queramos, en "Tool settings" pondremos el dominio del
+servidor: "dc=tudominio,dc=com", en "Security settings" lo mismo pero con el usuario responsable: "cn=admin,dc=as,dc=es" y en "Profile password" combiamos la contraseña y a Safe.
+
+Volveremos a "LAM configuration" y ha "Edit server profile" y entraremos a "Tipos de cuenta" y ha "Tipos de cuentas activas" en "Sufijo LDAP" tanto en "Usuarios" como en "Grupos" borraremos la ou de los dos y pondremos
+nuetro dominio.
+
+I nos logeamos.
 
 Instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP:
     -sudo apt install libnss-ldap libpam-ldap ldap-utils
