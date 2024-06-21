@@ -38,7 +38,7 @@ Empezamos utilizando el siguiente comando, para asegurarnos de que todo esté bi
 
 En tu navegador web de confianza buscamos la dirección ip del servidor seguido de lam:
 
-  -192.168.0.1/lam
+ip-del-serverlam
 
 Nos saldra es login de ACCOUNT MANAGER y iremos arriba a la derecha ha "LAM configuration" y a "Edit general settings" con la contraseña "lam", aqui bajamos asta abajo del todo a "Change master password" y pondremos
 la que mas nos interese, normalmete la misma que la del slapd
