@@ -14,7 +14,7 @@ Para saber qué versión de apache2 tienes:
     -sudo php -v
 
 Activamos la configuración php:
-    -sudo a2enconf php8.(la version de php que tengas)-cgi
+    -sudo a2enconf php8.1-cgi (la version de php que tengas)
 
 Reiniciamos el servicio apache2 para recoger las configuraciones:
     -sudo systemctl reload apache2
