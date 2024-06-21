@@ -24,7 +24,7 @@ Instalamos LDAP y la GUI de ldap cuando nos pida la contraseña pondremos la des
 
     -sudo nano /etc/apache2/conf-enabled/ldap-account-manager.conf
 
-En la parte de Requere ip pondremos la ip de localhost y la ip desde la maquina que queremos entrar al servidor LDAP:
+En la parte de Requere all garanted lo cambiamos por ip, pondremos la ip de localhost y la ip desde la maquina que queremos entrar al servidor LDAP:
 
     -Require ip 127.0.0.1 192.168.0.2/24 (direccion_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX)
 
@@ -33,7 +33,7 @@ I reiniciamos:
 
 Configuración hecha en el cliente
 
-Empezamos utilizando el siguiente pedido, para asegurarnos de que todo esté bien actualizado y no dé problemas:
+Empezamos utilizando el siguiente comando, para asegurarnos de que todo esté bien actualizado y no dé problemas:
     -sudo apt update && sudo apt upgrade && sudo apt install ldap-utils
 
 En tu navegador web de confianza buscamos la dirección ip del servidor seguido de lam:
