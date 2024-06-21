@@ -20,18 +20,21 @@ Reiniciamos el servicio apache2 para recoger las configuraciones:
     -sudo systemctl reload apache2
 
 Instalamos LDAP y la GUI de ldap cuando nos pida la contraseña pondremos la deseada para entrar en el servidor LDAP:
-    -sudo apt install slapd ldap-accountmanager
+    -sudo apt install ldap-account-manager
 
     -sudo nano /etc/apache2/conf-enabled/ldap-account-manager.conf
 
 En la parte de Requere ip pondremos la ip de localhost y la ip desde la maquina que queremos entrar al servidor LDAP:
 
-    -Require ip 127.0.0.1 (direccion_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX/XX))
+    -Require ip 127.0.0.1 192.168.0.2/24 (direccion_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX)
+
+I reiniciamos:
+    -sudo systemctl restart apache2.service
 
 Configuración hecha en el cliente
 
 Empezamos utilizando el siguiente pedido, para asegurarnos de que todo esté bien actualizado y no dé problemas:
-    -sudo apt update && sudo apt upgrade
+    -sudo apt update && sudo apt upgrade && sudo apt install ldap-utils
 
 En tu navegador web de confianza buscamos la dirección ip del servidor seguido de lam:
 
@@ -46,7 +49,28 @@ servidor: "dc=tudominio,dc=com", en "Security settings" lo mismo pero con el usu
 Volveremos a "LAM configuration" y ha "Edit server profile" y entraremos a "Tipos de cuenta" y ha "Tipos de cuentas activas" en "Sufijo LDAP" tanto en "Usuarios" como en "Grupos" borraremos la ou de los dos y pondremos
 nuetro dominio.
 
-I nos logeamos.
+Nos vamos al servidor y instalamos ldap:
+    -sudo apt install slapd
+
+I acto seguido:
+    -sudo dpkg-reconfigure slapd
+
+Primera:
+    NO
+
+Segunda:
+    Tu dns (tudominio.cat)
+
+Tercera:
+    La ou padre que quieras
+
+Cuarta:
+    Contraseña
+
+Quinta:
+    Repetir contraseña
+
+I nos logeamos con aquella contraseña en LAM.
 
 Instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP:
     -sudo apt install libnss-ldap libpam-ldap ldap-utils
