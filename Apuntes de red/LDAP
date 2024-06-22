@@ -14,7 +14,7 @@ Para saber qué versión de apache2 tienes:
     -sudo php -v
 
 Activamos la configuración php:
-    -sudo a2enconf php8.1-cgi (la version de php que tengas)
+    -sudo a2enconf php8.1-cgi (la versión de php que tengas)
 
 Reiniciamos el servicio apache2 para recoger las configuraciones:
     -sudo systemctl reload apache2
@@ -24,11 +24,11 @@ Instalamos LDAP y la GUI de ldap cuando nos pida la contraseña pondremos la des
 
     -sudo nano /etc/apache2/conf-enabled/ldap-account-manager.conf
 
-En la parte de Requere all garanted lo cambiamos por ip, pondremos la ip de localhost y la ip desde la maquina que queremos entrar al servidor LDAP:
+En la parte de Requere all garanted lo cambiamos por ip, pondremos la ip de localhost y la ip desde la máFquina que queremos entrar al servidor LDAP:
 
-    -Require ip 127.0.0.1 192.168.0.2/24 (direccion_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX)
+    -Require ip 127.0.0.1 192.168.0.2/24 (dirección_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX)
 
-I reiniciamos:
+Y reiniciamos:
     -sudo systemctl restart apache2.service
 
 Configuración hecha en el cliente
@@ -38,21 +38,21 @@ Empezamos utilizando el siguiente comando, para asegurarnos de que todo esté bi
 
 En tu navegador web de confianza buscamos la dirección ip del servidor seguido de lam:
 
-ip-del-serverlam
+ip-del-server/lam
 
-Nos saldra es login de ACCOUNT MANAGER y iremos arriba a la derecha ha "LAM configuration" y a "Edit general settings" con la contraseña "lam", aqui bajamos asta abajo del todo a "Change master password" y pondremos
-la que mas nos interese, normalmete la misma que la del slapd
+Nos saldrá es login de ACCOUNT MANAGER y iremos arriba a la derecha ha "LAM configuration" y a "Edit general settings" con la contraseña "lam", aquí bajamos asta abajo del todo a "Change master password" y pondremos
+la que más nos interese, normmalmente la misma que la del slapd
 
-I haremos lo mismo, iremos a "LAM configuration" y ha "Edit server profile" con la contraseña "lam": nos configuraremos el lenguaje en "Languaje settings" del que queramos, en "Tool settings" pondremos el dominio del
-servidor: "dc=tudominio,dc=com", en "Security settings" lo mismo pero con el usuario responsable: "cn=admin,dc=as,dc=es" y en "Profile password" combiamos la contraseña y a Safe.
+Y haremos lo mismo, iremos a "LAM configuration" y ha "Edit server profile" con la contraseña "lam": nos configuraremos el lenguaje en "Languaje settings" del que queramos, en "Tool settings" pondremos el dominio del
+servidor: "dc=tudominio,dc=com", en "Security settings" lo mismo pero con el usuario responsable: "cn=admin,dc=as,dc=es" y en "Profile password" cambiamos la contraseña y a Safe.
 
 Volveremos a "LAM configuration" y ha "Edit server profile" y entraremos a "Tipos de cuenta" y ha "Tipos de cuentas activas" en "Sufijo LDAP" tanto en "Usuarios" como en "Grupos" borraremos la ou de los dos y pondremos
-nuetro dominio.
+nuestro dominio.
 
 Nos vamos al servidor y instalamos ldap:
     -sudo apt install slapd
 
-I acto seguido:
+Y acto seguido:
     -sudo dpkg-reconfigure slapd
 
 Primera:
@@ -70,12 +70,12 @@ Cuarta:
 Quinta:
     Repetir contraseña
 
-I nos logeamos con aquella contraseña en LAM.
+Y nos logeamos con aquella contraseña en LAM.
 
-Como no tenemos ninguna ou_padre por la que partir, si nos vamos a "Herramientas" "Editor de OU" esta en blanco, es porque no tenemos ninguna asique crearemos un fichero .ldif en "/etc/"
+Como no tenemos ninguna ou_padre por la que partir, si nos vamos a "Herramientas" "Editor de OU" está en blanco, es porque no tenemos ninguna así que crearemos un fichero .ldif en "/etc/"
     -sudo nano ou.ldif
 
-I en ese fichero pondremos:
+Y en ese fichero pondremos:
 
 dn: ou=ou_padre,dc=dominio,dc=cat
 objectClass: top
@@ -94,7 +94,7 @@ objectClass: posixGroup
 gidNumber: 10000
 cn: Administradores
 
-I ya nos saldra, podremos crear: usuario, grupos, ou's, gestionarlas entre otros, pero vamos a crear un usuario:
+Y ya nos saldra, podremos crear: usuario, grupos, ou's, gestionarlas entre otros, pero vamos a crear un usuario:
 
 En "Usuario" "Nuevo usuario":
 
@@ -124,7 +124,7 @@ Quinta:
 Sexta:
     cn=admin,dc=dominio,dc=cat
 
-Septima:
+Séptima:
     Contraseña
 
 Accederemos a este archivo de configuración y le diremos que coja las contraseñas y grupos de LDAP:
@@ -134,7 +134,7 @@ Accederemos a este archivo de configuración y le diremos que coja las contrase�
     -group:         files ldap
     -shadow:        files ldap
 
-Despues de hacer eso si ponemos la comanda de abajo podemos ver los usuarios en la red (a nuetros usuarios creados):
+Déspues de hacer eso si ponemos la comanda de abajo podemos ver los usuarios en la red (a nuestros usuarios creados):
     -sudo nano getent passwd
 
     -sudo nano /etc/pam.d/common-session
@@ -145,6 +145,6 @@ Al final del archivo pondremos:
 
     -sudo apt install nslcd:
 
-Rellenamos las credenciales que tendrian que estar rellenadas ya y hacemos reboot
+Rellenamos las credenciales que tendrían que estar rellenadas ya y hacemos reboot:
 
-Así tendremos funcionando el servicio LDAP
+Así tendremos funcionando el servicio LDAP.
