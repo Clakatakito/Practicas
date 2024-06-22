@@ -72,25 +72,79 @@ Quinta:
 
 I nos logeamos con aquella contraseña en LAM.
 
-Instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP:
+Como no tenemos ninguna ou_padre por la que partir, si nos vamos a "Herramientas" "Editor de OU" esta en blanco, es porque no tenemos ninguna asique crearemos un fichero .ldif en "/etc/"
+    -sudo nano ou.ldif
+
+I en ese fichero pondremos:
+
+dn: ou=ou_padre,dc=dominio,dc=cat
+objectClass: top
+objectClass: organizationalUnit
+ou: ou_padre
+
+Guardamos y en la linea de comandos lo metemos en la base de datos:
+    -sudo ldapadd -x -D cn=admin,dc=dominio,dc=cat -W -f ou.ldif
+
+Ahora haremos lo mismo para crear un grupo y usaremos de plantilla de "ou.ldif":
+    -sudo cp ou.ldif group.ldif
+
+dn: cn=Administradores,ou=ou_padre,dc=dominio,dc=cat
+objectClass: top
+objectClass: posixGroup
+gidNumber: 10000
+cn: Administradores
+
+I ya nos saldra, podremos crear: usuario, grupos, ou's, gestionarlas entre otros, pero vamos a crear un usuario:
+
+En "Usuario" "Nuevo usuario":
+
+Nos crearemos el usuario como queramos:
+
+Por ejemplo crearemos el usuario pepe de contraseña pepe y de nombre de usuario pepe:
+
+
+Luego de eso iremos a la terminal y instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP:
     -sudo apt install libnss-ldap libpam-ldap ldap-utils
+
+Primera:
+    ldap://ip-de-tu-servidor/
+
+Segunda:
+    dc=dominio,dc=cat
+
+Tercera:
+    3
+
+Cuarta:
+    Si
+
+Quinta:
+    No
+
+Sexta:
+    cn=admin,dc=dominio,dc=cat
+
+Septima:
+    Contraseña
 
 Accederemos a este archivo de configuración y le diremos que coja las contraseñas y grupos de LDAP:
     -sudo nano /etc/nsswitch.conf
 
     -passwd:        files ldap
     -group:         files ldap
+    -shadow:        files ldap
 
-
+Despues de hacer eso si ponemos la comanda de abajo podemos ver los usuarios en la red (a nuetros usuarios creados):
+    -sudo nano getent passwd
 
     -sudo nano /etc/pam.d/common-session
 
 Al final del archivo pondremos:
 
-    -session optional pam_mkhomedir.so skel=/etc/skel umask=077
+    -session optional    pam_mkhomedir.so skel=/etc/skel umask=077
 
     -sudo apt install nslcd:
 
-Rellenamos las credenciales y hacemos reboot
+Rellenamos las credenciales que tendrian que estar rellenadas ya y hacemos reboot
 
 Así tendremos funcionando el servicio LDAP
