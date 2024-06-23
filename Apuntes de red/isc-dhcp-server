@@ -11,15 +11,15 @@ El segundo archivo de configuracion que iremos sera el "/etc/dhcp/dhcpd.conf" qu
     -sudo nano /etc/dhcp/dhcpd.conf
 En este archivo podemos configurar diversas cosas como: la dirrecion ip, el tiempo maximo de refresco de ip's, el rango, la mascara i mas..., pondre las que sean necesarias i las curiosas.
 
-ddns-update-style none; #desactiva las actualizaciones dinámicas de DNS
-subnet 192.168.0.0 netmask 255.255.255.0 # Configuración de la subred {
-  range 192.168.0.1 192.168.0.100; # Rango de direcciones IP a asignar
+ddns-update-style none;                            # Desactiva las actualizaciones dinámicas de DNS
+subnet 192.168.0.0 netmask 255.255.255.0           # Configuración de la subred {
+  range 192.168.0.1 192.168.0.100;                 # Rango de direcciones IP a asignar
   option domain-name-servers 192.168.0.1, 8.8.8.8; # Servidores DNS
-  option domain-name "dominio.com"; # Dominio local
-  option subnet-mask 255.255.255.0;  # Máscara de subred, no haria falta ya que ya lo indiquemos pero se suele poner igual
-  option routers 192.168.0.1; #Especifica la dirección IP de la puerta de enlace predeterminada
-  default-lease-time 600; # Tiempo de arrendamiento predeterminado en segundos
-  max-lease-time 7200; # Tiempo máximo de arrendamiento en segundos
+  option domain-name "dominio.com";                # Dominio local
+  option subnet-mask 255.255.255.0;                # Máscara de subred, no haria falta ya que ya lo indiquemos pero se suele poner igual
+  option routers 192.168.0.1;                      # Especifica la dirección IP de la puerta de enlace predeterminada
+  default-lease-time 600;                          # Tiempo de arrendamiento predeterminado en segundos
+  max-lease-time 7200;                             # Tiempo máximo de arrendamiento en segundos
 }
 
 Salimos del archivo guardandolo y reiniciamos el servicio:
