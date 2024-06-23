@@ -1,8 +1,9 @@
+
 LDAP ACCOUNT MANAGER
 
 El servicio LDAP, nos facilita el control de acceso entre usuarios en la red, para poder utilizar a los usuarios en diferentes máquinas conectados a la red guardando los datos de cada uno y facilita la gestión de los usuarios, lo implementaremos de la siguiente manera:
 
-Configuración hecha en el servidor
+Configuración hecha en el servidor:
 
 Empezamos utilizando la siguiente comanda para asegurarnos de que todo esté bien actualizado y no dé problemas:
     -sudo apt update && sudo apt upgrade
@@ -19,37 +20,38 @@ Activamos la configuración php:
 Reiniciamos el servicio apache2 para recoger las configuraciones:
     -sudo systemctl reload apache2
 
-Instalamos LDAP y la GUI de ldap cuando nos pida la contraseña pondremos la deseada para entrar en el servidor LDAP:
+Instalamos la GUI de LDAP:
     -sudo apt install ldap-account-manager
 
+Entraremos a "/etc/apache2/conf-enabled/ldap-account-manager.conf" para configurar que ip's pueden entrar al LDAP:
     -sudo nano /etc/apache2/conf-enabled/ldap-account-manager.conf
 
-En la parte de Requere all garanted lo cambiamos por ip, pondremos la ip de localhost y la ip desde la máFquina que queremos entrar al servidor LDAP:
+En la parte de "Require all garanted" cambiamos "all garanted" por "ip", pondremos la ip de localhost y la ip desde la máFquina que queremos entrar al servidor LDAP:
 
-    -Require ip 127.0.0.1 192.168.0.2/24 (dirección_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX)
+    -Require ip 127.0.0.1 192.168.0.2/24 (dirección_ip_desde_la_que_quiere_entrar(192.168.XXX.XXX/XX)
 
 Y reiniciamos:
     -sudo systemctl restart apache2.service
 
-Configuración hecha en el cliente
+Configuración hecha en el cliente:
 
-Empezamos utilizando el siguiente comando, para asegurarnos de que todo esté bien actualizado y no dé problemas:
+Empezamos utilizando el siguiente comando, para asegurarnos de que todo esté bien actualizado y no dé problemas y un paquete de LDAP:
     -sudo apt update && sudo apt upgrade && sudo apt install ldap-utils
 
 En tu navegador web de confianza buscamos la dirección ip del servidor seguido de lam:
 
 ip-del-server/lam
 
-Nos saldrá es login de ACCOUNT MANAGER y iremos arriba a la derecha ha "LAM configuration" y a "Edit general settings" con la contraseña "lam", aquí bajamos asta abajo del todo a "Change master password" y pondremos
-la que más nos interese, normmalmente la misma que la del slapd
+Nos saldrá el login de ACCOUNT MANAGER y nos iremos arriba a la derecha ha "LAM configuration" y a "Edit general settings" con la contraseña "lam", aquí bajamos asta abajo del todo a "Change master password" y pondremos
+la que más nos interese:
 
-Y haremos lo mismo, iremos a "LAM configuration" y ha "Edit server profile" con la contraseña "lam": nos configuraremos el lenguaje en "Languaje settings" del que queramos, en "Tool settings" pondremos el dominio del
-servidor: "dc=tudominio,dc=com", en "Security settings" lo mismo pero con el usuario responsable: "cn=admin,dc=as,dc=es" y en "Profile password" cambiamos la contraseña y a Safe.
+Y haremos lo mismo, iremos a "LAM configuration" y ha "Edit server profile" con la contraseña "lam", nos configuraremos el lenguaje en "Languaje settings" del que queramos, en "Tool settings" pondremos el dominio del
+servidor: "dc=tudominio,dc=com", en "Security settings" lo mismo pero con el usuario responsable: "cn=admin,dc=dominio,dc=com" y en "Profile password" cambiamos la contraseña y a Safe.
 
 Volveremos a "LAM configuration" y ha "Edit server profile" y entraremos a "Tipos de cuenta" y ha "Tipos de cuentas activas" en "Sufijo LDAP" tanto en "Usuarios" como en "Grupos" borraremos la ou de los dos y pondremos
 nuestro dominio.
 
-Nos vamos al servidor y instalamos ldap:
+Nos vamos al servidor y instalamos LDAP:
     -sudo apt install slapd
 
 Y acto seguido:
@@ -59,7 +61,7 @@ Primera:
     NO
 
 Segunda:
-    Tu dns (tudominio.cat)
+    Tu dns (tudominio.com)
 
 Tercera:
     La ou padre que quieras
