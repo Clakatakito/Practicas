@@ -1,15 +1,20 @@
-Vamos a instalar el servicio "isc-dhcp-server" que nos va ha dar ip's dinamicas y asignar automáticamente direcciones IP y otra información de configuración de red a los dispositivos que se conectan a una red.
 
-    -sudo apt update && sudo apt upgrade
-    -sudo apt install isc-dhcp-server
-Nos vamos al archivo de configuracion "/etc/default/isc-dhcp-server" que sera el encargado determinar en qué interfaces debe estar activo el servidor
+Vamos a instalar el servicio "isc-dhcp-server" que nos va ha dar ip's dinamicas y asignar automáticamente direcciones IP y otra información de configuración de red a los dispositivos que se conectan a nuestra red.
+
+    -sudo apt update && sudo apt upgrade && sudo apt install isc-dhcp-server
+
+Nos vamos al archivo de configuracion "/etc/default/isc-dhcp-server" que sera el encargado determinar en qué interfaces debe estar activo el servidor:
     -sudo nano /etc/default/isc-dhcp-server
-Aqui tendremos que poner la interface de red correspondiente en el apartado que te convenga
+
+Aqui tendremos que poner la interface de red correspondiente en el apartado que te convenga:
     -INTERFACESv4="enpXsX(enp0s8)"
-Guardamos y salimos
-El segundo archivo de configuracion que iremos sera el "/etc/dhcp/dhcpd.conf" que es el archivo principal donde configuraremos todo lo necesario.
+
+Guardamos y salimos:
+
+El segundo archivo de configuracion que iremos sera el "/etc/dhcp/dhcpd.conf" que es el archivo principal donde configuraremos todo lo necesario:
     -sudo nano /etc/dhcp/dhcpd.conf
-En este archivo podemos configurar diversas cosas como: la dirrecion ip, el tiempo maximo de refresco de ip's, el rango, la mascara i mas..., pondre las que sean necesarias i las curiosas.
+
+En este archivo podemos configurar diversas cosas como: la dirrecion ip, el tiempo maximo de refresco de ip's, el rango, la mascara i mas..., pondre las que sean necesarias y las curiosas:
 
 ddns-update-style none;                            # Desactiva las actualizaciones dinámicas de DNS
 subnet 192.168.0.0 netmask 255.255.255.0           # Configuración de la subred {
@@ -29,4 +34,4 @@ I podemos comprobar si esta activo:
   -sudo systemctl status isc-dhcp-server
 
 
-No te olvides de que tienes que poner ; despues de cada linea para indicar que saltas de lineas
+No te olvides de que tienes que poner ; despues de cada linea para indicar que saltas de linea.
