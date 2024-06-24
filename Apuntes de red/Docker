@@ -1,14 +1,18 @@
-Instalacion y configuración de Docker
 
-sudo apt update && sudo apt upgrade
+Docker es 
 
-sudo apt-get install ca-certificates curl
+Instalacion y configuración de Docker:
 
-sudo install -m 0755 -d /etc/apt/keyrings
+copiar y pegar de la explicación de esta comanda, me da pereza
+  -sudo apt update && sudo apt upgrade
 
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  -sudo apt-get install ca-certificates curl
 
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+  -sudo install -m 0755 -d /etc/apt/keyrings
+
+  -sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
+  -sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 
 
