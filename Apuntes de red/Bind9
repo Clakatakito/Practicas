@@ -63,6 +63,12 @@ I acabamos con un:
   -sudo systemctl restart bind9
   -sudo systemctl status bind9
 
-Ahora si hacemos un dig al nombre de dominio no nos saldra porque hay que modificar el "/etc/resolf.conf" ACABAR
+Ahora si hacemos un dig al nombre de dominio no nos saldra porque hay que modificar el "/etc/resolf.conf" cada vez que iniciamos la maquina (no es lo normal ya que un server no se tiene que apagar pero bueno), haremos esto:
+  -sudo apt install resolvconf
+
+Iremos a "/etc/resolvconf/resolv.conf.d/head" y poner la ip de loopback
+  -127.0.0.1
+
+Y ya estaria nuestro servicio DNS el Bind9 configurado.
 
   
