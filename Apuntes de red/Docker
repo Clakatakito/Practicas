@@ -12,6 +12,8 @@ copiar y pegar de la explicación de esta comanda, me da pereza
 
   -sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 
+  -sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
   -sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 
