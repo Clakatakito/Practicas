@@ -57,7 +57,7 @@ I el de inversa: #el db.127
 1       IN      PTR     dominio.
 2       IN      PTR     cliente01
 
-#RECORDEMOS QUE EL . AL FINAL SIGNIFICA QUE YA HAS ACABADO Y NO PONDRA EL DOMINIO AL FINAL (NO ES LO MISMO cliente01 que cliente01.as.cat)
+#RECORDEMOS QUE EL . AL FINAL SIGNIFICA QUE YA HAS ACABADO Y NO PONDRA EL DOMINIO AL FINAL (NO ES LO MISMO cliente01 que cliente01.dominio.cat)
 
 I acabamos con un:
   -sudo systemctl restart bind9
