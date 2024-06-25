@@ -1,1 +1,42 @@
-por hacer
+
+Fail2ban es una herramienta de seguridad diseñada para proteger sistemas Unix/Linux contra ataques de fuerza bruta y otras actividades maliciosas
+
+Empezamos utilizando la siguiente comanda para asegurarnos de que todo esté bien actualizado y no dé problemas:
+    -sudo apt update && sudo apt upgrade
+
+Instalaremos el servicio:
+  -sudo apt install fail2ban
+
+Copiaremos el archivo "/etc/fail2ban/jail.conf" para hacer el "/etc/fail2ban/jail.local"
+
+Entraremos en el:
+  -sudo nano /etc/fail2ban/jail.local
+
+I ya viene bastante configurado una vez instalado, pero podemos configurar los tiempo y intentos en:
+
+bantime  = 10m  # bantime es el número de segundos que un host será bloqueado, puedes usar "m" para minutos, "h" para horas, "d" para días. (10 minutos)
+
+findtime  = 10m  # Un host será bloqueado si ha generado "maxretry" intentos fallidos durante los últimos "findtime" segundos, Aquí también puedes usar "m", "h" o "d" para especificar minutos, horas o días. (10 minutos)
+
+maxretry = 5  # maxretry es el número de fallos permitidos antes de que un host sea bloqueado. (5 intentos fallidos)
+
+
+Para mas seguridad podemos poner en el apartado de [sshd] el:
+
+
+[sshd]
+
+enabled = true #Para no ir en cada apartado poniendo: bantime, findtime y maxretry podemos poner "enabled = true para que lo coja"
+port    = ssh
+logpath = %(sshd_log)s
+backend = %(sshd_backend)s
+
+
+Guardamos y salimos:
+
+Y reiniciamos el servicio:
+  -sudo systemctl restart fail2ban.service
+
+Puedes ir viendo el log:
+  -sudo tail -f /var/log/fail2ban.log
+
