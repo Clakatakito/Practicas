@@ -34,7 +34,7 @@ backend = %(sshd_backend)s
 
 Guardamos y salimos:
 
-Y reiniciamos el servicio:
+Y reiniciamos el servicio (tarda un poco en verse reflejada la configuracion):
   -sudo systemctl restart fail2ban.service
 
 Puedes ir viendo el log:
