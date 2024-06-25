@@ -3,8 +3,9 @@ Docker es
 
 Instalacion y configuración de Docker:
 
-copiar y pegar de la explicación de esta comanda, me da pereza
-  -sudo apt update && sudo apt upgrade
+Empezamos utilizando la siguiente comanda para asegurarnos de que todo esté bien actualizado y no dé problemas:
+    -sudo apt update && sudo apt upgrade
+
 
   -sudo apt-get install ca-certificates curl
 
