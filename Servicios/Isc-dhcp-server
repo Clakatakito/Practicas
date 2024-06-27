@@ -17,7 +17,7 @@ El segundo archivo de configuracion que iremos sera el "/etc/dhcp/dhcpd.conf" qu
 En este archivo podemos configurar diversas cosas como: la dirrecion ip, el tiempo maximo de refresco de ip's, el rango, la mascara i mas..., pondre las que sean necesarias y las curiosas:
 
 ddns-update-style none;                            # Desactiva las actualizaciones dinámicas de DNS
-subnet 192.168.0.0 netmask 255.255.255.0           # Configuración de la subred {
+subnet 192.168.0.0 netmask 255.255.255.0 {         # Configuración de la subred {
   range 192.168.0.1 192.168.0.100;                 # Rango de direcciones IP a asignar
   option domain-name-servers 192.168.0.1, 8.8.8.8; # Servidores DNS
   option domain-name "dominio.com";                # Dominio local
