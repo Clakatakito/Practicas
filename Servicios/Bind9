@@ -30,6 +30,10 @@ Reinicia el servicio:
 I comprobar si lo que pusimos no tiene fallos:
   -sudo systemctl status named.service
 
+Copiaremos el fichero de ejemplo del DNS directo:
+  -sudo cp /etc/bind/db.0 /etc/bind/db.dominio.cat
+  -sudo nano /etc/bind/db.dominio.cat
+
 Nos iremos a nuetro fichero directo remplazado y pondremos algo parecido a esto: #El db.0 
 
 @       IN      SOA     ns1.dominio. root.dominio. (
@@ -45,6 +49,8 @@ dominio.        IN      A       ip-del-server
 cliente01       IN      A       ip-del-cliente
 
 I el de inversa: #el db.127
+  -sudo cp /etc/bind/db.127 /etc/bind/db.as.cat.inverse
+  -sudo nano /etc/bind/db.as.cat.inverse
 
 @       IN      SOA     dominio. root.dominio. (
                               1         ; Serial
@@ -67,7 +73,13 @@ Ahora si hacemos un dig al nombre de dominio no nos saldra porque hay que modifi
   -sudo apt install resolvconf
 
 Iremos a "/etc/resolvconf/resolv.conf.d/head" y poner la ip de loopback
+  -sudo nano /etc/resolvconf/resolv.conf.d/head
   -127.0.0.1
+
+Ir por si acaso a "sudo nano /etc/resolv.conf" y ponerlo manual tu tambien para comprovar que la configuracion hecha funciona:
+  -sudo nano /etc/resolv.conf
+
+Reboot y ya esta
 
 Y ya estaria nuestro servicio DNS el Bind9 configurado.
 
