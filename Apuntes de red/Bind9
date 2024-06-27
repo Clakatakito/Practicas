@@ -1,0 +1,74 @@
+
+Bind9 es un servicio para resolver nombres de dominio en direcciones IP y viceversa.
+
+Empezamos:
+
+Primero actualizamos y lo mejoramos:
+  -sudo apt update && sudo apt upgrade
+
+I dedpues instalamos el servicio:
+  -sudo apt install bind9
+
+Nos iremos a "/etc/bind/named.conf.local":
+  -sudo nano /etc/bind/named.conf.local
+
+Haremos algo parecido a esto pero con nuestras credenciales:
+
+zone "tudominio.cat" {
+        type master;
+        file "/etc/bind/db.tudominio"; #Puedes hacer un cp del fichero db.0 y reescribirlo "sudo nano /etc/bind/db.0"
+};
+
+zone "0.168.192.in-addr.arpa" {
+        type master;
+        file "/etc/bind/as.cat.inverse"; #Puedes hacer lo mismo con el fichero db.127 "sudo nano /etc/bind/db.127"
+};
+
+Reinicia el servicio:
+  -sudo systemctl restart bind9
+
+I comprobar si lo que pusimos no tiene fallos:
+  -sudo systemctl status named.service
+
+Nos iremos a nuetro fichero directo remplazado y pondremos algo parecido a esto: #El db.0 
+
+@       IN      SOA     ns1.dominio. root.dominio. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@               IN      NS      ns1
+ns1             IN      A       ip-del-server
+dominio.        IN      A       ip-del-server
+cliente01       IN      A       ip-del-cliente
+
+I el de inversa: #el db.127
+
+@       IN      SOA     dominio. root.dominio. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns1.dominio.
+1       IN      PTR     dominio.
+2       IN      PTR     cliente01
+
+#RECORDEMOS QUE EL . AL FINAL SIGNIFICA QUE YA HAS ACABADO Y NO PONDRA EL DOMINIO AL FINAL (NO ES LO MISMO cliente01 que cliente01.dominio.cat)
+
+I acabamos con un:
+  -sudo systemctl restart bind9
+  -sudo systemctl status bind9
+
+Ahora si hacemos un dig al nombre de dominio no nos saldra porque hay que modificar el "/etc/resolf.conf" cada vez que iniciamos la maquina (no es lo normal ya que un server no se tiene que apagar pero bueno), haremos esto:
+  -sudo apt install resolvconf
+
+Iremos a "/etc/resolvconf/resolv.conf.d/head" y poner la ip de loopback
+  -127.0.0.1
+
+Y ya estaria nuestro servicio DNS el Bind9 configurado.
+
+  
