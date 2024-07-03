@@ -34,13 +34,13 @@ class Moto {
     }
 
     detenerse() {
-        document.write(`${this.marca} ${this.modelo} se ha detenido.`);
+        document.write(this.marca, " " ,this.modelo , " esta detenido");
     }
     get la_marca() {
         return this.marca
     }
-    set modificarMarca(nueva_marca) {
-        this._marca = nueva_marca;
+    set ModificarMarca(nueva_marca) {
+        this.marca = nueva_marca;
     } 
 }
 
@@ -56,8 +56,7 @@ document.write("<br>")
 document.write("<br>")
 
 miMoto.modificarMarca = "Kamasaki"
-document.write(miMoto.modificarMarca)
+document.write("Ahora el nuevo nombre es " , miMoto.modificarMarca)
 
-//Con Herencias
 
 
