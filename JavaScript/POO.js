@@ -1,8 +1,4 @@
-const { JSDOM } = require('jsdom');
 
-const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
-global.document = dom.window.document;
-global.window = dom.window;
 
 document.write('Hello, Quokka!');
 
@@ -93,14 +89,13 @@ console.log(personaje1.despedir());
 console.log(personaje1.verNombre);
 personaje1.CambiarNombre = "MANOLO"
 console.log(personaje1.verNombre);
-
 class Enemigo extends Personaje {
     constructor(nombre, edad, pelo, bigote){ //Pondremos los mismos paramentos de la otra clase mas nuevos si queremos
         super(nombre, edad, pelo) //ponemos aqui los que venga de la clase que estamos tomando, de la que no no
         this.bigote = bigote
     }
     atacar(){
-        return (this.nombre, " te ataca")
+        return (this.nombre + " te ataca")
     }
     saludar(){
         return super.saludar() + " y encima te pega"
