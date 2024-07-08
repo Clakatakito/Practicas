@@ -26,12 +26,7 @@ class Coche {
 const miCoche = new Coche("Toyota", "Corolla");
 
 // Usar la instancia para mostrar la información
-document.write(`El coche ${miCoche.marca} con modelo ${miCoche.modelo} está arrancando.`);
-
-document.write("<br>");
-document.write("<br>");
-document.write("<br>");
-document.write("<br>");
+console.log(`El coche ${miCoche.marca} con modelo ${miCoche.modelo} está arrancando.`);
 
 //Ejemplo con las funciones
 
@@ -42,11 +37,11 @@ class Moto {
     }
 
     arrancar() {
-        document.write(`${this.marca} ${this.modelo} está arrancando.`);
+        return (`${this.marca} ${this.modelo} está arrancando.`);
     }
 
     detenerse() {
-        document.write(this.marca, " " ,this.modelo , " esta detenido");
+        return (this.marca + " " + this.modelo + " esta detenido");
     }
     get la_marca() {
         return this.marca
@@ -56,29 +51,20 @@ class Moto {
     } 
 }
 
-const miMoto = new Moto('Honda', 'CBR500R');
-miMoto.arrancar();
-document.write("<br>");
-miMoto.detenerse();
-document.write("<br>")
-document.write("<br>")
-document.write(`La marca de la moto es: ${miMoto.la_marca}<br>`);
+const miMoto = new Moto("Honda", "CBR500R");
+console.log(miMoto.arrancar());
+console.log(miMoto.detenerse());
+console.log(`La marca de la moto es ${miMoto.la_marca}`);
 
-document.write("<br>")
-document.write("<br>")
 
-miMoto.modificarMarca = "Kamasaki"
-document.write("Ahora el nuevo nombre es " , miMoto.modificarMarca)
-document.write("<br>")
-document.write("<br>")
-document.write("<br>")
-document.write("<br>")
+
+miMoto.ModificarMarca = "Kamasaki"
+console.log("Ahora el nuevo nombre es " + miMoto.la_marca);
+console.log(miMoto.la_marca);
 
 //SUBCLASES
 
-document.write("SUBCLASES")
-document.write("<br>")
-document.write("<br>")
+console.log("SUBCLASES");
 
 class Personaje{
     constructor(nombre, edad, pelo) {
@@ -90,7 +76,7 @@ class Personaje{
         return (`${this.nombre} te saluda`)
     }
     despedir(){
-        document.write(`${this.nombre} se despide de ti`)
+        return (`${this.nombre} se despide de ti`)
     }
     get verNombre(){
         return this.nombre
@@ -102,17 +88,11 @@ class Personaje{
 
 const personaje1 = new Personaje("Mario", "30", "negro")
 
-personaje1.saludar() //Mario te saluda
-document.write("<br>")
-personaje1.despedir() //Mario se despide de ti
-document.write("<br>")
-document.write(personaje1.verNombre) //Mario
+console.log(personaje1.saludar());
+console.log(personaje1.despedir());
+console.log(personaje1.verNombre);
 personaje1.CambiarNombre = "MANOLO"
-document.write("<br>")
-document.write(personaje1.verNombre); //MANOLO
-document.write("<br>")
-document.write("<br>")
-document.write("<br>")
+console.log(personaje1.verNombre);
 
 class Enemigo extends Personaje {
     constructor(nombre, edad, pelo, bigote){ //Pondremos los mismos paramentos de la otra clase mas nuevos si queremos
@@ -120,10 +100,10 @@ class Enemigo extends Personaje {
         this.bigote = bigote
     }
     atacar(){
-        document.write(this.nombre, " te ataca")
+        return (this.nombre, " te ataca")
     }
     saludar(){
-        return super.saludar() + " encima te pega"
+        return super.saludar() + " y encima te pega"
     }
     
     //no tenemos que hacer un get ni set ya que ya los cojemos de la clse heredada
@@ -131,11 +111,6 @@ class Enemigo extends Personaje {
 
 const enemigo1 = new Enemigo("Bowser", "100", "no", "no")
 
-enemigo1.atacar()
-document.write("<br>")
-enemigo1.saludar() //No tengo ninguna funcion en esta clase llamada saludar(), ya que es de la heredada
-document.write(enemigo1.saludar())
-
-
-
-
+console.log(enemigo1.atacar());
+console.log(enemigo1.saludar()); //No tengo ninguna funcion en esta clase llamada saludar(), ya que es de la heredada
+console.log(enemigo1.saludar());
