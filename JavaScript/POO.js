@@ -1,4 +1,12 @@
+const { JSDOM } = require('jsdom');
 
+const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
+global.document = dom.window.document;
+global.window = dom.window;
+
+document.write('Hello, Quokka!');
+
+console.log('Quokka is running...');
 
 
 
@@ -114,6 +122,9 @@ class Enemigo extends Personaje {
     atacar(){
         document.write(this.nombre, " te ataca")
     }
+    saludar(){
+        return super.saludar() + " encima te pega"
+    }
     
     //no tenemos que hacer un get ni set ya que ya los cojemos de la clse heredada
 }
@@ -123,7 +134,7 @@ const enemigo1 = new Enemigo("Bowser", "100", "no", "no")
 enemigo1.atacar()
 document.write("<br>")
 enemigo1.saludar() //No tengo ninguna funcion en esta clase llamada saludar(), ya que es de la heredada
-console.log(enemigo1.saludar());
+document.write(enemigo1.saludar())
 
 
 
