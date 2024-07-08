@@ -44,7 +44,7 @@ class Moto {
         return (this.marca + " " + this.modelo + " esta detenido");
     }
     get la_marca() {
-        return this.marca
+        return this.marca;
     }
     set ModificarMarca(nueva_marca) {
         this.marca = nueva_marca;
@@ -58,7 +58,7 @@ console.log(`La marca de la moto es ${miMoto.la_marca}`);
 
 
 
-miMoto.ModificarMarca = "Kamasaki"
+miMoto.ModificarMarca = "Kamasaki";
 console.log("Ahora el nuevo nombre es " + miMoto.la_marca);
 console.log(miMoto.la_marca);
 
@@ -73,42 +73,42 @@ class Personaje{
         this.pelo = pelo;
     }
     saludar(){
-        return (`${this.nombre} te saluda`)
+        return (`${this.nombre} te saluda`);
     }
     despedir(){
-        return (`${this.nombre} se despide de ti`)
+        return (`${this.nombre} se despide de ti`);
     }
     get verNombre(){
-        return this.nombre
+        return this.nombre;
     }
     set CambiarNombre(NuevoNombre){
-        this.nombre = NuevoNombre
+        this.nombre = NuevoNombre;
     }
 }
 
-const personaje1 = new Personaje("Mario", "30", "negro")
+const personaje1 = new Personaje("Mario", "30", "negro");
 
 console.log(personaje1.saludar());
 console.log(personaje1.despedir());
 console.log(personaje1.verNombre);
-personaje1.CambiarNombre = "MANOLO"
+personaje1.CambiarNombre = "MANOLO";
 console.log(personaje1.verNombre);
 class Enemigo extends Personaje {
     constructor(nombre, edad, pelo, bigote){ //Pondremos los mismos paramentos de la otra clase mas nuevos si queremos
-        super(nombre, edad, pelo) //ponemos aqui los que venga de la clase que estamos tomando, de la que no no
-        this.bigote = bigote
+        super(nombre, edad, pelo); //ponemos aqui los que venga de la clase que estamos tomando, de la que no no
+        this.bigote = bigote;
     }
     atacar(){
-        return (this.nombre + " te ataca")
+        return (this.nombre + " te ataca");
     }
     saludar(){
-        return super.saludar() + " y encima te pega"
+        return super.saludar() + " y encima te pega";
     }
     
     //no tenemos que hacer un get ni set ya que ya los cojemos de la clse heredada
 }
 
-const enemigo1 = new Enemigo("Bowser", "100", "no", "no")
+const enemigo1 = new Enemigo("Bowser", "100", "no", "no");
 
 console.log(enemigo1.atacar());
 console.log(enemigo1.saludar()); //No tengo ninguna funcion en esta clase llamada saludar(), ya que es de la heredada
