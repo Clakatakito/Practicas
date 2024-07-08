@@ -79,7 +79,7 @@ class Personaje{
         this.pelo = pelo;
     }
     saludar(){
-        document.write(`${this.nombre} te saluda`)
+        return (`${this.nombre} te saluda`)
     }
     despedir(){
         document.write(`${this.nombre} se despide de ti`)
@@ -123,7 +123,7 @@ const enemigo1 = new Enemigo("Bowser", "100", "no", "no")
 enemigo1.atacar()
 document.write("<br>")
 enemigo1.saludar() //No tengo ninguna funcion en esta clase llamada saludar(), ya que es de la heredada
-
+console.log(enemigo1.saludar());
 
 
 
