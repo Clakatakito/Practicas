@@ -104,6 +104,9 @@ class Enemigo extends Personaje {
     saludar(){
         return super.saludar() + " y encima te pega";
     }
+    despedir(){
+        return super.despedir() + " y encima te pega";
+    }
     
     //no tenemos que hacer un get ni set ya que ya los cojemos de la clse heredada
 }
@@ -113,3 +116,4 @@ const enemigo1 = new Enemigo("Bowser", "100", "no", "no");
 console.log(enemigo1.atacar());
 console.log(enemigo1.saludar()); //No tengo ninguna funcion en esta clase llamada saludar(), ya que es de la heredada
 console.log(enemigo1.saludar());
+console.log(enemigo1.despedir());
