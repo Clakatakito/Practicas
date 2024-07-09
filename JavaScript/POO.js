@@ -131,7 +131,7 @@ class Mascota {
         this.contador = ++ Mascota.contarmascota;
     }
     static saludo(){
-        return "mover la cola"
+        return "mover la cola";
     }
     get contadormascota(){
         return this.contador;
@@ -164,8 +164,8 @@ class Perro extends Mascota{
 
 console.log(Perro.cola);
 
-console.log(Perro.contarmascota)
-const perro1 = new Perro("Rufus", "20", "Perro")
-console.log(Perro.contarmascota)
-console.log(perro1.contadormascota)
-console.log(perro1.contarmascota)
+console.log(Perro.contarmascota);
+const perro1 = new Perro("Rufus", "20", "Perro");
+console.log(Perro.contarmascota);
+console.log(perro1.contadormascota);
+console.log(perro1.contarmascota);
