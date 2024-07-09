@@ -1,7 +1,9 @@
 #Ignorar node.js
 
-package-lock.json
+package-lock.json 
 
 node_modules/
+
+.vscode
 
 package.json
