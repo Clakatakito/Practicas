@@ -117,3 +117,55 @@ console.log(enemigo1.atacar());
 console.log(enemigo1.saludar()); //No tengo ninguna funcion en esta clase llamada saludar(), ya que es de la heredada
 console.log(enemigo1.saludar());
 console.log(enemigo1.despedir());
+
+
+//Atributos y métodos estáticos
+
+class Mascota {
+    static cola = "tiene"; //valor statico, no puede heredarlo los objetos
+    static contarmascota = 0;
+    pelo = "rizado";
+    constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.contador = ++ Mascota.contarmascota;
+    }
+    static saludo(){
+        return "mover la cola"
+    }
+    get contadormascota(){
+        return this.contador;
+    }
+}
+
+const mascota1 = new Mascota("Tobby", "20");
+console.log(mascota1.nombre);
+console.log(Mascota.cola);
+console.log(mascota1.cola);
+console.log(mascota1.pelo);
+console.log(mascota1)
+const mascota2 = new Mascota("Perla", "10");
+console.log(mascota2);
+
+console.log(mascota1.contadormascota);
+console.log(mascota2.contadormascota);
+
+console.log(Mascota.saludo());
+//console.log(mascota1.saludo()); mascota1.saludo is not a fuction
+
+//Creados una clase hijo
+
+class Perro extends Mascota{
+    constructor(nombre, edad, raza){
+        super(nombre, edad);
+        this.raza = raza;
+    }
+}
+
+console.log(Perro.cola);
+
+console.log(Perro.contarmascota)
+const perro1 = new Perro("Rufus", "20", "Perro")
+console.log(Perro.contarmascota)
+console.log(perro1.contadormascota)
+console.log(perro1.contarmascota)
