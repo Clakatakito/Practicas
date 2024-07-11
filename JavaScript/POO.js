@@ -166,6 +166,7 @@ console.log(Perro.cola);
 
 console.log(Perro.contarmascota);
 const perro1 = new Perro("Rufus", "20", "Perro");
-console.log(Perro.contarmascota);
-console.log(perro1.contadormascota);
-console.log(perro1.contarmascota);
+console.log(Perro.contarmascota); //aqui como lo llamas desde la classe Perro y no desde el objeto 
+//perro1 puede ir a la variable satica de esa clase
+console.log(perro1.contadormascota); //aqui va directamente a la funcion get
+console.log(perro1.contarmascota); //aqui no funciona porque no eres una clase
