@@ -130,6 +130,14 @@ DETENER CONTENEDOR
 
 docker stop IDCONTENEDOR
 
+Crear un contenedor con un nombre
+
+docker create --name alex mongo
+
+Crear un contenedor y ponerle los puertos
+
+docker create -p27018 --name alex mysql
+
 
 
 ELIMINAR CONTENEDOR
