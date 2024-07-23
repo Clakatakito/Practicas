@@ -18,7 +18,7 @@ Activamos la configuración php:
     -sudo a2enconf php8.1-cgi (la versión de php que tengas)
 
 Reiniciamos el servicio apache2 para recoger las configuraciones:
-    -sudo systemctl reload apache2
+    -sudo systemctl reload apache2.service
 
 Instalamos la GUI de LDAP:
     -sudo apt install ldap-account-manager
