@@ -162,4 +162,4 @@ Abajo de:
 Pondremos:
     -%Administradores    ALL=(ALL:ALL) ALL
 
-I asi cada vez que tengamos que crear un usuario con permisos lo metemos en ese grupo y ya tendra permisos
+I asi cada vez que tengamos que crear un usuario con permisos lo metemos en ese grupo y ya tendra permisos (las mayusculas pueden alterar)
