@@ -150,3 +150,16 @@ Al final del archivo pondremos:
 Rellenamos las credenciales que tendrían que estar rellenadas ya y hacemos reboot:
 
 Así tendremos funcionando el servicio LDAP.
+
+Ademas de eso tambien podemos poner a los grupos que queremos que tengan permisos sudo sin estar poniendo cada usuario administrador, crearemos un grupo llama por ejemplo "Administradores" i el usuario "manolo"
+i accederemos con el usuario que tenga los permisos actuales a:
+
+    -sudo visuado
+
+Abajo de:
+    -%sudo   ALL=(ALL:ALL) ALL
+
+Pondremos:
+    -%Administradores    ALL=(ALL:ALL) ALL
+
+I asi cada vez que tengamos que crear un usuario con permisos lo metemos en ese grupo y ya tendra permisos
