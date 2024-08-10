@@ -105,6 +105,8 @@ Nos crearemos el usuario como queramos:
 Por ejemplo crearemos el usuario pepe de contraseña pepe y de nombre de usuario pepe:
 
 
+EN EL CLIENTE
+
 Luego de eso iremos a la terminal y instalamos los paquetes necesarios para que los clientes se comuniquen con el servicio LDAP:
     -sudo apt install libnss-ldap libpam-ldap ldap-utils
 
