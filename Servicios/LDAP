@@ -139,7 +139,7 @@ Accederemos a este archivo de configuración y le diremos que coja las contrase�
     -shadow:        files ldap
 
 Déspues de hacer eso si ponemos la comanda de abajo podemos ver los usuarios en la red (a nuestros usuarios creados):
-    -sudo nano getent passwd
+    -sudo getent passwd
 
     -sudo nano /etc/pam.d/common-session
 
