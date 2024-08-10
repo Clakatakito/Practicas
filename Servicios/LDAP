@@ -147,7 +147,7 @@ Al final del archivo pondremos:
 
     -session optional    pam_mkhomedir.so skel=/etc/skel umask=077
 
-    -sudo apt install nslcd:
+    -sudo apt install nslcd
 
 Rellenamos las credenciales que tendrían que estar rellenadas ya y hacemos reboot:
 
