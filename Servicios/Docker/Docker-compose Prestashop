@@ -13,7 +13,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWD:-prestashop}
       MYSQL_DATABASE: ${DB_NAME:-prestashop}
-    restart: unless-stopped
+    restart: always
     networks:
       - prestashop-network
 
@@ -51,6 +51,7 @@ services:
       - ./:/var/www/html:delegated
     networks:
       - prestashop-network
+    restart: always
 
   maildev:
     image: 'maildev/maildev'
