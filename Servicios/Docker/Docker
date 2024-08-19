@@ -130,6 +130,14 @@ DETENER CONTENEDOR
 
 docker stop IDCONTENEDOR
 
+DETENER TODOS LOS CONTENEDORES
+
+docker stop $(docker ps -q)
+
+ELIMINAR TODAS LAS IMAGENES
+
+docker rmi -f $(docker images -q)
+
 Crear un contenedor con un nombre
 
 docker create --name alex mongo
