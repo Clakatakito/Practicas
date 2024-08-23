@@ -142,6 +142,10 @@ ELIMINAR LAS REDES QUE NO ESTAN EN USO:
 
 docker network prune
 
+ELIMINAR LOS PROCESOS INACTIVOS:
+
+docker rm $(docker ps -a -f status=exited -q)
+
 Crear un contenedor con un nombre
 
 docker create --name alex mongo
