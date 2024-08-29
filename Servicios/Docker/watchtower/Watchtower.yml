@@ -1,3 +1,7 @@
+
+Ejemplo de watchtower sin configurar que contenedores comprueba (por defecto mira a todos)
+
+
 watchtower:
     container_name: watchtower
     image: containrrr/watchtower
