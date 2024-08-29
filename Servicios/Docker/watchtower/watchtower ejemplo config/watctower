@@ -1,5 +1,8 @@
 
-Para que watchtower
+Para que watchtower mire a los contenedores que tu quieras qque se actualizen para cuando haya una nueva version
+
+
+Tienes que tener los contenedores que quieras que miren el watchtower en la misma red
 
 services:
   watchtower:
