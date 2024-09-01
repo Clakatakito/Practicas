@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "81:81"
+      - "81:81"  
     volumes:
       - ./data/npm:/data
       - ./letsencrypt:/etc/letsencrypt
@@ -17,10 +17,15 @@ services:
       - DB_MYSQL_PASSWORD=npm_password
       - DB_MYSQL_NAME=npm
 
-
+  
   npm-db:
     image: mariadb:latest
     container_name: npm-db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: npm
+      MYSQL_USER: npm
+      MYSQL_PASSWORD: npm_password
+    volumes:
+      - ./data/db:/var/lib/mysql
