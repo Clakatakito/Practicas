@@ -3,6 +3,7 @@ services:
   docuseal:
   
     image: docuseal/docuseal:latest
+    restart: always
     container_name: docuseal
     ports:
       - "8200:3000"
@@ -17,6 +18,7 @@ services:
 
   postgres:
     image: postgres:15
+    restart: always
     volumes:
       - ./pg_data:/var/lib/postgresql/data
     environment:
