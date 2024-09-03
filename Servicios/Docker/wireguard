@@ -8,8 +8,8 @@ services:
     environment:
       - LANG=es
       - PASSWORD=p4ssw0rd
-      - WG_DEFAULT_DNS=1.1.1.1
-      - WG_HOST=192.168.0.1
+      - WG_DEFAULT_DNS=8.8.8.8 #dns de google
+      - WG_HOST= #ip del adaptador puente en mi caso
       - WG_PORT=51820
     ports:
       - 51820:51820/udp
