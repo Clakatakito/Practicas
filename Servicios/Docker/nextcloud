@@ -23,3 +23,11 @@ services:
 volumes:
   db_data:
   nextcloud:
+
+
+
+
+USUARIO: nextcloud
+CONTRASEÑA: example
+
+LUEGO SE PUEDE CAMBIAR
