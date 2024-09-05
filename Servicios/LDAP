@@ -88,7 +88,7 @@ Guardamos y en la linea de comandos lo metemos en la base de datos:
     -sudo ldapadd -x -D cn=admin,dc=dominio,dc=cat -W -f ou.ldif
 
 Ahora haremos lo mismo para crear un grupo y usaremos de plantilla de "ou.ldif":
-    -sudo cp ou.ldif group.ldif
+    -sudo nano group.ldif
 
 dn: cn=Administradores,ou=ou_padre,dc=dominio,dc=cat
 objectClass: top
