@@ -24,14 +24,14 @@ services:
   timetrex-web:
     image: timetrex/timetrex:latest
     ports:
-      - "8080:80"  # Ajusta el puerto aquí para que sea estándar
+      - "8081:80"  # Ajusta el puerto aquí para que sea estándar
     volumes:
       - ./var/www/html:/var/www/html/:rw
       - ./var/timetrex/:/var/timetrex:rw
       - ./etc/letsencrypt:/etc/letsencrypt:rw
     environment:
       - TIMETREX_WEB_HOSTNAME=localhost
-      - TIMETREX_TIMEZONE="America/Vancouver"
+      - TIMETREX_TIMEZONE="Europe/Madrid"
     networks:
       - timetrex-network
 
