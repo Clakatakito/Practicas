@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: docuseal
     ports:
-      - "8200:3000"
+      - "3000:3000"
     depends_on:
       postgres:
         condition: service_healthy
