@@ -3,8 +3,8 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      - POSTGRES_USER=timetrex
-      - POSTGRES_PASSWORD=timetrex
+      - POSTGRES_USER=timetrex #cambiar?
+      - POSTGRES_PASSWORD=timetrex #cambiar?
     command: ["-c", "shared_buffers=512MB", "-c", "max_connections=100"]
     ports:
       - '5432:5432'
@@ -38,3 +38,13 @@ services:
 networks:
   timetrex-network:
     driver: bridge
+
+
+
+
+
+
+En la partde de la instalación en la partde de la base de datos
+
+user: timetrex #o otra que hayas puesto
+passwd: timetrex #o otra que hayas puesto
