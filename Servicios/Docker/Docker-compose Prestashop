@@ -1,7 +1,7 @@
 
 
 service:
-  mysql:
+  mysql-prestashop:
     image: mariadb:11.2
     container_name: prestashop-db
     restart: unless-stopped
