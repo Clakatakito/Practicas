@@ -1,19 +1,19 @@
 
 
 service:
-    mysql:
-        image: mariadb:11.2
-        container_name: prestashop-db
-        restart: unless-stopped
-        environment:
-          - MYSQL_ROOT_PASSWORD=prestashop
-          - MYSQL_DATABASE=prestashop
-        ports:
-          - "3306:3306"
-        volumes:
-          - ./db-data:/var/lib/mysql
-        networks:
-          - prestashop
+  mysql:
+    image: mariadb:11.2
+    container_name: prestashop-db
+    restart: unless-stopped
+    environment:
+        - MYSQL_ROOT_PASSWORD=prestashop
+        - MYSQL_DATABASE=prestashop
+    ports:
+        - "3306:3306"
+    volumes:
+        - ./db-data:/var/lib/mysql
+    networks:
+        - prestashop
 
   prestashop:
     image: prestashop/prestashop:latest
