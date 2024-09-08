@@ -1,22 +1,4 @@
 services:
-  soporte:
-    image: httpd:latest
-    container_name: soporte_container
-    volumes:
-      - ./soporte/index.html:/usr/local/apache2/htdocs/index.html
-    environment:
-      VIRTUAL_HOST: soporte.docker.local
-    restart: always
-
-  test:
-    image: httpd:latest
-    container_name: test_container
-    volumes:
-      - ./test/index.html:/usr/local/apache2/htdocs/index.html
-    environment:
-      VIRTUAL_HOST: test.docker.local
-    restart: always
-
   ldap:
     image: osixia/openldap:1.5.0 #el alejandro me dijo que havia un error a partir de la 1.5 prueba la :latest
     container_name: ldap_container
@@ -40,13 +22,3 @@ services:
     depends_on:
       - ldap
     restart: always
-    
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: always
-    privileged: true
