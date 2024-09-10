@@ -1,0 +1,15 @@
+services:
+
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    expose:
+      - "8123"
+    environment:
+      - TZ='Europe/Madrid'
+      - DISABLE_JEMALLOC=true
+    volumes:
+      - ./app_config:/config
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
