@@ -20,7 +20,7 @@ services:
     environment:
       - DB_SERVER=mysql-prestashop
     ports:
-      - "8200:80"
+      - "8201:80"
       - "8443:443"
     depends_on:
       - mysql-prestashop
