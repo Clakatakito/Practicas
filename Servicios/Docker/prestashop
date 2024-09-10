@@ -1,31 +1,29 @@
-
-
 services:
-  mysql-prestashop:
+  maria-prestashop:
     image: mariadb:11.2
     container_name: prestashop-db
     restart: unless-stopped
     environment:
-        - MYSQL_ROOT_PASSWORD=prestashop
-        - MYSQL_DATABASE=prestashop
+      - MYSQL_ROOT_PASSWORD=prestashop
+      - MYSQL_DATABASE=prestashop
     ports:
-        - "3306:3306"
+      - "3306:3306"
     volumes:
-        - ./db-data:/var/lib/mysql
+      - ./db-data:/var/lib/mysql
     networks:
-        - prestashop
+      - prestashop
 
   prestashop:
     image: prestashop/prestashop:latest
     container_name: prestashop
     restart: unless-stopped
     environment:
-      - DB_SERVER=mysql
+      - DB_SERVER=mysql-prestashop
     ports:
       - "8200:80"
-      - "8443:443"  
+      - "8443:443"
     depends_on:
-      - mysql
+      - mysql-prestashop
     volumes:
       - ./html:/var/www/html:delegated
     networks:
