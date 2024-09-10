@@ -1,0 +1,6 @@
+
+Puertos reservados que uso con docker para mis contenedores
+
+
+docuseal:3000
+ollama:3001
