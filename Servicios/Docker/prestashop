@@ -1,5 +1,5 @@
 services:
-  maria-prestashop:
+  maria-prestashop:                  #nombre de tu base de datos cuando te pregunta por ella
     image: mariadb:11.2
     container_name: prestashop-db
     restart: unless-stopped
@@ -31,3 +31,13 @@ services:
 
 networks:
   prestashop:
+
+
+****************************************************************************************************************************************
+
+
+Una vex finalizada la instalacion tenemos que eliminar la carpeta /install, una vez desinstalado nos saldra un login, es muy importante copiar la url parecida a esra:
+
+  -http://ip-server:puerto/admin261ngiirmrwzngv5pmy/index.php?controller=AdminLogin&logout=1&token=8b2015665412d8aa2e1395de03cfafc8
+
+Porque sera la url para personalizar el sitio
