@@ -46,4 +46,6 @@ volumes:
 
 docker-compose exec ollama ollama pull tinyllama
 
-para eliminar un modelo tenemos que entrar al contenedor y ir a esta ruta ""
+directorio root
+
+para eliminar un modelo tenemos que entrar al contenedor y ir a esta ruta "ollama/models"
