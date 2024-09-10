@@ -1,6 +1,6 @@
 
 
-service:
+services:
   mysql-prestashop:
     image: mariadb:11.2
     container_name: prestashop-db
