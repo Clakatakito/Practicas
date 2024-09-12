@@ -15,7 +15,7 @@ services:
     network_mode: host
 
 
-otro:
+otro y mejor, tiene mas seguridad:
 
 services:
   homea-ssistant:
