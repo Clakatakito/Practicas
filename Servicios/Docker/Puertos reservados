@@ -2,5 +2,23 @@
 Puertos reservados que uso con docker para mis contenedores
 
 
-docuseal:3000
-ollama:3001
+docuseal:
+  3000:3000
+
+duplicati:
+  8111:8200
+
+home-assistand:
+  8123:8123
+
+nextcloud:
+  8080:80
+
+onlyoffice:
+  8100:80
+
+portainer:
+  9000:9000
+
+timetrex:
+  8081:80
