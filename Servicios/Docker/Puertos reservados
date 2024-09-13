@@ -14,6 +14,11 @@ home-assistand:
 nextcloud:
   8080:80
 
+nginx-proxy-manager
+  80:80
+  443:443
+  81:81
+
 onlyoffice:
   8100:80
 
