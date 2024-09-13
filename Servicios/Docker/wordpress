@@ -1,6 +1,4 @@
-
 services:
-
   wordpress:
     image: wordpress:latest
     environment:
@@ -8,11 +6,10 @@ services:
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: root
       WORDPRESS_DB_NAME: wordpress
-      VIRTUAL_HOST: wordpress.docker.local
     links:
       - mysql:mysql
-
-
+    ports:
+      - "8001:80"
   mysql:
     image: mysql:8.0.13
     command: --default-authentication-plugin=mysql_native_password
@@ -21,11 +18,3 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ~/docker/mysql-data:/var/lib/mysql
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    ports:
-      - "80:80"
-      - "433:433"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: always
