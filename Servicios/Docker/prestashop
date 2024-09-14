@@ -23,7 +23,7 @@ services:
       - "8201:80"
       - "8443:443"
     depends_on:
-      - mysql-prestashop
+      - maria-prestashop
     volumes:
       - ./html:/var/www/html:delegated
     networks:
