@@ -23,11 +23,17 @@ SERVIDOR
 /home 192.168.0.0/24(rw,sync,no_subtree_check)
 
 *****************************************************************************************************
+  -sudo nano /etc/nsswitch.conf
+
+  passwd:         files ldap
+  group:          files ldap
+  shadow:         files ldap
 
   -sudo exportfs -ra
   -sudo systemctl restart nfs-kernel-server
   -sudo systemctl enable nfs-kernel-server
   -sudo systemctl restart nfs-kernel-server #por si acaso
+  
 
 
 
