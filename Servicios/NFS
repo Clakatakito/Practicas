@@ -43,3 +43,6 @@ CLIENTE
   -sudo nano /etc/fstab
   -ip-server:/home /home nfs defaults 0 0
   -sudo mount -a
+
+rexportar
+sudo exportfs -ra
