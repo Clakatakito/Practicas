@@ -46,3 +46,32 @@ CLIENTE
 
 rexportar
 sudo exportfs -ra
+
+
+Es muy posible que cuando hagas un "sudo systemctl status nfs-common.service" te pongo inactivo o muerto o las dos, asique haz esto tanto en el desktop con en el server.
+
+  -sudo nano /etc/systemd/system/nfs-common.service
+
+*********************************************************************************
+
+  [Unit]
+Description=NFS Common utilities
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/etc/init.d/nfs-common start
+ExecStop=/etc/init.d/nfs-common stop
+
+[Install]
+WantedBy=multi-user.target
+
+*********************************************************************************
+
+  -sudo systemctl daemon-reload
+  -sudo systemctl enable nfs-common.service
+  -sudo systemctl start nfs-common.service
+  -sudo systemctl status nfs-common.service
+  -reboot
+
