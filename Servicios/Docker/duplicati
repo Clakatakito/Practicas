@@ -9,7 +9,7 @@ services:
     volumes:
       - /etc/duplicati:/config
       - /etc/backups:/backup
-      - /home/alex/docker/home-assistand:/source
+      - /home/alex/docker/home-assistand:/source/home-assistand
     ports:
       - 8111:8200
     restart: unless-stopped
