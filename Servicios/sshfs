@@ -22,9 +22,22 @@ servidor2
 
 servidor1:
   -sudo umount /mnt/servidor2
-  -sshfs alex@192.168.1.198:/ruta/del/archivo/a/copiar /mnt/servidor2 -o allow_other
+  -sshfs alex@ip-otro-server:/ruta/del/archivo/a/copiar /mnt/servidor2 -o allow_other
 
 ya podras tocarlo desde los dos servidores
+
+al reiniciar se quitara todo asique:
+
+servidor1:
+  -sudo nano /etc/fstab
+
+nos vamos abajo del todo y ponemos:
+  -user@ip-otro-server:/ruta/del/archivo/a/copiar /mnt/servidor2 fuse.sshfs defaults,_netdev,allow_other 0 0
+
+y cada vez que reiniciemos ponemos:
+  -sudo mount -a
+
+podemos ponerlo en un scrip de inicio para cuando encendamos el server
 
 
 
