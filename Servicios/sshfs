@@ -1,0 +1,2 @@
+sudo sshfs alex@192.168.0.2:/home/alex/docker/home-assistant /mnt/sshfs/home-assistant -o al
+low_other
