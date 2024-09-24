@@ -44,6 +44,12 @@ podemos ponerlo en un scrip de inicio para cuando encendamos el server
 
 
 
+si en el servidor1 vas al recurso y no sale, (tabuleas y no aparece los archivos), es porque hay que ponerle permisos desde el servidor2, algunos ejemplos:
+
+  -sudo chmod +rx /ruta
+  -sudo chmod +r /ruta
+  
+
 
 sudo sshfs alex@192.168.0.2:/home/alex/docker/home-assistant /mnt/sshfs/home-assistant -o al
 low_other
