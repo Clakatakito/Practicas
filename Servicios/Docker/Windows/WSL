@@ -1,1 +1,20 @@
+
+
 Comanods de Docker en Windows
+
+
+ACTIVAR WSL
+
+En Windows ir al cmd y poner "Activa o desactiva les característiques del Windows" y ally activar la caracteristica "Subsistema de Windows para Linux", aplicarla y reiniciar, y ya podemos instalar docker desktop
+
+Ver si cumples los requisitos de WSL:
+  -winver
+
+Comprobar si funciona:
+  -wsl -l
+
+Instalar algo:
+  -wsl --install -d la_imagen_que_quieras
+
+Abrir el contenedor:
+  -wsl -d el_contenedor
