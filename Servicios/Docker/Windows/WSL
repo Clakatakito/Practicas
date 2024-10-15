@@ -10,7 +10,7 @@ En Windows ir al cmd y poner "Activa o desactiva les característiques del Windo
 Ver si cumples los requisitos de WSL:
   -winver
 
-Comprobar si funciona:
+Comprobar si funciona, y tambien para listar los contenedores:
   -wsl -l
 
 Instalar algo:
