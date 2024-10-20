@@ -1,1 +1,1 @@
-# Codigo que he ido haciendo a lo largo de mi segundo año de CFGM, y practicando Git y GitHub.
+# Codigos y servicios que he ido haciendo a lo largo de mis 3 años en el mundo de la informática 
