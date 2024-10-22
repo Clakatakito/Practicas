@@ -77,3 +77,13 @@ document.weite("<br>");
 //corta la palabra
 document.write(palabra1con.split("ra"));
 
+const elefate = "elefante" /*las varable con const tienen que inicializarse no se puede hacer
+const cambiar
+cambiar = "cambiar"
+
+con let si que puedes
+let puedo_cambiar
+puedo_cambiar = ""cambiar
+
+*/
+
