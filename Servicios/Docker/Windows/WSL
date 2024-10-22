@@ -28,3 +28,11 @@ WSL te permite ejecutar distribuciones completas de Linux en Windows, funcionand
 pero no tiene relación directa con Docker.Docker, por su parte, es una herramienta que se usa para trabajar con contenedores,
 los cuales son entornos ligeros y aislados diseñados para ejecutar aplicaciones específicas. Para usar Docker en Windows, necesitas tener primero instalado WSL,
 ya que Docker utiliza WSL 2 como la base para ejecutar los contenedores en un entorno Linux dentro de Windows
+
+
+DOCKER DESKTOP
+
+INICIAR DOCKER DESKTOP CUANDO SE INICIE LA MAQUINA
+
+En Docker Desktop no vamos a "Configuracion" y en "General" habra una checkbox desmarcada que dice "Start Docker Desktop when you sign in to your computer", la marcais y clickais a "Apply & restart"
+y ya estaria
