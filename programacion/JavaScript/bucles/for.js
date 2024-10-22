@@ -21,7 +21,7 @@ document.write("<br>");
 
 
 const garaje = ["nada" ,"patinete", "libro", "bici"];
-for (var num = 1; num < garaje.length; num++) {
+for (let num = 1; num < garaje.length; num++) {
     document.write("Cosas en el garaje numero ", num, " = ", garaje[num]);
     document.write("<br>");
 }

@@ -1,7 +1,7 @@
 
 //Do-While
 
-var usuario, contraseña, usuariopedir, contraseñapedir, cont;
+let usuario, contraseña, usuariopedir, contraseñapedir, cont;
 
 usuario = prompt("Cual es su usuario?:");
 contraseña = prompt("Cual es su contraseña?:");
@@ -20,7 +20,7 @@ document.write("<br>");
 
 //Ahora con While
 
-var usuario2, contraseña2, usuariopedir2, contraseñapedir2, cont2;
+let usuario2, contraseña2, usuariopedir2, contraseñapedir2, cont2;
 usuario2 = prompt("Cual es su usuario?:");
 contraseña2 = prompt("Cual es su contraseña?:");
 cont2 = 0;

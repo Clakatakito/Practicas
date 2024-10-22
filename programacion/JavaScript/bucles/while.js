@@ -1,14 +1,14 @@
 
 //While
 
-var pregunta
+let pregunta
 while (pregunta != "españa" ) {
     pregunta = prompt("Dime el mejor pais de todos");
 }
 document.write("Bien dicho")
 document.write("<br>")
 
-var numero1, numero3, numero2;
+let numero1, numero3, numero2;
 
 
 
