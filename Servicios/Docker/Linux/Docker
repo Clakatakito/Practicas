@@ -132,6 +132,12 @@ COPIAR FICHEROS Y METERLOS EN UN CONTENEDOR
 
 docker cp fichero.txt contenedor1:/home
 
+COPIAR FICHEROS DE UN CONTENEDOR A LA MAQUINA
+
+*no hay que estar dentro del contenedor
+
+docker cp contendedor1:/home/fichero.txt . #el "." es donde te encuentras actualmente
+
 
 
 DETENER CONTENEDOR
