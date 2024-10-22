@@ -3,8 +3,8 @@
 
 //Operador &&
 
-var continente = prompt("Dime un continente".toString());//.toString al final no, dento del ()
-var edad = parseInt(prompt("Dime tu edad"));
+let continente = prompt("Dime un continente".toString());//.toString al final no, dento del ()
+let edad = parseInt(prompt("Dime tu edad"));
 if (edad=="78" && continente=="america") {
     document.write("bien hecho");
 }
@@ -12,7 +12,7 @@ document.write("<br>")
 
 //Operador ||
 
-var dia, mes, anio;
+let dia, mes, anio;
 dia = parseInt(prompt("Dime un dia"));
 mes = parseInt(prompt("Dime un mes"));
 anio = parseInt(prompt("Dime un año"));
