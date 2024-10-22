@@ -29,6 +29,14 @@ console.log("La longitud de la palabra es " , palabra.length);
 //la letras del x asta x
 console.log("La letras " , palabra.slice(0,4));
 
+//saber tipo de dato
+
+let tipo_de_dato = "tipo de dato";
+console.log(typeof tipo_de_dato)
+let tipo_de_dato2 = 666;
+console.log(typeof tipo_de_dato2)
+
+
 //remplazar
 let saludo = "hola manito";
 console.log(saludo.replace("hola" , "ADIOS"));
