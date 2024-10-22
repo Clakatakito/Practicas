@@ -1,5 +1,5 @@
-var nombre = prompt("Cual es su nombre".toString());
-var edad = parseInt(prompt("Ingresa tu edad"));
+let nombre = prompt("Cual es su nombre".toString());
+let edad = parseInt(prompt("Ingresa tu edad"));
 if (edad >= 18) {
     document.write("Bienvenido " , nombre.concat(" de edad ", edad));
     }else {
