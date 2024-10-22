@@ -24,7 +24,7 @@ let precio3 = Math.floor(700.1);
 console.log(precio3);
 let palabra;
 palabra = "palabra";
-//longitud de caracteres de una
+//longitud de caracteres de una variable
 console.log("La longitud de la palabra es " , palabra.length);
 //la letras del x asta x
 console.log("La letras " , palabra.slice(0,4));
