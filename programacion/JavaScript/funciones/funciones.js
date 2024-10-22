@@ -1,7 +1,7 @@
 
 //Funciones declarativas
-var veces = parseInt(prompt("Cuantas veces quieres ver la funcion:"));
-var cont = 0;
+let veces = parseInt(prompt("Cuantas veces quieres ver la funcion:"));
+let cont = 0;
 alert("Esto es mio");
 function funcion(){
     document.write("esto es una funcion");

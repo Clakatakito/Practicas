@@ -4,7 +4,7 @@
 function ladelreturn (valor1, valor2){
     valor1 = parseInt(prompt("Ingrese primer valor:"))
     valor2 = parseInt(prompt("Ingrese segundo valor:"))
-    var resultado = valor1 + valor2
+    let resultado = valor1 + valor2
     document.write(resultado)
 }
 ladelreturn();
@@ -28,5 +28,5 @@ document.write("<br>")
 function saludo(){
     return "hola!!!"
 }
-var mensaje = saludo()
+let mensaje = saludo()
 document.write(mensaje)

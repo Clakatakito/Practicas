@@ -1,7 +1,7 @@
 
 //Funciones con parametros
 
-var suma;
+let suma;
 function funcion2 (valor1, valor2){
     suma = valor1 + valor2;
     alert("Resultado obtenido " + suma);
