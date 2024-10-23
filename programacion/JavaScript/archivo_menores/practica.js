@@ -80,5 +80,5 @@ puedo_cambiar = ""cambiar
 */
 
 
-//probando, funciona
+//probando, funciona, me la pela, lo del ordenador es una kierda, ya trabjo mejor aqui y ya
 
