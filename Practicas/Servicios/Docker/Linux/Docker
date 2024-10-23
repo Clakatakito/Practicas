@@ -1,0 +1,179 @@
+
+Docker es 
+
+Instalacion y configuración de Docker:
+
+Empezamos utilizando la siguiente comanda para asegurarnos de que todo esté bien actualizado y no dé problemas:
+    -sudo apt update && sudo apt upgrade
+
+
+  -sudo apt-get install ca-certificates curl
+
+  -sudo install -m 0755 -d /etc/apt/keyrings
+
+  -sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
+  -sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
+  -sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+
+
+# Add the repository to Apt sources:
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Hasta el /dev/null se copia
+
+sudo apt-get update
+
+
+
+INSTALAR LA ÚLTIMA VERSIÓN
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+
+COMPROBAR ESTADO DOCKER
+
+sudo systemctl status docker
+
+docker --version
+
+
+
+AÑADIR USUARIO administrador A GRUPO DOCKER
+
+sudo usermod -aG docker administrador
+
+su - administrador
+
+
+
+COMPROBAR USUARIOS GRUPO DOCKER
+
+id -nG
+
+
+
+VER SUBCOMANDOS
+
+docker
+
+
+
+DESCARGAR IMAGEN ej:HELLO-WORLD
+
+docker run hello-world #Instala y lo ejecuta
+
+
+
+BUSCAR IMAGEN UBUNTU EN DOCKERHUB
+
+docker search ubuntu
+
+
+
+DESCARGAR IMAGEN UBUNTU
+
+docker pull ubuntu #Descarga solo el contenido
+
+
+
+VER IMAGENES DOCKER
+
+docker images
+
+
+
+EJECUTAR UN CONTENEDOR DE DOCKER
+
+docker run -it ubuntu
+
+apt update
+
+exit
+
+
+
+ADMINISTRAR CONTENEDORES DOCKER
+
+VER CONTENEDORES ACTIVOS
+
+docker ps
+
+
+
+VER CONTENEDORES ACTIVOS E INACTIVOS
+
+docker ps -a
+
+
+
+VER ÚLTIMO CONTENEDOR CREADO
+
+docker ps -l
+
+
+
+INICIAR UN CONTENEDOR
+
+docker start IDCONTENEDOR
+
+VER CUANTO OCUPAPAN LOS CONTENEDORES Y IMAGENES
+
+docker system df
+
+COPIAR FICHEROS Y METERLOS EN UN CONTENEDOR
+
+docker cp fichero.txt contenedor1:/home
+
+COPIAR FICHEROS DE UN CONTENEDOR A LA MAQUINA
+
+*no hay que estar dentro del contenedor
+
+docker cp contendedor1:/home/fichero.txt . #el "." es donde te encuentras actualmente
+
+
+
+DETENER CONTENEDOR
+
+docker stop IDCONTENEDOR
+
+DETENER TODOS LOS CONTENEDORES
+
+docker stop $(docker ps -q)
+
+ELIMINAR TODAS LAS IMAGENES
+
+docker rmi -f $(docker images -q)
+
+ELIMINAR LAS REDES QUE NO ESTAN EN USO:
+
+docker network prune
+
+ELIMINAR LOS PROCESOS INACTIVOS:
+
+docker rm $(docker ps -a -f status=exited -q)
+
+VER LA IP DE UN CONTENEDOR:
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [contenedor]
+
+Crear un contenedor con un nombre
+
+docker create --name alex mongo
+
+Crear un contenedor y ponerle los puertos
+
+docker create -p27018 --name alex mysql
+
+
+
+ELIMINAR CONTENEDOR
+
+docker rm IDCONTENEDOR

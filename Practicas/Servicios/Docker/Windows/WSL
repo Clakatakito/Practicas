@@ -1,0 +1,38 @@
+
+
+Comanods de Docker en Windows
+
+
+ACTIVAR WSL
+
+En Windows ir al cmd y poner "Activa o desactiva les característiques del Windows" y ally activar la caracteristica "Subsistema de Windows para Linux",
+aplicarla y reiniciar, y ya podemos instalar docker desktop
+
+Ver si cumples los requisitos de WSL:
+  -winver
+
+Comprobar si funciona, y tambien para listar los S.O:
+  -wsl -l
+
+Instalar algo:
+  -wsl --install -d la_imagen_que_quieras
+
+Abrir el S.O:
+  -wsl -d el_contenedor
+
+
+ACLARACION IMPORTANTE:
+
+WSL te permite ejecutar distribuciones completas de Linux en Windows, funcionando como una máquina virtual ligera para que puedas trabajar o estudiar en Linux sin salir de Windows,
+(NO SON NI IMAGENES NI CONTENEDORES, SON S.O)
+pero no tiene relación directa con Docker.Docker, por su parte, es una herramienta que se usa para trabajar con contenedores,
+los cuales son entornos ligeros y aislados diseñados para ejecutar aplicaciones específicas. Para usar Docker en Windows, necesitas tener primero instalado WSL,
+ya que Docker utiliza WSL 2 como la base para ejecutar los contenedores en un entorno Linux dentro de Windows
+
+
+DOCKER DESKTOP
+
+INICIAR DOCKER DESKTOP CUANDO SE INICIE LA MAQUINA
+
+En Docker Desktop no vamos a "Configuracion" y en "General" habra una checkbox desmarcada que dice "Start Docker Desktop when you sign in to your computer", la marcais y clickais a "Apply & restart"
+y ya estaria

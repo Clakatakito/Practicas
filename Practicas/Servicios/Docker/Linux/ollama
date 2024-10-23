@@ -1,0 +1,51 @@
+
+
+Instalaremos ollama
+
+****************************************************************************************************************************************
+
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama:/root/.ollama
+    pull_policy: always
+    tty: true
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    volumes:
+      - open-webui:/app/backend/data
+    depends_on:
+      - ollama
+    ports:
+      - ${OPEN_WEBUI_PORT-3001}:8080
+    environment:
+      - 'OLLAMA_API_BASE_URL=http://ollama:11434/api'
+      - 'WEBUI_SECRET_KEY='
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+
+volumes:
+  ollama: {}
+  open-webui: {}
+
+
+****************************************************************************************************************************************
+
+
+
+
+
+docker-compose exec ollama ollama pull tinyllama
+
+directorio root
+
+para eliminar un modelo tenemos que entrar al contenedor y ir a esta ruta "ollama/models"

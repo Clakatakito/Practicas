@@ -1,0 +1,28 @@
+
+
+Te instalas el Plugin de SliderbarMenu en el apartado de plugins y lo seleccionas y arrastras a la pagina desde el apartado de "Desing" una vez puesto pones lo que quieres que vea el usuario donde se vaya a redirigir
+A MANO, (texto estatico), ejemplo (Cuenta y Precios):
+
+SlidebarMenu A
+
+Appearance
+
+Options (press Enter between each entry)
+Cuenta
+Precios 
+
+
+
+Tambien puedes modificar los colores y imagenes
+
+Workflow
+
+Vamos a crear un nuevo workflow en "Elements" pulsamos "A slidebar menu's option is clicked"
+
+Y en "Only when" ponemos:
+
+This SlidebarMenu's current option contains Cuenta (importante no poner "Cuenta" que sino no funciona, poner sin ""
+
+Y haceis otro workflow para "Precios" igual a ese
+
+Y luego en los pasos poneis que os lleve a cualquier pagina o lo que sea
