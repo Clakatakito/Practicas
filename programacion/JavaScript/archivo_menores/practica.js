@@ -2,8 +2,8 @@ let si = "hola";
 let no = 54;
 let tio = {eltio: "pepe", edad: 78};
 console.log(typeof tio)
-let letiable = 5;
-let letiable2= "laotra";
+let variable = 5;
+let variable2= "laotra";
 let nombre = "alex";
 let apellido = "serrano";
 let nombreful = nombre.concat(" " + apellido);
@@ -126,7 +126,3 @@ let puedo_cambiar
 puedo_cambiar = ""cambiar
 
 */
-
-
-//probando, funciona, me la pela, lo del ordenador es una kierda, ya trabjo mejor aqui y ya,
-
