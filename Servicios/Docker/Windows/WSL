@@ -75,5 +75,5 @@ Windows Feature Experience Pack
 
 ACLARACION IMPORTANTE 5:
 
-Puedes tener Docker en un S.O creado con WSL si lo activais en Docker Desktop
-Video 69 :) del curso de docker, ya que no he podido hacerlo
+Puedes tener Docker en un S.O creado (sin instalacion manual y integrado) con WSL si lo activais en Docker Desktop en "Configuraciones" "Resources" "WSL Integration" marcando los S.O que veas que quieras que tengan docker,
+incluso veras los contenedores suyos en el docker desktop
