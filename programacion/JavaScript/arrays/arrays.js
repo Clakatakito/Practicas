@@ -2,92 +2,76 @@
 //arrays, elegir el caracter deseado, tambien con 
 
 /*let array = [1,2,3,4,5,4,5,]
-document.write(array.slice(0,1));*/
+console.log(array.slice(0,1));*/
 
 //cambiar valor de una array
 
 /*let array = [3,4,5]
 array.push(1,2,8,9,10)
 array.sort()
-document.write(array)
-document.write("<br>")*/
+console.log(array)*/
 
 //el .sort() tambien ordenada alfabeticamente los nombre
 
 let array = [3,4,5];
-array.push(1,2,8,9,10,);
-array.sort();
-document.write(array);
-document.write("<br>");
-document.write("<br>");
+array.push(1,2,8,9,10);
+console.log(array)
+array = array.sort()
+console.log(array);
 
 //ir al ultimo valor de un array
-document.write("Ultimo valor de la cadena array " , array[array.length-1]);
-document.write("<br>");
-document.write("<br>");
+console.log("Ultimo valor de la cadena array " , array[array.length-1]);
 
-//arrays de tipo texto
+//arrays/variables de tipo texto
 
 let frutas = ["kiwi", "manzana", "platano"];
-document.write("Pasar a string " , array.toString());
-document.write("<br>");
-document.write("<br>");
+console.log(typeof frutas)
+frutas = frutas.toString()
+console.log(typeof frutas)
+let vaaserunstring = 7
+console.log(typeof vaaserunstring)
+vaaserunstring = vaaserunstring.toString()
+console.log(typeof vaaserunstring)
 
 //unir tipos de array, basicamente concat
 
 let letras, letras2;
 numeros = [1,2,3,4];
 letras = ["a", "b", "c"];
-document.write(numeros.concat("Basicamente el concat " , " " , letras));
-document.write("<br>");
-document.write("<br>");
+console.log(numeros.concat("Basicamente el concat " , " " , letras));
 
 //borar el ultimo elemento de una array
 numeros.pop();
-document.write("Elimina el ultimo caracter de la array " , numeros);
-document.write("<br>");
-document.write("<br>");
+console.log("Elimina el ultimo caracter de la array " , numeros);
 
 //agregar elemento a una array
 
 array.push(4,6,7);
-document.write("Agrega numeros " , array);
-document.write("<br>");
-document.write("<br>");
+console.log("Agrega numeros " , array);
 
 //elimina primer elemento
 array.shift();
-document.write("Quitamos el primer valor de la array " , array);
-document.write("<br>");
-document.write("<br>");
+console.log("Quitamos el primer valor de la array " , array);
 
 
 //añade un elemento al principio de una array
 
 array.unshift(100);
-document.write("Agregamos en elemento al principio de una array " , array);
-document.write("<br>");
-document.write("<br>");
+console.log("Agregamos en elemento al principio de una array " , array);
 
 //cortar los elementos que no esten etre eso sitioa
 
-document.write("El splice otro vez" , array.splice(0,3));
-document.write("<br>");
-document.write("<br>");
+console.log("El splice otro vez" , array.splice(0,3));
 
 //copiar una array
 let cosas = [100,101.102,103,104,105];
-let copia = document.write(cosas);
-document.write("<br>");
-document.write("<br>");
+let copia = console.log(cosas);
 
 //Lo contrario al .sort(), el reverse
 let reverse = ["alex" , "neumatico" , "zorra"];
-document.write("Lista al reves " , reverse.reverse());
-document.write("<br>");
-document.write("<br>");
+console.log("Lista al reves " , reverse.reverse());
 
 //sustituir el len[x] por otro valor
  let coches = ["Honda", "Toyota", "Mercedes"];
  coches[0] = "picnic";
- document.write(coches);
+ console.log(coches);
