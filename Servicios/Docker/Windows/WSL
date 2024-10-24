@@ -34,5 +34,46 @@ DOCKER DESKTOP
 
 INICIAR DOCKER DESKTOP CUANDO SE INICIE LA MAQUINA
 
-En Docker Desktop no vamos a "Configuracion" y en "General" habra una checkbox desmarcada que dice "Start Docker Desktop when you sign in to your computer", la marcais y clickais a "Apply & restart"
+En Docker Desktop no vamos a "Configuracion" y en "General" habra una checkbox desmarcada que dice "Open Docker Dashboard when Docker Desktop starts", la marcais y clickais a "Apply & restart"
 y ya estaria
+
+
+ACLARACION IMPORTANTE 2:
+
+En un entorno Windows, gracias a la tecnología de Hyper-V y WSL (Windows Subsystem for Linux), es posible ejecutar imágenes de Linux en contenedores de Docker.
+Sin embargo, en un entorno Linux, no se pueden ejecutar imágenes de Windows directamente porque los contenedores de Docker dependen del kernel del sistema operativo anfitrión,
+y los contenedores de Windows requieren el kernel de Windows.
+
+
+ACLARACION IMPORTANTE 3:
+
+Cuando estás en modo de contenedores de Linux en Docker (usualmente a través de WSL 2 en Windows), solo puedes ejecutar imágenes de Linux y no puedes utilizar imágenes de Windows.
+Del mismo modo, cuando cambias a modo de contenedores de Windows, solo puedes ejecutar imágenes de Windows, y las imágenes de Linux no estarán disponibles.
+Aunque puedes alternar entre estos dos modos desde Docker Desktop, los contenedores y las imágenes del otro modo no se pierden, simplemente quedan inaccesibles hasta que vuelvas al modo correspondiente
+
+(Hay que tener la caracteristicas de Windows de "Subsistema de Windows para Linux" y "Contenedores"), para saber en que modo de contenedores estas puedes ir al iciono de la flecha que apunta hacia arriba y darle click derecho al icono de Docker,
+y veras "Switch to linux containers" o "Switch to windows containers" dependiendo de cual estas ya
+
+
+ACLARACION IMPORTANTE 4:
+
+No puedes descargar ninguna imagen de windows que sea superior a la que corresponda tu sistema, para mirar eso escribes en el buscador "sistema" y veras algo parecido a esto:
+
+Especificaciones de Windows
+Edición
+Versión
+Instalado el
+Compilación del sistema operativo
+Experiencia
+Windows 10 Education
+22H2                                      # este por ejemplo es es tag de los que vemos con docker
+11/7/2023
+19045.5011                                #este hay que mirar
+Windows Feature Experience Pack
+1000.19060.1000.0
+
+
+ACLARACION IMPORTANTE 5:
+
+Puedes tener Docker en un S.O creado (sin instalacion manual y integrado) con WSL si lo activais en Docker Desktop en "Configuraciones" "Resources" "WSL Integration" marcando los S.O que veas que quieras que tengan docker,
+incluso veras los contenedores suyos en el docker desktop
