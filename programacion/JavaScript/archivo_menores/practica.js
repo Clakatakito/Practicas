@@ -1,6 +1,7 @@
 let si = "hola";
 let no = 54;
 let tio = {eltio: "pepe", edad: 78};
+console.log(typeof tio)
 let letiable = 5;
 let letiable2= "laotra";
 let nombre = "alex";
