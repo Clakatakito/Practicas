@@ -8,44 +8,44 @@ let apellido = "serrano";
 let nombreful = nombre.concat(" " + apellido);
 console.log(nombreful);
 console.log("Mi nombre es" + " " + nombre);
-let neumatico, neumatico2
-neumatico = 1
-neumatico2 = 3
-console.log(neumatico + neumatico2)
+let neumatico, neumatico2;
+neumatico = 1;
+neumatico2 = 3;
+console.log(neumatico + neumatico2);
 
-let numerogrande = 18282828282828282828282828282828282882382839237829
-let numerograndebig = BigInt(18282828282828282828282828282828282882382839237829)
-console.log(numerogrande)
-console.log(typeof numerogrande)
-console.log(numerograndebig)
-console.log(typeof numerograndebig)
+let numerogrande = 18282828282828282828282828282828282882382839237829;
+let numerograndebig = BigInt(18282828282828282828282828282828282882382839237829);
+console.log(numerogrande);
+console.log(typeof numerogrande);
+console.log(numerograndebig);
+console.log(typeof numerograndebig);
 
 //booleans
 
-const buleano = true
-console.log(typeof buleano)
-const buleano2 = false
-console.log(typeof buleano2)
+const buleano = true;
+console.log(typeof buleano);
+const buleano2 = false;
+console.log(typeof buleano2);
 
 //Symbols
 
-let primersymbol, segundosymbol
-primersymbol = Symbol(30)
-segundosymbol = Symbol(30)
-console.log(primersymbol == segundosymbol)
-console.log(primersymbol === segundosymbol)
-let machupichu1,machupichu2
+let primersymbol, segundosymbol;
+primersymbol = Symbol(30);
+segundosymbol = Symbol(30);
+console.log(primersymbol == segundosymbol);
+console.log(primersymbol === segundosymbol);
+let machupichu1,machupichu2;
 machupichu1 = 3 //entero
 machupichu2 = 3 //entero
-console.log(machupichu1 === machupichu2) 
+console.log(machupichu1 === machupichu2); 
 machupichu1 = 3 //entero
 machupichu2 = "3" //string
-console.log(machupichu1 == machupichu2)
-console.log(machupichu1 === machupichu2)
+console.log(machupichu1 == machupichu2);
+console.log(machupichu1 === machupichu2);
 machupichu1 = 3 //entero
 machupichu2 = 4 //entero
-console.log(machupichu1 == machupichu2)
-console.log(machupichu1 === machupichu2)
+console.log(machupichu1 == machupichu2);
+console.log(machupichu1 === machupichu2);
 
 //los symbols son siempre diferentes, da igual el valor de dento o el tipo de dato
 
