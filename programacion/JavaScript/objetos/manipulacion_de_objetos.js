@@ -54,7 +54,8 @@ const cliente = {
 }
 const {nombre} = producto
 console.log(nombre)
-//const {nombre} = cliente //error porque estamos intentando hace 2 variables
+/*const {nombre} = cliente //error porque estamos intentando
+hacer 2 variables con el mismo nombre */
 const {nombre: nombrecliente} = cliente
 console.log(nombrecliente)
 
