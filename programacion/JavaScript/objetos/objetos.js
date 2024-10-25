@@ -37,3 +37,15 @@ const objeto_usuario = {
 };
 console.log(objeto_usuario);
 console.table(objeto_usuario);
+
+//poner valores a un objeto 2
+
+const tomate = "maduro";
+const platano = "fresco";
+
+const supermercado = {
+    tomate,
+    platano
+};
+console.log(tomate);
+console.log(platano);
