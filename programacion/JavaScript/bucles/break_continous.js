@@ -12,4 +12,3 @@ for(let f in palabra){
     }
 }
 document.write(resultado)
-//hola
