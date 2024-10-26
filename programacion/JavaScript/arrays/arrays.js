@@ -36,18 +36,17 @@ console.log(typeof vaaserunstring)
 //unir tipos de array, basicamente concat
 
 let letras, letras2;
-numeros = [1,2,3,4];
+let numeros = [1,2,3,4];
 letras = ["a", "b", "c"];
-console.log(numeros.concat("Basicamente el concat " , " " , letras));
-
+console.log(numeros.concat("Basicamente el concat " +  letras));
 //borar el ultimo elemento de una array
 numeros.pop();
-console.log("Elimina el ultimo caracter de la array " , numeros);
+console.log("Elimina el ultimo caracter de la array " + numeros);
 
 //agregar elemento a una array
 
 array.push(4,6,7);
-console.log("Agrega numeros " , array);
+console.log("Agrega numeros " + array);
 
 //elimina primer elemento
 array.shift();
