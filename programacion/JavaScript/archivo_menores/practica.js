@@ -1,9 +1,9 @@
 let si = "hola";
 let no = 54;
-let tio = {eltio: "pepe", edad: 78};
+let tio = { eltio: "pepe", edad: 78 };
 console.log(typeof tio)
 let variable = 5;
-let variable2= "laotra";
+let variable2 = "laotra";
 let nombre = "alex";
 let apellido = "serrano";
 let nombreful = nombre.concat(" " + apellido);
@@ -35,10 +35,10 @@ primersymbol = Symbol(30);
 segundosymbol = Symbol(30);
 console.log(primersymbol == segundosymbol);
 console.log(primersymbol === segundosymbol);
-let machupichu1,machupichu2;
+let machupichu1, machupichu2;
 machupichu1 = 3 //entero
 machupichu2 = 3 //entero
-console.log(machupichu1 === machupichu2); 
+console.log(machupichu1 === machupichu2);
 machupichu1 = 3 //entero
 machupichu2 = "3" //string
 console.log(machupichu1 == machupichu2);
@@ -63,7 +63,7 @@ const constante = 56;
 console.log("La constante es " + constante);
 //rendondea a decimal
 let precio = Math.round(500.6);
-console.log (precio);
+console.log(precio);
 //redondea sin mas al siguiente numero
 let precio2 = Math.ceil(347.1);
 console.log(precio2);
@@ -73,9 +73,9 @@ console.log(precio3);
 let palabra;
 palabra = "palabra";
 //longitud de caracteres de una variable
-console.log("La longitud de la palabra es " , palabra.length);
+console.log("La longitud de la palabra es ", palabra.length);
 //la letras del x asta x
-console.log("La letras " , palabra.slice(0,4));
+console.log("La letras ", palabra.slice(0, 4));
 
 //saber tipo de dato
 
@@ -87,7 +87,7 @@ console.log(typeof tipo_de_dato2)
 
 //remplazar
 let saludo = "hola manito";
-console.log(saludo.replace("hola" , "ADIOS"));
+console.log(saludo.replace("hola", "ADIOS"));
 
 /*let saludo = "hola manito"
 saludo(saludo.replace("hola" , "ADIOS"))
@@ -108,7 +108,7 @@ console.log(menores.toLowerCase());
 let palabra1con, palabra2con;
 palabra1con = "primera";
 palabra2con = "segunda";
-console.log(palabra1con.concat(" " , palabra2con));
+console.log(palabra1con.concat(" ", palabra2con));
 
 //acortar (no se visualiza bien)
 let palabra69 = "     Hola     5";
