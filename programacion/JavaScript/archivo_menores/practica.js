@@ -123,6 +123,6 @@ cambiar = "cambiar"
 
 con let si que puedes
 let puedo_cambiar
-puedo_cambiar = ""cambiar
+puedo_cambiar = "cambiar"
 //hola marios
 */
