@@ -17,4 +17,5 @@ console.table(arrays)
 
 let nuevaArray = ["primer sitio", ...arrays, "ultimo sitio"]
 console.log(nuevaArray)
+console.table(nuevaArray)
 
