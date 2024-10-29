@@ -117,12 +117,13 @@ console.log(palabra69.trimStart());  //para quitar espacios del lado izquierdo, 
 //corta la palabra
 console.log(palabra1con.split("ra"));
 
-const elefate = "elefante" /*las varable con const tienen que inicializarse no se puede hacer
+const elefate = "elefante" 
+/*
+Las varable con const tienen que inicializarse no se puede hacer
 const cambiar
 cambiar = "cambiar"
 
 con let si que puedes
 let puedo_cambiar
 puedo_cambiar = "cambiar"
-//hola marios
 */
