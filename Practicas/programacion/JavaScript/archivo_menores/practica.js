@@ -15,7 +15,7 @@ const constante = 56;
 console.log("La constante es " + constante);
 //rendondea a decimal
 let precio = Math.round(500.6);
-console.log (precio);
+console.log(precio);
 //redondea sin mas al siguiente numero
 let precio2 = Math.ceil(347.1);
 console.log(precio2);
