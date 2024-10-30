@@ -6,8 +6,6 @@
 
 #### Servicios de diseño
 
-#### http://www.espacioux.com
-
 ### UX
 
 ```
@@ -58,8 +56,6 @@ felices que deben contemplarse.
 ```
 
 #### Servicios de diseño
-
-#### http://www.espacioux.com
 
 ### Contexto
 
@@ -115,8 +111,6 @@ herramientas que facilitan su desarrollo.
 ```
 
 #### Servicios de diseño
-
-#### http://www.espacioux.com
 
 ### Etapa 1: Empatizar
 
@@ -183,8 +177,6 @@ la solución que estábamos buscando.
 
 #### Servicios de diseño
 
-#### http://www.espacioux.com
-
 ### Heatmap
 
 ```
@@ -233,8 +225,6 @@ brindan, el nivel de interactiviad, a que tiene acceso, etc.
 ```
 
 #### Servicios de diseño
-
-#### http://www.espacioux.com
 
 ### Journey Map
 
@@ -290,8 +280,6 @@ naturales.
 
 #### Servicios de diseño
 
-#### http://www.espacioux.com
-
 ### MVP
 
 ```
@@ -340,8 +328,6 @@ manera óptima a cualquier dispositivo.
 ```
 
 #### Servicios de diseño
-
-#### http://www.espacioux.com
 
 ### Stakeholders
 
@@ -392,8 +378,6 @@ interacción del usuario tan eficiente y simple como sea posible.
 
 #### Servicios de diseño
 
-#### http://www.espacioux.com
-
 ### A/B Test
 
 ```
@@ -436,5 +420,3 @@ usuarios.
 ```
 
 #### Servicios de diseño
-
-#### http://www.espacioux.com
