@@ -1,5 +1,5 @@
 
-//Hecha con codeqwen en usando continue
+//Hecha con codeqwen usando continue
 
 function rollDice() {
   // Generate a random number between 1 and 6 to simulate a dice roll
