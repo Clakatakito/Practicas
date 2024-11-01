@@ -3,7 +3,7 @@
 
 
 
-suma(1.5, 2);
+suma(1.5, 2); //puede ser llamada antes que la función
 
 
 function suma(num1=0, num2=0){
@@ -14,7 +14,7 @@ function suma(num1=0, num2=0){
 
 //Function expresion
 
-//console.log(sumar2(3,1)); error
+//console.log(sumar2(3,1)); error, no puede ser llamada antes que la función
 
 const sumar2 = function(nume1, nume2=0){
     console.log(nume1 + nume2)
