@@ -34,7 +34,9 @@ const sumar = (nume1, nume2 = 0) => {
 sumar(3, 1);
 
 
-//Diferencia principal entre una función declarativa y una expression
-//esque la declarativa la defines y la puedes llamar desde cualquier punto
-//incluso antes incluso de ser llamada, la expression no, tiene que llamarse depues
+/*
+Diferencia principal entre una función declarativa y una expression
+esque la declarativa la defines y la puedes llamar desde cualquier punto
+incluso antes incluso de ser llamada, la expression no, tiene que llamarse depues
+*/
 
