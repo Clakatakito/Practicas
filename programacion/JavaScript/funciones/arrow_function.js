@@ -17,4 +17,11 @@ const sumar = function(num1,num2){
 const resultado = sumar(1,1);
 console.log(resultado);
 
-//que diferencia hay entre las arrow functions y las functions normales?
+//que diferencia hay entre las arrow functions y las functions normales
+
+/*
+Las arrow functions en JavaScript tienen una sintaxis más breve y no crean su propio contexto de this,
+manteniéndolo igual al contexto en el que fueron definidas, lo que es útil en callbacks. En cambio,
+las funciones normales crean su propio this, que cambia según el contexto de llamada,
+ lo que les da flexibilidad en situaciones donde el contexto puede variar.
+*/
