@@ -3,10 +3,12 @@ Volumenes de Docker en Windows
 
 docker run --name ubuntu1 -d -it -v c:\vol1:/datos ubuntu
 
-Y en la raiz habra una carpeta llamada vol1
+Y en la raiz habra una carpeta llamada vol1 pero cuando hace "docker volumes ls" no te saldra tu volumen
 
 
 
 docker run --name ubuntu1 -d -it -v vol1:/datos ubuntu
 
-se creara el volumen vol1 en
+se creara el volumen vol1 en pero en otro sitio del sistema, para ve donde en "explorador de archivos" buscamos:
+
+\\wsl.localhost\docker-desktop\mnt\docker-desktop-disk\data\docker
