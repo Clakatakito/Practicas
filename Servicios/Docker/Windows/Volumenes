@@ -1,0 +1,12 @@
+
+Volumenes de Docker en Windows
+
+docker run --name ubuntu1 -d -it -v c:\vol1:/datos ubuntu
+
+Y en la raiz habra una carpeta llamada vol1
+
+
+
+docker run --name ubuntu1 -d -it -v vol1:/datos ubuntu
+
+se creara el volumen vol1 en
