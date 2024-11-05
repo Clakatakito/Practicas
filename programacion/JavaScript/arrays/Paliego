@@ -1,0 +1,11 @@
+Sin valor inicial: .reduce() toma el primer elemento del array como valor inicial del acumulador y empieza a operar desde el segundo elemento.
+
+Ejemplo: [10, 20, 30, 40] sin valor inicial → empieza con 10, y el primer paso es 10 + 20.
+
+
+Con valor inicial: Si especificas un valor inicial, el acumulador comienza con ese valor y .reduce() recorre todos los elementos del array.
+
+Ejemplo: [10, 20, 30, 40] con valor inicial 1 → empieza con 1, y el primer paso es 1 + 10.
+
+
+Resultado: Si el array está vacío y no se da un valor inicial, se lanza un error. Con un valor inicial, simplemente devuelve ese valor
