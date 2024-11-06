@@ -153,6 +153,25 @@ docker cp contendedor1:/home/fichero.txt . #el "." es donde te encuentras actual
 
 
 
+VER LOS CAMBIOS HECHOS EN UN CONTENEDOR
+
+docker diff (contenedor)
+
+A - AÑADIDO (APPEND)
+C - CAMBIO (CHANGED)
+D - ELIMINADO (DELETED)
+
+La diferencia que muestra docker diff es entre el sistema de archivos actual del contenedor y el sistema de archivos original de la imagen en la que se basó.
+Es decir, compara el estado actual del contenedor con el estado de la imagen al momento de crearse el contenedor.
+
+Así, si haces cambios en el contenedor después de arrancarlo (como crear, modificar o eliminar archivos), docker diff listará esos cambios,
+ya que son diferencias con respecto a la imagen base.
+
+No compara un arranque anterior con uno posterior, sino el estado actual del contenedor contra el sistema de archivos de la imagen inicial.
+
+
+
+
 DETENER CONTENEDOR
 
 docker stop IDCONTENEDOR
