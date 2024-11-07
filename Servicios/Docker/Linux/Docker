@@ -172,6 +172,26 @@ No compara un arranque anterior con uno posterior, sino el estado actual del con
 
 
 
+CREAR TUS PODRIAS IMAGENES
+
+cuando tenga una imagen, ejemplo ubuntu(la predeterminada), y ya tienes paquetes y servicios en ella y quieres tener otra igual puedes hacer un:
+
+docker commit (contenedor_al_que_copiar) (como_llamar_a_la_imagen)
+docker commit ubuntu1 ubuntu_mejora
+
+te saldra como imagen incluso:
+
+  docker images
+  REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+  ubuntu_mejora latest    1e3c0825dfb3   5 seconds ago   124MB
+  ubuntu        latest    59ab366372d5   3 weeks ago     78.1MB  
+
+
+  docker run -it -d --name ubuntu3 ubuntu_mejora bash
+
+
+
+
 DETENER CONTENEDOR
 
 docker stop IDCONTENEDOR
