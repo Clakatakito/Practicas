@@ -192,6 +192,59 @@ te saldra como imagen incluso:
 
 
 
+DATO CURIOSO
+
+Las imagenes de S.0 solo tienen 1 capa, se puede mirar asi:
+
+docker image inspect (IMAGEN)
+
+UBUNTU:
+  "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:a46a5fb872b554648d9d0262f302b2c1ded46eeb1ef4dc727ecc5274605937af"
+            ]
+        },
+
+una imagen de microservicio que me gusta:
+DOCUSEAL:
+  "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:78561cef0761903dd2f7d09856150a6d4fb48967a8f113f3e33d79effbf59a07",
+                "sha256:6e3d66f7c387dd4331b32d32954ebaee7a666c103015a29a7ca5c4f01fe5d690",
+                "sha256:cd7e80b727b807d777b65222e74bd9392159d02d4606bb3028137916963f1dc4",
+                "sha256:6c389d3b854a6a1b02f427dfabccbd4b742494af5ee249effafc9b7078ecea53",
+                "sha256:9b8dee3bb3e10e25ce31aa7c52fbca050584e7947b177017d49deb922b38b34e",
+                "sha256:ea23f1f76c095298c4ffbc5a5b9b29539d3604ebaa46f0ac5da62b7e9697a85d",
+                "sha256:5aa460b9a45ca01c7a9f314ef6d46367741db830c0726169e9ea6b9190aa6d58",
+                "sha256:fce52c012bc5af8a40fd5451c7356587ccf501f04fd3afeecc7ad079d3730c0a",
+                "sha256:b5e82aeb0cb42cd79c32006981987c035eff1e29965c0277343df336fee7e69d",
+                "sha256:5fab0a737ed60b5c2d967cb3b4cc6b6e458434e8213dc265a521ac963d075f00",
+                "sha256:43e78d21f2cbb4b012453d3df9b66fe9da3dc954e54ec4cac8ceef2571d26dd7",
+                "sha256:419941d73ab4bb793383870e02f5837d1738916483f672f55e9f0991ca9fb9a9",
+                "sha256:c09d8cac30a44e58a99eb5d989162c18bb0a9cf9354d7851827c4ca7bc98e011",
+                "sha256:14b5fa5033262c0af8cded092034ecc239210b8a359f0eb5a2b5fbc10a0c843d",
+                "sha256:7baf304a9d54a0f5a04a3075abbb4e47ba3bf70a25b58df3a96be074c04f0711",
+                "sha256:2621cd15ce1e12c8aaecab710775e05b2847091454b7670299a0b29d67ffe6d1",
+                "sha256:1af19a9e7332a588794f254f590a0431f15a09f8d2423b6c3afb822997e06e69",
+                "sha256:8827586cf28360e67ed9488cd0193037e16fbd864558b6877b79cdcfdf543928",
+                "sha256:0587a5bd0ad7dda1f7512e5e6ea15f63e2c4298f74c143626ef9fb1401476e00",
+                "sha256:4462b2190d4e6d835374bda6c3fe7af83f74a1d8044c9571b74b35b0fe2d14a0",
+                "sha256:29c70a551074c9c9be8d521821f9e51edbc5fcefbde1b1b76a9af77311fbdd13",
+                "sha256:6ba0a212b79ef6a3b1eb9490759640868fb3d8d7848a4c99e41e9edf3ed8ad77",
+                "sha256:a95fca15ee49d09b7789808c81b6de80966e1c6f154d2971179c172ea94c222e",
+                "sha256:e7bd3c9dfa69097c66e9153a82ef73f114c35a7f15b97a0390b56d7dddf01921",
+                "sha256:7dcce2938571678a79f38d7253487214a216e912c42a21586b6b0f83eef891f1"
+            ]
+        },          
+
+
+
+
+Se van creado mas capas a medida que tu escribas en ellas
+
+
 DETENER CONTENEDOR
 
 docker stop IDCONTENEDOR
