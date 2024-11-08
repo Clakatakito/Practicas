@@ -23,8 +23,8 @@ console.log(tecnologias2)
 
 //include
 
-const resultado = arrays.includes("PYTHON")
-console.log(resultado)
+const resultado = arrays.includes("PYTHON");
+console.log(resultado);
 
 
 
