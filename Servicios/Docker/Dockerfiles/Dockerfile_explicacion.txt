@@ -1,0 +1,65 @@
+
+Un Dockerfile es un archivo de texto que contiene instrucciones paso a paso para construir una imagen Docker,
+que es un paquete que incluye una aplicación junto con sus dependencias y configuraciones.
+Mediante comandos específicos, el Dockerfile permite definir el sistema operativo base,
+instalar programas y librerías,
+copiar archivos y establecer configuraciones necesarias para que la aplicación funcione de manera consistente en cualquier entorno donde se ejecute.
+
+
+sudo nano Dockerfile
+
+Definimos la imagen base desde la cual se construirá la nueva imagen, en este caso Ubuntu
+FROM ubuntu
+Ejecutamos el comando para actualizar la lista de paquetes disponibles en la imagen base
+RUN apt update
+Instalamos Python3 con el parámetro -y para que no sea interactivo
+RUN apt install -y python3
+
+
+docker build -t mi_imagen_python . #el punto es para indicarleque el path del Dockerfile, en mi caso de donde me encuentro     
+
+*Dentro del Dockerfile no necesitas usar sudo al ejecutar comandos como apt update o apt install.
+Esto se debe a que Docker construye las imágenes con privilegios de root de forma predeterminada,
+por lo que todos los comandos se ejecutan como superusuario
+
+
+=> [internal] load build definition from Dockerfile                                                               0.0s
+=> => transferring dockerfile: 91B                                                                                0.0s
+=> [internal] load metadata for docker.io/library/ubuntu:latest                                                   0.4s
+=> [internal] load .dockerignore                                                                                  0.0s
+=> => transferring context: 2B                                                                                    0.0s
+=> [1/3] FROM docker.io/library/ubuntu:latest@sha256:99c35190e22d294cdace2783ac55effc69d32896daaa265f0bbedbcde4f  0.0s
+=> CACHED [2/3] RUN apt update                                                                                    0.0s
+=> [3/3] RUN apt install -y python3                                                                               8.0s
+=> exporting to image                                                                                             0.5s
+=> => exporting layers                                                                                            0.5s
+=> => writing image sha256:a2b0e069951fb024dc205d78d2d7ef60e994ac7c1686ef6a13b2e6af41db6ad2                       0.0s
+=> => naming to docker.io/library/mi_imagen_python
+
+
+docker images
+REPOSITORY         TAG       IMAGE ID       CREATED          SIZE
+mi_imagen_python   latest    a2b0e069951f   11 minutes ago   161MB
+
+
+
+
+Ahora lo iniciamos
+
+docker run -it mi_imagen_python python3
+Python 3.12.3 (main, Sep 11 2024, 14:17:37) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("hola, bro")
+hola, bro
+>>>
+
+
+Tambien es lo mismo esto:
+
+docker run -it mi_imagen_python
+root@e87646ae3093:/# python3
+Python 3.12.3 (main, Sep 11 2024, 14:17:37) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("hola, bro")
+hola, bro
+>>>    
