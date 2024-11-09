@@ -18,7 +18,7 @@ services:
       MYSQL_USER: nextcloud
       MYSQL_PASSWORD: example
 
-  app:
+  nextcloud:
     image: nextcloud
     ports:
       - 8080:80
@@ -53,13 +53,14 @@ Por favor, ponte en contacto con tu administrador. Si eres un administrador, edi
 Más información sobre cómo configurar esto se puede encontrar en la documentación.
 
 
-ves al portainer y entra al contenedor
+ves al portainer o entra dentro del contenedor
 
 y ves a "/var/www/html/config/config.php" con nano
 
 si no te deja
 
   -apt update
+  -apt install nano
   -chmod 644 /var/www/html/config/config.php
   - nano /var/www/html/config/config.php
 
