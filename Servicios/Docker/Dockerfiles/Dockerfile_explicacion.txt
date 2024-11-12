@@ -62,4 +62,40 @@ Python 3.12.3 (main, Sep 11 2024, 14:17:37) [GCC 13.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> print("hola, bro")
 hola, bro
->>>    
+>>>
+
+*Un CMD solo puede haber 1, poder pueden haber los que queramos pero el ultimo es el que importa
+
+
+RUN vs CMD
+
+RUN se usa en un Dockerfile para ejecutar comandos durante la construcción de la imagen,
+configurando el entorno e instalando dependencias, mientras que CMD define el comando predeterminado que se ejecutará cuando se inicie un contenedor a partir de esa imagen.
+RUN afecta a la imagen en sí,
+creando una nueva capa, mientras que CMD simplemente establece el proceso de inicio del contenedor y puede ser sobrescrito al ejecutar el contenedor.
+
+
+
+CMD vs ENTRYPOINT
+
+La diferencia entre CMD y ENTRYPOINT en un Dockerfile es que CMD define el comando predeterminado que se ejecutará al iniciar el contenedor,
+pero puede ser sobrescrito al especificar otro comando al ejecutar el contenedor.
+En cambio, ENTRYPOINT establece un comando principal que siempre se ejecutará al iniciar el contenedor,
+y no se sobrescribe, aunque puedes agregarle argumentos adicionales usando CMD.
+Usar ambos juntos permite definir un comando fijo con argumentos predeterminados que aún puedes modificar al ejecutar el contenedor.
+De ENTRYPOINT tambien solo puede haber uno
+
+*ACLARACION IMPORTANTE
+
+Os acordais cuando antes haciamos "docker run -it -d --name ubuntu1 ubuntu"
+Y luego "docker exec -it ubuntu1 bash"
+Pues cuando hacemos un CMD o un Entrypoint y especificamos el /bin/bash, por ejemplo CMD ["/bin/bash"] en nuestro Dockerfile ya no tenemos que poner el parametro bash
+
+ -docker run -it -d --name ubuntu1 ubuntu(es la imagen creada con el Dockerfile)
+ -docker exec -it ubuntu1 #sin bash porque se lo especifiquemos en el Dockerfile
+
+
+
+
+
+
