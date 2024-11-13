@@ -29,4 +29,8 @@ ADD f*.txt /DATOS/
 ADD archivo.tar .
 #Una diferencia con el COPY es que el tar admite ficheros comprimidos de tipo "tar" y los desempaqueta, en este caso lo hara en /DATOS2
 
+#Con ADD también puedes descargar cosas de internet
+#ADD htps://url/de/internet /DATOS2
+#Lo que descargues tiene que ser .tar
+
 ENTRYPOINT ["/bin/bash"]
