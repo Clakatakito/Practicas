@@ -91,8 +91,9 @@ Os acordais cuando antes haciamos "docker run -it -d --name ubuntu1 ubuntu"
 Y luego "docker exec -it ubuntu1 bash"
 Pues cuando hacemos un CMD o un Entrypoint y especificamos el /bin/bash, por ejemplo CMD ["/bin/bash"] en nuestro Dockerfile ya no tenemos que poner el parametro bash
 
- -docker run -it -d --name ubuntu1 ubuntu(es la imagen creada con el Dockerfile)
- -docker exec -it ubuntu1 #sin bash porque se lo especifiquemos en el Dockerfile
+ -docker run -it -d --name ubuntu1 ubuntu(es la imagen creada con el Dockerfile), y directamente entrara en el contenedor sin tener que hacer, 
+"docker exec -it ubuntu1" despues, obiamente cuando dejemos de trabajar con el y luego queramos hacerlo si que tendremos que hacer, 
+"docker exec -it ubuntu1 bash"
 
 
 
