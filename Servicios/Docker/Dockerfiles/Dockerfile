@@ -24,17 +24,13 @@ COPY app.log /DATOS/
 ##ADD##
 
 ADD docs docs
+#añadira la carpeta docs y la llamara docs
 ADD f*.txt /DATOS/
 ADD archivo.tar .
 #Una diferencia con el COPY es que el tar admite ficheros comprimidos de tipo "tar" y los desempaqueta, en este caso lo hara en /DATOS2
 
-##ENV##
+#Con ADD también puedes descargar cosas de internet
+#ADD htps://url/de/internet /DATOS2
+#Lo que descargues tiene que ser .tar
 
-ENV dir=/data dir2=/data2
-ENV TEXTO="Esto es un texto de prueba"
-#no permite espacios entre los "=", ejemplo: dir = /data ERROR, dir=/data
-RUN mkdir $dir && mkdir $dir2
-RUN touch $dir/datos.txt
-CMD echo $TEXTO
-
-#ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
