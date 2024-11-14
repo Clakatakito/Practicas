@@ -33,4 +33,12 @@ ADD archivo.tar .
 #ADD htps://url/de/internet /DATOS2
 #Lo que descargues tiene que ser .tar
 
+##ENV##
+
+ENV data=/data data2=/data2
+#tiene que se pegado el "=", no piede ser data = /data, data=/data
+RUN mkdir $data && mkdir $data2
+RUN echo "Hola a todos" > $data/otroarchillo.txt
+
+
 ENTRYPOINT ["/bin/bash"]
