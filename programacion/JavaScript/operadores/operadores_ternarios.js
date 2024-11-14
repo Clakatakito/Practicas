@@ -16,7 +16,7 @@ if(auth){
 
 auth ? console.log("esta autenticado") : console.log("no esta autenticado");
 
-//A JavaScript no le importa los espacios asqie tambien se puede hacer asi, es mas es la manera mas comun de verlo
+//A JavaScript no le importa los espacios asqie tambien se puede hacer asi, es mas, es la manera mas comun de verlo
 
 auth ?
     console.log("esta autenticado"):
