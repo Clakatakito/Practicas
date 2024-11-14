@@ -15,3 +15,8 @@ sudo bash ./wazuh-install.sh -a -i
 https://ip-server
 
 
+#otra instalacion
+
+https://www.youtube.com/watch?v=EdZMe_zYg2g&t=904s
+
+git clone https://github.com/wazuh/wazuh-docker.git -b v4.7.3
