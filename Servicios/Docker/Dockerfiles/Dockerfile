@@ -36,9 +36,23 @@ ADD archivo.tar .
 ##ENV##
 
 ENV data=/data data2=/data2
+
+#Si al principio cuando crees el contenedor pones "docker run -it --rm imagen -e data=/ejemplo imagen" te dejara, sera valido pero...
+#Cuando entres al contenedor y pongas env
+#data=/ejemplo
+#Pero no se te creara ningun directorio llamado "ejemplo", es mas, si se creara igualmete el directorio /data
+#root@d45991cc3b7e:/# ls
+#DATOS  DATOS2  bin  boot  data  data2  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+
+ENV TEXTO="HOLA"
+#Si al principio cuando crees el contenedor pone "docker run -it --rm imagen -e TEXTO="OTRO TEXTO" se cambiara por el que has puesto
 #tiene que se pegado el "=", no piede ser data = /data, data=/data
 RUN mkdir $data && mkdir $data2
 RUN echo "Hola a todos" > $data/otroarchillo.txt
 
 
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT [ "${TEXTO}", "/bin/bash" ]
+ENTRYPOINT ["/bin/bash", "-c", "echo ${TEXTO} && exec /bin/bash"]
+
+#CMD echo ${TEXTO} && /bin/bash
