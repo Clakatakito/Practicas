@@ -59,3 +59,16 @@ ENTRYPOINT ["/bin/bash", "-c", "echo ${TEXTO} && exec /bin/bash"]
 #CMD ["/DATOS2/crear_dir.sh && exec /bin/bash"]
 #CMD ["/bin/bash", "-c", "/crear_dir.sh && exec /bin/bash"]
 #CMD echo ${TEXTO} && /bin/bash
+
+##ARG##
+
+#El comando ARG en un Dockerfile se utiliza para definir variables de construcción (build-time variables).
+#Estas variables solo están disponibles mientras se construye la imagen y no persisten en el contenedor resultante.
+#Es decir, se usan para proporcionar valores dinámicos al construir la imagen, pero no estarán accesibles en tiempo de ejecución.
+#*Solo se pueden utilizar cuando creamos el contenedro "docker run -it --rm imagen --build-arg"
+ARG directorio
+RUN mkdir $directorio
+#docker build -t imagen --build-arg directorio=/directorio .
+#ls
+#DATOS  DATOS2  bin  boot  data  data2  dev  directorio  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
