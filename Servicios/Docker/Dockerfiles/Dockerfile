@@ -36,6 +36,7 @@ ADD archivo.tar .
 ##ENV##
 
 ENV data=/data data2=/data2
+#ENV data3=/data3
 
 #Si al principio cuando crees el contenedor pones "docker run -it --rm imagen -e data=/ejemplo imagen" te dejara, sera valido pero...
 #Cuando entres al contenedor y pongas env
@@ -50,9 +51,11 @@ ENV TEXTO="HOLA"
 #tiene que se pegado el "=", no piede ser data = /data, data=/data
 RUN mkdir $data && mkdir $data2
 RUN echo "Hola a todos" > $data/otroarchillo.txt
-
+#ADD crear_dir.sh .
+#RUN chmod +x /DATOS2/crear_dir.sh
 
 #ENTRYPOINT [ "${TEXTO}", "/bin/bash" ]
 ENTRYPOINT ["/bin/bash", "-c", "echo ${TEXTO} && exec /bin/bash"]
-
+#CMD ["/DATOS2/crear_dir.sh && exec /bin/bash"]
+#CMD ["/bin/bash", "-c", "/crear_dir.sh && exec /bin/bash"]
 #CMD echo ${TEXTO} && /bin/bash
