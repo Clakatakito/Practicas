@@ -38,3 +38,5 @@ services:
       - INDEXER_URL=https://wazuh.indexer:9200
       - INDEXER_USERNAME=admin                  #cambiar?
       - INDEXER_PASSWORD=SecretPassword         #cambiar?
+
+Y ahy mas debajo, dar crt + w en nano para buscar
