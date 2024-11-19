@@ -1,4 +1,4 @@
 
-import { sumar } from "./funciones.js";
+import { sumar /*as lafuncionquesuma*/ } from "./funciones.js";
 
-console.log(sumar(2,3))
+console.log(sumar/*lafuncionquesuma*/(2,3))
