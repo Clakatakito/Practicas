@@ -54,11 +54,10 @@ RUN echo "Hola a todos" > $data/otroarchillo.txt
 #ADD crear_dir.sh .
 #RUN chmod +x /DATOS2/crear_dir.sh
 
-#ENTRYPOINT [ "${TEXTO}", "/bin/bash" ]
-ENTRYPOINT ["/bin/bash", "-c", "echo ${TEXTO} && exec /bin/bash"]
-#CMD ["/DATOS2/crear_dir.sh && exec /bin/bash"]
-#CMD ["/bin/bash", "-c", "/crear_dir.sh && exec /bin/bash"]
-#CMD echo ${TEXTO} && /bin/bash
+
+##SCRIPTS##
+
+#demostracion con scripts en /prueba-con-scripts
 
 ##ARG##
 
@@ -66,9 +65,26 @@ ENTRYPOINT ["/bin/bash", "-c", "echo ${TEXTO} && exec /bin/bash"]
 #Estas variables solo están disponibles mientras se construye la imagen y no persisten en el contenedor resultante.
 #Es decir, se usan para proporcionar valores dinámicos al construir la imagen, pero no estarán accesibles en tiempo de ejecución.
 #*Solo se pueden utilizar cuando creamos el contenedro "docker run -it --rm imagen --build-arg"
-ARG directorio
-RUN mkdir $directorio
+#ARG directorio
+#RUN mkdir $directorio
 #docker build -t imagen --build-arg directorio=/directorio .
 #ls
 #DATOS  DATOS2  bin  boot  data  data2  dev  directorio  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+##EXPOSE##
+
+#demostracion en /prueba-con-expose
+
+
+##VOLUME##
+
+#demostracion en /prueba-con-volume
+
+
+#ENTRYPOINT [ "${TEXTO}", "/bin/bash" ]
+ENTRYPOINT ["/bin/bash", "-c", "echo ${TEXTO} && exec /bin/bash"]
+#CMD ["/DATOS2/crear_dir.sh && exec /bin/bash"]
+#CMD ["/bin/bash", "-c", "/crear_dir.sh && exec /bin/bash"]
+#CMD echo ${TEXTO} && /bin/bash
+
 
