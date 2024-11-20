@@ -242,6 +242,46 @@ DOCUSEAL:
 
 Se van creado mas capas a medida que tu escribas en ellas
 
+COMPRIMIR IMAGENES EN .tar
+
+  -docker image save imagen -o(output) nombreimagen.tar
+
+Ejemplo
+
+  -docker image save ubuntu -o ubuntucomprimido.tar
+
+Y lo creara donde te situes
+
+Vamos a hacer una prueba:
+
+docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+docker rmi ubuntu                
+Untagged: ubuntu:latest
+Deleted: sha256:278628f08d4979fb9af9ead44277dbc9c92c2465922310916ad0c46ec9999295
+docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+Ya no tengo la imagen de ubuntu pero si tengo el ubuntucomprimido.tar
+
+
+DESCOMPRIMIR IMAGENES EN .tar
+
+  --docker image load -i(intput) nombreimagen.tar
+
+Ejemplo
+
+  -docker image load -i ubuntucomprimido.tar
+
+docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+docker image load -i ubuntucomprimido.tar
+Loaded image: ubuntu:latest
+docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+
 
 DETENER CONTENEDOR
 
