@@ -238,11 +238,28 @@ DOCUSEAL:
         },          
 
 
-TAG
-
-
-
 Se van creado mas capas a medida que tu escribas en ellas
+
+
+
+
+TAG
+*El comando docker tag se usa para crear un alias (o etiqueta) para una imagen existente. Esto es útil para organizar imágenes o prepararlas para subirlas a un registro, como Docker Hub.
+
+docker images     
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+docker tag ubuntu miubuntu
+docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+miubuntu     latest    278628f08d49   5 weeks ago   117MB
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+
+Apuntan al mismo id
+
+
+
+
 
 COMPRIMIR IMAGENES EN .tar
 
