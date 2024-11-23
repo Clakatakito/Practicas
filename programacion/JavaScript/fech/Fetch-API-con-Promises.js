@@ -3,18 +3,25 @@
 
 const url = "https://jsonplaceholder.typicode.com/comments"
 
-fetch(url)
+
+
+
+const consultaAPI = () =>{
+    fetch(url)
     .then((response) =>{
         if(response.ok){
             return response.json()
         }if(!response.ok){
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Hay un error crack: ${response.status}`);
         }
     })
-    .then(data =>{
-        console.log(data)
+    .then(datos =>{
+        console.log(datos)
     })
     
     .catch(error =>{
         console.log(error.message)
     })//el .catch solo funciona cuando hay error de conexion
+}    
+
+consultaAPI()
