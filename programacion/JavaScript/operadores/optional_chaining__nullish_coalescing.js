@@ -63,3 +63,7 @@ const usuario = {
 let nombre2 = usuario.perfil?.nombre2 ?? "Invitado";
 console.log(nombre2); // "Invitado"
 
+
+
+
+
