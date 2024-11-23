@@ -3,7 +3,7 @@ function obtenerDatos() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve("Datos obtenidos");
-        }, 7000); // Simula un retraso de 10 segundos
+        }, 7000); // Simula un retraso de X segundos
     });
 };
 
