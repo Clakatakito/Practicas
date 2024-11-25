@@ -302,6 +302,95 @@ REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 ubuntu       latest    278628f08d49   5 weeks ago   117MB
 
 
+
+
+MEMORIA EN LOS CONTENEDORES
+
+Ejemplo:
+
+  -docker run -it --name apachesinlimite -d httpd
+  -docker run -it --name apacheconlimite -d -m 12m httpd
+  -docker stats
+
+CONTAINER ID   NAME              CPU %     MEM USAGE / LIMIT    MEM %     NET I/O       BLOCK I/O   PIDS
+3b5968946bfb   apacheconlimite   0.00%     10.79MiB / 12MiB     89.91%    746B / 0B     0B / 0B     82
+c4fb228fbece   apachesinlimite   0.00%     24.1MiB / 7.692GiB   0.31%     1.05kB / 0B   0B / 0B     82
+
+Vemos que que el apacheconlimite tiene el limite de 12m porque se lo posimos en "docker run -it --name apacheconlimite -d -m 12m httpd",
+poreso tiene un % mas alto que el otro, aparte de ello por defecto tambien viene con swap que es una parte del disco duro que el sistema usa como memoria virtual cuando la RAM está llena.
+Es más lento que la RAM porque depende del almacenamiento, pero evita que el sistema se quede sin memoria por completo.
+
+Por defecto aprte del -m 12(limite de 12m) tambien te asigna 12m de momoria swap por si te pasas del limite establecido no detener o matar al contenedor
+
+Por defecto, también permite usar 12 MB adicionales de swap (RAM + swap = 24 MB).
+
+12 + 12 = 24, docker siempre te asignara Xm y te pondra Xm de memoria swap
+
+
+
+  -docker run --name apache1 -it -d -m 256m --memory-swap 1G httpd
+
+-m 256m:
+Limita la memoria RAM del contenedor a 256 MB.
+
+--memory-swap 1G:
+Configura el límite total de memoria (RAM + swap) en 1 GB. Esto significa que:
+
+El contenedor puede usar hasta 256 MB de RAM.
+Si necesita más memoria, puede usar hasta 744 MB de swap (1 GB total - 256 MB RAM).
+
+
+
+
+
+CPU EN LOS CONTENEDORES
+
+  -docker run -it -d --name apache --cpus=X httpd
+
+--cpus=X: 
+Limita el contenedor a utilizar X núcleos de CPU, en lugar de los recursos predeterminados. 
+
+
+*Si poneis:
+  -docker info
+
+Hos sale el numero de cpu's que teneis
+
+Ejemplo
+
+Yo tengo 16 cpu's y lanzo esto:
+
+  -docker run -it -d --name apache --cpus=5 httpd
+
+Quiere decir eso ahora que solo puedo usar 11 cpu's?, NO
+
+Lo que estás haciendo es limitar el contenedor a utilizar solo 5 núcleos de CPU. No significa que el sistema no pueda usar los 11 núcleos restantes, ya que el límite de --cpus=5 solo se aplica al contenedor de Docker y no al host en general.
+En otras palabras, con este comando:
+El contenedor Apache podrá usar hasta 5 núcleos de CPU.
+
+Y puedo usar esto sin problema:
+
+  -docker run -it -d --name apache --cpus=15 httpd
+
+Y no habra problema ya que el primer contenedor su limite sera 5 cpu's y el del segundo 15
+
+
+PERO QUE PASA CUANDO NOS PASAMOS DE LAS CPU'S QUE TENEMOS?
+
+  -docker run -it -d --name apache --cpus=17 httpd
+docker: Error response from daemon: Range of CPUs is from 0.01 to 16.00, as there are only 16 CPUs available.
+See 'docker run --help'.
+
+Pues que sale un ERROR
+
+
+
+
+
+
+
+
+
 DETENER CONTENEDOR
 
 docker stop IDCONTENEDOR
