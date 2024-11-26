@@ -385,6 +385,23 @@ Pues que sale un ERROR
 
 
 
+CPU EN LOS CONTENEDORES 2
+
+  -docker run --name apache1 -it -d --cpu-shares=X httpd
+
+--cpu-shares=X  
+
+La opción --cpu-shares=1024 asigna una prioridad relativa para el uso de la CPU al contenedor,
+indicando cómo se dividirán los recursos de CPU si varios contenedores compiten por ellos.
+Un valor más alto significa mayor prioridad frente a otros contenedores; por defecto,
+1024 es la prioridad estándar.
+No limita el uso de CPU, solo influye en la proporción de recursos asignados durante la competencia.
+
+Que cuanto mas --cpu-shares=X pongas priorizara el acceso a la CPU si hay competencia entre varios contenedores
+
+
+
+
 
 
 
