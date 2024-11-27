@@ -74,5 +74,7 @@ const consultarTodasLasAPImal = async () => {
     console.log(fin2 - inicio2);
 };
 
+//de la forma que he hecho es menos producente porque primero hace el primer bloque, y el segundo espera,
+
 consultarTodasLasAPImal();
 
