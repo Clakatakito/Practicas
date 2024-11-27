@@ -402,6 +402,53 @@ Que cuanto mas --cpu-shares=X pongas priorizara el acceso a la CPU si hay compet
 
 
 
+CONTEXTOS EN DOCKER
+
+En Docker, los contextos son configuraciones que permiten a los usuarios administrar múltiples entornos de Docker desde una sola máquina. Esto es útil para trabajar con diferentes hosts o configuraciones de Docker, como un clúster remoto, una máquina virtual, o un entorno local. Los contextos simplifican el cambio entre estos entornos sin necesidad de configurar repetidamente las variables de conexión.
+
+*Es decir: Con Docker Context puedes conectarte a diferentes servidores Docker(que tengan Docker instalado) para administrarlos desde tu máquina local.
+Esto incluye interactuar con los contenedores,
+imágenes y volúmenes que se encuentran en esos servidores.
+
+*Basicamente lo que haces es un "ssh" a otro servidor docker donde le estas pasando los contendores, imagenes etc...
+
+
+
+La idea es muy parecida a lo que hace SSH, pero con Docker, en lugar de acceder a una terminal remota,
+lo que haces es conectarte a un servidor Docker remoto para poder ejecutar comandos de Docker allí (como si estuvieras trabajando directamente en ese servidor), pero sin necesidad de interactuar manualmente con la terminal del servidor.
+
+Comparación con SSH:
+SSH: Accedes a una terminal remota donde puedes ejecutar cualquier comando, incluida la gestión de Docker.
+
+Docker Context: Te conectas a un servidor Docker remoto y ejecutas comandos de Docker directamente sobre ese servidor (sin necesidad de usar SSH). Es como si estuvieras gestionando Docker en esa máquina como si fuera local.
+
+
+*SIMULACION
+
+tengo un servidor ubuntu server con docker instalado con la ip 192.168.1.199 y quiero conectarme a el y uso docker-desktop
+
+
+en el docker-desktop:
+
+  -docker context create servidor-remoto --docker "host=tcp://192.168.1.199:2375(puerto que escuche docker)"
+
+Sino funciona yo use esta:
+
+  -docker context create docker-server --docker "host=ssh://user@ip-server"
+  -docker context use docker-server
+  docker-server
+Current context is now "docker-server"
+docker info
+user@ip-server's password: user@ip-server's password:
+
+
+*ACLARACION
+
+Cuando te conectas a un servidor remoto usando un contexto de Docker (como docker context use servidor-remoto),
+Docker solo te da acceso a la interfaz de Docker en ese servidor remoto.
+No tienes acceso directo al sistema de archivos del servidor para ejecutar comandos como mkdir o ver un archivo Docker Compose.
+
+
 
 
 
