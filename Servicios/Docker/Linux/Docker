@@ -492,3 +492,23 @@ docker create -p27018 --name alex mysql
 ELIMINAR CONTENEDOR
 
 docker rm IDCONTENEDOR
+
+
+
+
+
+DOCKER COMPOSE
+
+*Yo uso la version del "-", es decir que hago: "docker-compose up -d" por ejemplo, si no hos deja y hos da un erro alomejor teneis que poner "docker compose..."
+
+
+Parar/Iniciar los contenedores que cuelgan de una carpeta, ejemplo:
+
+  -docker-compose stop/start
+
+Ese comando parar o iniciara los contenedores que cuelguen del directorio en el que estes  
+
+
+BORRAR TODO
+
+  -docker-compose down
