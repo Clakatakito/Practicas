@@ -509,6 +509,22 @@ Parar/Iniciar los contenedores que cuelgan de una carpeta, ejemplo:
 Ese comando parar o iniciara los contenedores que cuelguen del directorio en el que estes  
 
 
-BORRAR TODO
+LIMPIEZA TOTAL DE CONTENEDORES: DETENER, ELIMINAR TODOS LOS CONTENEDORES, REDES, VOLUMENES Y SERVICIOS
 
   -docker-compose down
+
+
+
+PAUSE/UNPAUSE
+
+  -docker-compose pause
+  (pausa a todos)
+
+  -docker pause contenedor1
+  (pausa solo a ese contenedor)
+
+
+RESTART
+
+  -docker-compose restart
+  
