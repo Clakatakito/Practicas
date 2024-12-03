@@ -16,3 +16,32 @@ console.log(enlaces)
 //querySelectorALL
 const enlaces2 = document.querySelectorAll("nav a")
 console.log(enlaces2)
+
+
+//Manipular elemetos HTML con JavaScript
+
+const segundon = document.querySelector(".tituloh2")
+console.log(segundon.textContent)
+segundon.textContent = ("nuevo titulo") //antes ponia "Manipulacion de objetos"
+segundon.id = "idiferente"
+console.log(segundon.id) //antes ponia "segundo titulo"
+
+//eliminar el cambio
+
+//segundon.removeAttribute("id") //le quita el id
+//segundon.removeAttribute("class") //le quita la clase
+//ir descomenta
+
+//segundon.remove("nuevo titulo") //elimina
+
+
+//Inputs
+
+const primerInput = document.querySelector("#segundoInput") //date cuenta que se llama primerInput pero esta cojiendo realmente el del segundo, el segundoInput
+primerInput.value = "Jessica"
+
+//enlaces
+
+//enlaces.textContent = "otro nombre de enlace" //solo cambia el primero
+
+enlaces2.forEach(enlaces => enlaces.textContent = "todos iguales")
