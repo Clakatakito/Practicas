@@ -1,5 +1,9 @@
 
-Docker es 
+Docker es una plataforma que permite empaquetar aplicaciones y sus dependencias en contenedores, que son entornos ligeros, portátiles y aislados.
+Estos contenedores aseguran que las aplicaciones se ejecuten de manera consistente en cualquier entorno,
+ya sea en desarrollo, pruebas o producción, eliminando problemas de compatibilidad entre sistemas.
+
+
 
 Instalacion y configuración de Docker:
 
