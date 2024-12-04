@@ -531,4 +531,51 @@ PAUSE/UNPAUSE
 RESTART
 
   -docker-compose restart
-  
+
+
+
+
+PROYECTO
+
+  -docker-compose -p proyecto1 up -d
+
+*Despues de haber creado el docker-compose.yml, en vez de levartarlo y que nos de el nombre del directorio en el que estemos podemos poner la clausula -p, que permite personalizar el nombre del proyecto, evitando que Docker Compose use el nombre del directorio por defecto como prefijo  
+
+
+*Prueba
+
+Yo estoy en: Servicios\Docker\Linux\docuseal2
+
+cd .\Servicios\Docker\Linux\docuseal2\
+Servicios\Docker\Linux\docuseal2> docker-compose -p proyecto1 up -d
+[+] Running 30/2
+ ✔ docuseal Pulled                                                                                                                                                                                   21.3s 
+ ✔ postgres Pulled                                                                                                                                                                                   19.7s 
+[+] Running 3/3
+ ✔ Network proyecto1_default       Created                                                                                                                                                            0.1s 
+ ✔ Container proyecto1-postgres-1  Healthy                                                                                                                                                           16.1s 
+ ✔ Container docuseal              Started                                                                                                                                                           12.0s 
+Servicios\Docker\Linux\docuseal2> docker-compose ps
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+
+*Porque no nos dice los contenedores levantados?
+Porque cuando haces docker-compose ps lo que busca es el nombre del directorio en el que te encuentras, para verlo tenemos que poner tambien la clausula -p
+
+
+Servicios\Docker\Linux\docuseal2> docker-compose -p proyecto1 ps
+NAME                   IMAGE                      COMMAND                  SERVICE    CREATED         STATUS                   PORTS
+docuseal               docuseal/docuseal:latest   "/app/bin/bundle exe…"   docuseal   8 minutes ago   Up 7 minutes             0.0.0.0:3000->3000/tcp
+proyecto1-postgres-1   postgres:15                "docker-entrypoint.s…"   postgres   8 minutes ago   Up 8 minutes (healthy)   5432/tcp
+
+
+*Pues hacerlo desde cualquier parte:
+
+Servicios> docker-compose -p proyecto1 ps
+NAME                   IMAGE                      COMMAND                  SERVICE    CREATED          STATUS                    PORTS
+docuseal               docuseal/docuseal:latest   "/app/bin/bundle exe…"   docuseal   10 minutes ago   Up 10 minutes             0.0.0.0:3000->3000/tcp
+proyecto1-postgres-1   postgres:15                "docker-entrypoint.s…"   postgres   10 minutes ago   Up 10 minutes (healthy)   5432/tcp
+
+
+
+
+PROFILES
