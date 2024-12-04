@@ -579,3 +579,72 @@ proyecto1-postgres-1   postgres:15                "docker-entrypoint.s…"   pos
 
 
 PROFILES
+
+*Los Profiles (perfiles) son una característica que permite gestionar diferentes configuraciones dentro de un archivo docker-compose.yml.
+Los perfiles son útiles cuando tienes varios entornos (como desarrollo, pruebas y producción) y necesitas activar o desactivar servicios específicos dependiendo del entorno en el que estés trabajando.
+
+
+
+
+services:
+  web:
+    image: my-web-app
+    ports:
+      - "8080:80"
+
+  database:
+    image: mysql
+    profiles:
+      - prod
+
+  debugger:
+    image: debug-tool
+    profiles:
+      - dev
+
+
+
+Que hara?:
+  -docker-compose --profile dev up -d
+
+
+Lo que haces es levantar el contenedor web y el contenedor debugger
+
+*Siempre se inician por defecto cuando ejecutas docker-compose up, independientemente de los perfiles que actives.
+*En el ejemplo anterior, el servicio web no tiene un perfil asignado, así que siempre se iniciará.
+
+
+*Ejemplo
+
+docker-compose --profile dev up -d
+[+] Running 14/9
+ ✔ web                                                       #el web lo que coje siempre Pulled                                                                                                                                                                                        14.6s 
+ ✔ debugger                                                  #al ponerle --profile dev, ha cojido el debugger que esta asocisdo a ese profile   Pulled                                                                                                                                                                                   41.8s 
+[+] Running 2/3
+ ✔ Network prueba_default       Created                                                                                                                                                               0.0s 
+ - Container prueba-web-1       Starting                                                                                                                                                              3.0s 
+ ✔ Container prueba-debugger-1  Started                                                                                                                                                               3.0s 
+Error response from daemon: driver failed programming external connectivity on endpoint prueba-web-1 (9f302277fa21699e244ab029d034fc7b55ce0d5dc94c3fb282de26e7ec51ab87): Bind for 0.0.0.0:8080 failed: port is already allocated
+Servicios\Docker\Linux\prueba> docker-compose down
+[+] Running 2/2
+ ✔ Container prueba-web-1  Removed                                                                                                                                                                    0.0s 
+ ✔ Network prueba_default  Removed                                                                                                                                                                    0.2s 
+Servicios\Docker\Linux\prueba> docker-compose --profile prod up -d  #al ponerle ahora el prod, solo cojera el mysql y la web
+[+] Running 11/11
+ ✔ database              Pulled                                                                                                                                                                                    22.6s 
+   ✔ 1f87d67b89c6 Download complete                                                                                                                                                                   0.4s 
+   ✔ a841bff36f3c Download complete                                                                                                                                                                   2.9s 
+   ✔ cd0d5df9937b Download complete                                                                                                                                                                  13.1s 
+   ✔ cb5a6a8519b2 Download complete                                                                                                                                                                   0.6s 
+   ✔ 570d30cf82c5 Download complete                                                                                                                                                                   0.4s 
+   ✔ 5e49e1f26961 Download complete                                                                                                                                                                   0.5s 
+   ✔ 80ba30c57782 Download complete                                                                                                                                                                   0.5s 
+   ✔ 2c0a233485c3 Download complete                                                                                                                                                                  15.5s 
+   ✔ 0b9dc7ad7f03 Download complete                                                                                                                                                                   0.6s 
+   ✔ ced670fc7f1c Download complete                                                                                                                                                                  14.9s 
+[+] Running 2/3
+ ✔ Network prueba_default       Created                                                                                                                                                               0.0s 
+ - Container prueba-web-1       Starting                                                                                                                                                              3.1s 
+ ✔ Container prueba-database-1  Started                                                                                                                                                               3.1s 
+Error response from daemon: driver failed programming external connectivity on endpoint prueba-web-1 (2a0b601339d35e463c99d9e3ed6cf387bd0ea526bf7f6b03d0297aa46b1b4ed7): Bind for 0.0.0.0:8080 failed: port is already allocated
+PS C:\Users\PC GAMING\Desktop\vs code\Servicios\Docker\Linux\prueba>
