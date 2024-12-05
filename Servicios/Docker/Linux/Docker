@@ -647,4 +647,4 @@ Servicios\Docker\Linux\prueba> docker-compose --profile prod up -d  #al ponerle 
  - Container prueba-web-1       Starting                                                                                                                                                              3.1s 
  ✔ Container prueba-database-1  Started                                                                                                                                                               3.1s 
 Error response from daemon: driver failed programming external connectivity on endpoint prueba-web-1 (2a0b601339d35e463c99d9e3ed6cf387bd0ea526bf7f6b03d0297aa46b1b4ed7): Bind for 0.0.0.0:8080 failed: port is already allocated
-Servicios\Docker\Linux\prueba>
+Servicios\Docker\Linux\prueba> docker-compose --profile dev/prod down
