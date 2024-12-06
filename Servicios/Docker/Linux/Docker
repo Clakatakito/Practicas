@@ -485,11 +485,11 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [co
 
 Crear un contenedor con un nombre
 
-docker create --name alex mongo
+docker create --name claka mongo
 
 Crear un contenedor y ponerle los puertos
 
-docker create -p27018 --name alex mysql
+docker create -p27018 --name claka mysql
 
 
 
@@ -661,3 +661,134 @@ services:
     cpu_count: 1            # Le da acceso a 1 núcleo de CPU
     cpu_shares: 512         # Le asigna una prioridad media de uso de CPU
     mem_limit: 50m          # Limita el contenedor a usar máximo 50 MB de memoria
+
+
+
+
+REGISTRY/REGISTRO
+
+*Un registro en Docker es un lugar donde se guardan imágenes, que son como paquetes que contienen todo lo necesario para ejecutar una aplicación.
+Estos registros pueden ser públicos, como Docker Hub, donde cualquiera puede buscar y descargar imágenes,
+o privados, usados por empresas para guardar sus propias aplicaciones de forma segura. Es una forma de compartir y organizar aplicaciones listas para usar.
+
+
+Para usar registros en docker hay que bajarse una imagen
+
+  -docker run -d -p 5000:5000 --restart always --name registry registry:2
+
+Normalmente es esta instruccion la predeterminada para usar registros, pero claro que puedes cambiarle el puerto y el nombre
+
+
+docker ps
+CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS          PORTS                    NAMES
+64532115568f   registry:2                   "/entrypoint.sh /etc…"   25 minutes ago   Up 25 minutes   0.0.0.0:5000->5000/tcp   registry
+
+
+Para guardar la imagen en el repositorio la imagen tiene que tener la misma regla que para subir a Docker Hub:
+
+mi-maquina-local:5000/mi-imagen
+
+El "mi-maquina-local" tiene que ser accesible
+
+
+Ejemplo
+
+docker images                      
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+localhost:5000/ubuntu       latest    80dd3c3b9c6c   2 weeks ago     117MB
+
+
+*ACLARACION
+
+El 5000 es el puerto en el que tu registro Docker está escuchando para recibir peticiones y está corriendo en el puerto 5000 de tu máquina.
+
+Cuando usas localhost:5000/ubuntu, estás indicando que la imagen ubuntu se encuentra en tu registro privado (localhost), y que el puerto de acceso al registro es el 5000.
+
+Así que sí, el nombre localhost:5000/ubuntu es correcto, siempre y cuando el puerto 5000 esté configurado y accesible desde donde estás haciendo la consulta o la carga de la imagen.
+
+
+Vamos que si al poner "docker run -d -p 5000:5000 --restart always --name registry registry:2" le poner 5000 o cualquier valor, luego en el nombre tienes que referenciar ese puerto "localhost:5000/ubuntu"
+
+Y para subirlo es sencillo:
+
+  -docker push localhost:5000/ubuntu
+Using default tag: latest
+The push refers to repository [localhost:5000/ubuntu]
+de44b265507a: Pushed
+latest: digest: sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7 size: 424
+
+i Info → Not all multiplatform-content is present and only the available single-platform image was pushed
+         sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab -> sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7
+
+
+
+
+Y descargarmela es incluso mas sencillo:
+
+docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+ubuntu                  latest    80dd3c3b9c6c   2 weeks ago     117MB
+localhost:5000/ubuntu   latest    80dd3c3b9c6c   2 weeks ago     117MB
+cloudreve/cloudreve     latest    b6c8bfd46389   14 months ago   169MB
+registry                2         543dade69668   14 months ago   37.2MB
+mysql                   8.1.0     f61944ff3f29   16 months ago   784MB
+phpmyadmin/phpmyadmin   latest    67ba2550fd00   16 months ago   803MB
+docker rmi localhost:5000/ubuntu
+Untagged: localhost:5000/ubuntu:latest
+docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+ubuntu                  latest    80dd3c3b9c6c   2 weeks ago     117MB
+cloudreve/cloudreve     latest    b6c8bfd46389   14 months ago   169MB
+registry                2         543dade69668   14 months ago   37.2MB
+mysql                   8.1.0     f61944ff3f29   16 months ago   784MB
+phpmyadmin/phpmyadmin   latest    67ba2550fd00   16 months ago   803MB
+docker pull localhost:5000/ubuntu
+Using default tag: latest
+latest: Pulling from ubuntu
+Digest: sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7
+Status: Downloaded newer image for localhost:5000/ubuntu:latest
+localhost:5000/ubuntu:latest
+PS C:\Users\PC GAMING\Desktop\vs code> docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+localhost:5000/ubuntu   latest    6e75a10070b0   2 weeks ago     117MB
+ubuntu                  latest    80dd3c3b9c6c   2 weeks ago     117MB
+cloudreve/cloudreve     latest    b6c8bfd46389   14 months ago   169MB
+registry                2         543dade69668   14 months ago   37.2MB
+mysql                   8.1.0     f61944ff3f29   16 months ago   784MB
+phpmyadmin/phpmyadmin   latest    67ba2550fd00   16 months ago   803MB
+
+
+Es mas, tambien se puede hacer esto:
+
+  -docker pull 127.0.0.1:5000/ubuntu
+
+
+docker pull 127.0.0.1:5000/ubuntu
+Using default tag: latest
+latest: Pulling from ubuntu
+Digest: sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7
+Status: Downloaded newer image for 127.0.0.1:5000/ubuntu:latest
+127.0.0.1:5000/ubuntu:latest
+PS C:\Users\PC GAMING\Desktop\vs code> docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+127.0.0.1:5000/ubuntu   latest    6e75a10070b0   2 weeks ago     117MB
+localhost:5000/ubuntu   latest    6e75a10070b0   2 weeks ago     117MB
+
+
+
+Porque localhost = 127.0.0.1, lo importante es que tu maquina reconoxca los nombres
+
+
+
+REGISTRY API
+
+
+Es dificil saber que imagenes tenemos en los registros, poreso si nos vamos al navegador y ponemos "localhost:puerto-del-registro/v2/_catalog" nos aparecen las imagenes
+  -localhost:5000/v2/_catalog
+
+{"repositories":["mi-ubuntu","ubuntu"]}
+
+Tambien estan los tags de una determinada imagen, "http://localhost:puerto-del-registro/v2/imagen/tags/list"
+  -http://localhost:5000/v2/mi-ubuntu/tags/list
+
+{"name":"mi-ubuntu","tags":["v1","latest"]}  
