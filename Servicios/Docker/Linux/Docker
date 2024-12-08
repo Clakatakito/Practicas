@@ -792,3 +792,48 @@ Tambien estan los tags de una determinada imagen, "http://localhost:puerto-del-r
   -http://localhost:5000/v2/mi-ubuntu/tags/list
 
 {"name":"mi-ubuntu","tags":["v1","latest"]}  
+
+
+
+REGISTROS INSEGUROS
+
+*En Docker, registros inseguros (también llamados "insecure registries") se refieren a configuraciones de registro de imágenes de contenedores que no utilizan conexiones seguras (HTTPS). Estos registros permiten transferir imágenes mediante HTTP, lo que expone las comunicaciones a posibles ataques de interceptación o manipulación.
+
+Hay diferencia entre 127.0.0.1:5000/ubuntu y nombredetumaquinalocal:5000/ubuntu, aunque sea la misma
+
+Esto es dificil de explicar, lo entiendo pero no se explicarlo, aqui va Chat GPT:
+
+
+
+
+
+La razón por la que Docker no se queja cuando usas 127.0.0.1:5000/ubuntu en lugar de nombredetumaquinalocal:5000/ubuntu tiene que ver con cómo Docker maneja las conexiones y los registros locales.
+
+Diferencias clave entre 127.0.0.1 y nombredetumaquinalocal:
+127.0.0.1 (localhost):
+
+Localidad: 127.0.0.1 es la dirección de loopback que siempre apunta a tu propia máquina, sin importar el nombre de la computadora. Es una dirección especial que los sistemas operativos usan para referirse a sí mismos.
+No requiere resolución DNS: Cuando Docker ve 127.0.0.1, sabe inmediatamente que está hablando de la máquina local, sin necesidad de hacer ninguna búsqueda de nombre de host.
+Comunicación sin DNS: Dado que no hay un nombre de host involucrado, Docker no realiza ninguna resolución de nombre y se conecta directamente a la IP. Como es una dirección local, Docker no intenta usar HTTPS, lo que significa que simplemente usa HTTP, que es el comportamiento esperado para registros inseguros.
+nombredetumaquinalocal:
+
+Nombre de máquina: nombredetumaquinalocal es un nombre de máquina en tu red local, y Docker intenta hacer una resolución DNS de este nombre para encontrar la dirección IP correspondiente.
+Resolución DNS: Al intentar conectarse a nombredetumaquinalocal, Docker trata de resolver este nombre usando HTTPS por defecto, porque muchas configuraciones predeterminadas de Docker están configuradas para usar HTTPS para registros. Si el registro no está configurado para usar HTTPS, obtienes el error que mencionaste.
+¿Por qué 127.0.0.1 no causa problemas?
+El comportamiento de Docker con 127.0.0.1 es más "directo", ya que no realiza ninguna resolución de DNS ni intenta usar HTTPS. Docker simplemente asume que estás trabajando en un entorno local y conecta sin verificar si la conexión es segura (HTTP). En cambio, cuando usas un nombre de máquina como nombredetumaquinalocal, Docker asume que el tráfico puede estar destinado a un servidor remoto y, por eso, trata de usar HTTPS por defecto, lo que causa el error si el servidor no está configurado para manejar conexiones seguras.
+
+
+Espero que mas o menos se entienda, pero el tema es que es por culpa de las DNS
+
+Para solucionarlo tenemos que ir al daemon.json de docker
+
+windows: C:\ProgramData\Docker\config\daemon.json #si no lo veis crearlo
+linux /etc/docker/daemon.json  #si no lo veis crearlo
+
+Y poner esto:
+
+{
+  "insecure-registries": ["nombredetumaquinalocal"]
+}
+
+Y reinicias el servicio de docker, ya sea un "systemctl restart docker" o "Quit Docker Desktop" en Windows
