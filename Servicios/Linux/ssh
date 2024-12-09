@@ -9,3 +9,9 @@ Si el adaptador puente te da la misma ip todo el rato y no te deja acceder pon e
 Conectarte:
 
     ssh nombre@ip-de-tu-server
+
+
+
+Activar/desactivar firewall en Windows:
+
+-netsh advfirewall set allprofiles state on/off
