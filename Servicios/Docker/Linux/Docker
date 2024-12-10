@@ -837,3 +837,157 @@ Y poner esto:
 }
 
 Y reinicias el servicio de docker, ya sea un "systemctl restart docker" o "Quit Docker Desktop" en Windows
+
+
+
+
+
+DOCKER SWARM
+
+Docker Swarm es una herramienta de orquestación de contenedores integrada en Docker, diseñada para administrar y coordinar varios contenedores distribuidos en diferentes nodos (máquinas) como si fueran un solo clúster.
+
+
+INICIAR SWARM
+  -docker swarm init --advertise-addr ip-de-tu-maquina
+Swarm initialized: current node (psa4zo6fa5vd7e0j2cvmr3ts8) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-xxx... ip-de-tu-maquina:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+Listar nodos:
+  -docker node ls
+ID                            HOSTNAME     STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo1        Ready     Active         Leader           27.3.1
+
+
+*ACLARACIONES
+
+Cuando ejecutas el comando "docker swarm join-token worker" después de haber inicializado el clúster con docker swarm init, no genera un nuevo token, sino que muestra el token existente para los nodos Worker.
+
+1. Si ya iniciaste el clúster con docker swarm init, se genera un token único que sirve para unir nodos como Worker.
+
+2. El comando "docker swarm join-token worker" muestra el token que ya existe en el nodo Manager. No lo modifica ni crea uno nuevo.
+
+3. La salida incluye el comando completo que otro nodo debe ejecutar para unirse al clúster como Worker.
+
+
+AHORA VAMOS A UNIRNOS AL CLUSTER:
+
+En otra maquina con Docker ponemos el comando que no brinda docker:
+  -docker swarm join --token SWMTKN-1-xxx... ip-de-tu-maquina:2377
+  This node joined a swarm as a worker.
+
+Ahora ya tenemos un worker, que pasa si listamos?:
+  -sudo docker node ls
+Error response from daemon: This node is not a swarm manager. Worker nodes can't be used to view or modify cluster state. Please run this command on a manager node or promote the current node to a manager.
+
+
+Pero desde la maquina que hicimos "docker swarm init --advertise-addr ip-de-tu-maquina" si se puede porque es el manager
+  -docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   node1         Ready     Active         Leader           27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     node2         Ready     Active                          27.3.1
+
+
+Para añadir un nodo de tipo manager lo mismo que "docker swarm join-token worker" pero con manager, "docker swarm join-token manager" y creara el token y lo ponemos en la mauina nodo3:
+
+desde nodo1:
+
+docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo1         Ready     Active         Leader           27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3         Ready     Active         Reachable        27.3.1
+
+desde node3:
+
+sudo docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8     nodo1         Ready     Active         Leader           27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l *   nodo3         Ready     Active         Reachable        27.3.1
+
+desde node2 nos daria error porque es un worker
+
+Reachable: Manager (estado Reachable, es decir, disponible como respaldo), aunque sea manager solo puede haber un lider
+
+
+Caida de manager:
+
+Que pasa si se cae un manager?
+Vamos a verlos, vamos a parar nodo1:
+
+  -sudo systemctl stop docker
+
+nodo3:
+docker node ls
+Error response from daemon: rpc error: code = Unknown desc = The swarm does not have a leader. It's possible that too few managers are online. Make sure more than half of the managers are online.  
+
+Que pasa?
+
+Tengo 3 nodos, pero uno de ellos (el líder) fue apagado. El quorum es el número mínimo de nodos necesarios para tomar decisiones en el clúster, y en un clúster con 3 managers, el quorum es 2. Si uno de los managers (como el nodo líder) está apagado y no tienes al menos 2 managers activos, Docker Swarm no puede elegir un nuevo líder.
+
+Que tengo que tener minimo 3 nodos manager para cuando se caiga uno, entre los 2 nodos manager restantes que tomen la decision
+
+NO PUEDE TOMAR LA DECISION UN SOLO NODO MANAGER?:
+
+NO, un solo manager no puede ser el líder si no hay quorum.
+
+
+
+Si hubiera tenido 3 nodos manager no hubiera salido ese error y se hubiera cambiado el lider a nodo3 o nodox(que hubiera tenido), da igual cuantos workers tengas, mientras haya 2 managers por si uno se cae
+
+nodo1:
+  -sudo systemctl start docker
+
+Ahora vemos que nodo1 ya no es el lider:  
+docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo          Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3         Ready     Active         Leader           27.3.1
+
+Ahora es lider el nodo3
+
+
+PROMOVER O DEGRADAR NODOS
+
+  -docker node promote/demote
+
+promote: Este comando se usa para promover un nodo worker a nodo manager
+demote: Este comando se usa para degradar un nodo manager a nodo worker
+
+EMPEZAMOS POR EL PROMOTE:
+
+docker node ls
+ID                            HOSTNAME     STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo         Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2        Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3        Ready     Active         Leader           27.3.1
+docker node promote liiaa5bg5xmddtqx1vj2zhu6u
+Node liiaa5bg5xmddtqx1vj2zhu6u promoted to a manager in the swarm.
+docker node ls
+ID                            HOSTNAME     STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo         Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2        Ready     Active         Reachable        27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3        Ready     Active         Leader           27.3.1
+
+Y LO MISMO CON EL "demote"
+
+  -docker node demote liiaa5bg5xmddtqx1vj2zhu6u
+Manager liiaa5bg5xmddtqx1vj2zhu6u demoted in the swarm.
+docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo          Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3         Ready     Active         Leader           27.3.1
+
+TAMBIEN SE PUEDE HACER CON EL HOSTNAME Y CON OTRA OPCION
+  -docker node demote/promote node2
+  -docker node update --role manager/worker node2
+
+
