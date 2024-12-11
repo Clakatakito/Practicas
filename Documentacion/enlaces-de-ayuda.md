@@ -7,6 +7,7 @@ ENLACES DE AYUDA PARA MI
 CERTIFICADOS
 
 [Certs_Moure-Youtube](https://www.youtube.com/shorts/zcb6biEmpSI)
+
 [Certidev](https://www.tiktok.com/@certidevs/video/7418550891915005217?is_from_webapp=1&sender_device=pc)
 
 JavaScript
