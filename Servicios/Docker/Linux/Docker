@@ -991,3 +991,73 @@ TAMBIEN SE PUEDE HACER CON EL HOSTNAME Y CON OTRA OPCION
   -docker node update --role manager/worker node2
 
 
+
+SERVICES
+
+En Docker Swarm, los servicios son una capa adicional sobre los contenedores individuales que permite gestionar y orquestar aplicaciones distribuidas. Un servicio en Docker Swarm es una descripción de una tarea que el clúster debe ejecutar.
+
+  -docker service create --name apache2 httpd
+
+
+docker service create --name apache2 httpd
+1mykw777ej8nmv2m440fbv03d
+overall progress: 1 out of 1 tasks
+1/1: running   [==================================================>]
+verify: Service 1mykw777ej8nmv2m440fbv03d converged
+docker node ps
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE            ERROR     PORTS
+pkdry1bc91up   apache2.1   httpd:latest   nodo1        Running         Running 12 seconds ago
+
+docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+1mykw777ej8n   apache2   replicated   1/1        httpd:latest
+
+
+docker service ps apache2
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE           ERROR     PORTS
+pkdry1bc91up   apache2.1   httpd:latest   node1        Running         Running 2 minutes ago
+
+
+
+docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+1mykw777ej8n   apache2   replicated   1/1        httpd:latest
+lv2d1gtdm69a   apache3   replicated   1/1        httpd:latest   *:80->80/tcp
+mwxehmw11r3a   apache4   replicated   1/1        httpd:latest   *:81->80/tcp
+izvz02ncnt8n   apache5   replicated   1/1        httpd:latest   *:82->80/tcp
+docker service ps apache3
+ID             NAME        IMAGE          NODE          DESIRED STATE   CURRENT STATE            ERROR     PORTS
+lydrv6ouppad   apache3.1   httpd:latest   nodo3          Running         Running 10 minutes ago
+docker service ps apache4
+ID             NAME        IMAGE          NODE          DESIRED STATE   CURRENT STATE           ERROR     PORTS
+zeaidavv5spy   apache4.1   httpd:latest   nodo2          Running         Running 9 minutes ago
+docker service ps apache5
+ID             NAME        IMAGE          NODE          DESIRED STATE   CURRENT STATE           ERROR     PORTS
+is2plxflqwgf   apache5.1   httpd:latest   nodo3          Running         Running 2 minutes ago
+docker service ps apache2
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE            ERROR     PORTS
+pkdry1bc91up   apache2.1   httpd:latest   nodo         Running         Running 23 minutes ago
+
+Como veis he creado mas servicion sin decir mucho mas que "docker service create --name apachex --publish published=8x,target=80 httpd"
+
+Lo guay del docker swarm es que te lo conecta todo no?, mirar el "apache3" por ejemplo que funciona en el nodo3 sobre la ip 192.168.1.197:80
+Si en el navegador pongo "http://192.168.1.197:82/" funciona, aunque no sea su puerto
+
+Puedes entrar con cualquien dirrcion ip del cluster mientras sea por su puerto
+
+Cuando creas un servicio en Docker Swarm, Docker configura automáticamente una red virtual llamada ingress. Esta red permite que el servicio sea accesible desde cualquier nodo del clúster, independientemente de dónde se esté ejecutando el contenedor.
+
+
+
+que diferencia hay entre "docker service create --name apache5 --publish published=82,target=80 httpd" y "docker service create --name apache5 -p 82:80 httpd"?
+
+
+
+Comparación general:
+Característica	                                        --publish	                                                  -p
+Flexibilidad	                                  Alta (permite protocolos, modos, etc.)	                   Baja (sólo mapeo básico)
+Modo Swarm	                                            Totalmente compatible	                            Menos usado en modo Swarm
+Simplicidad	                                               Más detallado	                                Más sencillo y rápido
+Recomendado para producción	                                    Sí	                                          No generalmente
+
+
