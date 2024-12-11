@@ -20,6 +20,8 @@ JavaScript
 
 [Recursos_Animados](https://vm.tiktok.com/ZGdMgtqRY/)
 
+[Curso_JavaScript](https://web.dev/learn/javascript)
+
 REACT
 
 [Componentes_React](https://www.tiktok.com/@tarredev/video/7367382971940113696?is_from_webapp=1&sender_device=pc) [Pagina](https://mantine.dev/)
