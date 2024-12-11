@@ -10,13 +10,15 @@ CERTIFICADOS
 
 [Certidev](https://www.tiktok.com/@certidevs/video/7418550891915005217?is_from_webapp=1&sender_device=pc)
 
+[Cert_Ingles]
+
 JavaScript
 
 [Librerias_JavaScript](https://vm.tiktok.com/ZGdMgKtoa/)
 
 [Paste_JSON](https://vm.tiktok.com/ZGdMp1py6/)
 
-[Recursos_animados](https://vm.tiktok.com/ZGdMgtqRY/)
+[Recursos_Animados](https://vm.tiktok.com/ZGdMgtqRY/)
 
 REACT
 
@@ -30,9 +32,9 @@ HTML
 
 CSS
 
-[Mejorar_CSS_jugando](https://vm.tiktok.com/ZGdMgKAG7/)
+[Mejorar_CSS_Jugando](https://vm.tiktok.com/ZGdMgKAG7/)
 
-[Generador_CSS_GRID_tailwind](https://vm.tiktok.com/ZGdMg4JRE/) [Pagina](https://www.tailwindgen.com/)
+[Generador_CSS_GRID_Tailwind](https://vm.tiktok.com/ZGdMg4JRE/) [Pagina](https://www.tailwindgen.com/)
 
 [Neumorphism](https://www.tiktok.com/@elrincondeldev/video/7418244372455558432?is_from_webapp=1&sender_device=pc) [Pagina](https://neumorphism.io/#e0e0e0)
 
@@ -44,23 +46,22 @@ APLICACIONES
 
 [BocetosApps](https://www.tiktok.com/@aristidevs/video/7442357984866405664?_r=1&_t=8s7oiMFFrpw)
 
-[Patrones_de_diseño](https://vm.tiktok.com/ZGdMgr1SG/)
+[Patrones_De_Diseño](https://vm.tiktok.com/ZGdMgr1SG/)
 
 TRABAJO
 
-[Buscar_trabajo](https://www.tiktok.com/@chollometro/video/7400716819687902496?is_from_webapp=1&sender_device=pc)
+[Buscar_Trabajo](https://www.tiktok.com/@chollometro/video/7400716819687902496?is_from_webapp=1&sender_device=pc)
 
-[Buscar_trabajo](https://www.tiktok.com/@alexcraviotto/video/7411263551974821153?is_from_webapp=1&sender_device=pc)
+[Buscar_Trabajo](https://www.tiktok.com/@alexcraviotto/video/7411263551974821153?is_from_webapp=1&sender_device=pc)
 
 EXTENSIONES
 
-[Extension_web_modificar](https://www.tiktok.com/@elrincondeldev/video/7426406316853300513?is_from_webapp=1&sender_device=pc)
+[Extension_Web_Modificar](https://www.tiktok.com/@elrincondeldev/video/7426406316853300513?is_from_webapp=1&sender_device=pc)
 
-[Extension_simulador_movil_chrome](https://www.tiktok.com/@midudev/video/7394137254819613984?is_from_webapp=1&sender_device=pc)
+[Extension_Simulador_Movil_Chrome](https://www.tiktok.com/@midudev/video/7394137254819613984?is_from_webapp=1&sender_device=pc)
 
 SQL
-
-[Resumen_comandos_SQL](https://www.tiktok.com/@dazxirx/photo/7422706446426541345?is_from_webapp=1&sender_device=pc)
+[Resumen_Comandos_SQL](https://www.tiktok.com/@dazxirx/photo/7422706446426541345?is_from_webapp=1&sender_device=pc)
 
 [Curso_SQL](https://www.tiktok.com/@mouredev/video/7393005672448740641?is_from_webapp=1&sender_device=pc) [Pagina](https://sqlbolt.com/)
 
@@ -74,4 +75,4 @@ OTROS
 
 [De_localhost_a_URL](https://www.tiktok.com/@midudev/video/7424888244443172129?is_from_webapp=1&sender_device=pc)
 
-[Probar_distribuciónes_Linux](https://www.tiktok.com/@alexcraviotto/video/7407932990019472672?is_from_webapp=1&sender_device=pc)
+[Probar_Distribuciónes_Linux](https://www.tiktok.com/@alexcraviotto/video/7407932990019472672?is_from_webapp=1&sender_device=pc)
