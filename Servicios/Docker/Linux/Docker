@@ -68,10 +68,14 @@ docker
 
 
 
-DESCARGAR IMAGEN ej:HELLO-WORLD
+DESCARGAR UNA IMAGEN Y EJECUTARLA ej: hello-world
 
 docker run hello-world #Instala y lo ejecuta
 
+
+DESCARGAR UNA IMAGEN
+
+docker pull hello-world
 
 
 BUSCAR IMAGEN UBUNTU EN DOCKERHUB
@@ -80,13 +84,8 @@ docker search ubuntu
 
 
 
-DESCARGAR IMAGEN UBUNTU
 
-docker pull ubuntu #Descarga solo el contenido
-
-
-
-VER IMAGENES DOCKER
+VER TUS IMAGENES EN DOCKER
 
 docker images
 
@@ -95,11 +94,6 @@ docker images
 EJECUTAR UN CONTENEDOR DE DOCKER
 
 docker run -it ubuntu
-
-apt update
-
-exit
-
 
 
 ADMINISTRAR CONTENEDORES DOCKER
@@ -110,7 +104,7 @@ docker ps
 
 
 
-VER CONTENEDORES ACTIVOS E INACTIVOS
+VER TODOS LO CONTENEDORES ACTIVOS E INACTIVOS
 
 docker ps -a
 
@@ -176,7 +170,7 @@ No compara un arranque anterior con uno posterior, sino el estado actual del con
 
 CREAR TUS PODRIAS IMAGENES
 
-cuando tenga una imagen, ejemplo ubuntu(la predeterminada), y ya tienes paquetes y servicios en ella y quieres tener otra igual puedes hacer un:
+cuando tenga una imagen, ejemplo ubuntu(la predeterminada), y quieres que predeterminadamente tenga servicios en ella y no cada vez que ejecutes tu imagen tengas que instalar paquetes, sino que ya estén en la propia imagen:
 
 docker commit (contenedor_al_que_copiar) (como_llamar_a_la_imagen)
 docker commit ubuntu1 ubuntu_mejora
