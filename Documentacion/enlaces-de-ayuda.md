@@ -13,7 +13,9 @@ CERTIFICADOS
 JavaScript
 
 [Librerias_JavaScript-TikTok](https://vm.tiktok.com/ZGdMgKtoa/)
+
 [Paste_JSON-TikTok](https://vm.tiktok.com/ZGdMp1py6/)
+
 [Recursos_animados-TikTok](https://vm.tiktok.com/ZGdMgtqRY/)
 
 HTML
@@ -23,12 +25,15 @@ HTML
 CSS
 
 [Mejorar_CSS_jugando-TikTok](https://vm.tiktok.com/ZGdMgKAG7/)
+
 [Generador_CSS_GRID](https://vm.tiktok.com/ZGdMg4JRE/)
+
 [Neumorphism](https://www.tiktok.com/@elrincondeldev/video/7418244372455558432?is_from_webapp=1&sender_device=pc) [Paginas](https://neumorphism.io/#e0e0e0)
 
 APLICACIONES
 
 [BocetosApps-TikTok](https://www.tiktok.com/@aristidevs/video/7442357984866405664?_r=1&_t=8s7oiMFFrpw)
+
 [Patrones_de_diseño-TikTok](https://vm.tiktok.com/ZGdMgr1SG/)
 
 TRABAJO
