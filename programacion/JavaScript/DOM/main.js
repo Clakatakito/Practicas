@@ -45,3 +45,48 @@ primerInput.value = "Jessica"
 //enlaces.textContent = "otro nombre de enlace" //solo cambia el primero
 
 enlaces2.forEach(enlaces => enlaces.textContent = "todos iguales")
+
+//Eventos del DOM - Clicks
+
+const tituloclick = document.querySelector(".click2") //ir cambiando el . por # para ver diferencias
+tituloclick.textContent = "Click con DOM"
+
+tituloclick.addEventListener("mouseenter", function(){  //ir probando con mouseenter, click
+    tituloclick.textContent = "Nuevo titulo al dar click"
+    //alert("se pulso")
+    
+})
+tituloclick.addEventListener("mouseleave", function(){  //ir probando con mouseenter
+    tituloclick.textContent = "Click con DOM"
+    //alert("se pulso")
+    
+})
+
+//enlaces
+
+enlaces2.forEach( enlaces => {
+    enlaces.addEventListener("click", (e)=> {
+        e.preventDefault()
+        e.target.textContent = "Diste click"
+    })
+})
+
+//Eventos del DOM - Inputs
+
+const input1 = document.querySelector(".input1")
+const input2 = document.querySelector(".input2")
+input1.value = "Escribe"
+input2.value = "Esccribe algo..."
+input1.addEventListener("click", function(){
+    input1.value=""
+})
+input2.addEventListener("click", function(){
+    input2.value=""
+})
+input2.addEventListener("input", function(){
+    input2.type="text"
+    setTimeout(() => {
+        input2.type="password" //si pones input2.vale="lo que sea" el usuario no podra cambiarlo, es gracioso     
+    }, 300);
+
+})
