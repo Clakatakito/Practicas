@@ -22,6 +22,8 @@ JavaScript
 
 [Curso_JavaScript](https://web.dev/learn/javascript)
 
+[Eventos_Click](https://developer.mozilla.org/es/docs/Web/API/Element/click_event)
+
 REACT
 
 [Componentes_React](https://www.tiktok.com/@tarredev/video/7367382971940113696?is_from_webapp=1&sender_device=pc) [Pagina](https://mantine.dev/)
@@ -67,7 +69,7 @@ SQL
 
 [Curso_SQL](https://www.tiktok.com/@mouredev/video/7393005672448740641?is_from_webapp=1&sender_device=pc) [Pagina](https://sqlbolt.com/)
 
-[Interfaz_Grafica_SQL](https://www.tiktok.com/@midudev/video/7402645409711115553?is_from_webapp=1&sender_device=pc)
+[Interfaz_Grafica_SQL](https://www.tiktok.com/@midudev/video/7402645409711115553?is_from_webapp=1&sender_device=pc) [Pagina](https://postgres.new/)
 
 APIS
 
