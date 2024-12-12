@@ -1055,3 +1055,51 @@ Simplicidad	                                               Más detallado	      
 Recomendado para producción	                                    Sí	                                          No generalmente
 
 
+Para crear un servicio ya con las replicas:
+  -docker service create --name apache2 --replicas=x --publish published=81,target=80 httpd
+
+Si hemos creado un servicio sin replicas nos vendra con 1 replica, podemos añadir mas con:
+  -docker service scale nombre_del_servicio/ID=X
+
+
+*ACLARACION MUUY IMPORTANTE
+
+Cuanto intentes entrar a un servicio para cambiar algo dentro de el recuenrda que tienes que entrar por el ID DE CONTENEDOR NO EL ID DEL SERVICIO/TAREA, entonces hay que identificar en que maquina esta corriendo el servicio, eso lo hacemos con "docker service ps <servicio>" y nos dira el nodo en el que esta, entonces vamos al nodo y hacemos un "docker ps" normal, y nos saldra, pues es ese ID
+
+
+Para eso podemos hacer un "docker commit" del contenedor modificado y lo podemos poner como imagen en "docker service create --name apache5 --publish published=82,target=80 imagen_commit"
+
+A mi me salta error:
+
+image imagen_commit:latest could not be accessed on a registry to record
+its digest. Each node will access imagen_commit:latest independently,
+possibly leading to different nodes running different
+versions of the image.
+
+mtgqcrfxb06460q0d30laury4
+overall progress: 0 out of 1 tasks
+1/1: No such image: imagen_commit:latest
+
+Saldra cargando infinitamente, quedate igualmete y se cansara de buscar esa imagen en el Docker Hub y te la cojera
+
+
+
+IMPEDIR QUE UN NODO RECIBA TAREAS
+
+  -docker node update --availability drain w95nxk2n0axup4uyvpcsvre5l #no le pone tareas
+  -docker node update --availability pause w95nxk2n0axup4uyvpcsvre5l #pausa
+  -docker node update --availability active w95nxk2n0axup4uyvpcsvre5l #activa
+
+con "docker services ls" se puede ver cuales nodos estan: drain, pause y active  
+
+SERVICIOS GLOBALES
+
+  -docker service create --name apache2 --mode global --publish published=81,target=80 httpd
+  bxju5ke23tmyzifvw9akdpbbh
+  overall progress: 3 out of 3 tasks
+  psa4zo6fa5vd: running   [==================================================>]
+  liiaa5bg5xmd: running   [==================================================>]
+  w95nxk2n0axu: running   [==================================================>]
+  verify: Service bxju5ke23tmyzifvw9akdpbbh converged
+
+Ha creado 3 instancias/replicas, pero porque?, porque solo tengo 3 nodos en el cluster, en cada nodo hay una replica
