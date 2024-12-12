@@ -10,7 +10,7 @@ CERTIFICADOS
 
 [Certidev](https://www.tiktok.com/@certidevs/video/7418550891915005217?is_from_webapp=1&sender_device=pc)
 
-[Cert_Ingles]
+[Cert_Ingles](https://www.freecodecamp.org/espanol/learn/a2-english-for-developers/)
 
 JavaScript
 
