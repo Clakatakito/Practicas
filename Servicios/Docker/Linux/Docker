@@ -1103,3 +1103,123 @@ SERVICIOS GLOBALES
   verify: Service bxju5ke23tmyzifvw9akdpbbh converged
 
 Ha creado 3 instancias/replicas, pero porque?, porque solo tengo 3 nodos en el cluster, en cada nodo hay una replica
+
+
+DOCKER SWARM CON DOCKER-COMPOSE
+
+Para compartir el compose en docker swarm es importante tener en el compose la clausula "deploy":
+
+deploy:
+  mode: replicated #modo replicas
+  replicas: 6      #numero de replicas
+  restart_policy:  #politica de reinicio
+    condition: on-failure
+
+
+Y ejecutarlo con:
+  -docker stack deploy --compose-file docker-compose.yml nombreservicio
+
+Es posible que hos de fallos de algo pero podeis scalarlo y probar ha ver si funciona  
+
+Ejemplo de un docker-compose.yml preparado para la orquestacion:
+
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - target: 9000
+        published: 9000
+        protocol: tcp
+        mode: host #ingress para swarm
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
+    driver: local
+
+
+
+**ACLARACION SUPER IMPORTANTE
+
+Si intentas usar tu propia imagen en el cluster y no te deja es porque los demas nodos no saben de tu imagen, me explico:
+
+Cuando en un nodo(manager tendria que se) creas una imagen, ya sea de un Dockerfile o commit solo ese nodo sabe de tu imagen local, los demas restantes no, es poreso que si te bajas una imagen de Docker Hub TODOS los nodos saben cual es
+
+
+MODIFICAR SERVICIOS
+
+  -docker services update --help
+
+Algunos ejemplos:
+
+  -docker service update nombre servicio --limit-memory 10m #limitar memoria
+  -docker service update nombreservicio_portainer --limit-cpu 0.5 #limitar cpu
+
+
+ETIQUETAR NODOS:
+  -docker node update --label-add seccion=valor nodo
+  -docker node update --label-add rack=r2 w95nxk2n0axup4uyvpcsvre5l
+
+Este comando se usa para modificar la configuración de un nodo en un clúster de Docker Swarm.
+
+Aquí, estás agregando una etiqueta al nodo con la clave rack y el valor r1. Las etiquetas son pares clave-valor que puedes usar para identificar o clasificar los nodos de manera lógica. En este caso, se está etiquetando el nodo con la etiqueta rack=r1.
+
+Puedes poner varias etiquetas
+
+
+DESETIQUETAR NODOS:
+  -docker node update --label-rm seccion id
+  -docker node update --label-rm seccion hostname
+
+comandos para ver las etiquetas:
+  -docker node ls -q | xargs docker node inspect -f '{{ .ID }} [{{ .Description.Hostname }}]: {{ .Spec.Labels }}'
+
+
+
+RESTRINGIR NODOS EN EL DESPLIEGUE DE SERVICIOS
+
+Vale, con las etiquetas puestas podemos hacer que segun que nodos no trabajen o si en segun que servicios
+
+ejemplo:
+
+
+psa4zo6fa5vd7e0j2cvmr3ts8 [nodo]: map[rack:r1]
+liiaa5bg5xmddtqx1vj2zhu6u [nodo2]: map[personas:p1 rack:r2]
+w95nxk2n0axup4uyvpcsvre5l [nodo3]: map[]
+
+
+docker service create --name apache2 --constraint node.labels.rack==r1 httpd
+wq5agqfkf4xc2lq6uxoegohn6
+overall progress: 1 out of 1 tasks
+1/1: running
+verify: Service wq5agqfkf4xc2lq6uxoegohn6 converged
+ docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+wq5agqfkf4xc   apache2   replicated   1/1        httpd:latest
+ docker service ps apache2
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE            ERROR     PORTS
+glv2dwu3odui   apache2.1   httpd:latest   nodo         Running         Running 29 seconds ago
+
+ docker service scale apache2=3
+apache2 scaled to 3
+overall progress: 3 out of 3 tasks
+1/3: running
+2/3: running
+3/3: running
+verify: Service apache2 converged
+ docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+wq5agqfkf4xc   apache2   replicated   3/3        httpd:latest
