@@ -1223,3 +1223,57 @@ verify: Service apache2 converged
  docker service ls
 ID             NAME      MODE         REPLICAS   IMAGE          PORTS
 wq5agqfkf4xc   apache2   replicated   3/3        httpd:latest
+
+
+docker service ps apache2
+ID             NAME            IMAGE          NODE         DESIRED STATE   CURRENT STATE           ERROR
+              PORTS
+i4nxfo9hx2ac   apache2.1       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+6kl2iqsl0eye    \_ apache2.1   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.1.…"
+jl4y8b45rywe   apache2.2       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+c14te3tgt4qy    \_ apache2.2   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.2.…"
+bixsjbvvnvr5   apache2.3       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+34y8efzjgyzy    \_ apache2.3   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.3.…"
+vjxou0lcaow9   apache2.4       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+zntn1b2pix9p    \_ apache2.4   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.4.…"
+473qzl8wdnbi   apache2.5       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+u78k2f86705l    \_ apache2.5   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.5.…"
+p0y6aklub7ju   apache2.6       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+kkpaum8kssae    \_ apache2.6   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2
+
+Todos los servicios van al nodo cuyo label sea rack, y su valor sea 1, osea el nodo1
+
+
+RESTRINGIR NODOS EN EL DESPLIEGUE DE SERVICIOS 2
+
+Vale ya sabemos ponerle servicios a los nodos, pero y si queremos ponerle servicios a los que no sea igual a la etiqueta?
+
+  -docker service create --name apache2 --constraint node.labels.rack==r1 httpd #Para ponerle el servicio httpd a los dodos que tengan la etiqueta "rack=r1"
+  -docker service create --name apache2 --constraint node.labels.rack!=r1 httpd #Para ponerle el servicio httpd a los nodos diferentes a la etiqueta "rack=r1"
+
+
+NODOS PREFERENTES
+
+Vale y si ahora queremos hacer lo mismo pero queremos que coja a TODOS, pero preferentemente a unos por su etiqueta?:
+  -docker service create --name apache2 --replicas=6 --placement-pref "spread=node.labels.desarrollo" httpd #la etiqueta "desarrollo" no exixte, pero si exixtiera pondria los servicios preferentemente ahy, veis que no ponemos el "etiqueta=numero como en rack=r2, eso es porque cojera a todas las etiquetas"
+
+
+Quitar nodos del cluster
+
+  -docker swarm leave #Hacer en el nodo en el que te quieras ir
+  Node left the swarm.
+
+Desde un manager ahora si lo podemos eliminar:
+  -docker node rm id/hostanme
+
+
+Para los espabilados(como yo), no se puede hacer un "docker node rm id/hostanme" sin hacer el "docker swarm leave" antes
+
+
+HASTA AQUI HA LLEGADO EL MEGA TUTORIAL DE DOCKER DE 1279 LINEAS(MUCHAS DE ELLAS ESPACIOS INNECESARIOS, PERO ME AYUDAN A SEPARAR SECCIONES), SI HAS LLEGADO HASTA AQUI LO DUDO PORQUE NO CREERIA QUE ALGUIEN HUBIERA LLEGADO PERO GRACIAS SI LO HICISTE, ESTA GUIA PRIMORDIALMENTE ES PARA MI, PERO SI LE SIRVE A OTRA PERSONA GENIAL!
