@@ -1,0 +1,5 @@
+
+
+MongoDB es un sistema de bases de datos NoSQL que almacena datos en un formato similar a JSON llamado BSON (Binary JSON). Es conocido por ser escalable, flexible y adecuado para manejar grandes volúmenes de datos no estructurados o semi-estructurados.
+
+
