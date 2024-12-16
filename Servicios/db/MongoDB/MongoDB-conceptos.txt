@@ -3,3 +3,56 @@
 MongoDB es un sistema de bases de datos NoSQL que almacena datos en un formato similar a JSON llamado BSON (Binary JSON). Es conocido por ser escalable, flexible y adecuado para manejar grandes volúmenes de datos no estructurados o semi-estructurados.
 
 
+MODELO DE DATOS:
+
+SQL: Usa un modelo relacional, donde los datos se organizan en tablas con filas y columnas. Las relaciones entre las tablas se definen mediante claves primarias y foráneas.
+NoSQL: Utiliza modelos más flexibles, como documentos (por ejemplo, en MongoDB), clave-valor, grafos o columnas. No es necesario definir un esquema rígido, lo que permite una mayor flexibilidad.
+
+2. Estructura de datos:
+SQL: Los datos deben seguir una estructura predefinida, es decir, el tipo de cada campo debe definirse al crear la base de datos.
+NoSQL: Los datos no tienen una estructura fija. Pueden ser documentos JSON, valores clave, o datos organizados de manera libre.
+
+3. Escalabilidad:
+SQL: Escala principalmente de forma vertical (aumentando la capacidad del servidor).
+NoSQL: Escala de manera horizontal (añadiendo más servidores o nodos), lo que lo hace más adecuado para manejar grandes cantidades de datos distribuidos.
+
+4. Consultas:
+SQL: Usa el lenguaje SQL para consultas complejas. Es potente y permite realizar uniones (JOINs) entre tablas.
+NoSQL: Depende del tipo de base de datos, pero generalmente las consultas son más simples y menos estructuradas. No todas las bases de datos NoSQL soportan operaciones complejas como los JOINs.
+
+5. Transacciones:
+SQL: Proporciona ACID (Atomicidad, Consistencia, Aislamiento, Durabilidad), lo que garantiza que las transacciones sean seguras y consistentes.
+NoSQL: Muchas bases de datos NoSQL priorizan el rendimiento y la escalabilidad, por lo que no siempre garantizan ACID, aunque algunas ofrecen configuraciones de transacciones en un alcance limitado (por ejemplo, MongoDB con Multi-Document Transactions).
+
+6. Casos de uso:
+SQL: Ideal para aplicaciones con datos estructurados, como sistemas de gestión de relaciones (CRM), ERP, y aplicaciones financieras donde las relaciones entre datos son clave.
+NoSQL: Mejor para aplicaciones con grandes volúmenes de datos no estructurados o semi-estructurados, como redes sociales, big data, análisis en tiempo real o aplicaciones móviles.
+
+7. Ejemplos:
+SQL: MySQL, PostgreSQL, Microsoft SQL Server, Oracle DB.
+NoSQL: MongoDB, Cassandra, CouchDB, Redis, Firebase.
+En resumen, las bases de datos SQL son más adecuadas para aplicaciones con datos muy estructurados y relaciones complejas, mientras que NoSQL ofrece flexibilidad y escalabilidad para manejar grandes volúmenes de datos no estructurados.
+
+
+
+Básicamente, SQL trabaja con columnas y tablas, centralizando todo ahí dentro. Es una base de datos estructurada, que tiene lo que necesita tener. Es decir, tiene un esquema predefinido y relaciones entre los datos a través de claves primarias y foráneas. Debido a esta estructura rígida, no es tan apta para escalar horizontalmente como las bases de datos NoSQL.
+
+En cambio, MongoDB no es relacional. Es decir, no usa tablas ni relaciones fijas entre los datos. En lugar de eso, utiliza documentos en formato JSON, que pueden tener diferentes estructuras y campos. Esto le da mucha más flexibilidad y la hace más apta para manejar grandes volúmenes de datos no estructurados o semi-estructurados. Además, MongoDB puede escalar de manera más eficiente horizontalmente, agregando más nodos según sea necesario.
+
+Mientras que SQL es ideal para sistemas que requieren integridad de datos y relaciones complejas entre entidades (como aplicaciones bancarias o de inventarios), MongoDB y otras bases de datos NoSQL son mejores para aplicaciones que manejan grandes volúmenes de datos, como redes sociales, IoT o análisis de big data.
+
+
+
+TIPOS DE BASE DE DATOS NoSQL
+
+Clave-valor: Este tipo de base de datos almacena los datos como un par de clave y valor. Cada valor se asocia a una clave única, y es muy eficiente para buscar datos cuando conoces la clave. Es ideal para aplicaciones que necesitan almacenamiento rápido y simple, como cachés o configuraciones de usuario.
+
+Documentales: En este tipo de base de datos, los datos se almacenan como documentos (normalmente en formato JSON o BSON). Cada documento puede tener diferentes campos y estructuras, lo que da mucha flexibilidad. MongoDB es un ejemplo de base de datos documental. Son útiles cuando los datos no tienen un esquema fijo o cambian con frecuencia.
+
+Grafos: Las bases de datos de grafos están diseñadas para almacenar datos interconectados. Utilizan nodos, aristas y relaciones para representar la estructura de los datos. Son ideales para aplicaciones donde las relaciones entre los datos son clave, como redes sociales, recomendaciones y análisis de rutas.
+
+Columnas: Las bases de datos basadas en columnas almacenan los datos en formato de columnas en lugar de filas, como en las bases de datos tradicionales SQL. Cada columna puede contener una gran cantidad de datos relacionados, lo que hace que sean muy eficientes para consultas analíticas sobre grandes volúmenes de datos. En lugar de leer filas completas (como en una base de datos relacional), solo se leen las columnas que realmente se necesitan, lo que mejora el rendimiento en ciertos casos.
+
+
+
+
