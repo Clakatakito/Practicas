@@ -55,4 +55,77 @@ Columnas: Las bases de datos basadas en columnas almacenan los datos en formato 
 
 
 
+INSTALACION DE MONGODB
+
+
+WINDOWS
+
+Vale, la instalacion es un poco tiquismiquis pero se puede
+
+Ir a: "https://www.mongodb.com/try/download/community" y bajar hasta encontrar el boton "Download", podemos ingresar que tipo de instalacion queremos, yo escogi la msi por facil, y nos lo bajamos, luego instalamos el wizard, muy importante si lo quires como servicio o no, como servicio es que cada vez que ingreses a la maquina tendras al demonio mongod corriendo predeterminadamente, o bien si quieres no estar corriendolo hasta que lo habras tambien puedes, yo lo he hecho si servicio, tambien nos podemos instalar el compass, pero da igual porque luego se puede instalar tambien.
+
+Luego de esperar y alomejor dar consentimientos de algunas cosas tenemos que bajarnos la mongosh, la shell, en: "https://www.mongodb.com/try/download/shell" ingresamos las cosas y facil de instalar, yo he escojido msi, que es mas facil y automatico, tambien tenemos que ir a "C:\" y crear "data\db", vamos que tenemos que tener "C:\data\db" porque sino mongod no funcionara, luego de todo eso en "C:\Program Files\MongoDB\Server\8.0\bin" habra principalmente "mongod" que es el demonio, si eso no corre no nos conectara, lo ejecutamos y nos quedamos tranquilos, ya que el demonio esta listo nos podemos ir al "CMD" y podemos poner "mongosh" y veras que sale lo siguiente:
+
+mongosh
+Current Mongosh Log ID: 6761560c284f41d56779a1b5
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.6
+Using MongoDB:          8.0.4
+Using Mongosh:          2.3.6
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-12-17T11:44:18.959+01:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-12-17T11:44:18.960+01:00: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+------
+
+test>
+
+Ya esta, ya estamos dentro, si no tenemos mongod arrancado saldria esto:
+
+mongosh
+Current Mongosh Log ID: 6761569bde1b27e5a079a1b5
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.6
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+
+Que no se puede conectar vamos, y tu estaras pensado, joder tengo que ir cada vez que quiera trabajar con mongodb tengo que ir a "C:\Program Files\MongoDB\Server\8.0\bin" y ejecutar el mongod, pues no, nos iremos al buscador y windows y pondremos "editar las variables de entorno del sistema" abajo en "Variables de entorno", clickaremos "Path" y luego "editar", "nuevo" y ponemos "C:\Program Files\MongoDB\Server\8.0\bin\", luego aceptamos todo y eso creara una variable para que no tengas que ir todo el rato a "C:\Program Files\MongoDB\Server\8.0\bin", con esa variable solo escribre "mongod" en el CMD y arrancara el demonio, luego en otra pestaña escribes "mongosh" y listo 
+
+
+
+LINUX(Ubuntu):
+
+Nos vamos a "https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/#std-label-install-mdb-community-ubuntu" para ver la documentacion(igualmnte pondre los comandos)
+
+    -sudo apt-get install gnupg curl
+
+    -curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+    --dearmor
+
+    #dale "s"
+    #si no se encuentra la comanda "curl" instala con "sudo apt install curl", y vuelve a poner el segundo comando
+
+Selecciona tu distribucion de ubuntu
+
+    -echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+
+    -sudo apt-get update
+
+    -sudo apt-get install -y mongodb-org
+
+    -ps --no-headers -o comm 1 #depende del que te salga tendras que tomar una opcion u otra en el comando de abajo
+
+    -sudo systemctl start mongod #o sudo service mongod start
+
+    -sudo systemctl start mongodb
+
+    -sudo systemctl enable mongodb
+
+    -mongosh
+
+
+La    
+
+
 
