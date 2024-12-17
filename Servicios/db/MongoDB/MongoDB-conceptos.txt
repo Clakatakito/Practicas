@@ -125,7 +125,34 @@ Selecciona tu distribucion de ubuntu
     -mongosh
 
 
-La    
+PRIMEROS PASOS EN MONGODB:
 
+CREAR UNA BASE DE DATOS:
+    -use NuevaBaseDeDatos
+    switched to db NuevaBaseDeDatos
 
+MOSTRAR LAS BASES DE DATOS:
+    -show dbs
+    admin    40.00 KiB
+    config  108.00 KiB
+    local    72.00 KiB
 
+*Aclaracion
+
+No veras la base de datos que has creado hasta que haya valores dentro de ella
+
+VER EL NOMBRE DE LA BASE DE DATOS EN USO:
+    -NuevaBaseDeDatos> db.getName()
+    NuevaBaseDeDatos
+
+Tambien puedes usar:
+    -test> db
+    test
+    test> use NuevaBaseDeDatos
+    switched to db NuevaBaseDeDatos
+    NuevaBaseDeDatos> db
+    NuevaBaseDeDatos
+    NuevaBaseDeDatos>
+
+APAGAR EL SERVIDOR:
+    -db.shutdownServer()    
