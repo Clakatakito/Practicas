@@ -131,15 +131,19 @@ CREAR UNA BASE DE DATOS:
     -use NuevaBaseDeDatos
     switched to db NuevaBaseDeDatos
 
+El use es para usar, pero si la db "NuevaBaseDeDatos" no existe mongodb la creara    
+
 MOSTRAR LAS BASES DE DATOS:
     -show dbs
     admin    40.00 KiB
     config  108.00 KiB
     local    72.00 KiB
 
+La db "Test" no es una db en si, es al principio donde nos posiciona para luego decidir cual es nuestro proximo movimiento, cual salgas de "Test", esta no vuelve a salir    
+
 *Aclaracion
 
-No veras la base de datos que has creado hasta que haya valores dentro de ella
+No veras la base de datos que has creado hasta que haya colecciones dentro de ella
 
 VER EL NOMBRE DE LA BASE DE DATOS EN USO:
     -NuevaBaseDeDatos> db.getName()
@@ -155,4 +159,162 @@ Tambien puedes usar:
     NuevaBaseDeDatos>
 
 APAGAR EL SERVIDOR:
-    -db.shutdownServer()    
+    -db.shutdownServer()
+
+
+CREACION DE COLECCION
+
+Una vez "crada"(porque no se crea hasta que ingreses datos) la db hay que ingresa la coleccion:
+    -db.nombredelacoleccion.insertOne()
+
+Vamos a desglosarlo, el "db" hace referencia a la db donde estamo, en este caso "NuevaBaseDeDatos", el "nombredelacoleccion" es el nombre que queramos darle a la coleccion, y el "insertOne()" ya si es la funcion de ingresar, entonces podemos poner algo como:
+
+    -NuevaBase> db.usuarios.insertOne({nombre: "Alfredo", edad: 15}) //No lo he dicho pero tiene que tener formato JSON
+    {
+    acknowledged: true,
+    insertedId: ObjectId('6762a3599715157f0579a1ba')
+    }
+    NuevaBase>
+
+Y ahora si se vera la db "NuevaBase"
+    -show dbs
+    NuevaBase  40.00 KiB
+    admin      40.00 KiB
+    config     96.00 KiB
+    local      72.00 KiB    
+
+Aunque lo veas desde "Test"
+    -test> show dbs
+    NuevaBase  40.00 KiB
+    admin      40.00 KiB
+    config     96.00 KiB
+    local      72.00 KiB
+    test>
+
+ Para ver las colecciones que tenemos en una db usamos:
+    -show collections
+
+Cuidado si usas "show collections" en una db que no tenga o en "Test" sino no te saldra nada:
+    -test> show collections
+
+    test>
+
+Hay que usarlo dentro de la db:
+    -test> use NuevaBase
+    switched to db NuevaBase
+    NuevaBase> show collections
+    usuarios
+    NuevaBase>
+
+
+VER CONTENIDO DE LA DB:
+    -NuevaBase> db.usuarios.find() //El find encuentra
+    [
+    {
+        _id: ObjectId('6762a3599715157f0579a1ba'),
+        nombre: 'Alfredo',
+        edad: 15
+    }
+    ]
+    NuevaBase>
+
+CREAR UNA COLECCION VACIA:
+
+    -NuevaBase> db.createCollection("Nueva_Coleccion")
+    { ok: 1 }
+    NuevaBase> show dbs
+    NuevaBase    8.00 KiB
+    admin       40.00 KiB
+    config     108.00 KiB
+    local       72.00 KiB
+
+
+COMENTAR:
+
+Se puede comentar asi "//" o "/**/" para bloque, selecciona y copia el codigo de abajo:
+    -show dbs //mostrar databases
+
+*ACLARACION:
+
+Si creas un coleccion ya se vacia o con datos, no dejes espacios en ellos porque pasara algo como esto:
+    -NuevaBase> db.createCollection("Nueva Coleccion")
+    { ok: 1 }
+    NuevaBase> show collections
+    Nueva Coleccion
+    NuevaBase> db.Nueva Coleccion.find()
+    Uncaught:
+    SyntaxError: Missing semicolon. (1:8)
+
+    > 1 | db.Nueva Coleccion.find()
+        |         ^
+      2 |
+
+Y para borrarla tiene tela porque no le vale esto:
+    -db.Nueva Coleccion.drop() //el drop ya lo veremos mas adelante
+    Uncaught:
+    SyntaxError: Missing semicolon. (1:8)
+
+    > 1 | db.Nueva Coleccion.drop()
+        |         ^
+      2 |
+
+Tines que hacer esto:
+    -db["Nueva Coleccion"].drop()
+    true
+    NuevaBase> show collections
+
+    NuevaBase>
+
+
+ID:
+
+Cada documento tiene su id aunque no se lo pongamos nosotro mongodb ya se encargara de ponerlo:
+    -NuevaBase> db.usuarios.insertOne({nombre: "Claka", edad: 18}) //no le decimos nada de id:
+    {
+    acknowledged: true,
+    insertedId: ObjectId('6762ae45474b8ec7c679a1b6') //mongodb ha visto que no tenemos un campo llamado id, asique nos lo crea el
+    }
+    NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'), //se ve como este id y el de arriba es el mismo
+        nombre: 'Claka',
+        edad: 18
+    }
+    ]
+
+
+VARIABLES
+
+Podemos crear nuestra propias variables en mongodb y luego insertarlas como si de JavaScript se refiere:
+
+    -NuevaBase> let = documento = { _id: 1, nombre: "Teresa", edad: 67 }
+    { _id: 1, nombre: 'Teresa', edad: 67 }
+    -NuevaBase> documento
+    { _id: 1, nombre: 'Teresa', edad: 67 }
+    -db.usuarios.insertOne(documento)
+    { acknowledged: true, insertedId: 1 }
+    NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+        nombre: 'Alex',
+        edad: 18
+    },
+    { _id: 1, nombre: 'Teresa', edad: 67 }
+    ]
+    NuevaBase>
+    
+
+*ACLARACION    
+
+Siempre hemos podido poner el "_id", no solo es en la creacion de variables
+
+
+Que pasara si volvemos a insertar la variable con el mismo "_id"?:
+    -NuevaBase> db.usuarios.insertOne(documento)
+    MongoServerError: E11000 duplicate key error collection: NuevaBase.usuarios index: _id_ dup key: { _id: 1 }
+    NuevaBase>
+
+Pues que no deja
+
