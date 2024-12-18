@@ -318,3 +318,41 @@ Que pasara si volvemos a insertar la variable con el mismo "_id"?:
 
 Pues que no deja
 
+
+UPDATE:
+
+Vamos a ponerle una nueva clave llamada "etiqueta" al primero que se llame "Alex"
+
+    -NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+        nombre: 'Alex',
+        edad: 18
+    },
+    { _id: 1, nombre: 'Teresa', edad: 68 }
+    ]
+    NuevaBase> db.usuarios.updateOne({nombre: "Alex"}, { $set: {etiqueta: "atendido"}})
+    {
+    acknowledged: true,
+    insertedId: null,
+    matchedCount: 1,
+    modifiedCount: 1,
+    upsertedCount: 0
+    }
+    NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+        nombre: 'Alex',
+        edad: 18,
+        etiqueta: 'atendido'
+    },
+    { _id: 1, nombre: 'Teresa', edad: 68 }
+    ]
+    NuevaBase>
+
+
+
+DELETE 
+
