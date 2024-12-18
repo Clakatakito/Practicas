@@ -139,7 +139,7 @@ MOSTRAR LAS BASES DE DATOS:
     config  108.00 KiB
     local    72.00 KiB
 
-La db "Test" no es una db en si, es al principio donde nos posiciona para luego decidir cual es nuestro proximo movimiento, cual salgas de "Test", esta no vuelve a salir    
+La db "Test" no es una db en si, es al principio donde nos posiciona para luego decidir cual es nuestro proximo movimiento, cuando salgas de "Test", esta no vuelve a salir    
 
 *Aclaracion
 
@@ -164,10 +164,10 @@ APAGAR EL SERVIDOR:
 
 CREACION DE COLECCION
 
-Una vez "crada"(porque no se crea hasta que ingreses datos) la db hay que ingresa la coleccion:
+Una vez "creada"(porque no se crea hasta que ingreses datos) la db hay que ingresar la coleccion:
     -db.nombredelacoleccion.insertOne()
 
-Vamos a desglosarlo, el "db" hace referencia a la db donde estamo, en este caso "NuevaBaseDeDatos", el "nombredelacoleccion" es el nombre que queramos darle a la coleccion, y el "insertOne()" ya si es la funcion de ingresar, entonces podemos poner algo como:
+Vamos a desglosarlo, el "db" hace referencia a la db donde estamod, en este caso "NuevaBaseDeDatos", el "nombredelacoleccion" es el nombre que queramos darle a la coleccion, y el "insertOne()" ya si es la funcion de ingresar, entonces podemos poner algo como:
 
     -NuevaBase> db.usuarios.insertOne({nombre: "Alfredo", edad: 15}) //No lo he dicho pero tiene que tener formato JSON
     {
