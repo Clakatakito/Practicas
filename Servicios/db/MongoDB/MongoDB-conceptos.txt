@@ -320,12 +320,21 @@ Pues que no deja
 
 
 
-Read
+READ
 
     -db.usuarios.find() //ver toda la db
     -db.usuarios.find({}) //ver toda la db
     -db.usuarios.find({nombre: "Carlos"}) //ver los documento cuyo nombre se "Carlos", si no lo encuentra no devuelve nada
 
+Cuando tienes mas de 20 documento y intentas verlos con "db.usuarios.find()" solo te mostrara los primeros 20, por si en la db tienes miles de documentos no sobresaturarlo, pero puedes hacer "db.usuarios.find().toArray()" para mostrarlos todos aunque sea una mala practica, en su lugar puedes hacer:
+    -db.usuarios.find().forEach(empleadoData => { printjson(empleadoData)})
+
+Filtrar por solo un campo:
+    -db.usuarios.find({},{nombre: 1}) //solo te mostrara los 20 primeros
+    -db.usuarios.find({},{nombre: 1}).toArray() //TODOS
+
+El _id sale por defecto pero podemos quitarlo tambien:
+    -db.usuarios.find({},{nombre: 1, _id: 0})    
 
 UPDATE:
 
@@ -407,3 +416,13 @@ El metodo deletOne() y deletMany() borra documentos, no borra una clave-valor, b
     -db.usuarios.deletOne({}) //borra el primer documento de la db
     db.usuarios.deletOne({nombre: "Maria"}) //Borra el documento de maria, NO SOLO BORRA EL NOMBRE "MARIA", eso en update
 
+
+ARRAYS
+
+En los documentos se pueden tener arrays tambien:
+    -db.empleados.insertOne({nombre: "Marcus Ortega", email: "marcus@example.com", empleado: "si", diasLaborables: ["Sabado", "Domingo"]})
+    -db.empleados.updateOne({nombre: "Lewis Coleman"}, { $set : {diasLaborables: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]}})
+
+Filtrar por arrays:
+    -db.empleados.findOne({nombre: "Marcus Ortega"}).diasLaborables //tiene que ser el mismo nombre proporcionado en el documento
+    -
