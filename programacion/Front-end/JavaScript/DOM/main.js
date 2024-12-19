@@ -75,8 +75,6 @@ enlaces2.forEach( enlaces => {
 
 const input1 = document.querySelector(".input1")
 const input2 = document.querySelector(".input2")
-input1.value = "Escribe"
-input2.value = "Esccribe algo..."
 input1.addEventListener("click", function(){
     input1.value=""
 })
@@ -90,3 +88,18 @@ input2.addEventListener("input", function(){
     }, 300);
 
 })
+
+
+
+const boton = document.querySelector(".formulario");
+boton.addEventListener("submit", function(e) {
+    e.preventDefault();
+    if (input1 === "" || input2 === "") {
+        alert("rellena todos los campos")
+    }else{
+        alert("Enviando");
+    }
+});
+
+//falta
+
