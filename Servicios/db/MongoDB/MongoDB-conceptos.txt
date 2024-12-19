@@ -319,6 +319,14 @@ Que pasara si volvemos a insertar la variable con el mismo "_id"?:
 Pues que no deja
 
 
+
+Read
+
+    -db.usuarios.find() //ver toda la db
+    -db.usuarios.find({}) //ver toda la db
+    -db.usuarios.find({nombre: "Carlos"}) //ver los documento cuyo nombre se "Carlos", si no lo encuentra no devuelve nada
+
+
 UPDATE:
 
 Vamos a ponerle una nueva clave llamada "etiqueta" al primero que se llame "Alex"
@@ -352,7 +360,50 @@ Vamos a ponerle una nueva clave llamada "etiqueta" al primero que se llame "Alex
     ]
     NuevaBase>
 
+Si quieres poner una nueva clave-valor, eliminarla o editarla:
+
+NuevaBase> db.usuarios.find()
+[
+  {
+    _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+    nombre: 'Alex',
+    edad: 18,
+    etiqueta: 'atendido',
+    trabajo: true
+  }
+]
+NuevaBase> db.usuarios.updateOne(
+...   { nombre: "Alex" },
+...   { $unset: { edad: "" } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+NuevaBase> db.usuarios.find()
+[
+  {
+    _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+    nombre: 'Alex',
+    etiqueta: 'atendido',
+    trabajo: true
+  }
+]
+
+
+Tambien puedes actualizar por el "ObjectID":
+
+    -db.usuarios.updateOne({ _id: ObjectId('676412da0251d01c9379a1b7') }, { $set: { nombre: "Mariano" }})
 
 
 DELETE 
+
+El metodo deletOne() y deletMany() borra documentos, no borra una clave-valor, borra el documento en si
+
+    -db.usuarios.deletMany({}) //borra toda la base
+    -db.usuarios.deletOne({}) //borra el primer documento de la db
+    db.usuarios.deletOne({nombre: "Maria"}) //Borra el documento de maria, NO SOLO BORRA EL NOMBRE "MARIA", eso en update
 
