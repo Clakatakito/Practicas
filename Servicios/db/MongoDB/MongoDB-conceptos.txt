@@ -162,6 +162,8 @@ APAGAR EL SERVIDOR:
     -db.shutdownServer()
 
 
+CREATE
+
 CREACION DE COLECCION
 
 Una vez "creada"(porque no se crea hasta que ingreses datos) la db hay que ingresar la coleccion:
@@ -334,7 +336,86 @@ Filtrar por solo un campo:
     -db.usuarios.find({},{nombre: 1}).toArray() //TODOS
 
 El _id sale por defecto pero podemos quitarlo tambien:
+    -db.usuarios.find({},{nombre: 1, _id: 0})  
+
+
+Filtrar por anidamiento:
+    venta: {
+      pago: 'Efectivo',
+      monto: 5,
+      detalle: { responsable: 'Alex Serrano' }
+    }
+    -db.usuarios.find({"venta.detalle.responsable": "Alex Serrano"}) //usar las ""    
+
+El _id sale por defecto pero podemos quitarlo tambien:
     -db.usuarios.find({},{nombre: 1, _id: 0})    
+
+
+ordered inserts:
+
+Es cuando ya tiene un documento con ese _id: X, y intentas ponerle otro igual junto a mas documentos, te saldra un error y no te deja insertar ninguno, aunque el otro tenga un id valido.
+
+Ehemplo:
+
+Tenemos 2 documentos, uno con "el _id: 1" y el otro con el "_id: 2"
+[ { _id: 1, nombre: 'Patricias' }, { _id: 2, nombre: 'Agustin' } ]
+
+ y hago esto:
+    -db.prueba.insertMany([{_id: 1, nombre: "Pedro"}, {_id: 3, nombre: "Bartolo"}])
+    Uncaught:
+    MongoBulkWriteError: E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }
+    Result: BulkWriteResult {
+    insertedCount: 0, //no ha insertado nada
+    matchedCount: 0,
+    modifiedCount: 0,
+    deletedCount: 0,
+    upsertedCount: 0,
+    upsertedIds: {},
+    insertedIds: {}
+    }
+    Write Errors: [
+    WriteError {
+        err: {
+        index: 0,
+        code: 11000,
+        errmsg: 'E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }',
+        errInfo: undefined,
+        op: { _id: 1, nombre: 'Pedro' }
+        }
+    }
+    ]
+
+Un error de duplicidad por parte del "_id: 1" que intentamos insertar, pero que pasa?, que el "_id: 3" no tiene culpa y no se ha insertado, para eso esta el ordered, por defecto esta en "true" pero nosotros lo queremos en "false" para que funcione
+    -db.prueba.insertMany([{_id: 1, nombre: "Pedro"}, {_id: 3, nombre: "Bartolo"}], {ordered: false})
+    Uncaught:
+    MongoBulkWriteError: E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }n //da el error de duplicado
+    Result: BulkWriteResult {
+    insertedCount: 1, //pero vemos que ha insertado un documento
+    matchedCount: 0,
+    modifiedCount: 0,
+    deletedCount: 0,
+    upsertedCount: 0,
+    upsertedIds: {},
+    insertedIds: { '1': 3 }
+    }
+    Write Errors: [
+    WriteError {
+        err: {
+        index: 0,
+        code: 11000,
+        errmsg: 'E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }',
+        errInfo: undefined,
+        op: { _id: 1, nombre: 'Pedro' }
+        }
+    }
+    ]
+    NuevaBase> db.prueba.find()
+    [
+    { _id: 1, nombre: 'Patricias' },
+    { _id: 2, nombre: 'Agustin' },
+    { _id: 3, nombre: 'Bartolo' }
+    ]  
+
 
 UPDATE:
 
