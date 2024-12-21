@@ -507,3 +507,26 @@ En los documentos se pueden tener arrays tambien:
 Filtrar por arrays:
     -db.empleados.findOne({nombre: "Marcus Ortega"}).diasLaborables //tiene que ser el mismo nombre proporcionado en el documento
     -
+
+
+DESCARGAR MONGOIMPORT WINDOWS:
+
+En "https://www.mongodb.com/try/download/database-tools" elegimos la opcion de msi
+
+Vamos a "C:\Program Files\MongoDB\Tools\version\bin", hay estan los archivos que tenemos que pasar a "C:\Program Files\MongoDB\Server\version\bin"
+
+Poneros cada ventana del "Explorador de archivos" y ir copiando a la "C:\Program Files\MongoDB\Server\version\bin"
+
+*Aclaracion:
+
+Lo que hemos hecho es para poder importar documentos de nuestras maquinas al servidor, NO FUNCIONA LA COMANDa "mongoimport" DENTRO DEL SERVIDOR, es como "mongod" que se tiene que hacer el "CMD".
+
+Comando:
+    -mongoimport .\product.json -d product -c productData --jsonArray --drop
+
+mongoimport: la opcion de importar
+.\product.json: el archivo que queremos importar
+-d product: a la database product //si no existe la crea
+-c productData: a la coleccion productData //si no existe la crea
+--jsonArray: si el archivo tiene Array //si los tiene y lo pones no funcionara
+--drop: Si existe la base de datos la eliminara y hara el comando
