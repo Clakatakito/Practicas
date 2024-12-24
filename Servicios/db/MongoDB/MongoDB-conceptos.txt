@@ -539,10 +539,17 @@ mongoimport: la opcion de importar
 OPERADORES
 
 $eq: Igual que - db.LosProductos.find({productName: {$eq: "Chai"}}) // es lo mismo que - db.LosProductos.find({productName: "Chai"})
+
 $ne: Diferente de - db.LosProductos.find({branchOffice: {$ne: "Florida"}})
-$gt: Mayor que -
-$gte: Mayor o igual que -
-$lt: Menor que -
-$lte: Menor o igual que -
+
+$gt: Mayor que - db.LosProductos.find({unitsInStock: { $gt: 43}}) //mayor que 43, el 43 no incluido
+
+$gte: Mayor o igual que - db.LosProductos.find({unitsInStock: { $gte: 43}}) //mayor o igual a 43, 43 incluido
+
+$lt: Menor que - db.LosProductos.find({unitsInStock: { $lt: 43}}) //menor que 43, 43 no incluido
+
+$lte: Menor o igual que - db.LosProductos.find({unitsInStock: { $lte: 43}}) //menor o igual a 43, 43 incluido
+
 $in: Valor en una matriz - db.LosProductos.find({branchOffice: {$in: ["Florida"]}}) // es lo mismo que - db.LosProductos.find({branchOffice: "Florida"})
+
 $nin: Valor no está en una matriz/Array - db.LosProductos.find({branchOffice: {$nin: ["Florida", "California", "Ohio"]}})
