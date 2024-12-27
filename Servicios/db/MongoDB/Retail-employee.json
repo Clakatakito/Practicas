@@ -1,0 +1,238 @@
+[
+  {
+    "employeeID": 1,
+    "firstName": "Nancy",
+    "lastName": "Davolio",
+    "age": 37,
+    "title": "Sales Representative",
+    "description": "Nancy is a very kind person and loves to travel.",
+    "address": "507 - 20th Ave. Apt. 2A",
+    "country": "USA",
+    "state": ["Ohio", "Florida", "Misuri", "Oregon"],
+    "delay": 6,
+    "tolerance": 10,
+    "salesAmount": 150000,
+    "target": 200000,
+    "homePhone": "2065559857",
+    "score": [ 80, 90, 95 ],
+    "hobbies": [
+      {
+        "title": "Voley",
+        "frequency": 3
+      },
+      {
+        "title": "Dance",
+        "frequency": 2
+      }
+    ]
+  },
+  {
+    "employeeID": 2,
+    "firstName": "Andrew",
+    "lastName": "Fuller",
+    "age": 40,
+    "title": "Vice President, Sales",
+    "description": "Andrew is a very honest. He always tells the truth.",
+    "address": "908 W. Capital Way",
+    "country": "USA",
+    "state": ["Florida", "Misuri", "Oregon", "Ohio", "Alabama"],
+    "homePhone": 2065559482,
+    "score": [ 90, 93, 95 ],
+    "hobbies": [
+      {
+        "title": "Soccer",
+        "frequency": 2
+      }
+    ]
+  },
+  {
+    "employeeID": 3,
+    "firstName": "Janet",
+    "lastName": "Leverling",
+    "title": "Sales Representative",
+    "description": "Janet is a very smart. She is always neatly dressed.",
+    "address": "722 Moss Bay Blvd.",
+    "country": "USA",
+    "state": ["Florida", "Ohio"],
+    "delay": 12,
+    "tolerance": 10,
+    "salesAmount": 220000,
+    "target": 190000,
+    "homePhone": "2065553412",
+    "score": [ 70, 80, 90 ],
+    "hobbies": [
+      {
+        "title": "Dance",
+        "frequency": 3
+      },
+      {
+        "title": "Soccer",
+        "frequency": 4
+      },
+      {
+        "title": "Voley",
+        "frequency": 3
+      }
+    ]
+  },
+  {
+    "employeeID": 4,
+    "firstName": "Margaret",
+    "lastName": "Peacock",
+    "age": 30,
+    "title": "Sales Representative",
+    "description": "Margaret is very funny, she loves going to the movies and traveling.",
+    "address": "4110 Old Redmond Rd.",
+    "country": "USA",
+    "state": ["Misuri", "Oregon", "Alabama"],
+    "delay": 5,
+    "tolerance": 10,
+    "salesAmount": 150000,
+    "target": 140000,
+    "homePhone": "2065558122",
+    "score": [ 50, 60, 70 ],
+    "hobbies": [
+      {
+        "title": "Golf",
+        "frequency": 4
+      },
+      {
+        "title": "Voley",
+        "frequency": 2
+      }
+    ]
+  },
+  {
+    "employeeID": 5,
+    "firstName": "Steven",
+    "lastName": "Buchanan",
+    "age": 27,
+    "title": "Customer support",
+    "description": "Steven is a very polite boy. he always says please and thank you.",
+    "address": "14 Garrett Hill",
+    "country": "Canada",
+    "state": ["Quebec", "Yukon"],
+    "delay": 15,
+    "tolerance": 10,
+    "homePhone": 715554848,
+    "score": [ 60, 70, 80 ],
+    "hobbies": [
+      {
+        "title": "Yoga",
+        "frequency": 5
+      },
+      {
+        "title": "Basketball",
+        "frequency": 3
+      }
+    ]
+  },
+  {
+    "employeeID": 6,
+    "firstName": "Michael",
+    "lastName": "Suyama",
+    "title": "Customer Support",
+    "description": "Michael always for well dressed and goes to the gym.",
+    "address": "Coventry House Miner Rd.",
+    "country": "Canada",
+    "state": ["Yukon", "Quebec"],
+    "delay": 9,
+    "tolerance": 10,
+    "homePhone": 715557773,
+    "score": [ 80, 85 ],
+    "hobbies": [
+      {
+        "title": "Yoga",
+        "frequency": 4
+      },
+      {
+        "title": "Basketball",
+        "frequency": 4
+      }
+    ]
+  },
+  {
+    "employeeID": 7,
+    "firstName": "Robert",
+    "lastName": "King",
+    "age": 39,
+    "title": "Customer support",
+    "description": "Robert goes to the gym and loves soccer.",
+    "address": "Edgeham Hollow Winchester Way",
+    "country": "Canada",
+    "state": ["Quebec", "Yukon", "Alberta"],
+    "delay": 14,
+    "tolerance": 10,
+    "homePhone": "715555598",
+    "score": [ 75, 80, 85 ],
+    "hobbies": [
+      {
+        "title": "Dance",
+        "frequency": 3
+      },
+      {
+        "title": "Soccer",
+        "frequency": 1
+      }
+    ]
+  },
+  {
+    "employeeID": 8,
+    "firstName": "Andrea",
+    "lastName": "Callahan",
+    "age": null,
+    "title": "Inside Sales Coordinator",
+    "description": "Andrea loves to travel to concerts.",
+    "address": "4726 - 11th Ave. N.E.",
+    "country": "USA",
+    "state": ["Ohio", "Florida"],
+    "delay": 4,
+    "tolerance": 10,
+    "homePhone": null,
+    "score": [ 50, 55, 65 ],
+    "hobbies": [
+      {
+        "title": "Basketball",
+        "frequency": 5
+      },
+      {
+        "title": "Yoga",
+        "frequency": 4
+      },
+      {
+        "title": "Dance",
+        "frequency": 1
+      }
+    ]
+  },
+  {
+    "employeeID": 9,
+    "firstName": "Anny",
+    "lastName": "Dodsworth",
+    "title": "Sales Representative",
+    "description": "Anny loves to walk and go out to parties.",
+    "address": "7 Houndstooth Rd.",
+    "country": "Canada",
+    "state": ["Alberta", "Quebec"],
+    "delay": 10,
+    "tolerance": 10,
+    "salesAmount": 170000,
+    "target": 200000,
+    "homePhone": null,
+    "score": [ 90, 60, 55 ],
+    "hobbies": [
+      {
+        "title": "Voley",
+        "frequency": 5
+      },
+      {
+        "title": "Yoga",
+        "frequency": 2
+      },
+      {
+        "title": "Dance",
+        "frequency": 5
+      }
+    ]
+  }
+]

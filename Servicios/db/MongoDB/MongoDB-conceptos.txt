@@ -553,3 +553,15 @@ $lte: Menor o igual que - db.LosProductos.find({unitsInStock: { $lte: 43}}) //me
 $in: Valor en una matriz - db.LosProductos.find({branchOffice: {$in: ["Florida"]}}) // es lo mismo que - db.LosProductos.find({branchOffice: "Florida"})
 
 $nin: Valor no está en una matriz/Array - db.LosProductos.find({branchOffice: {$nin: ["Florida", "California", "Ohio"]}})
+
+
+OPERACIONES LOGICOS
+
+$and: une dos valores si son verdaderos - db.LosProductos.find({ $and: [{ "discountDay.Monday": { $gt: 0.25 } }, { branchOffice: "Florida" }] }, { "discountDay.Monday": 1, branchOffice: 1 }) //es lo mismo que db.LosProductos.find({ "discountDay.Monday": { $gt: 0.25 }, branchOffice: "Florida" }, { "discountDay.Monday": 1, branchOffice: 1 }) //esta buscando los documentos que el discountDay.Monday sera mayor a 0.25 y que este en la sucursal de Florida, junto a unas proyecciones
+
+$or: une dos valores si alguno de ellos es verdadero - db.LosProductos.find({$or: [{"categories.categoryName": {$eq: "Confections"}}, {"categories.categoryName": {$eq: "Produce"}}]})
+
+$not: niega la condición dada, selecciona documentos donde no se cumpla - db.LosProductos.find({branchOffice: {$not: {$in: ["California", "Misuri"]}}},{branchOffice: 1}) 
+
+$nor: selecciona documentos donde NINGUNA de las condiciones sea verdadera(basicamente en un $and pero los 2 valores tienen que ser falsos, lo contrario del $and) - db.LosProductos.find({ $nor: [{ branchOffice: "California" }, { branchOffice: "Misuri" }] }, { branchOffice: 1 })
+
