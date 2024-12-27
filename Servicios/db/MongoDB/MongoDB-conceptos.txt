@@ -565,3 +565,13 @@ $not: niega la condición dada, selecciona documentos donde no se cumpla - db.Lo
 
 $nor: selecciona documentos donde NINGUNA de las condiciones sea verdadera(basicamente en un $and pero los 2 valores tienen que ser falsos, lo contrario del $and) - db.LosProductos.find({ $nor: [{ branchOffice: "California" }, { branchOffice: "Misuri" }] }, { branchOffice: 1 })
 
+
+OPERACIONES DE CONSULTA
+
+$exist: Busca en un documento si exixte/o no la clave que queramos - db.empleados.find({ age: {$exists: true}}) // tambien puedes poner false para buscar por los que no existan(he hecho esto por diversion: db.empleados.find({ age: {$not: {$exists: true}}})), es lo mismo que db.empleados.find({ age: {$exists: false}})
+
+$type: 
+
+ACLARACION
+
+Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y "db.empleados.find({ age: {$exists: true, $gt: 35}})" hagan lo mismo yo te recomiendo el segundo porque como ya hemos dicho cuando hacemos un db.empleados.find({},{}) es 
