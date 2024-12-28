@@ -570,8 +570,38 @@ OPERACIONES DE CONSULTA
 
 $exist: Busca en un documento si exixte/o no la clave que queramos - db.empleados.find({ age: {$exists: true}}) // tambien puedes poner false para buscar por los que no existan(he hecho esto por diversion: db.empleados.find({ age: {$not: {$exists: true}}})), es lo mismo que db.empleados.find({ age: {$exists: false}})
 
-$type: 
+$type: verifica el tipo de dato - db.empleados.find({homePhone: {$type: "number"}}), puedes hacer que filtre X2 tambien: db.empleados.find({homePhone: {$type: ["number", "string"]}})
 
 ACLARACION
 
 Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y "db.empleados.find({ age: {$exists: true, $gt: 35}})" hagan lo mismo yo te recomiendo el segundo porque como ya hemos dicho cuando hacemos un db.empleados.find({},{}) es 
+
+
+OPERADORES DE EVALUACION
+
+$regex: busca patrones en cadenas de texto usando expresiones regulares - db.empleados.find({description: {$regex: "travel"}}) //salen todos los documentos que tengan la palabra "travel"
+
+
+    -db.empleados.find({title: {$regex: "support"}})
+Puedes añadir opciones a las busquedas con $regex con $options($options SOLO ESTA SI USAS $regex, NO SE PUEDE USAR SINO), el comando de arriba solo busca exactamente por "support" pero podemos hacer que no:
+
+    -db.empleados.find({title: {$regex: "support", $options: "i"}})
+
+Para que acaben con una letra o palabra determinada:
+    -db.empleados.find({ firstName: { $regex: "y$" } } )  
+
+Tambien puedes buscar caracteres asi:
+    -db.empleados.find({ description: /loves/ })
+
+$expr: Permite usar expresiones que comparan valores de campos o realizan cálculos - db.empleados.find({$expr: {$lt: ["$delay", "$tolerance"]}}) //estara devolviendo los documentos que $delay no sea mayor a $tolerance  //tambien puedes usar $eq, $gt, $ne,         
+
+$mod: No se muy bien lo que hace - db.empleados.find({ age: { $mod: [2, 0] } }) //devuelve los documento que age sea par, solo coje el entero, un $mod: [2.66, 0] NO, cojeria solo el primero, el 2
+
+
+OPERACIONES DE ARRAYS
+
+$all:
+
+$elemMatch:
+
+$size:
