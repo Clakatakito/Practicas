@@ -496,9 +496,9 @@ DELETE
 
 El metodo deletOne() y deletMany() borra documentos, no borra una clave-valor, borra el documento en si
 
-    -db.usuarios.deletMany({}) //borra toda la base
-    -db.usuarios.deletOne({}) //borra el primer documento de la db
-    db.usuarios.deletOne({nombre: "Maria"}) //Borra el documento de maria, NO SOLO BORRA EL NOMBRE "MARIA", eso en update
+    -db.usuarios.deleteMany({}) //borra toda la base
+    -db.usuarios.deleteOne({}) //borra el primer documento de la db
+    -db.usuarios.deleteOne({nombre: "Maria"}) //Borra el documento de maria, NO SOLO BORRA EL NOMBRE "MARIA", eso en update
 
 
 ARRAYS
@@ -600,8 +600,8 @@ $mod: No se muy bien lo que hace - db.empleados.find({ age: { $mod: [2, 0] } }) 
 
 OPERACIONES DE ARRAYS
 
-$all:
+$all: verificar si un campo de tipo arreglo contiene todos los valores especificados - db.empleados.find({state: {$all: ["Florida", "Ohio"]}}) //igual que: db.empleados.find({$and: [{state: {$eq: "Florida"}}, {state: {$eq: "Ohio"}}]})
 
-$elemMatch:
+$elemMatch: coincide con documentos que contienen un campo de matriz con al menos un elemento que coincide con todos los criterios de consulta especificados. - db.empleados.find({hobbies: {$elemMatch: {title: "Dance"} }}) //tambien: db.empleados.find({hobbies: {$elemMatch: {title: "Voley", frequency: {$gte: 3}}}})
 
-$size:
+$size: verificar la cantidad de elementos en un arreglo/array - db.empleados.find({hobbies: {$size: 2}}) //tambein: db.empleados.find({state: {$size: 5}})
