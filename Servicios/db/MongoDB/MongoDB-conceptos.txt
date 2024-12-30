@@ -605,3 +605,31 @@ $all: verificar si un campo de tipo arreglo contiene todos los valores especific
 $elemMatch: coincide con documentos que contienen un campo de matriz con al menos un elemento que coincide con todos los criterios de consulta especificados. - db.empleados.find({hobbies: {$elemMatch: {title: "Dance"} }}) //tambien: db.empleados.find({hobbies: {$elemMatch: {title: "Voley", frequency: {$gte: 3}}}})
 
 $size: verificar la cantidad de elementos en un arreglo/array - db.empleados.find({hobbies: {$size: 2}}) //tambein: db.empleados.find({state: {$size: 5}})
+
+
+
+METODO CURSOR
+
+.next(): mite obtener un solo documento a la vez del cursor, lo que da más control sobre la iteración, ya que debes llamarlo repetidamente para acceder a cada documento. Por otro lado, .it (utilizado en la shell interactiva de MongoDB) permite recorrer automáticamente todos los documentos del cursor, devolviendo uno a uno sin necesidad de llamarlo explícitamente cada vez, lo que facilita iterar sobre todos los resultados sin control manual.
+
+.hasNext(): Devuelve un booleado de si puedes hacer otro .next() o no, es solo informativo
+
+.sort(): Devuelve los documentos ordenados - db.LosProductos.find().sort({id: 1})//Los ordena ascendente, si quieres que sea descente es con "-1"
+
+.toArray(): Devuelve todos los documentos del la db especificados
+
+.skip(): Omite los primeros X documentos de la consulta - db.LosProductos.find().sort({ id: 1 }).skip(10) //se ordenan en ascendente pero se omiten los 10 primeros:
+
+    -db.LosProductos.find().sort({ id: 1 }).skip(10).toArray()
+[
+  {
+    _id: ObjectId('6767fdfa2e58910481c31b8e'),
+    id: 11, //empieza por el id 11
+
+.limit(): Limita el número de documentos que se devuelven a X - db.LosProductos.find().sort({ id: 1 }).skip(10).limit(15) //se ordenan en ascendente pero se omiten los 10 primeros y solo habra 15 documentos
+
+.count():
+
+
+
+
