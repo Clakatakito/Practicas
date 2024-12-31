@@ -628,8 +628,24 @@ METODO CURSOR
 
 .limit(): Limita el número de documentos que se devuelven a X - db.LosProductos.find().sort({ id: 1 }).skip(10).limit(15) //se ordenan en ascendente pero se omiten los 10 primeros y solo habra 15 documentos
 
-.count():
+.count(): Te dice cuantos documentos tienes(ponlo siempre en el final de la comanda):
+
+    -db.LosProductos.find().count()
+    63
+
+Asi no:
+    -db.LosProductos.find().count().limit(15)
+    TypeError: db.LosProducto ... ount().limit is not a function
+Asi:
+    -db.LosProductos.find().limit(15).count()
+    15
+
+
+OPERADORES DE PROYECCION    
+
+".$": La proyección con ".$": Devuelve únicamente el primer elemento de un array que cumple con la condición especificada en el filtro. Esto permite mostrar solo el dato relevante en lugar de devolver el array completo - db.empleados.find({"hobbies.frequency": {$gte: 3}}, {"hobbies.frequency.$": 1}) //o "hobbies.$": 1
 
 
 
 
+$slice: itar la cantidad de elementos devueltos de un array en los documentos resultantes - db.empleados.find({},{score: {$slice: 2}})//devuelve el "0" y "1", los 2 primeros vaya, si quieres los 2 ultimos pues -2
