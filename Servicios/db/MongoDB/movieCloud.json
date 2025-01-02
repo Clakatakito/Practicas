@@ -1,0 +1,144 @@
+[
+    {
+        "movieID": "mv01",
+        "title": "Avatar",
+        "runtime": 162,
+        "voteAverage": 7.2,
+        "dateRelease": new Date("2009-12-17"),
+        "dateExpired": new Date("2010-01-17"),
+        "lastView": new Date("2009-12-29"),
+        "isView": false,
+        "productionCompany": [
+            {
+                "name": "Ingenious Film Partners",
+                "country": "United Kingdom"
+            },
+            {
+                "name": "Twentieth Century Fox Film Corporation",
+                "country": "United States"
+            },
+            {
+                "name": "Dune Entertainment",
+                "country": "United States"
+            }
+        ]
+    },
+    {
+        "movieID": "mv02",
+        "title": "Titanic",
+        "runtime": 194,
+        "voteAverage": 7.5,
+        "dateRelease": new Date("1998-01-23"),
+        "dateExpired": new Date("1998-03-23"),
+        "lastView": new Date("1998-02-15"),
+        "isView": false,
+        "productionCompany": [
+            {
+                "name": "Twentieth Century Fox Film Corporation",
+                "country": "United States"
+            },
+            {
+                "name": "Paramount Pictures",
+                "country": "United States"
+            }
+        ]
+    },
+    {
+        "movieID": "mv03",
+        "title": "Iron Man 3",
+        "runtime": 130,
+        "voteAverage": 6.8,
+        "dateRelease": new Date("2013-04-25"),
+        "dateExpired": new Date("2013-05-25"),
+        "lastView": new Date("2013-05-20"),
+        "isView": false,
+        "productionCompany": [
+            {
+                "name": "Marvel Studios",
+                "country": "United States"
+            }
+        ]
+    },
+    {
+        "movieID": "mv04",
+        "title": "Jurassic World",
+        "runtime": 124,
+        "voteAverage": 6.5,
+        "dateRelease": new Date("2015-06-11"),
+        "dateExpired": new Date("2030-01-01"),
+        "lastView": new Date("2015-07-07"),
+        "isView": false,
+        "productionCompany": [
+            {
+                "name": "Universal Studios",
+                "country": "United States"
+            },
+            {
+                "name": "Fuji Television Network",
+                "country": "Japan"
+            },
+            {
+                "name": "Amblin Entertainment",
+                "country": "United States"
+            }
+        ]
+    },
+    {
+        "movieID": "mv05",
+        "title": "Transformers: Age of Extinction",
+        "runtime": 165,
+        "voteAverage": 5.8,
+        "dateRelease": new Date("2014-07-10"),
+        "dateExpired": new Date("2014-08-10"),
+        "lastView": new Date("2014-08-01"),
+        "isView": false,
+        "productionCompany": [
+            {
+                "name": "China Movie Channel",
+                "country": "China"
+            },
+            {
+                "name": "Hasbro Studios",
+                "country": "United States"
+            },
+            {
+                "name": "Paramount Pictures",
+                "country": "United States"
+            },
+            {
+                "name": "Amblin Entertainment",
+                "country": "United States"
+            }
+        ]
+    },
+    {
+        "movieID": "mv06",
+        "title": "Toy Story 3",
+        "runtime": 103,
+        "voteAverage": 7.6,
+        "dateRelease": new Date("2010-06-17"),
+        "dateExpired": new Date("2030-01-01"),
+        "lastView": new Date("2010-06-18"),
+        "isView": false,
+        "productionCompany": [
+            {
+                "name": "Walt Disney Pictures",
+                "country": "United States"
+            },
+            {
+                "name": "Pixar Animation Studios",
+                "country": "United States"
+            }
+        ]
+    },
+    {
+        "movieID": "mv07",
+        "title": "Minionsss",
+        "runtime": 9100,
+        "productionCompany": [
+                "Universal Pictures",
+                "Illumination Entertainment"
+        ],
+        "idioma": "ingles"
+    }
+]
