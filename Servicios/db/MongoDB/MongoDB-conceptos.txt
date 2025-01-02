@@ -645,7 +645,22 @@ OPERADORES DE PROYECCION
 
 ".$": La proyección con ".$": Devuelve únicamente el primer elemento de un array que cumple con la condición especificada en el filtro. Esto permite mostrar solo el dato relevante en lugar de devolver el array completo - db.empleados.find({"hobbies.frequency": {$gte: 3}}, {"hobbies.frequency.$": 1}) //o "hobbies.$": 1
 
-
-
-
 $slice: itar la cantidad de elementos devueltos de un array en los documentos resultantes - db.empleados.find({},{score: {$slice: 2}})//devuelve el "0" y "1", los 2 primeros vaya, si quieres los 2 ultimos pues -2
+
+
+
+PROFUNDIZANDO CON OPERACIONES UPDATE
+
+-replaceOne(): reemplaza completamente un documento existente en una colección con un nuevo documento. Es útil cuando quieres modificar un documento entero en lugar de actualizar campos específicos - db.movies.replaceOne({title: 'Toy Story 3'}, {movieID: 'mv06', title: "Toy Story 3", runtime: 103, voteAverage: 7.6, dateRelease: "2015-08-15", dateExpired: "2015-11-15", isView: true}) // es util por si quieres cambiar un solo documento, no pequeñas cosas de el
+
+-updateOne(): actualiza el primer documento que cumpla con un filtro específico, aplicando los cambios definidos, incluso si no existe el campo que quieras añadir - db.movies.updateOne({title: "Toy Story 3"}, {$set: {voteAverage: 64}}) // si existiera el campo voteAverage lo hubiera cambiado a 64, sino existia lo crea y le da el valor de 64
+
+-updateMany(): Lo mismo que el updateOne() pero con los que cumplan con el filtro - db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}}) // no existia ningun campo:
+    -db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 7,
+  modifiedCount: 7,
+  upsertedCount: 0
+}  
