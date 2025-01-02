@@ -4,9 +4,9 @@
         "title": "Avatar",
         "runtime": 162,
         "voteAverage": 7.2,
-        "dateRelease": new Date("2009-12-17"),
-        "dateExpired": new Date("2010-01-17"),
-        "lastView": new Date("2009-12-29"),
+        "dateRelease": "2009-12-17",
+        "dateExpired": "2010-01-17",
+        "lastView": "2009-12-29",
         "isView": false,
         "productionCompany": [
             {
@@ -28,9 +28,9 @@
         "title": "Titanic",
         "runtime": 194,
         "voteAverage": 7.5,
-        "dateRelease": new Date("1998-01-23"),
-        "dateExpired": new Date("1998-03-23"),
-        "lastView": new Date("1998-02-15"),
+        "dateRelease": "1998-01-23",
+        "dateExpired": "1998-03-23",
+        "lastView": "1998-02-15",
         "isView": false,
         "productionCompany": [
             {
@@ -48,9 +48,9 @@
         "title": "Iron Man 3",
         "runtime": 130,
         "voteAverage": 6.8,
-        "dateRelease": new Date("2013-04-25"),
-        "dateExpired": new Date("2013-05-25"),
-        "lastView": new Date("2013-05-20"),
+        "dateRelease": "2013-04-25",
+        "dateExpired": "2013-05-25",
+        "lastView": "2013-05-20",
         "isView": false,
         "productionCompany": [
             {
@@ -64,9 +64,9 @@
         "title": "Jurassic World",
         "runtime": 124,
         "voteAverage": 6.5,
-        "dateRelease": new Date("2015-06-11"),
-        "dateExpired": new Date("2030-01-01"),
-        "lastView": new Date("2015-07-07"),
+        "dateRelease": "2015-06-11",
+        "dateExpired": "2030-01-01",
+        "lastView": "2015-07-07",
         "isView": false,
         "productionCompany": [
             {
@@ -88,9 +88,9 @@
         "title": "Transformers: Age of Extinction",
         "runtime": 165,
         "voteAverage": 5.8,
-        "dateRelease": new Date("2014-07-10"),
-        "dateExpired": new Date("2014-08-10"),
-        "lastView": new Date("2014-08-01"),
+        "dateRelease": "2014-07-10",
+        "dateExpired": "2014-08-10",
+        "lastView": "2014-08-01",
         "isView": false,
         "productionCompany": [
             {
@@ -116,9 +116,9 @@
         "title": "Toy Story 3",
         "runtime": 103,
         "voteAverage": 7.6,
-        "dateRelease": new Date("2010-06-17"),
-        "dateExpired": new Date("2030-01-01"),
-        "lastView": new Date("2010-06-18"),
+        "dateRelease": "2010-06-17",
+        "dateExpired": "2030-01-01",
+        "lastView": "2010-06-18",
         "isView": false,
         "productionCompany": [
             {
