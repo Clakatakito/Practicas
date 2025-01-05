@@ -663,4 +663,46 @@ PROFUNDIZANDO CON OPERACIONES UPDATE
   matchedCount: 7,
   modifiedCount: 7,
   upsertedCount: 0
-}  
+}
+
+Si volvieramos a ejecutar el comando "db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}})" no pondria:
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 7, //se encuentran 7 documentos
+  modifiedCount: 0, //pero como no hay nada ha cambiar no se cambia nada
+  upsertedCount: 0
+}
+
+$inc: utiliza para incrementar o decrementar valores numéricos de un campo en un documento. Si el campo no existe, $inc lo crea con el valor proporcionado - db.movies.updateOne({movieID: 'mv07'}, {$inc: {price: 6}}) //le suma 6 al valor que havia antes, si quieres que reste pondias un "-", "-6"
+
+Tambien puedes crear nuevas claves-valores con $inc: db.movies.updateMany({},{$inc: {"%tax": 0.2}}) //le asigna a todos los documentos una nueva clave llamada "%tax" con el valor de "0.2" o "20%" tambien
+
+$min: actualizar el valor de un campo únicamente si el valor proporcionado es menor que el valor actual del campo. Si el campo no existe, $min lo añade con el valor proporcionado - db.movies.updateMany({},{$min: {VoteAverage: 7.5}}) //actualiza los campos que si "VoteAverage" sea mayor que "7.5" y le pone ese valor, si el "VoteAverage" es 9 despues de la comando puesta su valor sera de 7.5
+
+$max: actualizar el valor de un campo únicamente si el valor proporcionado es mayor que el valor actual del campo. Si el campo no existe, $max lo añade con el valor proporcionado(lo contrario que el $min) - db.movies.updateMany({},{$max: {VoteAverage: 6}}) //los que sean inferior a 6 los convertira a 6
+
+Un truco, si te lias con $min y $max piensa que de lo que estas pensando es al reves, me explico, cuando piensas en $min piensas en minimo obvio, pues no, en la comanda: "db.movies.updateMany({},{$min: {VoteAverage: 7.5}})" lo que hace es buscar los que sean MAYOR a 7.5, NO MENOR, LOS QUE SEAN MAYOR A 7.5 LOS CONVERTIRA A 7.5, y pasa lo mismo que con $max solo que no es "maximo", es menor, si cambiamos la comanda de antes el $min por el $max lo que hara es buscar a LOS MENORES A 7.5 y los convertira en 7.5
+
+$mul: multiplicar el valor de un campo por un número especificado - db.movies.updateOne({movieID: 'mv07'},{$mul: {price: 2}}) //si price valia 7, ahora vale 14
+
+$rename: cambiar el nombre de una clave en un documento - db.movies.updateMany({},{$rename: {'%tax': "percentTax"}}) // cambia la clave "%tax" por "percentTax"
+
+ACLARACION
+
+Solo cambia la clave no el valor, aqui un error comun: db.movies.updateOne({movieID: 'mv07'},{$rename: {title: "Minions 2"}}) //lo que estas haciendo es cambiar la clave "title" por "Minions 2", lo que quedaria asi: 'Minions 2': 'Minions'
+
+$unset: eliminar un campo específico de un documento. Cuando se aplica, el campo desaparece por completo del documento, junto con su valor. - db.movies.updateMany({},{$unset: {percentTax: 1}}) //elimina "percentTax" junto a su valor en todos los documentos, (en vez de poner un 1 tambien puedes usar "")
+
+$currentDate: establecer el valor de un campo como la fecha y hora actuales - db.movies.updateOne({title: 'Minions'},{$currentDate: {dateRelease: true}})// obvio que solo funciona con fechas, tambien puedes usar: db.movies.updateOne( { title: 'Minions' }, { $currentDate: { dateExpired: { $type: "date" } } } );
+
+$push: Añade un elemento al array - db.empleados.updateOne({employeeID: 5}, {$push: {score: 50}})
+
+$addToSet: Añade un elemento único al array (sin duplicados) - db.empleados.updateOne({employeeID: 5}, {$addToSet: {score: 81}}) // si pones un numero que ya estaba en la array: modifiedCount: 0
+
+$pull: Elimina un elemento del array - db.empleados.updateOne({employeeID: 5}, {$pull: {score: 81}}) //si intentas quitar un numero que no esta: modifiedCount: 0
+
+upsert: El parámetro upsert en MongoDB permite combinar las operaciones de actualización e inserción. Si el documento especificado en el filtro no existe, MongoDB crea uno nuevo usando los datos de la operación de actualización; si ya existe, simplemente lo actualiza - db.movies.updateOne({movieID: "MVO8"}, {$set: {title: "Capitan America"}}, {upsert: true}) //El movieID "MV08" NO EXISTE, lo que queremos hacer aqui es añadirlo si no existe o actualizarlo en caso de que si exista, si no existe el parametro upsert se encargara de crearlo y saldra asi: upsertedCount: 1 ya que lo ha insertado, si el movieID "MV08" SI HUBIESE EXISTIDO el title que hubiera en el movieID "MV08" se cambiara por el ingresado en la comanda, en este caso "Capitan America"
+
+$setOnInsert: se usa en operaciones de actualización con la opción upsert. Permite especificar los campos que deben establecerse solo cuando se inserta un nuevo documento (es decir, cuando el filtro no encuentra coincidencias y se crea un nuevo documento). Si el documento ya existe y se actualiza, los campos definidos en $setOnInsert no se aplican - 
