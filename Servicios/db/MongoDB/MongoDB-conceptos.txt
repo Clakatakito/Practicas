@@ -705,4 +705,29 @@ $pull: Elimina un elemento del array - db.empleados.updateOne({employeeID: 5}, {
 
 upsert: El parámetro upsert en MongoDB permite combinar las operaciones de actualización e inserción. Si el documento especificado en el filtro no existe, MongoDB crea uno nuevo usando los datos de la operación de actualización; si ya existe, simplemente lo actualiza - db.movies.updateOne({movieID: "MVO8"}, {$set: {title: "Capitan America"}}, {upsert: true}) //El movieID "MV08" NO EXISTE, lo que queremos hacer aqui es añadirlo si no existe o actualizarlo en caso de que si exista, si no existe el parametro upsert se encargara de crearlo y saldra asi: upsertedCount: 1 ya que lo ha insertado, si el movieID "MV08" SI HUBIESE EXISTIDO el title que hubiera en el movieID "MV08" se cambiara por el ingresado en la comanda, en este caso "Capitan America"
 
-$setOnInsert: se usa en operaciones de actualización con la opción upsert. Permite especificar los campos que deben establecerse solo cuando se inserta un nuevo documento (es decir, cuando el filtro no encuentra coincidencias y se crea un nuevo documento). Si el documento ya existe y se actualiza, los campos definidos en $setOnInsert no se aplican - 
+$setOnInsert: se usa en operaciones de actualización con la opción upsert. Permite especificar los campos que deben establecerse solo cuando se inserta un nuevo documento (es decir, cuando el filtro no encuentra coincidencias y se crea un nuevo documento). Si el documento ya existe y se actualiza, los campos definidos en $setOnInsert no se aplican -
+
+db.movies.updateOne(
+  { movieID: "mv02" }, // Filtro: busca el documento con movieID "mv02"
+  {
+    $set: { title: "Interstellar", year: 2014 }, // Si existe, actualiza estos campos
+    $setOnInsert: { genre: "Sci-Fi" } // Si se inserta, agrega el campo "genre"
+  },
+  { upsert: true } // Si no existe, crea un nuevo documento
+);
+
+
+
+
+OPERADOR POSICIONAL DE ARRAY ($)
+
+$: db.movie.updateOne({movieID: "mv01", ratings: 70}, {$set: {"ratings.$": 71}}) - La comanda busca un documento con movieID: "mv01" y un 70 en el array ratings, luego actualiza el primer 70 encontrado a 71, otro: db.movie.updateMany({productionCompany: {$elemMatch: {employee: {$eq: 70}, hoursWorkedAverage: {$gt: 9}}}}, {$set: {"productionCompany.$.salaryAverage": 8000}})
+
+$[]: Actualiza todos los elementos de un array dentro de un documento que coincidan con la consulta - db.movie.updateMany({movieID: {$in: ["mv01", "mv02"]}}, {$inc: {"ratings.$[]": 5}}) // otra: db.movie.updateMany({movieID: {$in: ["mv06", "mv07"]}}, {$set: {"productionCompany.$[elem].salaryAverage": 5000}}, {arrayFilters: [{"elem.employee": {$gte: 60}}]}), //otra: db.movie.updateMany({movieID: {$in: ["mv06", "mv07"]}}, {$inc: {"productionCompany.$[elem].employee": -10}}, {arrayFilters: [{"elem.name": "Marvel Studios", "elem.salaryAverage": 5000}]})
+
+
+OPERADORES MODIFICADORES DE ACTUALIZACION
+
+$each: se utiliza con operadores como $push o $addToSet para agregar múltiples valores a un array - db.movie.updateOne({movieID: 'mv07'}, {$addToSet: {language: {$each: ["Spanish", "English", "French"]}}})
+
+$position: Se utiliza con $push para especificar la posición exacta donde insertar elementos en un array. Por defecto, $push agrega los elementos al final, pero con $position puedes insertar en cualquier índice del array - db.movie.updateOne({ movieID: 'mv07' }, { $push: {ratings: {$each: [10,20,30], $position: 0}}}) // lo añade la principio(en la posicion 0 de la cadena)
