@@ -236,6 +236,12 @@ COMENTAR:
 Se puede comentar asi "//" o "/**/" para bloque, selecciona y copia el codigo de abajo:
     -show dbs //mostrar databases
 
+
+
+ELIMINAR DB
+
+
+
 *ACLARACION:
 
 Si creas un coleccion ya se vacia o con datos, no dejes espacios en ellos porque pasara algo como esto:
@@ -574,7 +580,7 @@ $type: verifica el tipo de dato - db.empleados.find({homePhone: {$type: "number"
 
 ACLARACION
 
-Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y "db.empleados.find({ age: {$exists: true, $gt: 35}})" hagan lo mismo yo te recomiendo el segundo porque como ya hemos dicho cuando hacemos un db.empleados.find({},{}) es 
+Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y "db.empleados.find({ age: {$exists: true, $gt: 35}})" hagan lo mismo yo te recomiendo el segundo porque como ya hemos dicho cuando hacemos un db.empleados.find({},{}) es igual al $and
 
 
 OPERADORES DE EVALUACION
@@ -731,3 +737,44 @@ OPERADORES MODIFICADORES DE ACTUALIZACION
 $each: se utiliza con operadores como $push o $addToSet para agregar múltiples valores a un array - db.movie.updateOne({movieID: 'mv07'}, {$addToSet: {language: {$each: ["Spanish", "English", "French"]}}})
 
 $position: Se utiliza con $push para especificar la posición exacta donde insertar elementos en un array. Por defecto, $push agrega los elementos al final, pero con $position puedes insertar en cualquier índice del array - db.movie.updateOne({ movieID: 'mv07' }, { $push: {ratings: {$each: [10,20,30], $position: 0}}}) // lo añade la principio(en la posicion 0 de la cadena)
+
+$slice: El operador $slice en MongoDB se utiliza junto con $push y $each para limitar el tamaño de un array después de insertar nuevos elementos. Esto es útil cuando quieres mantener un array con un número máximo de elementos, eliminando los más antiguos o los últimos según el orden - db.movie.updateOne({movieID: "mv05"}, {$push: {productionCompany: {$each: [{name: "Revolution Sun Studios", employee: 65, salaryAverage: 4500, hoursWorkedAverage: 8}], $slice: -2 }}}) //añadira ese documento y dejara los dos ultimos
+
+otro: db.movie.updateOne({movieID: "mv05"}, {$push: {ratings: {$each: [94,98], $position: 0, $slice: 4 }}})//añade 94 y 98 al principio de la array y solo enseña los 4 primeros
+
+$sort: se utiliza junto con $push y $each para ordenar los elementos de un array después de insertar nuevos valores. Es especialmente útil cuando deseas mantener un array ordenado automáticamente, ya sea en orden ascendente o descendente - db.movie.updateOne({ movieID: "mv05" }, { $push: { ratings: {$each: [3,9,7,5,1], $sort: 1} } } ) //si no quieres que se añada ningun documento y solo quieres ordenar deja la array vacia, []
+
+otro: db.movie.updateOne({ movieID: "mv05" }, { $push: { productionCompany: {$each: [{name: "Illumination Entertaiment", employee: 45, salaryAverage: 5000, hoursWorkedAverage: 7}], $sort: {employee: 1}, $slice: 2} } } ) //añade un documento nuevo y de ordenara segun el los employee y cojera los 2 primeros
+
+$pop: elimina un elemento de un array al principio o al final, dependiendo del valor que le asignes - db.movie.updateOne({movieID: "mv05"}, {$pop: {ratings: -1}})// el 1 elimina el ultimo y el -1 elimina el primero
+
+$pullAll: eliminar todos los valores especificados de un array dentro de un documento - db.movie.updateOne({movieID: "mv05"}, {$pullAll: {language: ["Italiano", "Latin"]}}) 
+
+
+
+TIPOS DE DATOS
+
+NO NUMEROS
+
+Saber que tipo de dato es un valor:
+    -typeof db.data.findOne().user 
+
+Antes lo haciamos asi:
+    -db.data.find({user: {$type: "string"}}) //podriamos poner tanto boolean, number, etc...
+
+Pero si no sabes que tipo es un valor yo te recomiendo la primera, es mas directa, la segunda es mas para filtar por los que tengan ese tipo no es para salir de dudas si no sabes que tipo es    
+
+Puedes ver informacion de la db actual:
+    -db.stats()
+
+Puedes ver informacion de la coleccion actual:
+    -db.coleccion.stats()
+
+Puedes buscar por un valor en especifico:
+    -db.coleccion.stats().size  
+
+Puedes insertar el tipo de dato que tu quieras tambien en mongodb:
+    -db.coleccion.insertOne({valor: Int32(30)}) //si pasa de cierto numero larguisimo dara erro y tendras que llamarlo con NumberLong
+
+    rango de valores desde -2,147,483,648 hasta 2,147,483,647 con Int32
+    rango de valores desde -9,223,372,036,854,775,808 a 9,223,372,036,854,775,807 con NumberLong
