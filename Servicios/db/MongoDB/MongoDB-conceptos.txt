@@ -778,3 +778,166 @@ Puedes insertar el tipo de dato que tu quieras tambien en mongodb:
 
     rango de valores desde -2,147,483,648 hasta 2,147,483,647 con Int32
     rango de valores desde -9,223,372,036,854,775,808 a 9,223,372,036,854,775,807 con NumberLong
+
+fECHAS    
+
+Con este comando puedes capturar la fecha actual diferente de como seria "new Date("xxxx-xx-x")" o ISODate("xxxx-xx-xx"):
+    -db.data.updateMany({},{$set: {FechaActual: Date()}})
+
+Saldria algo asi:
+        FechaActual: 'Sat Jan 11 2025 11:43:35 GMT+0100 (hora estándar de Europa central)'
+
+
+Usa ISODate cuando trabajes directamente con MongoDB, especialmente si estás insertando o consultando documentos en la base de datos.
+Usa new Date si estás manejando fechas desde JavaScript y necesitas construir o manipular datos antes de enviarlos a MongoDB.
+
+Timestamp
+
+    -db.data.updateMany({},{$set: {con_timestamp: new Timestamp()}})
+
+Te dara algo asi o no:
+
+con_timestamp: Timestamp({ t: 0, i: 0 })
+
+Lo actualizaremos:
+    -db.data.updateMany({}, {$currentDate: {con_timestamp: {$type: "timestamp"}}})
+
+Y ahora si
+
+con_timestamp: Timestamp({ t: 1736592921, i: 1 })
+
+
+
+Recomendación para usar números en MongoDB:
+Usa int32 para datos pequeños como edades, cantidades o IDs dentro de un rango limitado.
+Usa int64 cuando necesites manejar enteros grandes como números de serie o totales acumulados.
+Usa double para datos que incluyen fracciones o cuando la precisión decimal no sea crítica.
+Usa Decimal128 si trabajas con datos financieros o cálculos que requieran una precisión exacta.
+
+
+int32 (32-bit Integer):
+Constructor: Int32(30). //tampoco hace falta especificarlo ya que se pone predeterminado
+Ejemplo: { "edad": 25 }
+
+
+int64 (64-bit Integer):
+Constructor: NumberLong(838383615611093745)
+Ejemplo: { "grandesVentas": NumberLong(9223372036854775807) }
+
+
+double (64-bit Floating Point):
+Constructor: Number()
+Ejemplo: { "precio": Number(199.99) }
+Decimal128 (128-bit Decimal):
+
+Constructor: NumberDecimal()
+Ejemplo: { "saldo": NumberDecimal("123456.789") }
+
+
+
+No te comas mucho la cabeza pensando
+
+
+
+MODELO DE DATOS
+
+El modelo de datos no es más que la forma en que decides estructurar los datos dentro de los documentos y cómo gestionas las relaciones entre ellos.
+
+1. Relación Uno a Uno
+Definición: Un elemento de una colección está relacionado con exactamente un elemento de otra colección.
+Ejemplo: Un usuario tiene una tarjeta de identificación.
+Implementación:
+Incrustar: Si siempre necesitas ambos datos juntos.
+
+{
+  "_id": 1,
+  "nombre": "Alex",
+  "identificacion": {
+    "tipo": "DNI",
+    "numero": "123456789"
+  }
+}
+Referenciar: Si los datos de identificación se gestionan aparte.
+
+{
+  "_id": 1,
+  "nombre": "Alex",
+  "identificacion_id": "A123"
+}
+2. Relación Uno a Muchos
+Definición: Un elemento de una colección está relacionado con muchos elementos de otra colección.
+Ejemplo: Una categoría tiene varios productos.
+Implementación:
+Incrustar: Si el número de productos por categoría es pequeño.
+
+{
+  "_id": 1,
+  "categoria": "Electrónica",
+  "productos": [
+    { "nombre": "Teléfono", "precio": 300 },
+    { "nombre": "Laptop", "precio": 1000 }
+  ]
+}
+Referenciar: Si hay muchos productos o se reutilizan en varias categorías.
+
+{
+  "_id": 1,
+  "categoria": "Electrónica",
+  "productos_ids": [101, 102]
+}
+3. Relación Muchos a Muchos
+Definición: Muchos elementos de una colección están relacionados con muchos elementos de otra colección.
+Ejemplo: Usuarios que tienen roles múltiples, y cada rol puede pertenecer a varios usuarios.
+Implementación:
+Intersección con una colección puente: Usas una colección extra para almacenar las relaciones.
+Usuarios:
+
+{ "_id": 1, "nombre": "Alex" }
+{ "_id": 2, "nombre": "Rodolfo" }
+Roles:
+json
+Copiar código
+{ "_id": 101, "rol": "Admin" }
+{ "_id": 102, "rol": "Editor" }
+Relaciones (puente):
+
+{ "usuario_id": 1, "rol_id": 101 }
+{ "usuario_id": 1, "rol_id": 102 }
+{ "usuario_id": 2, "rol_id": 102 }
+
+*Aclaracion:
+
+Una estructura "ideal" en MongoDB seria que no falten valores, ejemplo de estructura mala:
+
+[
+  {
+    _id: ObjectId('6783a45b079082d76b79a1b6'),
+    name: 'Jamon',
+    price: 2
+  },
+  {
+    _id: ObjectId('6783a483079082d76b79a1b7'),
+    name: 'tablet',
+    price: 200,
+    detail: { storage: 256, ram: 12 } //aqui hay detail y en el otro documento no
+  }
+]
+
+Asi seria mejor:
+
+[
+  {
+    _id: ObjectId('6783a45b079082d76b79a1b6'),
+    name: 'Jamon',
+    price: 2
+    detail: null
+  },
+  {
+    _id: ObjectId('6783a483079082d76b79a1b7'),
+    name: 'tablet',
+    price: 200,
+    detail: { storage: 256, ram: 12 }
+  }
+]
+
+Aunque no haya detalles
