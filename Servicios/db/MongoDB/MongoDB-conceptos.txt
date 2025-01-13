@@ -62,7 +62,7 @@ WINDOWS
 
 Vale, la instalacion es un poco tiquismiquis pero se puede
 
-Ir a: "https://www.mongodb.com/try/download/community" y bajar hasta encontrar el boton "Download", podemos ingresar que tipo de instalacion queremos, yo escogi la msi por facil, y nos lo bajamos, luego instalamos el wizard, muy importante si lo quires como servicio o no, como servicio es que cada vez que ingreses a la maquina tendras al demonio mongod corriendo predeterminadamente, o bien si quieres no estar corriendolo hasta que lo habras tambien puedes, yo lo he hecho si servicio, tambien nos podemos instalar el compass, pero da igual porque luego se puede instalar tambien.
+Ir a: "https://www.mongodb.com/try/download/community" y bajar hasta encontrar el boton "Download", podemos ingresar que tipo de instalacion queremos, yo escogi la msi por facil, y nos lo bajamos, luego instalamos el wizard, muy importante si lo quires como servicio o no, como servicio es que cada vez que ingreses a la maquina tendras al demonio mongod corriendo predeterminadamente, o bien si quieres no estar corriendolo hasta que lo habras tambien puedes, yo lo he hecho sin servicio, tambien nos podemos instalar el compass, pero da igual porque luego se puede instalar tambien.
 
 Luego de esperar y alomejor dar consentimientos de algunas cosas tenemos que bajarnos la mongosh, la shell, en: "https://www.mongodb.com/try/download/shell" ingresamos las cosas y facil de instalar, yo he escojido msi, que es mas facil y automatico, tambien tenemos que ir a "C:\" y crear "data\db", vamos que tenemos que tener "C:\data\db" porque sino mongod no funcionara, luego de todo eso en "C:\Program Files\MongoDB\Server\8.0\bin" habra principalmente "mongod" que es el demonio, si eso no corre no nos conectara, lo ejecutamos y nos quedamos tranquilos, ya que el demonio esta listo nos podemos ir al "CMD" y podemos poner "mongosh" y veras que sale lo siguiente:
 
@@ -169,7 +169,7 @@ CREACION DE COLECCION
 Una vez "creada"(porque no se crea hasta que ingreses datos) la db hay que ingresar la coleccion:
     -db.nombredelacoleccion.insertOne()
 
-Vamos a desglosarlo, el "db" hace referencia a la db donde estamod, en este caso "NuevaBaseDeDatos", el "nombredelacoleccion" es el nombre que queramos darle a la coleccion, y el "insertOne()" ya si es la funcion de ingresar, entonces podemos poner algo como:
+Vamos a desglosarlo, el "db" hace referencia a la db donde estamos, en este caso "NuevaBaseDeDatos", el "nombredelacoleccion" es el nombre que queramos darle a la coleccion, y el "insertOne()" ya si es la funcion de ingresar un documento, entonces podemos poner algo como:
 
     -NuevaBase> db.usuarios.insertOne({nombre: "Alfredo", edad: 15}) //No lo he dicho pero tiene que tener formato JSON
     {
@@ -196,7 +196,10 @@ Aunque lo veas desde "Test"
  Para ver las colecciones que tenemos en una db usamos:
     -show collections
 
-Cuidado si usas "show collections" en una db que no tenga o en "Test" sino no te saldra nada:
+Para borrar un coleccion es:
+    -db.nombrecoleccion.drop()    
+
+Cuidado si usas "show collections" en una db que no tenga colecciones o en "Test" sino no te saldra nada:
     -test> show collections
 
     test>
@@ -240,7 +243,11 @@ Se puede comentar asi "//" o "/**/" para bloque, selecciona y copia el codigo de
 
 ELIMINAR DB
 
+Puedes eliminar todos las colecciones hasta que no haya ninguna con:
+    -db.coleccion.drop()
 
+O tambien puedes usar:
+    -db.dropDatabase()
 
 *ACLARACION:
 
@@ -258,7 +265,7 @@ Si creas un coleccion ya se vacia o con datos, no dejes espacios en ellos porque
       2 |
 
 Y para borrarla tiene tela porque no le vale esto:
-    -db.Nueva Coleccion.drop() //el drop ya lo veremos mas adelante
+    -db.Nueva Coleccion.drop()
     Uncaught:
     SyntaxError: Missing semicolon. (1:8)
 
@@ -276,16 +283,16 @@ Tines que hacer esto:
 
 ID:
 
-Cada documento tiene su id aunque no se lo pongamos nosotro mongodb ya se encargara de ponerlo:
+Cada documento tiene su _id aunque no se lo pongamos nosotro mongodb ya se encargara de ponerlo:
     -NuevaBase> db.usuarios.insertOne({nombre: "Claka", edad: 18}) //no le decimos nada de id:
     {
     acknowledged: true,
-    insertedId: ObjectId('6762ae45474b8ec7c679a1b6') //mongodb ha visto que no tenemos un campo llamado id, asique nos lo crea el
+    insertedId: ObjectId('6762ae45474b8ec7c679a1b6') //mongodb ha visto que no tenemos un campo llamado _id, asique nos lo crea el
     }
     NuevaBase> db.usuarios.find()
     [
     {
-        _id: ObjectId('6762ae45474b8ec7c679a1b6'), //se ve como este id y el de arriba es el mismo
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'), //se ve como este _id y el de arriba es el mismo
         nombre: 'Claka',
         edad: 18
     }
@@ -332,17 +339,17 @@ READ
 
     -db.usuarios.find() //ver toda la db
     -db.usuarios.find({}) //ver toda la db
-    -db.usuarios.find({nombre: "Carlos"}) //ver los documento cuyo nombre se "Carlos", si no lo encuentra no devuelve nada
+    -db.usuarios.find({nombre: "Carlos"}) //ver los documento cuyo nombre sea "Carlos", si no lo encuentra no devuelve nada
 
 Cuando tienes mas de 20 documento y intentas verlos con "db.usuarios.find()" solo te mostrara los primeros 20, por si en la db tienes miles de documentos no sobresaturarlo, pero puedes hacer "db.usuarios.find().toArray()" para mostrarlos todos aunque sea una mala practica, en su lugar puedes hacer:
     -db.usuarios.find().forEach(empleadoData => { printjson(empleadoData)})
 
 Filtrar por solo un campo:
-    -db.usuarios.find({},{nombre: 1}) //solo te mostrara los 20 primeros
-    -db.usuarios.find({},{nombre: 1}).toArray() //TODOS
+    -db.usuarios.find({},{nombre: 1}) //solo te mostrara los 20 primeros documentos y solo mostrara los nombres y el _id
+    -db.usuarios.find({},{nombre: 1}).toArray() //TODOS y solo mostrara los nombres y el _id
 
 El _id sale por defecto pero podemos quitarlo tambien:
-    -db.usuarios.find({},{nombre: 1, _id: 0})  
+    -db.usuarios.find({},{nombre: 1, _id: 0})  //sino lo haces saldra siempre
 
 
 Filtrar por anidamiento:
@@ -351,20 +358,18 @@ Filtrar por anidamiento:
       monto: 5,
       detalle: { responsable: 'Alex Serrano' }
     }
+
     -db.usuarios.find({"venta.detalle.responsable": "Alex Serrano"}) //usar las ""    
 
-El _id sale por defecto pero podemos quitarlo tambien:
-    -db.usuarios.find({},{nombre: 1, _id: 0})    
-
-
+    
 ordered inserts:
 
-Es cuando ya tiene un documento con ese _id: X, y intentas ponerle otro igual junto a mas documentos, te saldra un error y no te deja insertar ninguno, aunque el otro tenga un id valido.
+Es cuando ya tiene un documento con ese _id: X, y intentas ponerle otro igual junto a mas documentos, te saldra un error y no te deja insertar ninguno, aunque el otro tenga un _id valido.
 
-Ehemplo:
+EJemplo:
 
-Tenemos 2 documentos, uno con "el _id: 1" y el otro con el "_id: 2"
-[ { _id: 1, nombre: 'Patricias' }, { _id: 2, nombre: 'Agustin' } ]
+Tenemos 2 documentos en la db, uno con "el _id: 1" y el otro con el "_id: 2"
+Estos: [ { _id: 1, nombre: 'Patricias' }, { _id: 2, nombre: 'Agustin' } ]
 
  y hago esto:
     -db.prueba.insertMany([{_id: 1, nombre: "Pedro"}, {_id: 3, nombre: "Bartolo"}])
@@ -396,7 +401,7 @@ Un error de duplicidad por parte del "_id: 1" que intentamos insertar, pero que 
     Uncaught:
     MongoBulkWriteError: E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }n //da el error de duplicado
     Result: BulkWriteResult {
-    insertedCount: 1, //pero vemos que ha insertado un documento
+    insertedCount: 1, //pero vemos que ha insertado un documento, antes no
     matchedCount: 0,
     modifiedCount: 0,
     deletedCount: 0,
@@ -422,8 +427,6 @@ Un error de duplicidad por parte del "_id: 1" que intentamos insertar, pero que 
     { _id: 3, nombre: 'Bartolo' }
     ]  
 
-
-PROFUNDIZANDO CON OPERACIONES READ
 
 
 UPDATE:
@@ -459,7 +462,7 @@ Vamos a ponerle una nueva clave llamada "etiqueta" al primero que se llame "Alex
     ]
     NuevaBase>
 
-Si quieres poner una nueva clave-valor, eliminarla o editarla:
+Tambien puedes eliminar:
 
 NuevaBase> db.usuarios.find()
 [
@@ -473,7 +476,7 @@ NuevaBase> db.usuarios.find()
 ]
 NuevaBase> db.usuarios.updateOne(
 ...   { nombre: "Alex" },
-...   { $unset: { edad: "" } }
+...   { $unset: { edad: "" } } //eliminamos la clave y el valor del campo edad, tambien puedes poner true en vez de los ""
 ... )
 {
   acknowledged: true,
@@ -495,7 +498,7 @@ NuevaBase> db.usuarios.find()
 
 Tambien puedes actualizar por el "ObjectID":
 
-    -db.usuarios.updateOne({ _id: ObjectId('676412da0251d01c9379a1b7') }, { $set: { nombre: "Mariano" }})
+    -db.usuarios.updateOne({ _id: ObjectId('676412da0251d01c9379a1b7') }, { $set: { nombre: "Mariano" }}) //puedes actualizar cojiendo el filtro de lo que quieras
 
 
 DELETE 
@@ -504,7 +507,7 @@ El metodo deletOne() y deletMany() borra documentos, no borra una clave-valor, b
 
     -db.usuarios.deleteMany({}) //borra toda la base
     -db.usuarios.deleteOne({}) //borra el primer documento de la db
-    -db.usuarios.deleteOne({nombre: "Maria"}) //Borra el documento de maria, NO SOLO BORRA EL NOMBRE "MARIA", eso en update
+    -db.usuarios.deleteOne({nombre: "Maria"}) //Borra el documento de maria, NO SOLO BORRA EL NOMBRE "MARIA", eso en update con el $unset
 
 
 ARRAYS
@@ -528,7 +531,7 @@ Poneros cada ventana del "Explorador de archivos" y ir copiando a la "C:\Program
 
 *Aclaracion:
 
-Lo que hemos hecho es para poder importar documentos de nuestras maquinas al servidor, NO FUNCIONA LA COMANDa "mongoimport" DENTRO DEL SERVIDOR, es como "mongod" que se tiene que hacer el "CMD".
+Lo que hemos hecho es para poder importar documentos de nuestra maquina al servidor, NO FUNCIONA LA COMANDa "mongoimport" DENTRO DEL SERVIDOR, es como "mongod" que se tiene que hacer el "CMD".
 
 Comando:
     -mongoimport .\product.json -d product -c productData --jsonArray --drop
@@ -561,9 +564,9 @@ $in: Valor en una matriz - db.LosProductos.find({branchOffice: {$in: ["Florida"]
 $nin: Valor no está en una matriz/Array - db.LosProductos.find({branchOffice: {$nin: ["Florida", "California", "Ohio"]}})
 
 
-OPERACIONES LOGICOS
+OPERADORES LOGICOS
 
-$and: une dos valores si son verdaderos - db.LosProductos.find({ $and: [{ "discountDay.Monday": { $gt: 0.25 } }, { branchOffice: "Florida" }] }, { "discountDay.Monday": 1, branchOffice: 1 }) //es lo mismo que db.LosProductos.find({ "discountDay.Monday": { $gt: 0.25 }, branchOffice: "Florida" }, { "discountDay.Monday": 1, branchOffice: 1 }) //esta buscando los documentos que el discountDay.Monday sera mayor a 0.25 y que este en la sucursal de Florida, junto a unas proyecciones
+$and: une dos o mas valores si son verdaderos - db.LosProductos.find({ $and: [{ "discountDay.Monday": { $gt: 0.25 } }, { branchOffice: "Florida" }] }, { "discountDay.Monday": 1, branchOffice: 1 }) //es lo mismo que db.LosProductos.find({ "discountDay.Monday": { $gt: 0.25 }, branchOffice: "Florida" }, { "discountDay.Monday": 1, branchOffice: 1 }) //esta buscando los documentos que el discountDay.Monday sera mayor a 0.25 y que este en la sucursal de Florida, junto a unas proyecciones
 
 $or: une dos valores si alguno de ellos es verdadero - db.LosProductos.find({$or: [{"categories.categoryName": {$eq: "Confections"}}, {"categories.categoryName": {$eq: "Produce"}}]})
 
@@ -585,13 +588,13 @@ Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y
 
 OPERADORES DE EVALUACION
 
-$regex: busca patrones en cadenas de texto usando expresiones regulares - db.empleados.find({description: {$regex: "travel"}}) //salen todos los documentos que tengan la palabra "travel"
+$regex: busca patrones en cadenas de texto usando expresiones regulares - db.empleados.find({description: {$regex: "travel"}}) //salen todos los documentos que tengan la palabra "travel" en el campo de description
 
 
     -db.empleados.find({title: {$regex: "support"}})
 Puedes añadir opciones a las busquedas con $regex con $options($options SOLO ESTA SI USAS $regex, NO SE PUEDE USAR SINO), el comando de arriba solo busca exactamente por "support" pero podemos hacer que no:
 
-    -db.empleados.find({title: {$regex: "support", $options: "i"}})
+    -db.empleados.find({title: {$regex: "support", $options: "i"}}) //sin importar mayusculas o minusculas
 
 Para que acaben con una letra o palabra determinada:
     -db.empleados.find({ firstName: { $regex: "y$" } } )  
@@ -616,7 +619,7 @@ $size: verificar la cantidad de elementos en un arreglo/array - db.empleados.fin
 
 METODO CURSOR
 
-.next(): mite obtener un solo documento a la vez del cursor, lo que da más control sobre la iteración, ya que debes llamarlo repetidamente para acceder a cada documento. Por otro lado, .it (utilizado en la shell interactiva de MongoDB) permite recorrer automáticamente todos los documentos del cursor, devolviendo uno a uno sin necesidad de llamarlo explícitamente cada vez, lo que facilita iterar sobre todos los resultados sin control manual.
+.next(): obtiene un solo documento a la vez del cursor, lo que da más control sobre la iteración, ya que debes llamarlo repetidamente para acceder a cada documento. Por otro lado, .it (utilizado en la shell interactiva de MongoDB) permite recorrer automáticamente todos los documentos del cursor, devolviendo uno a uno sin necesidad de llamarlo explícitamente cada vez, lo que facilita iterar sobre todos los resultados sin control manual.
 
 .hasNext(): Devuelve un booleado de si puedes hacer otro .next() o no, es solo informativo
 
