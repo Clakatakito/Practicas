@@ -941,3 +941,306 @@ Asi seria mejor:
 ]
 
 Aunque no haya detalles
+
+
+
+VALIDAR CAMPOS OBLIGATORIOS Y VALORES DE CAMPO
+
+La validación de campos asegura que los datos ingresados o almacenados en una base de datos cumplan con ciertos criterios predefinidos. Esto ayuda a prevenir errores, inconsistencias y datos no deseados.
+
+db.createCollection( "product", { //crea la coleccion "product"
+    validator: { //añade un validador
+        $jsonSchema: { 
+            bsonType: "object", //acepta documentos
+            required: [ "name", "price", "ammount", "available", "orderDate" ], //requiere estos campos obligatorios, pero puedes agregar nuevos
+            description: "Los campos name, price, ammount, available y orderDate son obligatorios.", //por si sale error
+            properties: { //propiedades que tienen que tener los campos
+                name: {
+                    bsonType: "string", //tipo de dato
+                    description: "Solo acepta tipo de dato string." //si sale error
+                },
+                price: {
+                    bsonType: "double", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta valores decimales." //si sale error
+                },
+                ammount: {
+                    bsonType: "int", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta valores enteros." //si sale error
+                },
+                available: {
+                    bsonType: "bool", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta true o false." //si sale error
+                },
+                orderDate: {
+                    bsonType: "date", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta fecha." //si sale error
+                }
+            }
+        }, //QUITAR O PONER LA , SI QUIERES/NO QUIERES LAS "additionalProperties"
+        "additionalProperties": false //esto es por si solo quieres que se pongan los campos que hayas requerido, NO MAS, tambien tendras que poner la propiedad de _id, porque todo documento necesita un _id 
+    } 
+} )
+
+
+Mismo comando en una linea:
+    -db.createCollection("product", { validator: { $jsonSchema: { bsonType: "object", required: ["name", "price", "ammount", "available", "orderDate"], description: "Los campos name, price, ammount, available y orderDate son obligatorios.", properties: { name: { bsonType: "string", description: "Solo acepta tipo de dato string." }, price: { bsonType: "double", description: "Solo acepta valores decimales." }, ammount: { bsonType: "int", description: "Solo acepta valores enteros." }, available: { bsonType: "bool", description: "Solo acepta true o false." }, orderDate: { bsonType: "date", description: "Solo acepta fecha." } } } } });
+
+
+VALIDAR MAXIMOS Y MINIMOS
+
+
+db.createCollection( "user", {
+    validator: { 
+        $jsonSchema: { 
+            bsonType: "object",
+            required: [ "name", "age"],
+            description: "Los campos name y age son obligatorios",
+            properties: { 
+                name: {
+                    bsonType: "string",
+                    description: "Solo acepta tipo de dato string." 
+                },
+                age: {
+                    bsonType: "int",
+                    minimum: 20, //minimo
+                    maximum: 110, //maximo
+                    description: "Solo acepta valores enterros y que sea entre 18 y 100 años"
+                }
+            }
+        }
+    } 
+} )
+
+
+VALIDAR SUBDOCUMENTOS
+
+db.createCollection( "customer", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [ "name", "age", "address" ], //nuevo campo address
+            description: "Los campos name, age y address son obligatorios.",
+            properties: {
+                name: {
+                    bsonType: "string",
+                    description: "Agregar el nombre del cliente."
+                },
+                age: {
+                    bsonType: "int",
+                    minimum: 18,
+                    maximum: 110,
+                    description: "La edad debe estar entre el rango de 18 a 110 años."
+                },
+                address:{ //propiedades de address
+                    bsonType: "object", //tipo object ya que es un documento
+                    required: [ "country", "city", "avenue" ], //tambien puede requerir sus propios valores
+                    description: "Los campos country, city y avenue son obligatorios",
+                    properties: { //a partir de aqui ya te imaginas
+                        country: {
+                            bsonType: "string",
+                            description: "Debe ingresar el nombre del país."
+                        },
+                        city: {
+                            bsonType: "string",
+                            description: "Debe ingresar el nombre de la ciudad."
+                        },
+                        avenue: {
+                            bsonType: "string",
+                            description: "Debe ingresar la avenida de su domicilio."
+                        }
+                    }
+                }
+            }
+        }
+    }
+} )
+
+
+VALIDAR ARRAYS
+
+db.createCollection( "employee", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                employees: {
+                    bsonType: "array",
+                    description: "Debemos agregar una matriz.",
+                    items: {
+                        bsonType: "object",
+                        required: [ "name", "lastName" ],
+                        properties: {
+                            name: {
+                                bsonType: "string",
+                                description: "Debe ingresar el nombre."
+                            },
+                            lastName: {
+                                bsonType: "string",
+                                description: "Debe ingresar el apellido."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+} )
+
+
+db.employee.insertOne(
+    {
+        employees: [
+            {
+                name: "Hugo",
+                lastName: "Fernandez"
+            },
+            {
+                name: "Marco",
+                lastName: "Prado"
+            },
+            {
+                name: "Micaela",
+                lastName: "Rojas"
+            }
+        ]
+    }
+)
+
+
+Consultar TODAS las validaciones:
+    -db.getCollectionInfos()
+
+Consultar UNA validacion:
+    -db.getCollectionInfos({name: "Coleccion"})    
+
+
+MODIFICAR LA VALIDACIÓN DE ESQUEMA
+
+Cambiar como se valida una coleccion:
+    -db.runCommand( { collMod: "user", //con CollMod decimos que queremos cambiar la validacion de la coleccion "user"
+        validator: { 
+            $jsonSchema: { 
+                bsonType: "object",
+                required: [ "name", "age"],
+                description: "Los campos name y age son obligatorios",
+                properties: { 
+                    name: {
+                        bsonType: "string",
+                        description: "Solo acepta tipo de dato string." 
+                    },
+                    age: {
+                        bsonType: "int",
+                        minimum: 20, //minimo
+                        maximum: 110, //maximo
+                        description: "Solo acepta valores enterros y que sea entre 18 y 100 años"
+                    }
+                }
+            }
+        }
+    })
+
+
+
+
+VALIDAR LISTA DE VALORES EN UN ARRAY
+
+Tambien puedes validar una array:
+
+db.createCollection("color", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["color"],
+            properties: {
+                color: {
+                    bsonType: "array",
+                    description: "Agregar los colores disponibles del producto.",
+                    items: {
+                        bsonType: "string",
+                        enum: ["Rojo", "Azul", "Amarillo", "Verde"] // solo acepta estos valores
+                    },
+                    minItems: 1 // mínimo puede haber 1 elemento
+                }
+            }
+        }
+    }
+})
+
+
+*ACLARACION
+
+Si insertas un documento con solo el campo x (por ejemplo: { x: "x" }) y luego configuras una validación que requiere un campo adicional llamado y, MongoDB no aplicará retroactivamente las validaciones a los documentos existentes. Esto significa que el documento que ya está en la colección no se verá afectado y permanecerá intacto.
+
+Sin embargo, después de habilitar la validación, cualquier operación de escritura (como insertar o actualizar documentos) que no cumpla con las nuevas reglas de validación será rechazada.
+
+
+
+
+El validationLevel es una opción en MongoDB que determina cómo se aplican las reglas de validación en una colección. Afecta si los documentos existentes o ciertas operaciones de escritura están sujetos a las reglas de validación configuradas.
+
+Valores de validationLevel
+MongoDB soporta tres valores principales para esta configuración:
+
+strict (predeterminado):
+
+Reglas de validación aplicadas estrictamente.
+Todas las operaciones de escritura (inserciones y actualizaciones) deben cumplir con las reglas de validación. Si un documento no cumple, la operación se rechaza.
+Nota: Los documentos existentes antes de la configuración de validación no se ven afectados, pero cualquier actualización que intente modificar un documento debe cumplir con las reglas.
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: { $jsonSchema: { bsonType: "object", required: ["x"] } },
+    validationLevel: "strict"
+});
+moderate:
+
+Validación aplicada solo a documentos que cambian.
+Durante las actualizaciones, MongoDB valida solo los documentos que se están modificando.
+No bloquea documentos existentes que no cumplan con las reglas de validación, siempre y cuando la operación de escritura no modifique esos documentos.
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: { $jsonSchema: { bsonType: "object", required: ["x"] } },
+    validationLevel: "moderate"
+});
+off:
+
+Desactiva la validación.
+MongoDB no valida ningún documento al momento de realizar operaciones de escritura, pero las reglas de validación siguen estando configuradas y pueden reactivarse más tarde.
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: { $jsonSchema: { bsonType: "object", required: ["x"] } },
+    validationLevel: "off"
+});
+Cuándo usar cada nivel:
+
+strict:
+Es la opción más segura para asegurar la integridad de los datos. Úsalo si necesitas que todos los documentos cumplan siempre con las reglas de validación.
+
+moderate:
+Útil cuando estás migrando datos o aplicando validaciones de manera progresiva. Permite trabajar con documentos antiguos sin necesidad de modificarlos inmediatamente y cuando ya tenias un documento en la db y pones una nueva validacion que ese documento no cumple no lo contara cuando lo actualizes ya que estaba antes de la validacion.
+
+off:
+Ideal para casos en los que las reglas de validación están en desarrollo o en un entorno de pruebas donde no deseas que las validaciones interfieran con las operaciones de escritura.
+
+Ejemplo completo:
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["x", "y"],
+            properties: {
+                x: { bsonType: "string" },
+                y: { bsonType: "string" }
+            }
+        }
+    },
+    validationLevel: "moderate"
+});
+Esto asegura que los documentos que ya están en la colección no se ven afectados, pero cualquier documento nuevo o actualizado deberá cumplir con las reglas de validación.
+
+
+Hacer lo del validationAction
