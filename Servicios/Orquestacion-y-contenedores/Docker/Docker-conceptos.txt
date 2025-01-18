@@ -98,8 +98,6 @@ BUSCAR IMAGEN UBUNTU EN DOCKERHUB
 docker search ubuntu
 
 
-
-
 VER TUS IMAGENES EN DOCKER
 
 docker images
@@ -117,6 +115,43 @@ VER CONTENEDORES ACTIVOS
 
 docker ps
 
+DETENER CONTENEDOR
+
+docker stop IDCONTENEDOR
+
+DETENER TODOS LOS CONTENEDORES
+
+docker stop $(docker ps -q)
+
+ELIMINAR TODAS LAS IMAGENES
+
+docker rmi -f $(docker images -q)
+
+ELIMINAR LAS REDES QUE NO ESTAN EN USO:
+
+docker network prune
+
+ELIMINAR LOS PROCESOS INACTIVOS:
+
+docker rm $(docker ps -a -f status=exited -q)
+
+VER LA IP DE UN CONTENEDOR:
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [contenedor]
+
+Crear un contenedor con un nombre
+
+docker create --name claka mongo
+
+Crear un contenedor y ponerle los puertos
+
+docker create -p27018 --name claka mysql
+
+
+
+ELIMINAR CONTENEDOR
+
+docker rm IDCONTENEDOR
 
 
 VER TODOS LO CONTENEDORES ACTIVOS E INACTIVOS
@@ -460,53 +495,6 @@ user@ip-server's password: user@ip-server's password:
 Cuando te conectas a un servidor remoto usando un contexto de Docker (como docker context use servidor-remoto),
 Docker solo te da acceso a la interfaz de Docker en ese servidor remoto.
 No tienes acceso directo al sistema de archivos del servidor para ejecutar comandos como mkdir o ver un archivo Docker Compose.
-
-
-
-
-
-
-
-
-DETENER CONTENEDOR
-
-docker stop IDCONTENEDOR
-
-DETENER TODOS LOS CONTENEDORES
-
-docker stop $(docker ps -q)
-
-ELIMINAR TODAS LAS IMAGENES
-
-docker rmi -f $(docker images -q)
-
-ELIMINAR LAS REDES QUE NO ESTAN EN USO:
-
-docker network prune
-
-ELIMINAR LOS PROCESOS INACTIVOS:
-
-docker rm $(docker ps -a -f status=exited -q)
-
-VER LA IP DE UN CONTENEDOR:
-
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [contenedor]
-
-Crear un contenedor con un nombre
-
-docker create --name claka mongo
-
-Crear un contenedor y ponerle los puertos
-
-docker create -p27018 --name claka mysql
-
-
-
-ELIMINAR CONTENEDOR
-
-docker rm IDCONTENEDOR
-
-
 
 
 
