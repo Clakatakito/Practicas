@@ -754,6 +754,25 @@ $pop: elimina un elemento de un array al principio o al final, dependiendo del v
 $pullAll: eliminar todos los valores especificados de un array dentro de un documento - db.movie.updateOne({movieID: "mv05"}, {$pullAll: {language: ["Italiano", "Latin"]}}) 
 
 
+CAMBIAR TIPOS DE DATOS
+
+Comanda para cambiar de un tipo de dato a otro, con fechas:
+    -db.catalog.updateMany({},{$set: {release_date: {"$toDate": "$release_data"}}})
+
+Con Strings:
+    -db.catalog.updateOne( { movie_id: 11 }, [ { $set: { runtime: { $toString: "$runtime" } } }] ) //muy importante poner las []   
+
+MAS
+
+$toDate: Convierte un valor a un tipo de dato Date.
+$toString: Convierte un valor a una cadena de texto.
+$toInt: Convierte un valor a un entero (int).
+$toLong: Convierte un valor a un entero largo (long).
+$toDouble: Convierte un valor a un número de punto flotante (double).
+$toDecimal: Convierte un valor a un tipo decimal (decimal).
+$toBool: Convierte un valor a un valor booleano (true o false).
+$toObjectId: Convierte un valor a un ObjectId.
+
 
 TIPOS DE DATOS
 
@@ -1246,4 +1265,390 @@ db.runCommand({
 Esto asegura que los documentos que ya están en la colección no se ven afectados, pero cualquier documento nuevo o actualizado deberá cumplir con las reglas de validación.
 
 
-Hacer lo del validationAction
+validationAction
+
+En MongoDB, el campo validationAction se utiliza en la creación de una colección con validación de documentos. Este campo determina qué acción tomará MongoDB cuando un documento no cumpla con las reglas de validación definidas en el esquema
+
+error (por defecto):
+Si un documento no cumple con las reglas de validación, MongoDB rechaza la operación y lanza un error.
+
+warn:
+Si un documento no cumple con las reglas de validación, MongoDB permite la operación, pero registra una advertencia en los logs.
+
+db.createCollection("usuarios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["nombre", "edad"],
+      properties: {
+        nombre: {
+          bsonType: "string",
+          description: "Debe ser una cadena de texto y es obligatorio"
+        },
+        edad: {
+          bsonType: "int",
+          minimum: 18,
+          description: "Debe ser un número entero y mayor o igual a 18"
+        }
+      }
+    }
+  },
+  validationAction: "warn"
+})
+
+
+
+ACLARACION*
+
+Si quieres cambiar la validacion no tienes porque volver a poner toda la estructura de la validacion, puedes poner solo el cambio:
+
+Ejemplo, el validationAction esta en "warm" y lo quieres cambiar a "error", pues haces esto:
+
+db.runCommand({
+  collMod: "usuarios",
+  validationAction: "error"
+})
+
+Tambien sirve para otros campos
+
+ELIMINAR UNA VALIDACIÓN
+
+db.runCommand({
+  collMod: "usuarios", // Nombre de la colección
+  validator: {}, // Eliminamos las reglas de validación
+  validationAction: "warn", // (Opcional) Cambia a "warn" o "error" si fuera necesario
+  validationLevel: "off" // (Opcional) Desactiva cualquier validación a nivel de colección
+});
+
+
+ÍNDICES
+
+¿Qué son los índices en MongoDB?
+Los índices en MongoDB son estructuras de datos que mejoran el rendimiento de las consultas al permitir que la base de datos localice rápidamente los documentos que coinciden con una consulta. Funcionan de manera similar a los índices en libros: en lugar de buscar página por página, puedes ir directamente al tema o capítulo que necesitas.
+
+¿Para qué sirven?
+Mejoran el rendimiento de las consultas: Reducen el tiempo que MongoDB tarda en encontrar y devolver resultados, especialmente en colecciones grandes.
+Ordenación más rápida: Cuando se consulta con un sort, el índice puede optimizar el proceso.
+Evitan escaneos completos: Sin un índice, MongoDB tiene que revisar todos los documentos de una colección, lo que es costoso en términos de tiempo y recursos.
+
+Tipos de índices en MongoDB
+Índice único (Single Field Index): Indexa un solo campo. Ejemplo: { "nombre": 1 }.
+Índice compuesto (Compound Index): Indexa múltiples campos combinados. Ejemplo: { "nombre": 1, "edad": -1 }.
+Índice único (Unique Index): Impide que existan valores duplicados en un campo indexado.
+Índice geoespacial: Optimiza las consultas de datos de coordenadas.
+Índices de texto: Permiten búsquedas de texto complejas en documentos.
+Índices parciales: Aplican índices solo a un subconjunto de documentos.
+Índices multiclave: Indexan arrays, permitiendo búsquedas en cada valor de un array.
+
+¿Qué desventajas o cosas malas tienen?
+Consumen espacio en disco: Cada índice ocupa espacio adicional en el almacenamiento, lo que puede ser significativo en bases de datos grandes.
+Impactan el rendimiento de escritura: Insertar, actualizar o eliminar documentos en una colección con índices lleva más tiempo porque MongoDB debe actualizar los índices además de los datos.
+Mantenimiento adicional: Con índices mal diseñados o redundantes, las consultas pueden no ser óptimas y el sistema podría gastar recursos innecesarios.
+Complejidad en las consultas: Si hay demasiados índices, MongoDB debe decidir cuál usar, lo que podría generar un mal rendimiento si selecciona un índice menos eficiente.
+Fragmentación en sistemas distribuidos: En configuraciones como un clúster con sharding, los índices deben estar bien diseñados para evitar problemas de balanceo entre shards.
+Coste en tiempo de creación: Crear índices en colecciones muy grandes puede ser un proceso lento y consumir muchos recursos.
+
+¿Cuándo evitarlos o usarlos con cuidado?
+No indexar cada campo: Aunque podría parecer útil, indexar todo puede sobrecargar el sistema.
+Para datos en constante cambio: Si una colección tiene muchas operaciones de escritura y los índices no son esenciales, es mejor limitar su uso.
+Índices innecesarios: Evalúa si el índice mejora realmente la consulta. Usa explain() para analizar el plan de ejecución.
+
+ver tus indices:
+    -db.coleccion.getIndexes()
+
+Cuando creas una coleccion, MongoDB por defecto crea un indice para el campo _id, que evita que puedas insertar 2 veces el campo _id
+
+crear un indice:
+    -db.usuarios.createIndex({ nombre: 1 }) //te dara el name "nombre_1"
+    -db.catalog.createIndex({runtime: 1}, {name: "corrertiempo"}) //te dara el nombre corrertiempo
+
+Obviamente se tiene que hacer en una db que ya este creada y con documentos insertados que concuerden con el indice de lo que dices
+El índice optimiza las búsquedas en el campo nombre
+
+Puedes ver mas informacion con los comandos:
+db.catalog.find({runtime: {$gt: 100}}).explain()
+db.catalog.find({runtime: {$gt: 100}}).explain("executionStats") //muestra mas informacion como executionTimeMillis y totalDocsExamined.
+
+
+Algunas de las salidas de: db.catalog.find({runtime: {$gt: 100}}).explain("executionStats")
+
+stage: 'IXSCAN'
+stage: 'COLLSCAN'
+executionTimeMillis: X
+totalDocsExamined: X
+
+IXSCAN es cuando haces la consulta que tenga en Indice y COLLSCAN es un escaner general, la diferencia radica que IXSCAN escanea menos documento gracias al Indice y poreso se supone que su executionTimeMillis y totalDocsExamined tiene que ser mas bajo
+
+IXSCAN ocurre cuando MongoDB utiliza un índice que coincide con la consulta, reduciendo la cantidad de documentos examinados
+COLLSCAN ocurre cuando no hay un índice adecuado o cuando la consulta requiere escanear toda la colección
+
+La primera consulta que hagas con un Indice y te haga la busqueda con IXCAN te dara menos executionTimeMillis como ya dijimos pero llegara un momento en el que el Indice aprendera y el executionTimeMillis sera nulo(0), no tardara ni consumira memeria porque lo tiene asimilado
+
+
+Crear índice en campo de un documento embebido:
+    -db.usuarios.createIndex({ "main_character.character_name": 1 })
+
+    Es la misma teria de los campos embebidos de siempre    
+
+
+ELIMINAR ÍNDICES
+
+Lo primero saber que nombre tiene el Indice:
+    -db.catalog.getIndexes() //te mostrara el nombre en name
+
+Borrar:
+    -db.catalog.dropIndex("main_character.character_name_1") //documentos embebidos
+    { nIndexesWas: 5, ok: 1 }
+    -db.catalog.dropIndex("runtime_1") //campos unicos
+    { nIndexesWas: 4, ok: 1 }
+
+borrar sin utilizar las {}
+
+Que pasa si intentamos borrar el Indice del campo _id_?
+    -db.catalog.dropIndex("_id_")
+    MongoServerError[InvalidOptions]: cannot drop _id index
+
+    Pues que no deja    
+
+
+CREAR UN INDICE SOBRE TODO EL DOCUMENTO EMBEBIDO
+
+Imagina que tienes esto en la db:
+
+main_character: { character_name: 'Luke Skywalker', person_name: 'Mark Hamill' }
+
+El campo main_character que tiene mas campos, y quieres volver los campos: character_name y person_name
+
+NO LOS CREES ASI:
+    -db.catalog.createIndex({"main_character.noseque_name"})
+
+    Porque en este caso hay 2 pero imaginate que hay MUCHISSIMOS
+
+HAZ ESTO:
+    -db.catalog.createIndex({main_character})
+
+    Esa comanda ya cojera a los subdocumentos que cuelguen de main_character
+
+    Pero la comanda tendra que se asi:
+    -db.catalog.find({main_character: {character_name: 'Joe', person_name: 'Nicolas Cage' }})
+
+    NO asi:
+    -db.catalog.find({ "main_character.character_name": "Joe", "main_character.person_name": "Nicolas Cage" }).explain("executionStats")
+
+    El resultado sera el mismo pero la primera comanda si usara el Indice y la segunda no
+
+
+RESTRICCIONES DE ÍNDICE
+
+Las restricciones de índice en MongoDB son reglas que regulan cómo se crean y utilizan los índices para garantizar eficiencia y consistencia. Aquí tienes un resumen:
+
+Tamaño máximo de clave: Cada clave de índice no puede superar los 1024 bytes.
+Número máximo de índices: Una colección puede tener hasta 64 índices (incluido _id).
+Índices únicos: Garantizan que no haya valores duplicados en el campo indexado.
+Campos nulos o ausentes: Los índices permiten valores null o documentos sin el campo, pero en índices únicos solo puede haber uno.
+Índices compuestos: El orden de los campos es importante y debe respetarse en las consultas.
+Campos embebidos: Se indexan con la notación de puntos (campo.subcampo).
+Índices TTL: Solo funcionan en campos de tipo fecha y hay un único índice TTL por colección.
+Índices de texto: Solo se permite un índice de texto por colección.
+Índices geoespaciales: Los datos deben seguir formatos específicos ([x, y] o GeoJSON).
+Arrays: Los índices incluyen cada elemento del array como clave, pero los índices únicos no funcionan con valores duplicados dentro del array.
+
+
+ÍNDICES COMPUESTOS
+
+Los índices compuestos en MongoDB son índices que incluyen más de un campo de un documento en una colección
+
+Crear un Indice compuesto
+    -db.catalog.createIndex({campo1: 1, campo2: 1}) //es lo mismo que crea un Indice normal
+    -db.catalog.createIndex({campo1: 1, campo2: 1}, {name: campo1_campo2}) //Tambien puedes ponerle nombre
+
+
+ACLARACION*
+
+
+Al crear un Indice con un campo ej: db.catalog.createIndex({patatas: 1}) da lo mismo el orden porque solo hay 1 entonces si buscas por el campo patata lo buscara por el Indice, osea hara la busqueda por IXSCAN
+
+Pero al hacer un Indice compuesto, ej: db.catalog.createIndex({manzana: 1, platano: 1}) si en la busqueda de datos con find() no especificas eso 2 campos hara la busqueda con COLLSCAN, osea sin Indice
+
+    -db.catalog.findOne({manzana: "Apple", platano: "Banana"}) //Bien, estan manazana y platano en el orden correcto, IXCAN
+    -db.catalog.findOne({manzana: "Apple"}) Bien/Mal, al se el primer campo del Indice compuesto/falta platano, IXSCAN/COLLSCAN (Haciendo pruebas me dio IXSCAN, pueden las 2?)
+    -db.catalog.findOne({platano: "Banana"}) Mal, falta manzana, COLLSCAN
+    -db.catalog.findOne({platano: "Banana", manzana: "Apple"}) Mal, el orden correcto es primero platano y luego manzana, COLLSCAN
+
+
+ACLARACION*
+
+En una ocasion he hecho una prueba para ver si al poner el primer campo del Indice compuesto te daba IXSCAN y me lo dio,entonces probe esto
+
+Indice compuesto:
+
+{ v: 2, key: { budget: 1, revenue: 1 }, name: 'budget_revenue' } //esta primero budget y luego revenue
+
+Pues al hacer esta comanda: db.catalog.find({revenue: {$gt: 4300000}, budget: 1}).explain("executionStats") que deberia hacer COLLSCAN no?, pues da IXSCAN
+
+winningPlan: {
+      isCached: false,
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { budget: 1, revenue: 1 },
+        indexName: 'budget_revenue',
+        ETC...
+
+
+Yo se que se puede de izquierda a derecha pero creia que de derecha a izquierda no, para buenas practicas igualmente mejor hacerlo de izquierda a derecha        
+
+ChatGPT:
+
+    Tienes razón al pensar que, en general, los índices compuestos en MongoDB se deberían utilizar de izquierda a derecha, es decir, el orden de los campos en el índice es relevante para las consultas. Sin embargo, el comportamiento que has observado tiene que ver con la flexibilidad y la inteligencia del motor de consultas de MongoDB.
+
+    ¿Por qué ocurre esto?
+    MongoDB es lo suficientemente inteligente para realizar un IXSCAN en un índice compuesto incluso si no sigue el orden exacto de los campos de la consulta. Esto sucede por varias razones:
+
+    Condición de igualdad (budget: 1):
+
+    Aunque el campo revenue aparece primero en tu consulta, el motor de MongoDB ve que budget está siendo filtrado por un valor exacto (budget: 1). Esto es algo que MongoDB puede usar para avanzar rápidamente en el índice.
+    Dado que budget está al principio del índice, MongoDB puede encontrar rápidamente los documentos con budget: 1 y luego proceder a filtrar por revenue.
+    Flexibilidad del índice compuesto:
+
+    El índice compuesto { budget: 1, revenue: 1 } es bastante flexible y, aunque el orden de los campos en la consulta sea diferente, MongoDB puede todavía hacer uso de los dos campos del índice. Lo hace de la siguiente manera:
+    Primero filtra por budget, ya que es un valor exacto.
+    Luego utiliza el campo revenue con el operador $gt para encontrar documentos con valores mayores que 4,300,000.
+    IXSCAN incluso con el orden invertido: MongoDB es capaz de usar el índice para realizar un Index Scan (IXSCAN) incluso cuando los campos de la consulta no coinciden exactamente con el orden del índice, siempre que la condición de filtrado permita la utilización eficiente del índice.
+
+    ¿Es una buena práctica usar este comportamiento?
+    Aunque MongoDB sea capaz de realizar un IXSCAN incluso cuando los campos no siguen estrictamente el orden del índice, la mejor práctica sigue siendo diseñar los índices y las consultas para que coincidan en el orden de los campos. Esto es importante por varias razones:
+
+    Rendimiento óptimo:
+
+    Si sigues el orden natural del índice, el motor de consultas puede ser más eficiente. Forzar a MongoDB a "usar" el índice en orden inverso puede generar un mayor costo de ejecución, aunque en este caso no sea tan evidente.
+    Previsibilidad:
+
+    Si tus índices siempre siguen el mismo patrón (de izquierda a derecha), puedes predecir mejor cómo se comportará MongoDB con diferentes consultas.
+    Recomendaciones:
+    Para mantener buenas prácticas, es recomendable que reordenes las consultas para que coincidan con el orden del índice, y además el índice debería ser diseñado con las consultas más comunes en mente.
+    Si frecuentemente haces consultas con revenue primero, entonces sería más adecuado crear un índice compuesto { revenue: 1, budget: 1 }.
+    En resumen, MongoDB es muy flexible y hace un uso bastante inteligente de los índices, pero para obtener el mejor rendimiento y coherencia en tus aplicaciones, es ideal mantener un diseño de índices que coincida con el patrón de tus consultas.
+
+
+
+USANDO ÍNDICES PARA ORDENAR
+
+Ya que tenemos los indices podemos hacer busquedas con el metodo find(), eso tambien incluye al .sort()
+
+Entonces podemos hacer:
+    -db.catalog.find().sort({budget: 1, revenue: 1}).explain("executionStats") //recordar que para que salga el IXSCAN tenemos que tener los dos del indice compuesto en el orden que toca(tambien se puede hacer con un indice de un solo campo), saldra IXSCAN
+
+Si los filtrados por descendentes, osea asi:
+    -db.catalog.find().sort({budget: -1, revenue: -1}).explain("executionStats") //sera un COLLSCAN
+
+    Porque el Indice es ascendente:
+    -{ v: 2, key: { budget: 1, revenue: 1 }, name: 'budget_revenue' }
+
+
+Si ponemos solo el campo "budget" tambien sera IXSCAN porque es el primero del indice a la izquierda pero si pones solo al "revenue" sera COLLSCAN, algo que contradice segun la pruebas de la linea 1479, para buenas practicas siempre de izquierda a derecha
+
+
+
+
+INDICES TIME-TO-LIVE(TTL)
+
+Solo funcionan con campos tipo fecha, este tipo de índice es útil para manejar datos que tienen un tiempo de vida limitado, como sesiones de usuario, logs temporales o cachés.
+
+Crear un Indice TTL:
+    -db.session.createIndex({fecha: 1}, {expireAfterSeconds: 5})//puedes ponerle nombre tambien, {name: "expired", expireAfterSeconds: 5}
+    -{ v: 2, key: { fecha: 1 }, name: 'fecha_1', expireAfterSeconds: 5 }//el Indice
+    -db.session.insertOne({name: "Manolo", fecha: new Date()})
+
+En 5 segundos el documento de Manolo se eliminara
+
+
+
+
+INDICES ÚNICOS
+
+los índices únicos son un tipo especial de índice que asegura que los valores en un campo (o conjunto de campos) sean únicos en todos los documentos de una colección
+
+Es como el _id, que no deja repetirse, un momento, os acordais del Indice que crea automaticamente MongoDB al crear una coleccion?, este: { v: 2, key: { _id: 1 }, name: '_id_' }, y que sale un error cuando intenetamos poner 2 iguales, pues ese es un Indice unico
+
+crear un indice unico:
+    -db.session.createIndex({email: 1}, {name: "email", unique: true}) //tiene que ser unico
+    email
+    -db.session.insertOne({name: "Manolo", email: "manolo@gmail.com"})
+    {
+    acknowledged: true,
+    insertedId: ObjectId('678f7c7a54180dfd6e79a1b9')
+    }
+    -db.session.find()
+    [
+    {
+        _id: ObjectId('678f7c7a54180dfd6e79a1b9'),
+        name: 'Manolo',
+        email: 'manolo@gmail.com'
+    }
+    ]
+    -db.session.insertOne({name: "Manolo", email: "manolo@gmail.com"})
+    MongoServerError: E11000 duplicate key error collection: movies.session index: email dup key: { email: "manolo@gmail.com" }
+    -db.session.insertOne({name: "Manolo", email: "manoloelegante@gmail.com"})
+    {
+    acknowledged: true,
+    insertedId: ObjectId('678f7c9f54180dfd6e79a1bb')
+    }
+    movies> db.session.find()
+    [
+    {
+        _id: ObjectId('678f7c7a54180dfd6e79a1b9'),
+        name: 'Manolo',
+        email: 'manolo@gmail.com'
+    },
+    {
+        _id: ObjectId('678f7c9f54180dfd6e79a1bb'),
+        name: 'Manolo',
+        email: 'manoloelegante@gmail.com'
+    }
+    ]
+
+
+
+
+ÍNDICES PARCIALES    
+
+los índices parciales son una funcionalidad avanzada que permite crear índices sobre un subconjunto de los documentos en una colección. Esto significa que solo los documentos que cumplen una condición específica serán indexados.
+
+crear un indice parcial_
+    -db.catalog.createIndex({vote_average: 1}, {name: "vote_average", partialFilterExpression: {vote_average: {$eq: 8}}}) //nos buscara por IXSCAN cuando preguntemos si el campo "vote_average" es igual a 8
+    -v: 2, key: { vote_average: 1 }, name: 'vote_average', partialFilterExpression: { vote_average: { '$eq': 8 } }
+
+Ojo que tambien he creado el siguiente indice parcial:
+    -v: 2, key: { vote_average: 1 }, name: 'vote_average1', partialFilterExpression: { vote_average: 4 } //el numero es diferente si pero este no tiene el $eq, las 2 comandas hazen exactamente lo mismo pero de manera diferente y con un numero diferente
+
+Vamos a probar:
+    -db.catalog.find({vote_average: {$eq: 8}}).explain("executionStats") //IXSCAN, es el de la linea 1620
+    -db.catalog.find({vote_average: 8}).explain("executionStats") //TAMBIEN DA IXSCAN, este me ha sorprendido la verdad, claro, esque por detras ha hecho un parsedQuery: { vote_average: { '$eq': 8 } }, entonces claro, concuerda con el indice
+
+
+Tambien se puede crear un Índice parcial compuesto
+    -db.catalog.createIndex({title: 1, runtime: 1}, {partialFilterExpression: {title: {$exists: true}}})//mientras el campo title exista, las consultas sera IXSCAN
+    -db.catalog.find({title: {$regex: "^S"}}).explain()//IXSCAN
+
+    Un truquito muy guarro es el {partialFilterExpression: {campo: {$exists: true}}} porque da igual que operadores le metas en la consulta, ejemplo: si en el indice tienes el $exists pero en la consulta le pones un $gt sera un IXSCAN porque el valor existe
+
+    El operador $gt está actuando como un filtro adicional, pero lo que importa aquí es que el campo campo existe en los documentos indexados.
+
+    El truco del índice parcial con $exists: true permite que cualquier consulta que busque el campo indexado (incluso con operadores como $gt, $lt, etc.) pueda aprovechar el índice, ya que garantiza que el campo esté presente.
+    
+    Esto se traduce en un IXSCAN (Index Scan) eficiente, incluso si la consulta usa operadores como $gt, que normalmente no se beneficiarían de un índice si el filtro del índice no estuviera alineado con la consulta.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
