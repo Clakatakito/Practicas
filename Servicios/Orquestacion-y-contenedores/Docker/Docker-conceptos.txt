@@ -364,11 +364,11 @@ CONTAINER ID   NAME              CPU %     MEM USAGE / LIMIT    MEM %     NET I/
 3b5968946bfb   apacheconlimite   0.00%     10.79MiB / 12MiB     89.91%    746B / 0B     0B / 0B     82
 c4fb228fbece   apachesinlimite   0.00%     24.1MiB / 7.692GiB   0.31%     1.05kB / 0B   0B / 0B     82
 
-Vemos que que el apacheconlimite tiene el limite de 12m porque se lo posimos en "docker run -it --name apacheconlimite -d -m 12m httpd",
+Vemos que que el apacheconlimite tiene el limite de 12m porque se lo pusimos en "docker run -it --name apacheconlimite -d -m 12m httpd",
 poreso tiene un % mas alto que el otro, aparte de ello por defecto tambien viene con swap que es una parte del disco duro que el sistema usa como memoria virtual cuando la RAM está llena.
 Es más lento que la RAM porque depende del almacenamiento, pero evita que el sistema se quede sin memoria por completo.
 
-Por defecto aprte del -m 12(limite de 12m) tambien te asigna 12m de momoria swap por si te pasas del limite establecido no detener o matar al contenedor
+Por defecto aprte del -m 12(limite de 12m) tambien te asigna 12m de memoria swap por si te pasas del limite establecido no detener o matar al contenedor
 
 Por defecto, también permite usar 12 MB adicionales de swap (RAM + swap = 24 MB).
 
