@@ -1636,15 +1636,317 @@ Tambien se puede crear un Índice parcial compuesto
     El operador $gt está actuando como un filtro adicional, pero lo que importa aquí es que el campo campo existe en los documentos indexados.
 
     El truco del índice parcial con $exists: true permite que cualquier consulta que busque el campo indexado (incluso con operadores como $gt, $lt, etc.) pueda aprovechar el índice, ya que garantiza que el campo esté presente.
-    
+
     Esto se traduce en un IXSCAN (Index Scan) eficiente, incluso si la consulta usa operadores como $gt, que normalmente no se beneficiarían de un índice si el filtro del índice no estuviera alineado con la consulta.
 
 
+Aparte del metodo .explain("executionStats") y el .explain() esta el .explain("allPlansExecution") que describe la ejecucion del plan ganador y las estadisticas de otros planes candidatos
+
+
+
+ÍNDICES MULTI-key
+
+
+Un índice multi-key en MongoDB es un tipo especial de índice que se utiliza para campos que contienen arrays. Este índice permite que MongoDB indexe cada elemento individual del array en lugar de tratar el array como un único valor, no hay que especificar nada en la creacion del índice
+
+
+Restricciones importantes:
+
+No se pueden crear índices multi-key en campos que son arrays y contienen documentos anidados con otros arrays.
+Solo se permite un índice multi-key por consulta.
+Si el índice multi-key está compuesto (más de un campo), uno de los campos puede ser un array, pero no ambos.
+
+
+Dentro de eso es simplemente un índice mas, pero MongoDB se lo pone a los arrays, MongoDB creará índices individuales para cada valor dentro de la array
+
+Y ya solo es hacer la busqueda: db.catalog.find({language: {$all: ["English", "French"]}}).explain()
+
+Crear el indice es lo mismo de siempre, mongodb vera si es de tipo array o mo
+
+
+
+ÍNDICES DE TEXTO:
+
+Los índices de texto en MongoDB son un tipo de índice diseñado para facilitar búsquedas rápidas y eficientes en contenido de tipo texto dentro de tus documentos. Permiten realizar consultas como búsquedas por palabras clave o frases dentro de campos específicos.
+
+Eliminar palabras comunes (como "el", "de", "y" en español).
+
+Los indices de textos son lo mismo que el $regex buscaras la palabra y si conicide con el resultado de un documento que este indexado con un indice de texto tendras tu IXSCAN
+
+MongoDB, solo se puede crear un índice de texto por colección. Esto significa que no puedes tener múltiples índices de texto independientes dentro de la misma colección. Sin embargo, puedes incluir varios campos dentro del mismo índice de texto.
+
+Tambien se puede hacer un indice de texto combinado, con mas de 1 campo vaya
+
+
+Crear un indice de tipo texto:
+    -db.prueba.createIndex({descripcion: "text"}, {name: "buzca_buzca"})
+    -db.prueba.getIndexes() //luego veremos como cambiar algunos datos
+    [
+    { v: 2, key: { _id: 1 }, name: '_id_' },
+    {
+        v: 2,
+        key: { _fts: 'text', _ftsx: 1 },
+        name: 'buzca_buzca',
+        weights: { descripcion: 1 },
+        default_language: 'english',
+        language_override: 'language',
+        textIndexVersion: 3
+    }
+    ]
+
+Mis 2 documentos:
+    [
+    {
+        _id: ObjectId('6790cb887a41c5fc6d79a1b6'),
+        nombre: 'Raton',
+        descripcion: 'Es un buen raton para jugar al Fortnite, pero no al Lego Fortnite'
+    },
+    {
+        _id: ObjectId('6790cb887a41c5fc6d79a1b7'),
+        nombre: 'manta',
+        descripcion: 'Es una buena manta para taparse el ojete durante el inviero que hace frio'
+    }
+    ]
+
+    -db.prueba.find({$text: {$search: "Fortnite"}})//No usamos el campo descripción porque, como se menciona en la línea 1676, solo se puede tener un índice de texto por colección. El índice ya se encarga de buscar las palabras coincidentes en los campos definidos, por lo que no es necesario buscar directamente en el campo.
+    [
+    {
+        _id: ObjectId('6790cb887a41c5fc6d79a1b6'),
+        nombre: 'Raton',
+        descripcion: 'Es un buen raton para jugar al Fortnite, pero no al Lego Fortnite'
+    }
+    ]
+
+Busca palabras por separado:
+    -db.prueba.find({$text: {$search: "ojete Fortnite"}})//busca un documento que coincida con ojete y otro con Fortnite, no busca un documento donde esten esas 2 palabras juntas
+
+Si quieres que si que busque una concatenacion de palabras hay que usar \
+    -db.prueba.find({$text: {$search: "\"buena manta\""}})  
+
+
+
+ÍNDICE DE TEXTO - SCORING    
+
+el scoring (o puntuación) es un valor que indica la relevancia de un documento en los resultados de una búsqueda de texto. Este puntaje se calcula automáticamente cuando utilizas un índice de texto con una consulta $text.
+
+Cómo funciona el scoring
+El scoring evalúa qué tan bien un documento coincide con los términos de búsqueda, considerando aspectos como:
+
+Frecuencia: Los términos más frecuentes en un documento tienen mayor peso.
+
+Coincidencias exactas: Una frase completa entre comillas dobles ("termino exacto") tiene mayor puntuación.
+
+Se usa asi:
+    -db.prueba.find( { $text: { $search: "Fortnite manta //palabras de tu documento" } }, { score: { $meta: "textScore" } } ).sort({ score: { $meta: "textScore" } })
+
+A mi me ha dado esto:
+
+    [
+        {
+            _id: ObjectId('6790cb887a41c5fc6d79a1b6'),
+            nombre: 'Raton',
+            descripcion: 'Es un buen raton para jugar al Fortnite, pero no al Lego Fortnite',
+            score: 0.875
+        },
+        {
+            _id: ObjectId('6790cb887a41c5fc6d79a1b7'),
+            nombre: 'manta',
+            descripcion: 'Es una buena manta para taparse el ojete durante el inviero que hace frio',
+            score: 0.5357142857142857
+        }
+    ]
+
+Factores que influyen en el scoring:
+
+Frecuencia de los términos de búsqueda:
+Si un término aparece más veces en un documento, este será considerado más relevante.
+Por ejemplo, si la palabra "ratón" aparece dos veces en un documento y solo una vez en otro, el primero obtendrá un puntaje más alto.
+
+Posición del término:
+Los términos que aparecen en campos con mayor peso (weights) definidos en el índice de texto tendrán mayor impacto en el puntaje.
+Si no se definen pesos, MongoDB asigna el mismo peso a todos los campos del índice.
+
+Coincidencia exacta:
+Si el término de búsqueda coincide completamente con palabras del documento (o con frases exactas usando comillas dobles), el score será más alto.
+
+Longitud del texto:
+Documentos con textos más cortos tienden a obtener un puntaje más alto si contienen los términos de búsqueda, ya que la densidad de coincidencias es mayor.
+Consulta avanzada:
+
+MongoDB permite realizar búsquedas específicas como frases exactas, exclusión de términos o combinaciones. Estas pueden influir en el cálculo del score.
+   
 
 
 
 
+ÍNDICE DE TEXTO - EXCLUIR PALABRAS
 
+Tan facil como:
+    -db.prueba.find({$text: {$search: "Es -Fortnite"}})//En las 2 descripciones esta la palabra "Es", tendrian que salir los 2 documento pero he excluido el documento que tenga la palabra "Fortnite"
+
+
+
+ÍNDICE DE TEXTO - ESPECIFICAR UN IDIOMA Y WEIGHTS
+
+Ahora lo explico tranquilos:
+    -db.prueba.createIndex({name: "text", descripcion: "text"}, {name: "name_descripcion-text", default_language: "spanish", weights: {name: 1, descripcion: 10}})
+
+    Voy a explicar solo lo nuevo: en la linea 1683 os dije que se podian cambia mas cosas, el lenguaje predeterminado es el ingles pero lo podemos cambiar como se ve, luego el weight es que asigna un peso diferente a cada campo del índice(lo del: { score: { $meta: "textScore" } })
+
+
+
+ÍNDICES GEOESPACIALES
+
+Los índices geoespaciales en MongoDB son herramientas especializadas para trabajar con datos relacionados con la geolocalización, como coordenadas, ubicaciones o formas geométricas. Te permiten realizar consultas espaciales eficientes, como buscar puntos cercanos, dentro de un área específica o en un rango determinado.
+
+Crear un campo geoespacial:
+    -db.sitios.insertOne({name: "Sagrada Familia", lugar: {type: "Point", coordinates: [2.17447, 41.40356]}})//dentro de la matriz se pone primero la longitud y luego la latitud
+    Es importante entender tambien que usamos los indices geoespaciales para algo mas que simplemente mostrar coordenadas, claro que podrias usar:
+    -db.sitios.insertOne({name: "Sagrada Familia", lugar: {coordinates: [2.17447, 41.40356]}})//porque aqui no estas haciendo nada geoespacial, luego no podras usar ciertos operadores para aprovechas los indices geoespaciales
+
+
+Crear un indice geoespacial
+    -db.sitios.createIndex({lugar: "2dsphere"})
+
+El indice:
+    -{ v: 2, key: { lugar: '2dsphere' }, name: 'lugar_2dsphere', '2dsphereIndexVersion': 3 }
+
+Comanda para ver:
+    -db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [2.17447, 41.40356]}}}})    
+
+*ACLARACION
+
+Hay que crear primero el indice geoespacial antes de haxer la buscaqueda, aunque el campo sea tipo geospacial si no tenemos un indice geoespacial no funcionara
+
+Vale, una vez tengas tu sitio o sitios vamos a hacer esto para que se entienda:
+
+yo tengo esto, son ligeramente diferentes en las coordenadas si hos fijais:
+    [
+        {
+            _id: ObjectId('67921af9a7fdaf608279a1b6'),
+            name: 'Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17447, 41.40356 ] }
+        },
+        {
+            _id: ObjectId('679225e5a7fdaf608279a1b8'),
+            name: 'Metro Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17462, 41.40446 ] }
+        }
+    ]
+
+Y bien yo puedo poner esto:
+    -db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}}}})
+    [
+        {
+            _id: ObjectId('67921af9a7fdaf608279a1b6'),
+            name: 'Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17447, 41.40356 ] }
+        },
+        {
+            _id: ObjectId('679225e5a7fdaf608279a1b8'),
+            name: 'Metro Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17462, 41.40446 ] }
+        }
+    ]  
+
+Si hos fijais en las coordenadas son totalmente inventadas por mi, ni se acercan a las que son en realidad, entonces porque salen?, bien, las coordenadas [11.111, 2.345] es donde estas en realidad, y te empareja con los resultados porque no tenemos filto, ahora mismo ha buscado los puntos mas cercanos a ti, en un area sin filtro, osea todo el globo terraqueo, poreso estan los operados $masDistance y $minDistance
+
+$maxDistance: Se utiliza para limitar los resultados de una consulta geoespacial a aquellos documentos que estén dentro de una distancia máxima específica desde un punto de referencia.
+
+Ahora si probamos con el operador $maxDistance:
+    -sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 1000}}}) // 1KM
+
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 17000}}}) // 17 KM
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 170000}}}) // 170 KM
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 1700000}}}) // 1.700 KM
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 17000000}}}) // 17.000 km
+    [
+        {
+            _id: ObjectId('67921af9a7fdaf608279a1b6'),
+            name: 'Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17447, 41.40356 ] }
+        },
+        {
+            _id: ObjectId('679225e5a7fdaf608279a1b8'),
+            name: 'Metro Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17462, 41.40446 ] }
+        }
+    ]
+
+
+Porcierto en la linea 1866 que sepais que ese rango es lo suficientemente grande para incluir cualquier punto en la superficie terrestre, ya que el diámetro de la Tierra es de aproximadamente 12,742 km, pero se entiende
+
+
+AREAS
+
+Tambien puedes hacer areas y que te enseñe todos los dosumentos que esten dentro de esa area
+
+Te recomiendo hacer los puntos y meterlos en variables, como esto es un archivo txt no puedo poner imagines asique usar la imaginacion
+
+
+
+            punto1                                                                                                  punto4
+
+                                                punto_interes-1
+                                                                AREA
+                                                                                                                                        punto_interes-3
+                                                                                    punto_interes-2
+                punto2                                                                              punto3
+
+
+Vale, imaginaos ese mapa y cojer la longitud y latitud de cada uno de los puntos y meterlo en variables o constantes y quedaria una comanda tal que asi:
+    -db.sitios.find({lugar: {$geoWithin: {$geometry: {type: "Polygon", coordinates: [ [punto1, punto2, punto3, punto4, punto1] ]}}}}) //si esta bien saldran los punto_interes menos el "punto_interes-3"
+
+    No seais bobo y vayáis de punto1 a punto3 o de punto2 a punto4, porcierto el ultimo punto en la matriz, el punto1, se repite si, pero es porque hay que cerrar el area
+
+
+RADIO
+
+Tambien puedes definir un area y que te enseñe los documentos que esten en ese radio, la comanda:
+    -db.sitios.find({lugar: {$geoWithin: {$centerSphere: [ [2.17318, 41.40401 //donde se encuentra el user o lo que sea], 1 / 6378.1 ] }}}) // el 1 / 6378.1 tan raro que es, es para conseguir los km, en ente caso radio de un 1 km
+
+
+Area2
+
+tambien podemos crear un documento que tenga el area anterior, lo que queremos ahora es que al saber las coordenadas de algo o alguien nos diga en que zona esta, el anterior nos decia que habia en esa zona, nosotros ahora queremos saber en que area esta
+
+Poreso podemos crear un campo area
+    -db.area.insertOne({name "barrio", area: {type: "Polygon", coordinates: [ [punto1, punto2, punto3, punto4, punto1] ]}})
+    Si no tenemos variables se puede hacer de esta manera:
+    -db.area.insertOne({name: "barrio", area: {type: "Polygon", coordinates: [[[longitud, latitud], [longitud, latitud], [longitud, latitud], [longitud, latitud], [longitud, latitud]]]}})
+
+
+
+Luego creamos en indice geoespacial:
+    -db.sitios.createIndex({area: "2dsphere"})
+
+Y ahora buscamos:
+    -db.sitios.find({area: {$geoIntersects: {$geometry: {type: "Point", coordinates: [LongitudDeLoQueQuieroBuscar, LatitudDeLoQueQuieroBuscar]}}}})    
+
+
+Diferencias entre: AREA(linea 1884) y AREA2(linea 1913)
+
+
+1. Primer enfoque (búsqueda de elementos dentro de un área):
+Este enfoque se usa cuando tienes un polígono que define un área y deseas consultar qué documentos están dentro de esa área. Utilizas $geoWithin para encontrar los documentos dentro de un polígono dado.
+
+Objetivo: Buscar documentos dentro de un área específica definida por el polígono.
+
+
+2. Segundo enfoque (determinar en qué área está un punto):
+En este caso, lo que haces es consultar en qué área o zona está un punto dado. Si tienes un conjunto de áreas definidas, usas $geoIntersects para saber si un punto dado se encuentra dentro de algún área o polígono. En este caso, la búsqueda se hace en el área, no dentro de ella.
+
+Objetivo: Determinar en qué área o zona se encuentra un punto específico.
+Operador utilizado: $geoIntersects se utiliza para ver si un punto intersecta con cualquier polígono.
+
+
+Resumen de diferencias:
+$geoWithin: Se utiliza cuando quieres encontrar elementos dentro de un área geoespacial (p. ej., encontrar todos los sitios dentro de un barrio).
+$geoIntersects: Se usa para determinar si un punto está dentro de un área (p. ej., saber en qué barrio se encuentra una coordenada específica).
 
 
 
