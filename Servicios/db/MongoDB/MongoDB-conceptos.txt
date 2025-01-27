@@ -431,7 +431,7 @@ Un error de duplicidad por parte del "_id: 1" que intentamos insertar, pero que 
 
 UPDATE:
 
-Vamos a ponerle una nueva clave llamada "etiqueta" al primero que se llame "Alex"
+Vamos a ponerle una nueva clave llamada "etiqueta" a los que se llamen "Alex"
 
     -NuevaBase> db.usuarios.find()
     [
@@ -547,48 +547,70 @@ mongoimport: la opcion de importar
 
 OPERADORES
 
-$eq: Igual que - db.LosProductos.find({productName: {$eq: "Chai"}}) // es lo mismo que - db.LosProductos.find({productName: "Chai"})
+$eq: Igual que   
+    -db.LosProductos.find({productName: {$eq: "Chai"}})    
+    Es lo mismo que 
+    -db.LosProductos.find({productName: "Chai"})
 
-$ne: Diferente de - db.LosProductos.find({branchOffice: {$ne: "Florida"}})
+$ne: Diferente de 
+    -db.LosProductos.find({branchOffice: {$ne: "Florida"}})
 
-$gt: Mayor que - db.LosProductos.find({unitsInStock: { $gt: 43}}) //mayor que 43, el 43 no incluido
+$gt: Mayor que 
+    -db.LosProductos.find({unitsInStock: { $gt: 43}}) //mayor que 43, el 43 no incluido
 
-$gte: Mayor o igual que - db.LosProductos.find({unitsInStock: { $gte: 43}}) //mayor o igual a 43, 43 incluido
+$gte: Mayor o igual que   
+    -db.LosProductos.find({unitsInStock: { $gte: 43}}) //mayor o igual a 43, 43 incluido
 
-$lt: Menor que - db.LosProductos.find({unitsInStock: { $lt: 43}}) //menor que 43, 43 no incluido
+$lt: Menor que    
+    -db.LosProductos.find({unitsInStock: { $lt: 43}}) //menor que 43, 43 no incluido
 
-$lte: Menor o igual que - db.LosProductos.find({unitsInStock: { $lte: 43}}) //menor o igual a 43, 43 incluido
+$lte: Menor o igual que 
+    -db.LosProductos.find({unitsInStock: { $lte: 43}}) //menor o igual a 43, 43 incluido
 
-$in: Valor en una matriz - db.LosProductos.find({branchOffice: {$in: ["Florida"]}}) // es lo mismo que - db.LosProductos.find({branchOffice: "Florida"})
+$in: Valor en una matriz 
+    -db.LosProductos.find({branchOffice: {$in: ["Florida"]}}) // es lo mismo que - db.LosProductos.find({branchOffice: "Florida"})
 
-$nin: Valor no está en una matriz/Array - db.LosProductos.find({branchOffice: {$nin: ["Florida", "California", "Ohio"]}})
+$nin: Valor no está en una matriz/Array    
+    -db.LosProductos.find({branchOffice: {$nin: ["Florida", "California", "Ohio"]}})
 
 
 OPERADORES LOGICOS
 
-$and: une dos o mas valores si son verdaderos - db.LosProductos.find({ $and: [{ "discountDay.Monday": { $gt: 0.25 } }, { branchOffice: "Florida" }] }, { "discountDay.Monday": 1, branchOffice: 1 }) //es lo mismo que db.LosProductos.find({ "discountDay.Monday": { $gt: 0.25 }, branchOffice: "Florida" }, { "discountDay.Monday": 1, branchOffice: 1 }) //esta buscando los documentos que el discountDay.Monday sera mayor a 0.25 y que este en la sucursal de Florida, junto a unas proyecciones
+$and: Une dos o mas valores si son verdaderos 
+    -db.LosProductos.find({ $and: [{ "discountDay.Monday": { $gt: 0.25 } }, { branchOffice: "Florida" }] }, { "discountDay.Monday": 1, branchOffice: 1 }) 
+    Es lo mismo que 
+    -db.LosProductos.find({ "discountDay.Monday": { $gt: 0.25 }, branchOffice: "Florida" }, { "discountDay.Monday": 1, branchOffice: 1 }) //esta buscando los documentos que el discountDay.Monday sera mayor a 0.25 y que este en la sucursal de Florida, junto a unas proyecciones, CON ESTE METODO NO PODRAS BUSCAR A MAS DE 2, que la comanda de arriba si podras buscar mas de 2
 
-$or: une dos valores si alguno de ellos es verdadero - db.LosProductos.find({$or: [{"categories.categoryName": {$eq: "Confections"}}, {"categories.categoryName": {$eq: "Produce"}}]})
+$or: Une dos valores si alguno de ellos es verdadero 
+    -db.LosProductos.find({$or: [{"categories.categoryName": {$eq: "Confections"}}, {"categories.categoryName": {$eq: "Produce"}}]}) //Busca documentos donde el nombre de la caterogia sea "Confections" o "Produce"
 
-$not: niega la condición dada, selecciona documentos donde no se cumpla - db.LosProductos.find({branchOffice: {$not: {$in: ["California", "Misuri"]}}},{branchOffice: 1}) 
+$not: Niega la condición dada, selecciona documentos donde no se cumpla 
+    -db.LosProductos.find({branchOffice: {$not: {$in: ["California", "Misuri"]}}},{branchOffice: 1}) //Muestra los documneto que no esten ni "California" ni "Misuri", mas una proyeccion
 
-$nor: selecciona documentos donde NINGUNA de las condiciones sea verdadera(basicamente en un $and pero los 2 valores tienen que ser falsos, lo contrario del $and) - db.LosProductos.find({ $nor: [{ branchOffice: "California" }, { branchOffice: "Misuri" }] }, { branchOffice: 1 })
+$nor: Selecciona documentos donde NINGUNA de las condiciones sea verdadera(basicamente en un $and pero los 2 o mas valores tienen que ser falsos, lo contrario del $and) 
+    -db.LosProductos.find({ $nor: [{ branchOffice: "California" }, { branchOffice: "Misuri" }] }, { branchOffice: 1 })
 
 
 OPERACIONES DE CONSULTA
 
-$exist: Busca en un documento si exixte/o no la clave que queramos - db.empleados.find({ age: {$exists: true}}) // tambien puedes poner false para buscar por los que no existan(he hecho esto por diversion: db.empleados.find({ age: {$not: {$exists: true}}})), es lo mismo que db.empleados.find({ age: {$exists: false}})
+$exist: Busca en un documento si exixte/o no la clave que queramos 
+    -db.empleados.find({ age: {$exists: true}}) 
+    Tambien puedes poner false para buscar por los que no existan(he hecho esto por diversion): 
+    -db.empleados.find({ age: {$not: {$exists: true}}})) //Es lo mismo que db.empleados.find({ age: {$exists: false}})
 
-$type: verifica el tipo de dato - db.empleados.find({homePhone: {$type: "number"}}), puedes hacer que filtre X2 tambien: db.empleados.find({homePhone: {$type: ["number", "string"]}})
+$type: verifica el tipo de dato 
+    -db.empleados.find({homePhone: {$type: "number"}}) 
+    Puedes hacer que filtre X2 o mas tambien: 
+    -db.empleados.find({homePhone: {$type: ["number", "string"]}})
 
-ACLARACION
+*ACLARACION
 
-Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y "db.empleados.find({ age: {$exists: true, $gt: 35}})" hagan lo mismo yo te recomiendo el segundo porque como ya hemos dicho cuando hacemos un db.empleados.find({},{}) es igual al $and
+Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y "db.empleados.find({ age: {$exists: true, $gt: 35}})" hagan lo mismo yo te recomiendo el segundo porque como ya hemos dicho cuando hacemos un db.empleados.find({campo: "valor", otrocampo: "otrovalor"}) es igual al $and
 
 
 OPERADORES DE EVALUACION
 
-$regex: busca patrones en cadenas de texto usando expresiones regulares 
+$regex: Busca patrones en cadenas de texto usando expresiones regulares 
     -db.empleados.find({description: {$regex: "travel"}}) //salen todos los documentos que tengan la palabra "travel" en el campo de description
     -db.empleados.find({title: {$regex: "support"}})
 
@@ -606,23 +628,29 @@ $expr: Permite usar expresiones que comparan valores de campos o realizan cálcu
 
 $mod: No se muy bien lo que hace 
     -db.empleados.find({ age: { $mod: [2, 0] } }) //devuelve los documento que age sea par, solo coje el entero, un $mod: [2.66, 0] NO, cojeria solo el primer numero, el 2
+    -db.empleados.find({$expr: {$lt: ["$delay", "$tolerance"]}}) //estara devolviendo los documentos que $delay no sea mayor a $tolerance  //tambien puedes usar $eq, $gt, $ne, etc...         
+
+$mod: No se muy bien lo que hace 
+    -db.empleados.find({ age: { $mod: [2, 0] } }) //devuelve los documento que age sea par, solo coje el entero, un $mod: [2.66, 0] NO, cojeria solo el primero, el 2
 
 
 OPERACIONES DE ARRAYS
 
-$all: verificar si un campo de tipo arreglo contiene todos los valores especificados 
+$all: Verificar si un campo de tipo arreglo contiene todos los valores especificados 
     -db.empleados.find({state: {$all: ["Florida", "Ohio"]}}) 
-    //igual que: 
+    Igual que: 
     -db.empleados.find({$and: [{state: {$eq: "Florida"}}, {state: {$eq: "Ohio"}}]})
+    NO IGUAL QUE:
+    -db.empleados.find({state: ["Florida", "Ohio"]}) //Porque eso buscara un documento que en ese mismo array este primero "Florida", y luego "Ohio"
 
 $elemMatch: coincide con documentos que contienen un campo de matriz con al menos un elemento que coincide con todos los criterios de consulta especificados. 
     -db.empleados.find({hobbies: {$elemMatch: {title: "Dance"} }}) 
-    //tambien: 
+    Tambien: 
     -db.empleados.find({hobbies: {$elemMatch: {title: "Voley", frequency: {$gte: 3}}}})
 
 $size: verificar la cantidad de elementos en un arreglo/array 
     -db.empleados.find({hobbies: {$size: 2}}) 
-    //tambein: 
+    Tambien: 
     -db.empleados.find({state: {$size: 5}})
 
 
@@ -670,13 +698,16 @@ $slice: itar la cantidad de elementos devueltos de un array en los documentos re
 
 PROFUNDIZANDO CON OPERACIONES UPDATE
 
--replaceOne(): reemplaza completamente un documento existente en una colección con un nuevo documento. Es útil cuando quieres modificar un documento entero en lugar de actualizar campos específicos - db.movies.replaceOne({title: 'Toy Story 3'}, {movieID: 'mv06', title: "Toy Story 3", runtime: 103, voteAverage: 7.6, dateRelease: "2015-08-15", dateExpired: "2015-11-15", isView: true}) // es util por si quieres cambiar un solo documento, no pequeñas cosas de el
+-replaceOne(): Reemplaza completamente un documento existente en una colección con un nuevo documento. Es útil cuando quieres modificar un documento entero en lugar de actualizar campos específicos 
+    -db.movies.replaceOne({title: 'Toy Story 3'}, {movieID: 'mv06', title: "Toy Story 3", runtime: 103, voteAverage: 7.6, dateRelease: "2015-08-15", dateExpired: "2015-11-15", isView: true}) // es util por si quieres cambiar un solo documento, no pequeñas cosas de el
 
--updateOne(): actualiza el primer documento que cumpla con un filtro específico, aplicando los cambios definidos, incluso si no existe el campo que quieras añadir - db.movies.updateOne({title: "Toy Story 3"}, {$set: {voteAverage: 64}}) // si existiera el campo voteAverage lo hubiera cambiado a 64, sino existia lo crea y le da el valor de 64
+-updateOne(): Actualiza el primer documento que cumpla con un filtro específico, aplicando los cambios definidos, incluso si no existe el campo que quieras añadir 
+    -db.movies.updateOne({title: "Toy Story 3"}, {$set: {voteAverage: 64}}) // si existiera el campo voteAverage lo hubiera cambiado a 64, sino existia lo crea y le da el valor de 64, si hubiera otro campo de title: "Toy Story 3", osea 2 mismo        documentos con title: "Toy Story 3" solo actualizaria el primero que encuentre 
 
--updateMany(): Lo mismo que el updateOne() pero con los que cumplan con el filtro - db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}}) // no existia ningun campo:
-    -db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}})
-{
+-updateMany(): Lo mismo que el updateOne() pero con TODOS los que cumplan con el filtro 
+ -db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}}) //Actualiza toda la db porque no hay filtros, y actualiza/crea los campos: lenguaje y price
+
+}
   acknowledged: true,
   insertedId: null,
   matchedCount: 7,
@@ -684,7 +715,7 @@ PROFUNDIZANDO CON OPERACIONES UPDATE
   upsertedCount: 0
 }
 
-Si volvieramos a ejecutar el comando "db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}})" no pondria:
+Si volvieramos a ejecutar el comando "db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}})
 
 {
   acknowledged: true,
@@ -694,37 +725,50 @@ Si volvieramos a ejecutar el comando "db.movies.updateMany({}, {$set: {lenguaje:
   upsertedCount: 0
 }
 
-$inc: utiliza para incrementar o decrementar valores numéricos de un campo en un documento. Si el campo no existe, $inc lo crea con el valor proporcionado - db.movies.updateOne({movieID: 'mv07'}, {$inc: {price: 6}}) //le suma 6 al valor que havia antes, si quieres que reste pondias un "-", "-6"
+$inc: Se utiliza para incrementar o decrementar valores numéricos de un campo en un documento. Si el campo no existe, $inc lo crea con el valor proporcionado 
+    -db.movies.updateOne({movieID: 'mv07'}, {$inc: {price: 6}}) //le suma 6 al valor que havia antes, si quieres que reste pondias un "-", "-6", sino existe lo crea
 
 Tambien puedes crear nuevas claves-valores con $inc: db.movies.updateMany({},{$inc: {"%tax": 0.2}}) //le asigna a todos los documentos una nueva clave llamada "%tax" con el valor de "0.2" o "20%" tambien
 
-$min: actualizar el valor de un campo únicamente si el valor proporcionado es menor que el valor actual del campo. Si el campo no existe, $min lo añade con el valor proporcionado - db.movies.updateMany({},{$min: {VoteAverage: 7.5}}) //actualiza los campos que si "VoteAverage" sea mayor que "7.5" y le pone ese valor, si el "VoteAverage" es 9 despues de la comando puesta su valor sera de 7.5
+$min: Actualizar el valor de un campo únicamente si el valor proporcionado es menor que el valor actual del campo. Si el campo no existe, $min lo añade con el valor proporcionado 
+    -db.movies.updateMany({},{$min: {VoteAverage: 7.5}}) //actualiza los campos si "VoteAverage" es mayor que "7.5" y le pone ese valor, si el "VoteAverage" es 9 despues de la comando puesta su valor sera de 7.5
 
-$max: actualizar el valor de un campo únicamente si el valor proporcionado es mayor que el valor actual del campo. Si el campo no existe, $max lo añade con el valor proporcionado(lo contrario que el $min) - db.movies.updateMany({},{$max: {VoteAverage: 6}}) //los que sean inferior a 6 los convertira a 6
+$max: Actualiza el valor de un campo únicamente si el valor proporcionado es mayor que el valor actual del campo. Si el campo no existe, $max lo añade con el valor proporcionado(lo contrario que el $min) 
+    -db.movies.updateMany({},{$max: {VoteAverage: 6}}) //los que sean inferior a 6 los convertira a 6
 
 Un truco, si te lias con $min y $max piensa que de lo que estas pensando es al reves, me explico, cuando piensas en $min piensas en minimo obvio, pues no, en la comanda: "db.movies.updateMany({},{$min: {VoteAverage: 7.5}})" lo que hace es buscar los que sean MAYOR a 7.5, NO MENOR, LOS QUE SEAN MAYOR A 7.5 LOS CONVERTIRA A 7.5, y pasa lo mismo que con $max solo que no es "maximo", es menor, si cambiamos la comanda de antes el $min por el $max lo que hara es buscar a LOS MENORES A 7.5 y los convertira en 7.5
 
-$mul: multiplicar el valor de un campo por un número especificado - db.movies.updateOne({movieID: 'mv07'},{$mul: {price: 2}}) //si price valia 7, ahora vale 14
+$mul: multiplicar el valor de un campo por un número especificado 
+    -db.movies.updateOne({movieID: 'mv07'},{$mul: {price: 2}}) //si price valia 7, ahora vale 14
 
-$rename: cambiar el nombre de una clave en un documento - db.movies.updateMany({},{$rename: {'%tax': "percentTax"}}) // cambia la clave "%tax" por "percentTax"
+$rename: cambiar el nombre de una clave en un documento 
+    -db.movies.updateMany({},{$rename: {'%tax': "percentTax"}}) // cambia la clave "%tax" por "percentTax"
 
-ACLARACION
+*ACLARACION
 
-Solo cambia la clave no el valor, aqui un error comun: db.movies.updateOne({movieID: 'mv07'},{$rename: {title: "Minions 2"}}) //lo que estas haciendo es cambiar la clave "title" por "Minions 2", lo que quedaria asi: 'Minions 2': 'Minions'
+$rename solo cambia la clave no el valor, aqui un error comun: db.movies.updateOne({movieID: 'mv07'},{$rename: {title: "Minions 2"}}) //lo que estas haciendo es cambiar la clave "title" por "Minions 2", lo que quedaria asi: 'Minions 2': 'Minions'
 
-$unset: eliminar un campo específico de un documento. Cuando se aplica, el campo desaparece por completo del documento, junto con su valor. - db.movies.updateMany({},{$unset: {percentTax: 1}}) //elimina "percentTax" junto a su valor en todos los documentos, (en vez de poner un 1 tambien puedes usar "")
+$unset: eliminar un campo específico de un documento. Cuando se aplica, el campo desaparece por completo del documento, junto con su valor. 
+    -db.movies.updateMany({},{$unset: {percentTax: 1}}) //elimina "percentTax" junto a su valor en todos los documentos, (en vez de poner un 1 tambien puedes usar "")
 
-$currentDate: establecer el valor de un campo como la fecha y hora actuales - db.movies.updateOne({title: 'Minions'},{$currentDate: {dateRelease: true}})// obvio que solo funciona con fechas, tambien puedes usar: db.movies.updateOne( { title: 'Minions' }, { $currentDate: { dateExpired: { $type: "date" } } } );
+$currentDate: establecer el valor de un campo como la fecha y hora actuales 
+    -db.movies.updateOne({title: 'Minions'},{$currentDate: {dateRelease: true}})// obvio que solo funciona con fechas 
+    Tambien puedes usar: 
+    -db.movies.updateOne( { title: 'Minions' }, { $currentDate: { dateExpired: { $type: "date" } } } );
 
-$push: Añade un elemento al array - db.empleados.updateOne({employeeID: 5}, {$push: {score: 50}})
+$push: Añade un elemento al array 
+    -db.empleados.updateOne({employeeID: 5}, {$push: {score: 50}}) //puede estar duplicada dentro de la array
 
-$addToSet: Añade un elemento único al array (sin duplicados) - db.empleados.updateOne({employeeID: 5}, {$addToSet: {score: 81}}) // si pones un numero que ya estaba en la array: modifiedCount: 0
+$addToSet: Añade un elemento único al array (sin duplicados) 
+    -db.empleados.updateOne({employeeID: 5}, {$addToSet: {score: 81}}) // si pones un numero que ya estaba en la array: modifiedCount: 0
 
-$pull: Elimina un elemento del array - db.empleados.updateOne({employeeID: 5}, {$pull: {score: 81}}) //si intentas quitar un numero que no esta: modifiedCount: 0
+$pull: Elimina un elemento del array 
+    -db.empleados.updateOne({employeeID: 5}, {$pull: {score: 81}}) //si intentas quitar un numero que no esta: modifiedCount: 0
 
-upsert: El parámetro upsert en MongoDB permite combinar las operaciones de actualización e inserción. Si el documento especificado en el filtro no existe, MongoDB crea uno nuevo usando los datos de la operación de actualización; si ya existe, simplemente lo actualiza - db.movies.updateOne({movieID: "MVO8"}, {$set: {title: "Capitan America"}}, {upsert: true}) //El movieID "MV08" NO EXISTE, lo que queremos hacer aqui es añadirlo si no existe o actualizarlo en caso de que si exista, si no existe el parametro upsert se encargara de crearlo y saldra asi: upsertedCount: 1 ya que lo ha insertado, si el movieID "MV08" SI HUBIESE EXISTIDO el title que hubiera en el movieID "MV08" se cambiara por el ingresado en la comanda, en este caso "Capitan America"
+upsert: El parámetro upsert en MongoDB permite combinar las operaciones de actualización e inserción. Si el documento especificado en el filtro no existe, MongoDB crea uno nuevo usando los datos de la operación de actualización; si ya existe, simplemente lo actualiza 
+    -db.movies.updateOne({movieID: "MVO8"}, {$set: {title: "Capitan America"}}, {upsert: true}) //El movieID "MV08" NO EXISTE, lo que queremos hacer aqui es añadirlo si no existe o actualizarlo en caso de que si exista, si no existe el parametro upsert se encargara de crearlo y saldra asi: upsertedCount: 1 ya que lo ha insertado, si el movieID "MV08" SI HUBIESE EXISTIDO el title que hubiera en el movieID "MV08" se cambiara por el ingresado en la comanda, en este caso "Capitan America"
 
-$setOnInsert: se usa en operaciones de actualización con la opción upsert. Permite especificar los campos que deben establecerse solo cuando se inserta un nuevo documento (es decir, cuando el filtro no encuentra coincidencias y se crea un nuevo documento). Si el documento ya existe y se actualiza, los campos definidos en $setOnInsert no se aplican -
+$setOnInsert: se usa en operaciones de actualización con la opción upsert. Permite especificar los campos que deben establecerse solo cuando se inserta un nuevo documento (es decir, cuando el filtro no encuentra coincidencias y se crea un nuevo documento). Si el documento ya existe y se actualiza, los campos definidos en $setOnInsert no se aplican:
 
 db.movies.updateOne(
   { movieID: "mv02" }, // Filtro: busca el documento con movieID "mv02"
@@ -1308,7 +1352,7 @@ db.createCollection("usuarios", {
 
 
 
-ACLARACION*
+*ACLARACION
 
 Si quieres cambiar la validacion no tienes porque volver a poner toda la estructura de la validacion, puedes poner solo el cambio:
 
@@ -1473,7 +1517,7 @@ Crear un Indice compuesto
     -db.catalog.createIndex({campo1: 1, campo2: 1}, {name: campo1_campo2}) //Tambien puedes ponerle nombre
 
 
-ACLARACION*
+*ACLARACION
 
 
 Al crear un Indice con un campo ej: db.catalog.createIndex({patatas: 1}) da lo mismo el orden porque solo hay 1 entonces si buscas por el campo patata lo buscara por el Indice, osea hara la busqueda por IXSCAN
@@ -1486,7 +1530,7 @@ Pero al hacer un Indice compuesto, ej: db.catalog.createIndex({manzana: 1, plata
     -db.catalog.findOne({platano: "Banana", manzana: "Apple"}) Mal, el orden correcto es primero platano y luego manzana, COLLSCAN
 
 
-ACLARACION*
+*ACLARACION
 
 En una ocasion he hecho una prueba para ver si al poner el primer campo del Indice compuesto te daba IXSCAN y me lo dio,entonces probe esto
 
