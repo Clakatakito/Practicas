@@ -2,6 +2,8 @@
 
 AGREGACIONES
 
+((se esta trabajando sobre (se esta trabajando sobre profesionalPractitioner.json).json))
+
 Las agregaciones son operaciones que procesan datos de una colección y devuelven resultados calculados o transformados. Estas operaciones son muy útiles para realizar análisis, filtrado y transformación de datos sin necesidad de mover los datos fuera de la base de datos.
 
 El núcleo del sistema de agregaciones es el pipeline de agregación, que permite definir una serie de etapas que se aplican secuencialmente a los documentos de la colección. Cada etapa transforma los documentos y pasa el resultado a la siguiente etapa.
@@ -23,9 +25,11 @@ stage $group: Agrupa documentos por un campo específico y calcula valores agreg
     -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}}}]) //cuenta los empleados segun el pais
 
     -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}]) //el maximo de algo, lo contrario sera el $min
+
+
 $sort: Se utiliza para ordenar los resultados de una agregación según uno o más campos. Puedes ordenar de manera ascendente o descendente, voy utilizando comandas del pasado que no tengan nada que ver que el tema de la linea para ver como se conbinan
 
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}, {$sort: {countEmployee: -1, county: 1, maximoquehepagado: -1}}]) //veis como a partir del $sort vuelvo a utilizar los nombres que he creado en el $group?, se pueden reusar en la comanda
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}, {$sort: {countEmployee: -1, country: 1, maximoquehepagado: -1}}]) //veis como a partir del $sort vuelvo a utilizar los nombres que he creado en el $group?, se pueden reusar en la comanda
 
 stage $count: se utiliza en una tubería de agregación para contar el número de documentos que pasan por las etapas anteriores y asignar ese valor a un campo llamado count (o como prefieras llamarlo)
 
@@ -34,7 +38,7 @@ stage $count: se utiliza en una tubería de agregación para contar el número d
 
 ACLARACION*
 
-En la comanda de la linea 31 hay 2 $count, el primero es para contar el numero de trabajadores de "countEmployee", que porcierto parece magico no?, porque el cuenta sin haberle pasado ningun valor no?, Esto es porque el primer $count cuenta automáticamente la cantidad de documentos que llegan a esa etapa del pipeline, independientemente de los campos que tengan.
+En la comanda de la linea 34 hay 2 $count, el primero es para contar el numero de trabajadores de "countEmployee", que porcierto parece magico no?, porque el cuenta sin haberle pasado ningun valor no?, Esto es porque el primer $count cuenta automáticamente la cantidad de documentos que llegan a esa etapa del pipeline, independientemente de los campos que tengan.
 
 Cuando usas $count dentro de $group, no necesita un valor específico para contar. Simplemente incrementa un contador por cada documento que pertenece al grupo actual. Esto significa que no importa qué campos estén presentes en los documentos, $count simplemente cuenta cuántos hay en total para cada grupo.
 
@@ -98,3 +102,74 @@ $substrCP: se utiliza para extraer una subcadena de una cadena, comenzando en un
 $switch: es una forma más compleja de realizar decisiones condicionales, similar a una declaración switch en otros lenguajes de programación
 
     -db.employee.aggregate([{ $project: { gender: 1, newgender: { $switch: { branches: [{ case: { $eq: ["$gender", "male"] }, then: "M" }, { case: { $eq: ["$gender", "female"] }, then: "F" }], default: "other" } } } }])
+
+
+$convert: convertir valores de un tipo de dato a otro, es similar a la linea 811 en MongoDB-conceptos.txt, solo que ahora en agregaciones
+
+    -db.employee.aggregate([{$project: {_id: 0, name: 1, coordinates_latitud: {$convert: {input: "$coordinates.latitude", to: "double"}}, coordinates_longitud: {$convert: {input: "$coordinates.longitude", to: "double"}}}}])
+
+    -db.employee.aggregate([{$project: {_id: 0, name: 1, birthDate: {$convert: {input: "$date.birthDate", to: "date"}}}}])
+
+    Tambien puedes comprovar si alguno de los valores da error o es null:
+    -db.employee.aggregate([{$project: {_id: 0, name: 1, birthDate: {$convert: {input: "$date.birthDate", to: "date", onError: 0.0, onNull: 0.0}}}}]) //controla si hay valores nulos o errores
+
+
+$toDataType: El conjunto de operadores $toString, $toInt, $toDouble, $toBool, etc..., tiene una sintaxis mas clara que el $convert pero no maneja errores ni nulos, es incluso mas similar a la linea 811 en MongoDB-conceptos.txt, solo que ahora en agregaciones
+
+    -db.employee.aggregate([{$project: {name: 1, gender: 1, yearlyPayment: {$toString: "$yearlyPayment"}}}])
+
+
+Datos Date
+
+
+Hay muchos, pero muchos datos Date, para mas info: "https://www.mongodb.com/docs/manual/reference/operator/aggregation/" y buscar con "crt + f" esto: "Date Expression Operators" y hos saldran todos, vamos a hacer la prueba con 1
+
+
+
+    -db.employee.aggregate([{$project: {name: 1, gender: 1, data: {$toDate: "$date.hireDate"}}}, {$group: {_id: {year: {$year: "$data"}}, totalemployee: {$count: {}}}}, {$sort: {year: -1}}]) //cuenta los empleados contratados en cada respectivo año
+
+
+AHORA TOCA VER AGREGACIONES EN ARRAYS
+
+$push: se usa dentro de $group para agrupar documentos y almacenar valores en un array. Permite crear listas de elementos dentro de cada grupo, (se esta trabajando sobre profesionalPractitioner.json)
+
+    -db.employee.aggregate([{$group: {_id: {age: "$age"}, allLanguajes: {$push: "$language"}}}])
+
+stage $unwind: descompone un array en múltiples documentos individuales. Cada elemento del array se convierte en un nuevo documento.
+
+    -db.employee.aggregate([{$unwind: "$language"}]) //descompone el array en documentos individuales
+
+    [
+        {
+            "_id": ObjectId("679a0fbe97cd379c879c36f9"),
+            "name": "Juan",
+            "language": "JavaScript",
+            "age": 30,
+            "qualification": [
+            { "difficulty": 9, "score": 16.9 },
+            { "difficulty": 4, "score": 15.9 },
+            { "difficulty": 2, "score": 19.5 }
+            ]
+        },
+        {
+            "_id": ObjectId("679a0fbe97cd379c879c36f9"),
+            "name": "Juan",
+            "language": "PHP",
+            "age": 30,
+            "qualification": [
+            { "difficulty": 9, "score": 16.9 },
+            { "difficulty": 4, "score": 15.9 },
+            { "difficulty": 2, "score": 19.5 }
+            ]
+        }
+    ]
+    etc...
+
+Pero podemos separarlo para luego volver a juntarlos
+
+    -db.employee.aggregate([{$unwind: "$language"}, {$group: {_id: {age: "$age"}, allLanguajes: {$push: "$language"}}}]) //ahora estan todas en una misma array y no en 2 separadas como en la linea 136  
+
+
+$addToSet: para agregar valores a un array sin duplicados. Es similar a $push, pero mientras que $push agrega un valor a un array incluso si ya está presente, $addToSet asegura que solo se agregue si el valor no está ya en el array, (el $addToSet de siempre)  
+
+    -db.employee.aggregate([{$unwind: "$language"}, {$group: {_id: {age: "$age"}, allLanguajes: {$addToSet: "$language"}}}]) //Python ya no esta repetido
