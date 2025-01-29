@@ -2003,42 +2003,4 @@ $geoWithin: Se utiliza cuando quieres encontrar elementos dentro de un área geo
 $geoIntersects: Se usa para determinar si un punto está dentro de un área (p. ej., saber en qué barrio se encuentra una coordenada específica).
 
 
-
-
-AGREGACIONES
-
-Las agregaciones son operaciones que procesan datos de una colección y devuelven resultados calculados o transformados. Estas operaciones son muy útiles para realizar análisis, filtrado y transformación de datos sin necesidad de mover los datos fuera de la base de datos.
-
-El núcleo del sistema de agregaciones es el pipeline de agregación, que permite definir una serie de etapas que se aplican secuencialmente a los documentos de la colección. Cada etapa transforma los documentos y pasa el resultado a la siguiente etapa.
-
-$match: Filtra los documentos según una condición, similar a una consulta con find 
-    -db.employee.aggregate([{$match: {maritalStatus: "S"}}])
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}])
-
-
-$group: Agrupa documentos por un campo específico y calcula valores agregados como sumas, promedios, conteos, etc, y poner el campo _id es obligatorio, los campos a partir del $group tendran que representarse como $campo
-
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: "$location.country"}}]) //filtra y agrupa por el pais, la salia parece decir que el _id son los paises pero es mentira, se puede cambiar
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}}}]) //le puedes agregar un nombre, en este caso tambien es  "country"
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}}}]) //cuenta los empleados segun el pais
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}]) //el maximo de algo, lo contrario sera el $min
-
-$sort: Se utiliza para ordenar los resultados de una agregación según uno o más campos. Puedes ordenar de manera ascendente o descendente, voy utilizando comandas del pasado que no tengan nada que ver que el tema de la linea para ver como se conbinan
-
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}, {$sort: {countEmployee: -1, county: 1, maximoquehepagado: -1}}]) //veis como a partir del $sort vuelvo a utilizar los nombres que he creado en el $group?, se pueden reusar en la comanda
-
-$count: se utiliza en una tubería de agregación para contar el número de documentos que pasan por las etapas anteriores y asignar ese valor a un campo llamado count (o como prefieras llamarlo)
-
-    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}, {$sort: {countEmployee: -1, county: 1, maximoquehepagado: -1}}, {$count: "TotalDocumentos"}])
-    [ { TotalDocumentos: 6 } ]
-
-ACLARACION*
-
-En la comanda de la linea 1986 hay 2 $count, el primero es para contar el numero de trabajadores de "countEmployee", que porcierto parece magico no?, porque el cuenta sin haverle pasado ningun valor no?, Esto es porque el primer $count cuenta automáticamente la cantidad de documentos que llegan a esa etapa del pipeline, independientemente de los campos que tengan.
-
-Cuando usas $count dentro de $group, no necesita un valor específico para contar. Simplemente incrementa un contador por cada documento que pertenece al grupo actual. Esto significa que no importa qué campos estén presentes en los documentos, $count simplemente cuenta cuántos hay en total para cada grupo.
-
-Como el primer $count esta en la segunda etapa de pipeline, primero de haber pasado por el $match y el { country: "$location.country" } cuenta para cada documento que hay
-
-El segundo $count cuenta los documentos, NO LOS EMPLEADOS, NO SALEN VALORES, AL PONER AL FINAL EL $count simplemente cuenta los documentos
-
+Sigue en MongoDB-conceptos-2.txt
