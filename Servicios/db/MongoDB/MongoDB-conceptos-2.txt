@@ -173,3 +173,26 @@ Pero podemos separarlo para luego volver a juntarlos
 $addToSet: para agregar valores a un array sin duplicados. Es similar a $push, pero mientras que $push agrega un valor a un array incluso si ya está presente, $addToSet asegura que solo se agregue si el valor no está ya en el array, (el $addToSet de siempre)  
 
     -db.employee.aggregate([{$unwind: "$language"}, {$group: {_id: {age: "$age"}, allLanguajes: {$addToSet: "$language"}}}]) //Python ya no esta repetido
+
+
+$filter: filtrar elementos dentro de un array según una condición
+
+    -db.employee.aggregate([{$project: {name: 1, language: {$filter: {input: "$qualification.score",
+    as: "sc", cond: {$gt: ["$$sc", 19]}}}}}])
+
+*Aclaracion
+
+La razón por la que $filter usa "cond" en lugar de "$cond" es porque "cond" es un parámetro dentro del operador $filter, mientras que "$cond" es un operador de expresión condicional que se usa para evaluar condiciones en una agregación.
+
+*Aclaracion2
+
+El "$$sc" usa 2 "$$" al ser un alias, y $filter necessita el alias
+
+
+stage $set: agregar nuevos campos o modificar los existentes, es parecido al $project pero en este no hace falta que en cada stage que uses $project vayas repitiendo los campo
+
+    -db.employee.aggregate([{$set: {departamento: "este", totalscore: {$sum: "$qualification.score"}, media: {$round: [{$avg: "$qualification.score"}, 2]}}}]) //de paso el $round redonde segun el valor que le pongas, en mi caso 2, 2 decimales
+
+stage $unset: eliminar uno o más campos de los documentos durante una operación de agregación
+
+    -db.employee.aggregate([{$unset: ["age", "language", "qualification.difficulty"]}]) //si solo quieres eliminar 1, quitale las []
