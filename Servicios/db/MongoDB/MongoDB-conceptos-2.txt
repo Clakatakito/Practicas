@@ -196,3 +196,170 @@ stage $set: agregar nuevos campos o modificar los existentes, es parecido al $pr
 stage $unset: eliminar uno o más campos de los documentos durante una operación de agregación
 
     -db.employee.aggregate([{$unset: ["age", "language", "qualification.difficulty"]}]) //si solo quieres eliminar 1, quitale las []
+
+
+stage $skip: omitir un número específico de documentos en el resultado de la agregación  
+
+    -db.employee.aggregate([{ $match: { gender: "male" } }, { $project: { fullnombre: { $concat: ["$name.FirstName", " ", {$ifNull: ["$name.MiddleName", " "]}, " ", "$name.LastName"]}, email: 1, yearlyPayment: 1}}, {$sort: {yearlyPayment: -1}}, {$skip: 20}, {$count: "totalDocumentos"}]) //si vas jugando con el $skip, veras como el $count le va restando
+
+stage $limit: limitar la cantidad de documentos que devuelve una consulta
+
+    -db.employee.aggregate([{ $match: { gender: "male" } }, { $project: { fullnombre: { $concat: ["$name.FirstName", " ", {$ifNull: ["$name.MiddleName", " "]}, " ", "$name.LastName"]}, email: 1, yearlyPayment: 1}}, {$sort: {yearlyPayment: -1}}, {$limit: 20}, {$count: "totalDocumentos"}]) //la misma comanda de arriba pero con el $limit
+
+
+
+Crear una nueva colección a partir del Pipeline
+
+Es un stage, llamado $out, ponlo asi al final del pipeline: {$out: "NombreColeccion"}
+
+
+stage $geoNear: encontrar documentos cercanos a un punto de referencia específico en un espacio geográfico
+
+    -db.NombreColeccion.aggregate([ { $geoNear: { near: { type: "Point", coordinates: [ -74.00203, 40.71678 ] }, maxDistance: 10000, query: { "name.MiddleName": null }, distanceField: "distance" } }, { $sort: { distance: 1 } }, { $limit: 5 } ]);
+
+    {
+        $geoNear: {
+            near: { <punto de referencia> },  // Punto de referencia
+            distanceField: "<campo>",         // El campo donde se almacenará la distancia
+            maxDistance: <distancia máxima>,  // Opcional: limitar la distancia máxima
+            query: <consulta>,                // Opcional: realizar una consulta adicional sobre otros campos
+            spherical: true,                  // Opcional: activar la búsqueda esférica
+            limit: <número>                   // Opcional: limitar la cantidad de resultados
+        }
+    }
+
+
+
+SEGURIDAD
+
+Siempre entramos al servidor mongod con "mongosh" sin ninguna importancia no?, pues eso es un fallo enorme, vamos a crear un usuario admin para que pueda entrar, tambien modificaremos permisos para que no puedan hacer todo cualquier usuario
+
+userAdminAnyDatabase: Permite administrar usuarios en cualquier base de datos.
+dbAdminAnyDatabase: Permite administrar cualquier base de datos, como crear índices, obtener estadísticas, etc.
+readWriteAnyDatabase: Permite leer y escribir en cualquier base de datos.
+root: Proporciona acceso completo a todas las operaciones administrativas.
+etc...
+
+
+crear user:
+    -db.createUser({user: "claka", pwd: "1234", roles: [{role: "readWriteAnyDatabase", db: "admin"}]}) 
+    
+    si volveis atras con la flechita vereis que no sale la comanda, al ser "privada", y porque digo "privada"?, porque la contraseña esta en texto plano, aun nos pueden ver la contraseña, si alguin lee la db admin
+
+Poreso podemos hacer esto:
+    -admin> db.createUser({user: "claka2", pwd: passwordPrompt(), roles: [{role: "readWriteAnyDatabase", db: "admin"}]})
+    Enter password
+    ****{ ok: 1 }
+    Mas seguro
+
+Tambien podemos ver que en la db "admin" tenemos 2 colecciones, la "system.users" y la "system.version", la primera es donde se almacenan las configuraciones de los usuarios creados, y la segunda almacena información sobre la versión actual de MongoDB, así como algunas configuraciones internas del sistema, yo no tocaria la segunda  
+
+
+
+multiples permisos:
+
+read: Permite leer datos de una base de datos específica.
+
+readWrite: Permite leer y escribir datos en una base de datos específica.
+
+dbAdmin: Permite realizar tareas administrativas (como crear índices, analizar la base de datos y ver estadísticas) en una base de datos, sin modificar los datos.
+
+dbOwner: Combina los privilegios de dbAdmin con permisos adicionales para gestionar roles y usuarios en la base de datos.
+
+userAdmin: Permite crear, modificar y eliminar usuarios y roles, pero únicamente en la base de datos en la que se asigna.
+
+readAnyDatabase: Permite leer datos en todas las bases de datos del servidor.
+
+readWriteAnyDatabase: Permite leer y escribir datos en todas las bases de datos del servidor.
+
+dbAdminAnyDatabase: Permite realizar tareas administrativas en todas las bases de datos del servidor.
+
+userAdminAnyDatabase: Permite crear, modificar y eliminar usuarios y roles en todas las bases de datos.
+
+clusterMonitor: Permite ver el estado y la configuración del clúster sin posibilidad de realizar cambios.
+
+clusterManager: Permite realizar tareas de gestión del clúster, como operaciones de mantenimiento y configuración, sin gestionar usuarios.
+
+clusterAdmin: Otorga amplios privilegios para administrar el clúster (incluyendo replica sets y sharded clusters) y ver toda su configuración.
+
+hostManager: Permite realizar tareas administrativas a nivel del host, como la gestión de procesos y recursos del sistema.
+
+backup: Permite realizar copias de seguridad de la base de datos.
+
+restore: Permite restaurar datos a partir de una copia de seguridad.
+
+root: Es el rol de superusuario que otorga todos los privilegios de administración, lectura, escritura y gestión de usuarios en todas las bases de datos del servidor.
+
+
+
+base de datos "local":
+
+Propósito: La base de datos local es una base de datos especial que MongoDB usa para almacenar información de sistema interna que no debe replicarse en una configuración de replica set.
+
+coleccion "startup_log":
+
+Logs de inicio: Esta colección registra los eventos de inicio de MongoDB, proporcionando detalles sobre los procesos de arranque, como la versión de MongoDB, el estado del sistema de archivos, y otros eventos importantes que ocurren cuando el servidor MongoDB inicia.
+
+Depuración: Es útil para diagnosticar problemas relacionados con el arranque del servidor, ya que contiene detalles de lo que hizo MongoDB durante el proceso de inicio.
+
+
+Ahora que tenemos el usuario vamos a ver:
+
+video que me ayudo: "https://chatgpt.com/share/679d14a2-f420-8006-b77e-0fffc1ed3cd5"
+
+lo primero es que tenemos que tener el servicio/mongod apagado, lo segundo vamos a editar el archivo de configuracion de mongodb que esta en: "C:\Program Files\MongoDB\Server\8.0\bin", es el mongod que no tiene el arbol/planta esa, el archivo de configuracion
+
+le añadiremos esto al final:
+
+security:
+  authorization: enabled
+
+
+puede que venga comentado asique podeis descomentarlo
+
+luego tendremos que reiniciar mongodb, hacerlo en la cmd modo administrador, poner esto:
+    -mongod --config "C:\Program Files\MongoDB\Server\8.0\bin\mongod.cfg"
+
+Hos pueden dar multiples errores, sobretodo a los que tengais variables de entorno activadas hos tengo esto: "https://chatgpt.com/share/679d14a2-f420-8006-b77e-0fffc1ed3cd5", verlo a partir de las decima pregunta que le hago
+
+aparte de eso te pueden dar mas errores, si en "C:\Program Files\MongoDB\Server\8.0" no tenias la carpeta "data" o "log" yo las he creado por si acaso
+
+luego de todo eso ya podremos iniciar "mongod", pero si lo iniciamos no habra login y tendremos todo abierto y accessible que antes, tenemos que usar "mongod -auth", y cuando entremos con mongosh ya no nos dejara hacer nada hasta logearnos
+
+Una vez estando dentro de la base de datos no te dejara hasta que te loges como ya he dicho, vamos a logearnos:
+    -use admin 
+    -db.auth("myUserAdmin", passwordPrompt()) o la contraseña en texto plano que tambien puedes poner, linea 244
+
+    seria asi sin el "passwordPrompt()":
+    -db.auth("claka", "1234")
+
+Otra forma es antes de entrar a la db:
+
+    -mongosh --authenticationDatabase "admin" -u "claka" -p #podriamos poner la contraseña despues del "-p" pero no es muy seguro, en la forma que esta hecho es mejor
+    Enter password: ****
+
+
+
+Ver información del usuario:
+    -db.getUser("user") //solo se puede hacer si tu eres ese usuario, con esa comanda no puedes ver stats de otros usuarios, solo del tuyo
+
+
+Actualizar usuarios:
+
+No se puede cambiar el nombre del usuario
+
+Actualizar roles a los usuarios:
+    -db.updateUser("user", {role: [role: "readWrite", db: "db"]})  
+
+Actualizar contraseña a los usuarios:
+    -db.updateUser("user", { pwd: "nuevaContraseña" })
+
+ver ambas a la vez:
+    -db.updateUser("user", { pwd: "nuevaContraseña", roles: [{ role: "readWrite", db: "db" }]})
+
+
+
+Eliminar usuarios
+
+Se tiene que eliminar con un usuario administrador, y en la misma db donde se creo:
+    -db.dropUser("user")    
