@@ -252,6 +252,11 @@ Poreso podemos hacer esto:
     ****{ ok: 1 }
     Mas seguro
 
+
+Deslogearme:
+    -db.logout()
+
+
 Tambien podemos ver que en la db "admin" tenemos 2 colecciones, la "system.users" y la "system.version", la primera es donde se almacenan las configuraciones de los usuarios creados, y la segunda almacena información sobre la versión actual de MongoDB, así como algunas configuraciones internas del sistema, yo no tocaria la segunda  
 
 
@@ -354,12 +359,40 @@ Actualizar roles a los usuarios:
 Actualizar contraseña a los usuarios:
     -db.updateUser("user", { pwd: "nuevaContraseña" })
 
-ver ambas a la vez:
+actualizar ambas a la vez:
     -db.updateUser("user", { pwd: "nuevaContraseña", roles: [{ role: "readWrite", db: "db" }]})
 
+
+con "db.grantRolesToUser" agrega roles adicionales a un usuario existente sin necesidad de recrearlo. Esto es útil cuando quieres ampliar los permisos de un usuario sin modificar otros atributos como su contraseña.
+
+
+
+Ver con que usuarios estas logeado:
+    -db.runCommand({ connectionStatus: 1 })
 
 
 Eliminar usuarios
 
 Se tiene que eliminar con un usuario administrador, y en la misma db donde se creo:
-    -db.dropUser("user")    
+    -db.dropUser("user")   
+
+
+
+BACKUPS
+
+Crear un usuario con permisos de backup:
+    -db.createUser({user: "userbackup", pwd: passwordPrompt(), roles: [{role: "backup", db: "admin"}, {role: "restore", db: "admin"}]})
+
+lanzar la comanda para hacer el backup:
+    -mongodump -h localhost:27017 -u "userbackup" -p "12345" //es igual que cuando usamos mongoimport, se tiene que hacer desde linea de comandos y con el servidor mongod abierto, se te descargara el backup segun en que ruta te encuentres    
+
+
+restaurar un backup:
+
+crear o eliminar alguna db para ver las diferencias y posicionarnos donde este la capeta del backup:
+    -mongorestore -h localhost:27017 -u "userbackup" -p "12345"
+
+
+
+
+MONGODB ATLAS    
