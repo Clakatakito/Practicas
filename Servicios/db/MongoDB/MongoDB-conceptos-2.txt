@@ -396,3 +396,24 @@ crear o eliminar alguna db para ver las diferencias y posicionarnos donde este l
 
 
 MONGODB ATLAS    
+
+MongoDB Atlas es una base de datos en la nube totalmente administrada que se encarga de toda la complejidad de implementar, administrar y reparar sus implementaciones en el proveedor de servicios en la nube que elija (AWS, Azure y GCP). MongoDB Atlas es la mejor manera de implementar, ejecutar y escalar MongoDB en la nube.
+
+
+Crear cuenta en: "https://www.mongodb.com/es/cloud/atlas/register"
+Iniciar sesion en: "https://account.mongodb.com/account/login/"
+
+
+Configuraciones en MongoDB Atlas
+
+ir a "Quickstart", dentro de "Security" y crearnos un usuario o varios
+
+
+Conectarnos a MongoDB Atlas desde la shell:
+
+Ir a "Cluster" y a "Conect", seleccionamos la "shell" y que tenemos mongodb instalado, ya seria copiar el comando que te proporcionan y poner la contraseña del usuario creado en mongod atlas
+
+
+Conectarnos a MongoDB Atlas desde la shell:
+
+Ir a "Cluster" y a "Conect", seleccionamos la "Compass" y que tenemos mongodb compass instalado, ya seria copiar el comando que te proporcionan y ingresarlo en "Add a new conection" en MongoDB Compass, el password hay que ingresarlo manualmente
