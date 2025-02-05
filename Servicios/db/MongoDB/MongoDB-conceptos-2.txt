@@ -417,3 +417,10 @@ Ir a "Cluster" y a "Conect", seleccionamos la "shell" y que tenemos mongodb inst
 Conectarnos a MongoDB Atlas desde la shell:
 
 Ir a "Cluster" y a "Conect", seleccionamos la "Compass" y que tenemos mongodb compass instalado, ya seria copiar el comando que te proporcionan y ingresarlo en "Add a new conection" en MongoDB Compass, el password hay que ingresarlo manualmente
+
+
+Proximamente hare una app de lo que sea que use mongodb, en el curso que hacia de mongodb la hacen con python y yo solo se python basico asique algunas cosas no las pillo, la haremos con JavaScript
+
+HASTA AQUI HA LLEGADO EL MEGA SUPER HIPER TUTORIAL DE MONGODB DE APROXIMADAS 2.429 LINEAS(MUCHAS DE ELLAS ESPACIOS INNECESARIOS, PERO ME AYUDAN A SEPARAR SECCIONES), SI HAS LLEGADO HASTA AQUI LO DUDO PORQUE NO CREERIA QUE ALGUIEN HUBIERA LLEGADO PERO GRACIAS SI LO HICISTE, ESTA GUIA PRIMORDIALMENTE ES PARA MI, PERO SI LE SIRVE A OTRA PERSONA GENIAL!
+
+La despedida ha sido un copi-pega de Docker-conceptos.txt
