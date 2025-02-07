@@ -20,7 +20,7 @@ console.log(nombre);
 console.log(precio);
 console.log(disponible);
 
-/*tambien es lo mismo esto pero el Destructurin es mejor porque puedes poner todos las cariables del
+/*tambien es lo mismo esto pero el Destructurin es mejor porque puedes poner todos las variables del
 objeto dento de las llaves y te vale:
 */
 const nombre2 = producto.nombre;

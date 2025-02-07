@@ -21,6 +21,40 @@ console.log(typeof numerogrande);
 console.log(numerograndebig);
 console.log(typeof numerograndebig);
 
+//multiples variables
+
+/*
+no hace falta hacer:
+
+var producto = "monitor"
+var producto2 = "raton"
+var producto3 = "pc"
+*/
+
+//mejor
+
+var producto = "monitor",
+producto2 = "raton",
+producto3 = "pc"
+
+let grafono = 20
+console.log(grafono.toString())
+let gramola = "20"
+console.log(parseInt(gramola))
+
+console.log(Number.isInteger(20.1))
+
+console.log(producto)
+console.log(producto2)
+console.log(producto3)
+
+
+//include
+
+const frutas = ["manzana", "pera", "uva"];
+console.log(frutas.includes("pera"));  // true
+console.log(frutas.includes("banana")); // false
+
 //booleans
 
 const buleano = true;

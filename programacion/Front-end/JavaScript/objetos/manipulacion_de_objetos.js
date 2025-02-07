@@ -36,7 +36,7 @@ nomodifica.si = "si";
 console.log(nomodifica);
 
 //con object.seal(objeto) si te deja modificar pero no te deja añadir ni eliminar
-
+//console.log(Object.isSealed(objeto))
 //destructuring de 2 o mas objetos
 
 const producto = {
@@ -55,13 +55,16 @@ const cliente = {
 const {nombre} = producto;
 console.log(nombre);
 /*const {nombre} = cliente //error porque estamos intentando
-hacer 2 variables con el mismo nombre */
+hacer 2 variables con el mismo nombre(nombre) */
 const {nombre: nombrecliente} = cliente;
 console.log(nombrecliente);
 
 console.log(cliente.direccion);
 const {direccion} = cliente;
 console.log(direccion);
+
+
+//destructuring objetos anidados
 const {direccion: {calle} } = cliente;
 //const {direccion} = cliente // no es lo mismo eso, te da otro valor
 console.log(calle);
@@ -96,3 +99,21 @@ console.log(nuevo_objeto);
 
 const objeto2 = Object.assign(producto2, carrito);
 console.log(objeto2);
+
+
+
+//sumar 2 objetos
+
+const fruteria = {
+    manzana: true,
+    pera: false
+}
+const otrafruteria = {
+    uvas: true,
+    mandarinas: true
+}
+
+console.log(Object.assign(fruteria, otrafruteria))
+//tambien puedes hacer
+const combinado = { ...fruteria, ...otrafruteria };
+console.log(combinado);
