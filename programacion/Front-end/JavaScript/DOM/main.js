@@ -51,16 +51,13 @@ enlaces2.forEach(enlaces => enlaces.textContent = "todos iguales")
 const tituloclick = document.querySelector(".click2") //ir cambiando el . por # para ver diferencias
 tituloclick.textContent = "Click con DOM"
 
-tituloclick.addEventListener("mouseenter", function(){  //ir probando con mouseenter, click
-    tituloclick.textContent = "Nuevo titulo al dar click"
+tituloclick.addEventListener("mouseenter", () => {  //ir probando con mouseenter, click
+    tituloclick.textContent = "Nuevo titulo al dar click/pasar por encima"
     //alert("se pulso")
     
 })
-tituloclick.addEventListener("mouseleave", function(){  //ir probando con mouseenter
-    tituloclick.textContent = "Click con DOM"
+tituloclick.addEventListener("mouseleave", () => tituloclick.textContent = "Click con DOM" ) //ir probando con mouseenter
     //alert("se pulso")
-    
-})
 
 //enlaces
 

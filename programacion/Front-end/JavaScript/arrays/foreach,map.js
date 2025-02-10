@@ -36,3 +36,26 @@ console.log(nuevoArray2)
 for(let tech4 of arrays){
     console.log(tech4);
 };
+
+
+let arreglo = ["triciclo", "mapa", "tesoro"]
+let arreglo2 = [1,3,5,7,9]
+
+arreglo.forEach((num) => {
+    console.log(`tengo ${num}`)
+})
+
+mas = arreglo2.map(num => num*2)
+console.log(mas)
+
+mas2 = arreglo2.map(function(num){
+    console.log(num*2)
+})
+
+mas3 = arreglo2.filter(fil =>{
+    return fil > 5
+})
+console.log(mas3)
+
+mas4 = arreglo2.filter(numfil => numfil >5)
+console.log(mas4)
