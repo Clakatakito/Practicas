@@ -310,7 +310,7 @@ Depuración: Es útil para diagnosticar problemas relacionados con el arranque d
 
 Ahora que tenemos el usuario vamos a ver:
 
-video que me ayudo: "https://chatgpt.com/share/679d14a2-f420-8006-b77e-0fffc1ed3cd5"
+video que me ayudo: "https://www.youtube.com/watch?v=_w6GnVEzA8s&t=95s"
 
 lo primero es que tenemos que tener el servicio/mongod apagado, lo segundo vamos a editar el archivo de configuracion de mongodb que esta en: "C:\Program Files\MongoDB\Server\8.0\bin", es el mongod que no tiene el arbol/planta esa, el archivo de configuracion
 
