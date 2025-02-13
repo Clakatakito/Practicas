@@ -1,102 +1,108 @@
 
-//Selectores
 
-const lista1 = document.querySelector(".titulo")
-console.log(lista1)
-console.log("El tag que tiene: " , lista1.tagName)
-console.log(lista1.textContent)
-console.log(lista1.classList)
-console.log(lista1.id)
+//PRACTICA DEL DOM
 
+//IR DESCOMENTANDO/Comentando EN BLOQUE
 
-const enlaces = document.querySelector("nav a")
-console.log(enlaces)
-//solo te saldra el primero, el: <a href="#">este es un link1</a><br>
+//cambiar texto
+//let titulo = document.querySelector("#titulo")
+//titulo.textContent = "Examen de Manipulación del DOM"
 
-//querySelectorALL
-const enlaces2 = document.querySelectorAll("nav a")
-console.log(enlaces2)
+/*............................................................*/
 
+//cambiar background
+//let seccion2 = document.querySelector("#seccion2")
+//seccion2.style.backgroundColor = "lightblue"
 
-//Manipular elemetos HTML con JavaScript
+/*............................................................*/
 
-const segundon = document.querySelector(".tituloh2")
-console.log(segundon.textContent)
-segundon.textContent = ("nuevo titulo") //antes ponia "Manipulacion de objetos"
-segundon.id = "idiferente"
-console.log(segundon.id) //antes ponia "segundo titulo"
+//cambiar todos los textos 
+//let parrafos = document.querySelectorAll("p")
+//parrafos.forEach(par => par.textContent = "Este contenido ha sido modificado")
 
-//eliminar el cambio
+/*............................................................*/
 
-//segundon.removeAttribute("id") //le quita el id
-//segundon.removeAttribute("class") //le quita la clase
-//ir descomenta
+//bordes
+//let secciones = document.querySelectorAll("section")
+//secciones.forEach(sec => sec.style.border = "2px solid red");
 
-//segundon.remove("nuevo titulo") //elimina
+/*............................................................*/
+
+//cambiar color de letra
+//let footerText = document.querySelector("#footer-text")
+//footerText.style.color = "blue"
 
 
-//Inputs
+/*............................................................*/
 
-const primerInput = document.querySelector("#segundoInput") //date cuenta que se llama primerInput pero esta cojiendo realmente el del segundo, el segundoInput
-primerInput.value = "Jessica"
+//crear elementos
+//let newp = document.createElement("p")
+//let seccion3 = document.querySelector("#seccion3")
+//newp.textContent = "Este es un nuevo párrafo añadido dinámicamente."
+//seccion3.appendChild(newp)
 
-//enlaces
+/*............................................................*/
 
-//enlaces.textContent = "otro nombre de enlace" //solo cambia el primero
+//eliminar
+//let seccion1 = document.querySelector("#seccion1")
+//seccion1.remove()
 
-enlaces2.forEach(enlaces => enlaces.textContent = "todos iguales")
 
-//Eventos del DOM - Clicks
+/*............................................................*/
 
-const tituloclick = document.querySelector(".click2") //ir cambiando el . por # para ver diferencias
-tituloclick.textContent = "Click con DOM"
 
-tituloclick.addEventListener("mouseenter", () => {  //ir probando con mouseenter, click
-    tituloclick.textContent = "Nuevo titulo al dar click/pasar por encima"
-    //alert("se pulso")
-    
-})
-tituloclick.addEventListener("mouseleave", () => tituloclick.textContent = "Click con DOM" ) //ir probando con mouseenter
-    //alert("se pulso")
-
-//enlaces
-
-enlaces2.forEach( enlaces => {
-    enlaces.addEventListener("click", (e)=> {
-        e.preventDefault()
-        e.target.textContent = "Diste click"
-    })
-})
-
-//Eventos del DOM - Inputs
-
-const input1 = document.querySelector(".input1")
-const input2 = document.querySelector(".input2")
-input1.addEventListener("click", function(){
-    input1.value=""
-})
-input2.addEventListener("click", function(){
-    input2.value=""
-})
-input2.addEventListener("input", function(){
-    input2.type="text"
-    setTimeout(() => {
-        input2.type="password" //si pones input2.vale="lo que sea" el usuario no podra cambiarlo, es gracioso     
-    }, 300);
-
-})
+//let modp2 = document.querySelector("#seccion2 p")
+//modp2.textContent = "Sección Modificada"
 
 
 
-const boton = document.querySelector(".formulario");
-boton.addEventListener("submit", function(e) {
-    e.preventDefault();
-    if (input1 === "" || input2 === "") {
-        alert("rellena todos los campos")
-    }else{
-        alert("Enviando");
-    }
-});
+//Traversing the DOM
 
-//falta
+//.parentNode, .childNodes, .firstChild, .lastChild, .nextElementSibling, .previousElementSibling
+
+
+//const nav1 = document.querySelector("#navegacion");
+//const primerEnlace = nav1.firstElementChild; //diferencias entre firstElementChild y firstChild: firstElementChilddevuelve el primer nodo hijo Element , mientras que firstChilddevuelve el primer nodo hijo Node , independientemente de si es un Elemento, un Texto, un Comentario o algo más.
+//primerEnlace.textContent = "Enlace Modificado";
+//primerEnlace.removeAttribute("href") quitar el href para convertirlo en texto normal
+
+
+
+/*............................................................*/
+
+
+//const navegacion1 = document.querySelector("#navegacion");
+//const enlaceprimero = navegacion1.firstElementChild;
+//const padre = enlaceprimero.parentNode
+//padre.style.backgroundColor = "green"
+
+/*............................................................*/
+
+//let seccion2 = document.querySelector("#seccion2") //seleccionamos el contenedor seccion2
+//let primerh2 = seccion2.firstElementChild //vamos al primer elemento
+//let segundop = primerh2.nextElementSibling //i vamos al siguiente
+//segundop.textContent = "aqui"
+
+
+/*............................................................*/
+
+//let seccion3 = document.querySelector("#seccion3")
+//seccion3.children[1].textContent = "aqui"
+
+/*............................................................*/
+
+//let seccion2 = document.querySelector("#seccion2");
+//let segundoParrafo = seccion2.children[2];
+//let parrafoAnterior = segundoParrafo.previousElementSibling;
+//parrafoAnterior.textContent = "Este es el párrafo anterior modificado";
+
+
+
+
+
+
+
+
+
+
 

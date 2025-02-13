@@ -21,7 +21,7 @@ const tecnologias2 = arrays.filter(function(tech){
 });
 console.log(tecnologias2)
 
-//include
+//include, solo soporta strings
 
 const resultado = arrays.includes("PYTHON");
 console.log(resultado);
@@ -63,7 +63,6 @@ const isBelowThreshold = (currentValue) => currentValue < 40;
 const array3 = [1, 30, 39, 29, 10, 13];
 
 console.log(array1.every(isBelowThreshold));
-// Expected output: true //pone false pero es true
 
 
 
@@ -88,16 +87,11 @@ console.log(array4.fill(6));
 
 
 
-/*
-El método .find() busca el primer elemento en el array que cumpla con una condición. En este caso,
- la condición es que el element (o sea, cada número del array) sea mayor que 10.
-*/
+//encontrar
 
-const array5 = [5, 12, 8, 130, 44];
-
-const found = array5.find((element) => element > 10);
-
-console.log(found);
+const arreglo = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]
+const busqueda = arreglo.findIndex(mes => mes === "Viernes")
+console.log(busqueda)
 
 
 
