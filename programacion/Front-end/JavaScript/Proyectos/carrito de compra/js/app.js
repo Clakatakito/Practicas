@@ -46,7 +46,7 @@ function agregarCurso(e){
 
         // Restaurar después de 5 segundos
         setTimeout(() => {
-            e.target.textContent = e.target.dataset.textoOriginal;
+            e.target.textContent = "AGREGAR AL CARRITO";
             e.target.style.backgroundColor = e.target.dataset.bgOriginal;
             e.target.style.color = e.target.dataset.colorOriginal;
         }, 5000);
