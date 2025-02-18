@@ -8,6 +8,10 @@ function CargarEventos(){
     listaCursos.addEventListener("mouseover", mostrarMensaje);
     listaCursos.addEventListener("mouseout", restaurarTexto);
     carrito.addEventListener("click", eliminarCurso)
+    vaciarCarrito.addEventListener("click",  ()=>{
+        artiCulosCarritos = [] //vaciamos el arreglo
+        limpiarHTML()
+    })
 }
 CargarEventos()
 
@@ -66,11 +70,11 @@ function eliminarCurso(e){
     if(e.target.classList.contains("borrar-curso")){
         console.log(e.target.getAttribute("data-id"))
 
-        //const cursoId = e.target.getAttribute("data-id")
-        //console.log(cursoId)
+        const cursoId = e.target.getAttribute("data-id")
+        console.log(cursoId)
         //Eliminar del arreglo de articulosCarrito por el data-id
-        //artiCulosCarritos = artiCulosCarritos.filter(curso => curso.id !== cursoId)
-        //carritoHTML()
+        artiCulosCarritos = artiCulosCarritos.filter(curso => curso.id !== cursoId)
+        carritoHTML()
     }
 }
 
@@ -133,7 +137,7 @@ function carritoHTML(){
                 ${curso.cantidad}
             </td>
             <td>
-                <a href="#" class="borrar-curso" data-id="{$curso.id}">ELIMINAR </a>
+                <a href="#" class="borrar-curso" data-id="${curso.id}">ELIMINAR </a>
             </td> 
 
         `;
