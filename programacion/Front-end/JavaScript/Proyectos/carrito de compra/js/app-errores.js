@@ -7,6 +7,7 @@ function CargarEventos(){
     listaCursos.addEventListener("click", agregarCurso)
     listaCursos.addEventListener("mouseover", mostrarMensaje);
     listaCursos.addEventListener("mouseout", restaurarTexto);
+    carrito.addEventListener("click", eliminarCurso)
 }
 CargarEventos()
 
@@ -59,6 +60,21 @@ function agregarCurso(e){
     }
 } 
 
+
+
+function eliminarCurso(e){
+    if(e.target.classList.contains("borrar-curso")){
+        console.log(e.target.getAttribute("data-id"))
+
+        //const cursoId = e.target.getAttribute("data-id")
+        //console.log(cursoId)
+        //Eliminar del arreglo de articulosCarrito por el data-id
+        //artiCulosCarritos = artiCulosCarritos.filter(curso => curso.id !== cursoId)
+        //carritoHTML()
+    }
+}
+
+
 function leerDatosCurso(curso){
     const infoCurso = {
         img: curso.querySelector("img").src,
@@ -75,11 +91,12 @@ function leerDatosCurso(curso){
         const cursos = artiCulosCarritos.map(curso => {
             if(curso.id === infoCurso.id){
                 curso.cantidad++
-                return curso
+                return curso //retorna el objeto actualizado
             }else{
-                return curso
+                return curso //retorna los objetos que no estan duplicados
             }
         })
+        //artiCulosCarritos.push(cursos)
     }else{
         artiCulosCarritos.push(infoCurso)
     }
