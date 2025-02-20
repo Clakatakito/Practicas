@@ -54,7 +54,7 @@ function agregarCurso(e){
             e.target.textContent = "AGREGAR AL CARRITO";
             e.target.style.backgroundColor = e.target.dataset.bgOriginal;
             e.target.style.color = e.target.dataset.colorOriginal;
-        }, 5000);
+        }, 500);
 
 
 
