@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const email = {
         email: "",
-        cc: "",
         asunto: "",
         mensaje: ""
     }
@@ -116,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function() {
     function resetFormulario() {
         // reiniciar el objeto
         email.email = "";
-        email.cc = "",
         email.asunto = "";
         email.mensaje = "";
 
