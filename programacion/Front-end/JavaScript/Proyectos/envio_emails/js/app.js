@@ -1,28 +1,29 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function() {
 
     const email = {
-        email: '',
-        asunto: '',
-        mensaje: ''
+        email: "",
+        cc: "",
+        asunto: "",
+        mensaje: ""
     }
 
     // Seleccionar los elementos de la interfaz
-    const inputEmail = document.querySelector('#email');
-    const inputAsunto = document.querySelector('#asunto');
-    const inputMensaje = document.querySelector('#mensaje');
-    const formulario = document.querySelector('#formulario');
-    const btnSubmit = document.querySelector('#formulario button[type="submit"]');
-    const btnReset = document.querySelector('#formulario button[type="reset"]');
-    const spinner = document.querySelector('#spinner');
+    const inputEmail = document.querySelector("#email");
+    const inputAsunto = document.querySelector("#asunto");
+    const inputMensaje = document.querySelector("#mensaje");
+    const formulario = document.querySelector("#formulario");
+    const btnSubmit = document.querySelector("#formulario button[type='submit']");
+    const btnReset = document.querySelector("#formulario button[type='reset']");
+    const spinner = document.querySelector("#spinner");
 
     // Asignar eventos
-    inputEmail.addEventListener('input', validar);
-    inputAsunto.addEventListener('blur', validar);
-    inputMensaje.addEventListener('blur', validar);
+    inputEmail.addEventListener("input", validar);
+    inputAsunto.addEventListener("blur", validar);
+    inputMensaje.addEventListener("blur", validar);
 
-    formulario.addEventListener('submit', enviarEmail);
+    formulario.addEventListener("submit", enviarEmail);
 
-    btnReset.addEventListener('click', function(e) {
+    btnReset.addEventListener("click", function(e) {
         e.preventDefault();
         resetFormulario();
     })
@@ -30,19 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function enviarEmail(e) {
         e.preventDefault();
 
-        spinner.classList.add('flex');
-        spinner.classList.remove('hidden');
+        spinner.classList.add("flex");
+        spinner.classList.remove("hidden");
 
         setTimeout(() => {
-            spinner.classList.remove('flex');
-            spinner.classList.add('hidden');
+            spinner.classList.remove("flex");
+            spinner.classList.add("hidden");
 
             resetFormulario();
 
             // Crear una alerta
-            const alertaExito = document.createElement('P');
-            alertaExito.classList.add('bg-green-500', 'text-white', 'p-2', 'text-center', 'rounded-lg', 'mt-10', 'font-bold', 'text-sm', 'uppercase');
-            alertaExito.textContent = 'Mensaje enviado correctamente';
+            const alertaExito = document.createElement("P");
+            alertaExito.classList.add("bg-green-500", "text-white", "p-2", "text-center", "rounded-lg", "mt-10", "font-bold", "text-sm", "uppercase");
+            alertaExito.textContent = "Mensaje enviado correctamente";
 
             formulario.appendChild(alertaExito);
 
@@ -53,16 +54,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validar(e) {
-        if(e.target.value.trim() === '') {
+        if(e.target.value.trim() === "") {
             mostrarAlerta(`El Campo ${e.target.id} es obligatorio`, e.target.parentElement);
-            email[e.target.name] = '';
+            email[e.target.name] = "";
             comprobarEmail();
             return;
         }
 
-        if(e.target.id === 'email' && !validarEmail(e.target.value)) {
-            mostrarAlerta('El email no es válido', e.target.parentElement);
-            email[e.target.name] = '';
+        if(e.target.id === "email" && !validarEmail(e.target.value)) {
+            mostrarAlerta("El email no es válido", e.target.parentElement);
+            email[e.target.name] = "";
             comprobarEmail();
             return;
         }
@@ -80,9 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
         limpiarAlerta(referencia);
         
         // Generar alerta en HTML
-        const error = document.createElement('P');
+        const error = document.createElement("P");
         error.textContent = mensaje;
-        error.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center');
+        error.classList.add("bg-red-600", "text-white", "p-2", "text-center");
        
         // Inyectar el error al formulario
         referencia.appendChild(error);
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function limpiarAlerta(referencia) {
         // Comprueba si ya existe una alerta
-        const alerta = referencia.querySelector('.bg-red-600');
+        const alerta = referencia.querySelector(".bg-red-600");
         if(alerta) {
             alerta.remove();
         }
@@ -103,20 +104,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function comprobarEmail() {
-        if(Object.values(email).includes('')) {
-            btnSubmit.classList.add('opacity-50');
+        if(Object.values(email).includes("")) {
+            btnSubmit.classList.add("opacity-50");
             btnSubmit.disabled = true;
             return
         } 
-        btnSubmit.classList.remove('opacity-50');
+        btnSubmit.classList.remove("opacity-50");
         btnSubmit.disabled = false;
     }
 
     function resetFormulario() {
         // reiniciar el objeto
-        email.email = '';
-        email.asunto = '';
-        email.mensaje = '';
+        email.email = "";
+        email.cc = "",
+        email.asunto = "";
+        email.mensaje = "";
 
         formulario.reset();
         comprobarEmail();
