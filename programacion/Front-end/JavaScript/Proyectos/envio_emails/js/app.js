@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Asignar eventos
     inputEmail.addEventListener('input', validar);
-    inputAsunto.addEventListener('input', validar);
-    inputMensaje.addEventListener('input', validar);
+    inputAsunto.addEventListener('blur', validar);
+    inputMensaje.addEventListener('blur', validar);
 
     formulario.addEventListener('submit', enviarEmail);
 
