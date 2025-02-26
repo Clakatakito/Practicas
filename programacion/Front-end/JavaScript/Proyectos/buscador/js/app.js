@@ -89,7 +89,7 @@ function llenarSelect(){
 function filtrarCoches(){
     const resultado = coches.filter(filtrarMarcas).filter(filtrarAño).filter(filtrarPrcioMin).filter(filtrarPrcioMax).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor)
     
-    if(resultado = length){
+    if(resultado.length){
         mostrarCoches(resultado)
     }else{
         limpiarHTML()
