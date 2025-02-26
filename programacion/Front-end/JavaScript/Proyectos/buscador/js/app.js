@@ -16,6 +16,7 @@ const resultado = document.querySelector("#resultado")
 const datosBusqueda = {
     marca: "",
     modelo: "",
+    minimo: "",
     year: "",
     color: "",
     puertas: "",
@@ -38,18 +39,23 @@ year.addEventListener("change", (e) => {
 })
 minimo.addEventListener("change", (e) => {
     datosBusqueda.minimo = e.target.value
+    filtrarCoches()
 })
 maximo.addEventListener("change", (e) => {
     datosBusqueda.maximo = e.target.value
+    filtrarCoches()
 })
 puertas.addEventListener("change", (e) => {
-    datosBusqueda.puertas = e.target.value
+    datosBusqueda.puertas = parseInt(e.target.value)
+    filtrarCoches()
 })
 color.addEventListener("change", (e) => {
     datosBusqueda.color = e.target.value
+    filtrarCoches()
 })
 transmision.addEventListener("change", (e) => {
     datosBusqueda.transmision = e.target.value
+    filtrarCoches()
 })
 
 
@@ -58,9 +64,9 @@ transmision.addEventListener("change", (e) => {
 function mostrarCoches(coches){
     limpiarHTML()
     coches.forEach(coche => {
-        const {marca, modelo, year, puertas, color, transmision} = coche
+        const {marca, modelo, year, puertas, color, transmision, precio} = coche
         const autoHTML = document.createElement("P")
-        autoHTML.textContent = `${marca} ${modelo} - ${puertas} Puertas ${color} ${transmision}`
+        autoHTML.textContent = `${marca} ${modelo} - ${puertas} Puertas ${color} ${transmision} ${precio}`
         resultado.appendChild(autoHTML)
     })
 
@@ -81,18 +87,67 @@ function llenarSelect(){
     
 }
 function filtrarCoches(){
-    const resultado = coches.filter(filtrarMarcas).filter(filtrarAño)
-    mostrarCoches(resultado)
+    const resultado = coches.filter(filtrarMarcas).filter(filtrarAño).filter(filtrarPrcioMin).filter(filtrarPrcioMax).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor)
+    
+    if(resultado = length){
+        mostrarCoches(resultado)
+    }else{
+        limpiarHTML()
+        alerta()
+    }
 }
 function filtrarMarcas(coche){
     if(datosBusqueda.marca){
         return coche.marca === datosBusqueda.marca
     }
-    return coches
+    return coche
 }
 function filtrarAño(coche){
     if(datosBusqueda.year){
         return coche.year === parseInt(datosBusqueda.year)
     }
-    return coches
+    return coche
+}
+function filtrarPrcioMin(coche){
+    const {minimo} = datosBusqueda
+    if(minimo){
+        return coche.precio >= minimo
+    }
+    return coche
+}
+function filtrarPrcioMax(coche){
+    const {maximo} = datosBusqueda
+    if(maximo){
+        return coche.precio <= maximo
+    }
+    return coche
+}
+function filtrarPuertas(coche){
+    const {puertas} = datosBusqueda
+    if(puertas){
+        return coche.puertas === datosBusqueda.puertas
+    }
+    return coche
+}
+function filtrarTransmision(coche){
+    const {transmision} = datosBusqueda
+    if(transmision){
+        return coche.transmision === datosBusqueda.transmision
+    }
+    return coche
+}
+function filtrarColor(coche){
+    const {color} = datosBusqueda
+    if(color){
+        return coche.color === datosBusqueda.color
+    }
+    return coche
+}
+function alerta(){
+    const alerta = document.createElement("P")
+    alerta.textContent = "NO HAY ESOS COCHES, BUSCA OTROS"
+    alerta.style.backgroundColor = "red"
+    alerta.style.color = "white"
+    resultado.appendChild(alerta)
+    
 }
