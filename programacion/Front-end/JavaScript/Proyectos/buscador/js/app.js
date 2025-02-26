@@ -8,7 +8,7 @@ const maximo = document.querySelector("#maximo")
 const puertas = document.querySelector("#puertas")
 const transmision = document.querySelector("#transmision")
 const color = document.querySelector("#color")
-const resultado = document.querySelector("#resultado")
+const resultadoPag = document.querySelector("#resultado")
 
 
 //objeto que resultados
@@ -67,13 +67,13 @@ function mostrarCoches(coches){
         const {marca, modelo, year, puertas, color, transmision, precio} = coche
         const autoHTML = document.createElement("P")
         autoHTML.textContent = `${marca} ${modelo} - ${puertas} Puertas ${color} ${transmision} ${precio}`
-        resultado.appendChild(autoHTML)
+        resultadoPag.appendChild(autoHTML)
     })
 
 }
 function limpiarHTML(){
-    while(resultado.firstChild){
-        resultado.removeChild(resultado.firstChild)
+    while(resultadoPag.firstChild){
+        resultadoPag.removeChild(resultado.firstChild)
     }
 }
 function llenarSelect(){
@@ -148,6 +148,6 @@ function alerta(){
     alerta.textContent = "NO HAY ESOS COCHES, BUSCA OTROS"
     alerta.style.backgroundColor = "red"
     alerta.style.color = "white"
-    resultado.appendChild(alerta)
+    resultadoPag.appendChild(alerta)
     
 }
