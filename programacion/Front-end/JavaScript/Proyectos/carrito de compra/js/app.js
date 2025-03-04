@@ -12,6 +12,10 @@ function CargarEventos(){
         artiCulosCarritos = [] //vaciamos el arreglo
         limpiarHTML()
     })
+    document.addEventListener("DOMContentLoaded", ()=>{
+        artiCulosCarritos = JSON.parse(localStorage.getItem("curso")) || []
+        carritoHTML()
+    })
 }
 CargarEventos()
 
@@ -120,7 +124,6 @@ function carritoHTML(){
 
     //limpiar HTML
     limpiarHTML()
-
     artiCulosCarritos.forEach(curso => {
         const row = document.createElement("tr")
         row.innerHTML = `
@@ -143,6 +146,10 @@ function carritoHTML(){
         `;
         contenedorCarrito.appendChild(row)
     })
+    agregarLocalStorage()
+}
+function agregarLocalStorage(){
+    localStorage.setItem("curso", JSON.stringify(artiCulosCarritos))
 }
 
 function limpiarHTML(){
