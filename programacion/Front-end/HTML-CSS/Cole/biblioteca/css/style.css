@@ -1,0 +1,64 @@
+
+nav {
+  display: flex;
+  justify-content: space-between; /* Separa los elementos en los extremos */
+  align-items: center; /* Alinea verticalmente */
+  background-color: rgb(182, 209, 141);
+  padding: 15px 30px;
+}
+
+#logo {
+  display: flex;
+  align-items: center; /* Centra la imagen verticalmente */
+  order: -1; /* Mueve el logo a la izquierda */
+}
+
+#logo img {
+  width: 50px;
+}
+
+#btns {
+  display: flex;
+  gap: 10px; /* Espaciado entre los botones */
+}
+
+
+
+button {
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
+    background-color: hsl(236, 32%, 26%);
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+  }
+  
+  button::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    right: 100%;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #3cefff;
+    transform-origin: center;
+    transform: translate3d(50%, -50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
+  }
+  
+  button:hover {
+    cursor: pointer;
+    color: #161616;
+  }
+  
+  button:hover::before {
+    transform: translate3d(50%, -50%, 0) scale3d(15, 15, 15);
+  }
+  
