@@ -1,0 +1,141 @@
+nav {
+    display: flex;
+    justify-content: space-between; /* Separa los elementos en los extremos */
+    align-items: center; /* Alinea verticalmente */
+    background-color: rgba(105, 234, 94, 1);
+    
+    height: 80px;
+  }
+  
+#logo {
+    display: flex;
+    align-items: flex-start; /* Centra la imagen verticalmente */
+    justify-content: flex-start;
+    order: -1; /* Mueve el logo a la izquierda */
+}
+  
+#logo img {
+    width: auto;
+    height: 80px;
+}
+  
+#btns {
+    display: flex;
+    gap: 10px; /* Espaciado entre los botones */
+    padding: 15px 30px;
+}
+
+#img-books{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#img-books img{
+    display: flex;
+    width: 50%; /*80%*/
+    height: 220px; /*320px*/
+    object-fit: cover;
+}
+
+.txt{
+    color: purple;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+}
+#libro-mes{
+    background-color: black;
+    display: flex;
+    width: 70%;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+i{
+    position: absolute;
+    height: 200px;
+    background: red;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    animation: animate 5s linear infinite;
+}
+i:nth-child(3n + 1)
+{
+    background: linear-gradient(transparent, #0ff);
+}
+i:nth-child(3n + 2)
+{
+    background: linear-gradient(transparent, #0f0);
+}
+i:nth-child(3n + 3)
+{
+    background: linear-gradient(transparent, #f00);
+}
+
+@keyframes animate{
+    0%{
+        transform: translateY(-200px);
+    }
+    100%{
+        transform: translateY(calc(100vh + 200px));
+    }
+}
+
+footer {
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    margin-top: 20px;
+    bottom: 0;
+    padding: 10px;
+}
+footer div p{
+    color: white;
+}
+
+ 
+  
+  
+button {
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
+    background-color: rgb(45, 48, 88);
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+}
+    
+button::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    right: 100%;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #3cefff;
+    transform-origin: center;
+    transform: translate3d(50%, -50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
+}
+    
+button:hover {
+    cursor: pointer;
+    color: #161616;
+}
+    
+button:hover::before {
+    transform: translate3d(50%, -50%, 0) scale3d(15, 15, 15);
+}
+
+        
