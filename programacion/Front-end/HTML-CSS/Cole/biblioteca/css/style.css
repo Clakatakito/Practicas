@@ -24,11 +24,52 @@ nav {
     height: 80px;
 }
   
+
 #btns {
     display: flex;
     gap: 10px; /* Espaciado entre los botones */
     padding: 15px 30px;
 }
+
+button {
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
+    background-color: rgb(45, 48, 88);
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+}
+    
+button::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    right: 100%;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #3cefff;
+    transform-origin: center;
+    transform: translate3d(50%, -50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
+}
+    
+button:hover {
+    cursor: pointer;
+    color: #161616;
+}
+    
+button:hover::before {
+    transform: translate3d(50%, -50%, 0) scale3d(15, 15, 15);
+}
+
+/* Principio del index.html */
 
 #img-books{
     display: flex;
@@ -111,10 +152,13 @@ footer div p{
 .titulo{
     text-align: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
 }
 
 #container{
     display: flex;
+    justify-content: space-between;
+    padding: 20px;
     width: 1000px;
     min-height: 400px;
     background-color: black;
@@ -122,6 +166,7 @@ footer div p{
 }
 #container-img{
     display: flex;
+    justify-content: space-between;
 }
 #container-img img{
     width: 300px;
@@ -130,55 +175,43 @@ footer div p{
     z-index: 3;
 }
 #container-txt{
+    background-color: black;
     z-index: 3;
-    background-color: #f00;
-    width: 800px;
-    display: flex
+    width: 300px;
+    word-wrap: wrap;
+    overflow-wrap: break-word;
+    white-space: normal;
     
 }
 #container-txt p{
     color: white;
+    word-wrap: break-word;
+    z-index: 3;
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: center;
     
 }
- 
+/*Fin del index.html */
   
-  
-button {
-    z-index: 1;
+/* Principio de nosotros.html */
+
+.slider{
+    aspect-ratio: 10 / 16;
+    width: 300px;
     position: relative;
-    font-size: inherit;
-    font-family: inherit;
-    color: white;
-    padding: 0.5em 1em;
-    outline: none;
-    border: none;
-    background-color: rgb(45, 48, 88);
-    overflow: hidden;
-    transition: color 0.4s ease-in-out;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
 }
-    
-button::before {
-    content: '';
-    z-index: -1;
-    position: absolute;
-    top: 100%;
-    right: 100%;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: #3cefff;
-    transform-origin: center;
-    transform: translate3d(50%, -50%, 0) scale3d(0, 0, 0);
-    transition: transform 0.45s ease-in-out;
+.slider img{
+    display: flex;
+    width: 100%;
+    left: 0;
+    object-fit: cover;
+    border-radius: 5px;
+    scroll-snap-align: center;
 }
-    
-button:hover {
-    cursor: pointer;
-    color: #161616;
-}
-    
-button:hover::before {
-    transform: translate3d(50%, -50%, 0) scale3d(15, 15, 15);
-}
+
 
         
