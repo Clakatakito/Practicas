@@ -1,4 +1,3 @@
-
 //frasses aleatorias
 
 console.log("hola monstro")
@@ -34,7 +33,7 @@ frasesFamosas.textContent = fraseAleatoria
 
 function lluvia(){
     const divLluvia = document.querySelector("#libro-mes")
-    let cantidad = 40
+    let cantidad = 250
     let i = 0
     while(i < cantidad){
         let caida = document.createElement("I")
@@ -42,9 +41,9 @@ function lluvia(){
         let posX = Math.floor(Math.random()* window.innerWidth)
         let delay = Math.random() * -20
         let duration = Math.random() * 5
-
         caida.style.width = 0.2 + size + "px"
         caida.style.left = posX + "px"
+        //caida.style.zIndex = 2 //por delante
         caida.style.animationDelay = delay + "s"
         caida.style.animationDuration = duration = 1 + duration + "s"
         divLluvia.appendChild(caida)
@@ -53,4 +52,3 @@ function lluvia(){
 
 }
 lluvia()
-
