@@ -1,7 +1,7 @@
 //frasses aleatorias
 
 console.log("hola monstro")
-frasesFamosas = document.querySelector("#frase-famosa")
+frasesFamosas = document.querySelector(".frase-famosa")
 const frases = [
     "La educación es el arma más poderosa que puedes usar para cambiar el mundo. — Nelson Mandela",
     "No hay medicina que cure lo que no cura la felicidad. — Gabriel García Márquez",
