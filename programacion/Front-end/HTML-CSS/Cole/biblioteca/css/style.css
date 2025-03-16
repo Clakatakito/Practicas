@@ -1,24 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body{
     background-color: white;
     position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+    align-self: center;
 }
 
 nav {
     display: flex;
     justify-content: space-between; /* Separa los elementos en los extremos */
-    align-items: center; /* Alinea verticalmente */
-    background-color: rgba(105, 234, 94, 1);
+    align-items:end; /* Alinea verticalmente */
     
     height: 80px;
   }
-  
+
+
 #logo {
     display: flex;
     align-items: flex-start; /* Centra la imagen verticalmente */
     justify-content: flex-start;
     order: -1; /* Mueve el logo a la izquierda */
 }
-  
+
 #logo img {
     width: auto;
     height: 80px;
@@ -33,6 +43,7 @@ nav {
 
 frase-famosa{
     text-align: center;
+    align-content: center;
 }
 
 button {
@@ -44,7 +55,7 @@ button {
     padding: 0.5em 1em;
     outline: none;
     border: none;
-    background-color: rgb(45, 48, 88);
+    background-color: rgb(11, 68, 0);
     overflow: hidden;
     transition: color 0.4s ease-in-out;
 }
@@ -58,7 +69,7 @@ button::before {
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    background-color: #3cefff;
+    background-color: #a2e096;
     transform-origin: center;
     transform: translate3d(50%, -50%, 0) scale3d(0, 0, 0);
     transition: transform 0.45s ease-in-out;
@@ -83,17 +94,39 @@ button:hover::before {
 }
 #img-books img{
     display: flex;
-    width: 50%; /*80%*/
+    width: 75%; /*80%*/
     height: 220px; /*320px*/
     object-fit: cover;
+    border: solid 1px;
+}
+
+.hrprincipal{
+    width: 100%;
 }
 
 .txt{
-    color: purple;
-    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    width: 500px;
+    display: flex;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     text-align: center;
+    background-color: rgb(125, 190, 117);
+    border: solid rgb(11, 68, 0);
+    border-width: 0.5px;
 }
+
+#textofrasesfamosas{
+    justify-content: center;
+    text-align: center;
+}
+
+hr{
+   border: solid 2px;
+   color: rgb(11, 68, 0);
+   width: 90%;
+}
+
 #libro-mes{
     background-color: black;
     display: flex;
@@ -148,13 +181,11 @@ i:nth-child(4n + 4)
 .footer {
     position: relative;
     width: 100%;
-    max-width: 1790px;
     display: flex;
-    background: #286bcf;
+    background: #499636;
     min-height: 100px;
-    padding: 20px 50px;
     justify-content: center;
-    align-items: center;
+    text-align: center;
     flex-direction: column;
 }
 
@@ -163,54 +194,64 @@ i:nth-child(4n + 4)
     justify-content: center;
     position: relative;
     align-items: center;
+    text-align: center;
     margin: 10px 0;
     flex-wrap: wrap;
 }
 
 .menu-elem {
     list-style: none;
+    text-align: center;
 }
 
 .menu-icon {
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 20px;
     display: inline-block;
     text-decoration: none;
     margin: 5px 10px;
-    opacity: 0.5;
+    opacity: 1;
     transition: 0.3s;
+    text-align: center;
 }
 
 .menu-icon:hover {
     opacity: 1;
+    text-align: center;
 }
 
 .text {
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 15px;
+}
+
+.menu-icon:hover{
+    color: #ffffff;
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
     .footer {
         padding: 20px;
+        text-align: center;
     }
 
     .menu {
         flex-direction: column;
         gap: 10px;
+        text-align: center;
     }
 
     .menu-icon {
         font-size: 18px;
         margin: 5px;
+        text-align: center;
     }
 
     .text {
         font-size: 18px;
+        text-align: center;
     }
 }
 @media (max-width: 768px) {
@@ -242,7 +283,7 @@ i:nth-child(4n + 4)
     width: 1000px;
     min-height: 400px;
     background-color: black;
-    box-shadow: 5px 5px 5px 15px white;
+    box-shadow: 5px 5px 5px 15px rgb(139, 185, 102);
     z-index: 3;
 }
 #container-img{
@@ -299,7 +340,7 @@ i:nth-child(4n + 4)
     scroll-snap-align: center;
 }
 
-.presentacion{
+.presentacion {
     background-color: rgb(182, 118, 45);
     width: 100%;
     height: 200px;
@@ -317,14 +358,14 @@ i:nth-child(4n + 4)
 }
 .presentacion div{
     display: flex;
-    flex-direction: column;
-    padding-left: 30px;
-    
-    
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-left: 30px;    
 }
 .presentacion div p{
     border-left: 5px solid #BFA181;
     display: flex;
+
     
 }
 
