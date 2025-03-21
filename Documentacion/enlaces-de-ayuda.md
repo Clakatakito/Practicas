@@ -95,6 +95,23 @@ APIS
 
 [Repertorios_APIS](https://www.tiktok.com/@aristidevs/video/7361393245479390497?is_from_webapp=1&sender_device=pc)
 
+
+Ilustraciones
+
+https://www.humaaans.com/
+
+https://undraw.co/illustrations
+
+https://www.vecteezy.com/
+
+Imágenes
+
+https://www.pexels.com/es-es/    <- ¡También tiene videos!
+
+https://unsplash.com/
+
+https://burst.shopify.com/
+
 OTROS
 
 [De_localhost_a_URL](https://www.tiktok.com/@midudev/video/7424888244443172129?is_from_webapp=1&sender_device=pc)
