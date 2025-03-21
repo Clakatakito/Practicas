@@ -4,6 +4,8 @@ ENLACES DE AYUDA PARA MI
 
 
 
+DEV
+
 CERTIFICADOS
 
 [Certs_Mouredev](https://www.youtube.com/shorts/zcb6biEmpSI)
@@ -96,6 +98,12 @@ APIS
 [Repertorios_APIS](https://www.tiktok.com/@aristidevs/video/7361393245479390497?is_from_webapp=1&sender_device=pc)
 
 
+
+
+
+
+UX
+
 Ilustraciones
 
 https://www.humaaans.com/
@@ -111,6 +119,12 @@ https://www.pexels.com/es-es/    <- ¡También tiene videos!
 https://unsplash.com/
 
 https://burst.shopify.com/
+
+ONBOARDING
+
+https://www.useronboard.com/user-onboarding-teardowns/
+
+https://1stwebdesigner.com/mobile-app-user-onboarding/
 
 OTROS
 
