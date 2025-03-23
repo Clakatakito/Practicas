@@ -126,6 +126,10 @@ https://www.useronboard.com/user-onboarding-teardowns/
 
 https://1stwebdesigner.com/mobile-app-user-onboarding/
 
+Blank states
+
+https://www.espacioux.com/blog/empty-state-ux
+
 OTROS
 
 [De_localhost_a_URL](https://www.tiktok.com/@midudev/video/7424888244443172129?is_from_webapp=1&sender_device=pc)
