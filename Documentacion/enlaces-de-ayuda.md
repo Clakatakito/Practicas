@@ -130,6 +130,10 @@ Blank states
 
 https://www.espacioux.com/blog/empty-state-ux
 
+Prototipos y Flujos de aplicaciones móviles
+
+https://uxarchive.com/
+
 OTROS
 
 [De_localhost_a_URL](https://www.tiktok.com/@midudev/video/7424888244443172129?is_from_webapp=1&sender_device=pc)
