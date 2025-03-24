@@ -130,9 +130,15 @@ Blank states
 
 https://www.espacioux.com/blog/empty-state-ux
 
-Prototipos y Flujos de aplicaciones móviles
+PROTOTIPOS Y FLUJOS DE APLICACIONES MÓVILES
 
 https://uxarchive.com/
+
+UX WRITING
+
+https://www.espacioux.com/blog/ux-writing-diseno-interfaces
+
+[Chatbots](https://www.espacioux.com/blog/consejos-chatbots-usuarios)
 
 OTROS
 
