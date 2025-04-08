@@ -1,15 +1,17 @@
 services:
+
   duplicati:
     image: lscr.io/linuxserver/duplicati:latest
     container_name: duplicati
     environment:
-      - PUID=0
-      - PGID=0
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Madrid
+      - DUPLICATI__WEBSERVICE_PASSWORD=p4ssw0rd      
     volumes:
-      - /etc/duplicati:/config
-      - /etc/backups:/backup
-      - /home/alex/docker/home-assistand:/source/home-assistand
+      - ./config:/config
+      - ./backups:/backups
+      - ./source:/source
     ports:
-      - 8111:8200
+      - "8200:8200"
     restart: unless-stopped
