@@ -142,6 +142,10 @@ https://www.espacioux.com/blog/ux-writing-diseno-interfaces
 
 [Chatbots](https://www.espacioux.com/blog/consejos-chatbots-usuarios)
 
+COLORES
+
+https://mycolor.space/?hex=%231CA6CF&sub=1
+
 OTROS
 
 [De_localhost_a_URL](https://www.tiktok.com/@midudev/video/7424888244443172129?is_from_webapp=1&sender_device=pc)
