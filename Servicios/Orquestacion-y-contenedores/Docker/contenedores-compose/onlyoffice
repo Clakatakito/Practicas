@@ -50,3 +50,31 @@ y te conectas con la ip-del-servidor/puerto-elegido y con la contraseña que hay
 
 
 Y YA ESTA
+
+
+
+
+
+Si no funciona prueba este:
+
+services:
+
+  onlyoffice-docs:
+    image: onlyoffice/documentserver:latest  #latest-arm64 (para Raspberry Pi)
+    container_name: onlyoffice-docs
+    restart: unless-stopped
+    stdin_open: true
+    tty: true    
+    ports:
+      - "8000:80"
+      - "8543:443"
+    volumes:
+      - ./onlyoffice/Docs/logs:/var/log/onlyoffice
+      - ./onlyoffice/Docs/data:/var/www/onlyoffice/Data
+      - ./onlyoffice/Docs/lib:/var/lib/onlyoffice
+      - ./onlyoffice/Docs/db:/var/lib/postgresql      
+    environment:
+      - JWT_ENABLED=true
+      - JWT_SECRET=my_secret
+      - JWT_HEADER=Authorization
+      - JWT_IN_BODY=true
