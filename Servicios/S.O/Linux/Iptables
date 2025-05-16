@@ -1,1 +1,73 @@
-para mañana haber que tal
+
+iptables es una herramienta de línea de comandos en Linux que permite configurar reglas para el firewall del sistema.
+
+Sirve para controlar el tráfico de red que entra o sale del equipo, permitiendo o bloqueando conexiones según ciertas condiciones, como dirección IP, puerto o protocolo.
+
+#Eliminar reglas iptables definidas, -F=Flush(Borrar)
+
+  -sudo iptables -F
+
+
+Iptables funciona en "tablas" con el parametro "-t" hacemos referencia, por defecto si no usamos el "-t" todo se creara en la tabla "filter", NO SE PUEDEN CREAR TABLAS
+
+Iptables tiene las siguientes tablas:
+
+filter (la tabla por defecto para permitir o denegar paquetes)
+
+nat (traducción de direcciones)
+
+mangle (modificación avanzada de paquetes)
+
+raw (para omitir el seguimiento de conexiones)
+
+security (integración con SELinux)
+
+
+#Ver las reglas iptables de una tabla, -L=lista las reglas, -v=muestra detalles (como los contadores de paquetes/bytes), -n=no resuelve DNS (más rápido).
+
+  -sudo iptables -L -v -n #ver reglas en la tabla filter(la tabla por defecto)
+  -sudo iptables -t nat -L -v -n #ver reglas en la tabla nat
+
+#Reiniciar contador(Un contador en iptables es un número que cuenta los paquetes que coinciden con una regla)
+
+  -sudo iptables -Z
+
+
+En iptables, una cadena es una lista de reglas que se revisan una por una para decidir qué hacer con un paquete de red (aceptarlo, bloquearlo, redirigirlo, etc.).
+
+🔗 Cadenas principales (predefinidas por el sistema):
+INPUT → controla el tráfico que llega al sistema.
+
+OUTPUT → controla el tráfico que sale del sistema.
+
+FORWARD → controla el tráfico que pasa a través del sistema (como si fuera un router).
+
+Estas están en la tabla filter, que es la más común.
+
+
+Jerarquia en iptables:
+Tabla > Cadena > Regla
+
+
+                                                    ┌─────────────┐
+                                                    │   Tabla     │
+                                                    │ (filter,    │
+                                                    │  nat, etc.) │
+                                                    └─────┬───────┘
+                                                          │
+                                                          ▼
+                                                    ┌─────────────┐
+                                                    │   Cadena    │
+                                                    │ (INPUT,     │
+                                                    │  OUTPUT,    │
+                                                    │  FORWARD)   │
+                                                    └─────┬───────┘
+                                                          │
+                                                          ▼
+                                                    ┌─────────────┐
+                                                    │   Regla     │
+                                                    │ (Condición  │
+                                                    │  + Acción)  │
+                                                    └─────────────┘
+
+
