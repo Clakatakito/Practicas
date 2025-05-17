@@ -71,3 +71,14 @@ Tabla > Cadena > Regla
                                                     └─────────────┘
 
 
+
+#Poner las cadenas en ACCEPT/DROP
+  -sudo iptables -P INPUT/FORDWARD/OUTPUT DROP/ACCEPT
+
+Una vez explicado eso vamos ha explicar las politicas por defecto, que es lo que va a hacer un paquete cuando la regla no coincide, es decir, si tenemos las cadenas INPUT, FORWARD y OUTPUT en DROP por ejemplo, por defecto no entra nada ni sale nada al menos hasta que tu lo dictamines, si lo tubieramos en ACCEPT aceptaria TODO, y ya podriamos poner las reglas de lo que no queremos que entre
+
+#muestra todas las reglas actuales de iptables en formato de línea de comandos
+  -sudo iptables -S
+  -P INPUT DROP
+  -P FORWARD ACCEPT
+  -P OUTPUT ACCEPT
