@@ -82,3 +82,7 @@ Una vez explicado eso vamos ha explicar las politicas por defecto, que es lo que
   -P INPUT DROP
   -P FORWARD ACCEPT
   -P OUTPUT ACCEPT
+
+
+#Añadir una regla iptable sencilla
+  -sudo iptables -A INPUT -j ACCEPT (el -A la añade al principio de todas las reglas, y el -I al final de las reglas, el -j es para ACCEPT/DROP)
