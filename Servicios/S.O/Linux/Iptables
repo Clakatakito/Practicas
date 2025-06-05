@@ -129,3 +129,13 @@ sudo iptables -S
 -A OUTPUT -o enp0s3 -p icmp -j ACCEPT
 
 Practicando para hacer ping fuera de la red, lo consegui y hice ping al 8.8.8.8, pero al rato y sin tocar nada volvi a probar y no funcionaba y no habia tocado nada, y yo creia que todo iba bien en mi loclahost porque podia acceder a  mi CUP's desde una interfaz, en general, aunque antes de la regla de permitir el trafico en local ya hos funcionaban en local los servicios seria por falta de refrescarlos o algo raro que no se, siempre es bueno tenerlo
+
+por el momento:
+
+-P INPUT DROP
+-P FORWARD DROP
+-P OUTPUT DROP
+-A INPUT -i enp0s3 -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A OUTPUT -o enp0s3 -p icmp -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
