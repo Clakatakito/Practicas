@@ -84,5 +84,48 @@ Una vez explicado eso vamos ha explicar las politicas por defecto, que es lo que
   -P OUTPUT ACCEPT
 
 
-#Añadir una regla iptable sencilla
-  -sudo iptables -A INPUT -j ACCEPT (el -A la añade al principio de todas las reglas, y el -I al final de las reglas, el -j es para ACCEPT/DROP)
+#Estructura regla iptable sencilla
+  -sudo iptables -A INPUT (medida que quieres optar) -j ACCEPT (el -A la añade al principio de todas las reglas, y el -I al final de las reglas, el -j es para ACCEPT/DROP)
+
+
+#Eliminar una regla iptables
+
+Ver las reglas tienes y su numero
+  -sudo iptables -L INPUT --line-numbers
+
+Eliminar la regla con su numero
+  -sudo iptables -D INPUT (num)
+
+NO SE PUEDEN EDITAR LAS REGLAS, SE TIENEN QUE BORRAR Y PONER BIEN
+
+#Reglas iptables
+
+Permitir el ping, (la enp0s3 es la que sale a internet)
+  -sudo iptables -A OUTPUT -i enp0s3 -p icmp -j ACCEPT
+  -sudo iptables -A OUTPUT -o enp0s3 -p icmp -j ACCEPT
+
+Da igual si pones primero la regla de INPUT o OUTPUT ya que tienen que estar las 2, recuerda que INPUT deja entrar y OUTPUT deja salir, pues es obio que si dices que puede salir(INPUT) pero no le dices que puede entrar(OUTPUT), no funcionara, ya que se complementan el INPUT y OUTPUT
+
+Permitir el trafico en local
+  -sudo iptables -A INPUT -i lo -j ACCEPT
+  -sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+
+**ACLARACION
+
+Es muy importante permitir el trafico en local
+El tráfico por la interfaz lo (loopback) es esencial porque permite que el propio sistema se comunique internamente consigo mismo, como cuando accedes a localhost; si tienes políticas DROP en iptables y no permites explícitamente el tráfico en lo, muchas funciones internas como servidores locales o resoluciones DNS pueden dejar de funcionar, por eso siempre se recomienda añadir reglas que acepten el tráfico en lo.
+
+
+Ejemplo personal de la importancia del lo:
+
+yo practicando tenia esto:
+
+sudo iptables -S
+-P INPUT DROP
+-P FORWARD DROP
+-P OUTPUT DROP
+-A INPUT -i enp0s3 -p icmp -j ACCEPT
+-A OUTPUT -o enp0s3 -p icmp -j ACCEPT
+
+Practicando para hacer ping fuera de la red, lo consegui y hice ping al 8.8.8.8, pero al rato y sin tocar nada volvi a probar y no funcionaba y no habia tocado nada, y yo creia que todo iba bien en mi loclahost porque podia acceder a  mi CUP's desde una interfaz, en general, aunque antes de la regla de permitir el trafico en local ya hos funcionaban en local los servicios seria por falta de refrescarlos o algo raro que no se, siempre es bueno tenerlo
