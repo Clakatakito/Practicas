@@ -104,6 +104,15 @@ Permitir el ping, (la enp0s3 es la que sale a internet)
   -sudo iptables -A OUTPUT -i enp0s3 -p icmp -j ACCEPT
   -sudo iptables -A OUTPUT -o enp0s3 -p icmp -j ACCEPT
 
+**ACLARACION
+
+🔹 ¿Qué hace -i y -o?
+-i → indica la interfaz de entrada (como enp0s3 o lo) → se usa en la cadena INPUT.
+-o → indica la interfaz de salida → se usa en la cadena OUTPUT.
+
+-i solo se usa en INPUT, un truco es que INPUT empieza por i, como -i, pero en minusculas
+-o solo se usa en OUTPUT, un truco es que OUTPUT empieza por o, como -o, pero en minusculas
+
 Da igual si pones primero la regla de INPUT o OUTPUT ya que tienen que estar las 2, recuerda que INPUT deja entrar y OUTPUT deja salir, pues es obio que si dices que puede salir(INPUT) pero no le dices que puede entrar(OUTPUT), no funcionara, ya que se complementan el INPUT y OUTPUT
 
 Permitir el trafico en local
@@ -139,3 +148,23 @@ por el momento:
 -A INPUT -i lo -j ACCEPT
 -A OUTPUT -o enp0s3 -p icmp -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT
+
+
+Bien, de momento lo que podemos hacer son pings hacia internet y recibirlos, y dejar pasar el trafico por lo(localhost), recordar tener las reglas de las lineas 139 y 141, porque el ping saldra y entrara si, pero no circulara bien por localhost asique hay que tenerlo
+
+Ahora lo siguiente que haremos es permitir el trafico para las paginas web:
+
+# Permitir tráfico saliente HTTP
+sudo iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT
+
+Le decimos que acepte las conexion cuyo puerto destino sea el 80
+
+# Permitir tráfico saliente HTTPS
+sudo iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
+
+Le decimos que acepte las conexion cuyo puerto destino sea el 433
+
+# Permitir tráfico entrante relacionado a esas conexiones
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+Ahora aceptamos las peticiones que vengas de esas llamadas de las comandas anteriores que esten establecidas
