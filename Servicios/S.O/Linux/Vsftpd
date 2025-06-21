@@ -1,0 +1,17 @@
+
+vsftpd (Very Secure FTP Daemon) es un servidor FTP para sistemas Unix/Linux. Permite transferir archivos entre clientes y servidores de forma segura y rápida, cumpliendo con el protocolo FTP.
+
+  -sudo apt install vsftpd
+
+El paquete vsftpd solo tiene un archivo, el del configuracion, ubicado en "/etc/vsftpd.conf"
+
+
+VSFTPD EXPLICACION
+vsftpd significa Very Secure FTP Daemon
+
+vsftpd viene del protocolo FTP (File Transfer Protocol), que sirve para transferir archivos entre un cliente y un servidor. Es uno de los protocolos más antiguos para este fin. Lo que hace vsftpd es implementar ese protocolo en forma de servidor y securizarlo, ahy viene el Secure en su nombre, para que tú puedas montar uno en tu máquina y permitir que otros (o tú mismo) se conecten y suban/bajen archivos.
+
+
+
+El paquete solo afecta a los usuarios existentes en el S.O. donde ha sido instalado. Más adelante ya veremos, pero por ejemplo, no puedes inventarte usuarios e ingresar: tienen que existir en el sistema. A no ser que habilites un modo anónimo, para que cualquiera pueda acceder.
+
