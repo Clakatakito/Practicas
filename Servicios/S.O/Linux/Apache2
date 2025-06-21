@@ -1,1 +1,62 @@
-que hacer
+
+Apache2 es un servidor web que muestra páginas web al navegador cuando alguien visita tu sitio. Básicamente, responde a peticiones HTTP enviando archivos HTML, imágenes, etc., desde tu servidor al cliente.
+
+Es uno de los mejores servicios web junto a NGINX
+
+instalamos apache2
+
+  -sudo apt install apche2
+
+Una vez instalado iremos a "/etc/apache2/" y observaremos que hay
+
+  -cd /etc/apache2/
+  -ls
+
+Tenemos varios directorios y archivos, veremos lo que son:
+
+apache2.conf    conf-enabled  magic           mods-enabled  sites-available
+conf-available  envvars       mods-available  ports.conf    sites-enabled
+
+**ACLARACION
+Un enlace simbólico es como un atajo a otro archivo o carpeta. No es una copia, solo apunta al original.
+
+
+📄 apache2.conf
+Archivo principal de configuración. Aquí se ponen ajustes globales que afectan a todo Apache.(no recomendable tocar)
+
+📁 conf-available/
+Contiene archivos de configuración opcionales (por ejemplo, seguridad, charset, etc.). Están disponibles, pero no activos aún.
+
+📁 conf-enabled/
+Aquí van los archivos de configuración que sí están activados (son enlaces simbólicos a conf-available).
+
+📁 mods-available/
+Todos los módulos que se pueden activar (SSL, rewrite, PHP, etc.). Están instalados pero no todos se usan.
+
+📁 mods-enabled/
+Aquí van los módulos que están activos. Son enlaces a los que están en mods-available.
+
+📁 sites-available/
+Aquí pones las configuraciones de tus sitios web. Por ejemplo, miweb.conf, donde defines el dominio, ruta al proyecto, puertos, etc.
+
+📁 sites-enabled/
+Aquí van los sitios que están activos. Son enlaces a los que tienes en sites-available.
+
+📄 ports.conf
+Define en qué puertos escucha Apache, normalmente el 80 (HTTP) y el 443 (HTTPS).
+
+📄 envvars
+Aquí se definen variables de entorno que Apache usa al iniciarse (como el usuario que ejecuta el servicio).(no recomendable tocar)
+
+📄 magic
+Sirve para que Apache intente adivinar el tipo de archivo cuando no tiene extensión, usando firmas mágicas.(no recomendable tocar)
+
+
+Bien, casi los unicos directorios que vamos a tocar son: sites-avaibles y sites-anabled
+
+
+EMPEZEMOS
+
+Una vez tengamos apache2 instalado ya tendremos una pagina web que podemos ver, la de por defecto de apache2, esa pagina estara en "/var/www/html/" en su fichero index.html que es modificable, podemos verla porque apache ya la tiene habilitada, veamoslo
+
+en ""
