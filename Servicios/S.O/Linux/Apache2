@@ -61,4 +61,47 @@ Una vez tengamos apache2 instalado ya tendremos una pagina web que podemos ver, 
 
 La podremos visualizar buscando en el navegor la ip de la maquina donde esta instalado apache2, apache2 por defecto usa el puerto 80, que es el puerto para mostrar las paginas web, algo interesante del puerto 80 es que no hace falta poner la ip y el puerto tipo: 192.168.0.1:80, sino que solo con la ip vale y si le pones el 80 atras tambien funcionara, recomiendo dejarlo asi pero es modificable desde el fichero de configuracion "ports.conf"
 
-Una vez podemos ver nuestra pagina web es hora de explicar los "Virtualhosts"
+Una vez podemos ver nuestra pagina web es hora de explicar los "Virtualhosts":
+
+Los VirtualHosts en Apache2 sirven para tener varias páginas web en un mismo servidor. Básicamente, es como decirle al servidor:
+"Si alguien entra al dominio X, le enseñas esta carpeta; si entra al dominio Y, le enseñas otra."
+
+Entonces, tú puedes tener por ejemplo:
+
+mipagina.com → /var/www/mipaginaderopa -> mostrara el contenido del index.html que haya ahy
+
+otracosa.com → /var/www/mipaginadeproductos -> mostrara el contenido del index.html que haya ahy
+
+Aunque sea la misma ip ya que una ip puede tener nombres DNS diferentes
+
+Todo en la misma máquina y usando la misma IP.
+El servidor detecta el dominio que pidió la persona y carga la web correcta.
+
+Vamos a ver el contenido del Virtualhost de la pagina web por defecto:
+
+**ACLARACION IMPORTANTE
+
+En "/etc/apache2/" hay 2 directorios que parecen iguales pero no lo son: el "sites-available" y el "sites-enabled", dije las diferencias en la linea 39 y 42 pero las volvere a decir:
+
+sites-available es donde guardas todas las configuraciones de los sitios que quieres tener, estén activos o no. Es como el almacén, ahí puedes tener las webs listas pero apagadas.
+sites-enabled es donde están los sitios que realmente están activos en el servidor. Apache solo lee lo que está en esta carpeta.
+
+Es decir que si tengo un virtualhost que apunta a una pagina web solo en sites-available no lo podre ver porque no esta en el sites-enabled
+Es decir otra vez que primero se crea en sites-available y luego se pone en sites-enabled, si hos fijais hay un 000-default.conf en "sites-available" y en "sites-enabled" si lo quitaramos de "sites-enabled" nos quedariamos sin pagina web por defecto, el que esta en "sites-available" llamado "default-ssl.conf" es un ejemplo de los que seria un virtualhost con ssl que ya veremos
+
+Si vemos el contenido de 000-default.conf seria literalmente esto entre mas cosas:
+
+<VirtualHost *:80>                                                                             #Aqui declaramos el virtualhost que escucha a cualquier ip que venga al puerto 80, si tendremos varios virtualhost se tendria que cambiar por un dns personalizado
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html                                                            #Aqui le decimos que la pagina web esta justo ahy, ruta que obviamente se puede cambiar
+
+
