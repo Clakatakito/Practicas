@@ -57,6 +57,8 @@ Bien, casi los unicos directorios que vamos a tocar son: sites-avaibles y sites-
 
 EMPEZEMOS
 
-Una vez tengamos apache2 instalado ya tendremos una pagina web que podemos ver, la de por defecto de apache2, esa pagina estara en "/var/www/html/" en su fichero index.html que es modificable, podemos verla porque apache ya la tiene habilitada, veamoslo
+Una vez tengamos apache2 instalado ya tendremos una pagina web que podemos ver, la de por defecto de apache2 que nos demuestra que el servicio esta funcionando, esa pagina estara en "/var/www/html/" en su fichero index.html que es modificable, tambien podemos modificar la ruta de donde estara la pagina web, ejemplo: "/var/www/mi-web" y decirle a apache2 que indique ahy, asi no es necessario modificar ni eliminar la pagina web por defecto, podemos verla porque apache ya la tiene habilitada
 
-en ""
+La podremos visualizar buscando en el navegor la ip de la maquina donde esta instalado apache2, apache2 por defecto usa el puerto 80, que es el puerto para mostrar las paginas web, algo interesante del puerto 80 es que no hace falta poner la ip y el puerto tipo: 192.168.0.1:80, sino que solo con la ip vale y si le pones el 80 atras tambien funcionara, recomiendo dejarlo asi pero es modificable desde el fichero de configuracion "ports.conf"
+
+Una vez podemos ver nuestra pagina web es hora de explicar los "Virtualhosts"
