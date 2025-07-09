@@ -1,0 +1,85 @@
+
+vsftpd (Very Secure FTP Daemon) es un servidor FTP para sistemas Unix/Linux. Permite transferir archivos entre clientes y servidores de forma segura y rápida, cumpliendo con el protocolo FTP.
+
+  -sudo apt install vsftpd
+
+El paquete vsftpd solo tiene un archivo, el del configuracion, ubicado en "/etc/vsftpd.conf"
+
+
+VSFTPD EXPLICACION
+vsftpd significa Very Secure FTP Daemon
+
+vsftpd viene del protocolo FTP (File Transfer Protocol), que sirve para transferir archivos entre un cliente y un servidor. Es uno de los protocolos más antiguos para este fin. Lo que hace vsftpd es implementar ese protocolo en forma de servidor y securizarlo, ahy viene el Secure en su nombre, para que tú puedas montar uno en tu máquina y permitir que otros (o tú mismo) se conecten y suban/bajen archivos.
+
+
+
+El paquete solo afecta a los usuarios existentes en el S.O. donde ha sido instalado. Más adelante ya veremos, pero por ejemplo, no puedes inventarte usuarios e ingresar: tienen que existir en el sistema. A no ser que habilites un modo anónimo, para que cualquiera pueda acceder.
+
+
+Ejemplo de archivo de configuracion "vsftpd.conf":
+
+# Ejemplo de archivo de configuración: /etc/vsftpd.conf
+
+# Escucha conexiones IPv4 directamente (IPv6 NO)
+listen=YES
+
+# No permitimos a los usuarios anónimos
+# ¿Qué es un usuario anónimo? No es un usuario como tal, es más bien una entrada libre.
+# No te identificas con nada, como un invitado que no existe en el sistema.
+# Es decir, cualquiera podrá entrar a tu servidor vsftpd si tienes el "YES"
+anonymous_enable=NO
+
+# Permitimos el acceso a usuarios locales del sistema
+local_enable=YES
+
+# Permitimos que los usuarios puedan escribir (subir, borrar, renombrar, etc.)
+write_enable=YES
+
+# Controla los permisos por defecto de archivos/directorios subidos por usuarios locales
+local_umask=022
+
+# Usamos la hora local del sistema para los logs
+use_localtime=YES
+
+# Registra todas las transferencias de archivos que se hacen por FTP
+xferlog_enable=YES
+
+# Asegura que las conexiones de transferencia tipo PORT salgan desde el puerto 20 (ftp-data)
+connect_from_port_20=YES
+
+# Activamos el enjaulamiento: los usuarios locales se quedan encerrados en su carpeta home
+# Enjaular = que no puedan salir de su ruta, ejemplo: /home/pepe -> no puede ir a /etc/
+chroot_local_user=YES
+
+Activar una lista de usuarios que no estarán enjaulados
+chroot_list_enable=NO
+
+# Si activáramos la lista, esta sería la ruta del archivo donde se listan los usuarios que NO estarán enjaulados
+# chroot_list_file=/etc/vsftpd.chroot_list
+
+# Permitimos que los usuarios enjaulados puedan escribir en sus directorios (sin esto, no podrían)
+allow_writeable_chroot=YES
+
+# --------------------- Seguridad con cifrado SSL/TLS ---------------------
+
+# Activamos SSL/TLS para que los datos y contraseñas viajen cifrados
+ssl_enable=YES
+
+# Requiere que los datos y accesos vayan cifrados con TLS (si no, el cliente no entra)
+force_local_data_ssl=YES
+force_local_logins_ssl=YES
+
+# Activamos solo TLSv1 (las versiones SSL antiguas son inseguras)
+ssl_tlsv1=YES
+ssl_sslv2=NO
+ssl_sslv3=NO
+
+# Ruta del certificado SSL que usa el servidor (hay que generarlo o usar uno existente)
+rsa_cert_file=/etc/ssl/certs/vsftpd.pem
+
+# Ruta de la clave privada (solo si tu archivo .pem no la incluye)
+rsa_private_key_file=/etc/ssl/private/vsftpd.key
+
+
+**ACLARACION
+Para que los usuarios se puedan conectar perfectamente con vsftpd tienen que ser los propietarios de su carpeta home
