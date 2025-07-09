@@ -86,3 +86,16 @@ Una vez explicado eso vamos ha explicar las politicas por defecto, que es lo que
 
 #Añadir una regla iptable sencilla
   -sudo iptables -A INPUT -j ACCEPT (el -A la añade al principio de todas las reglas, y el -I al final de las reglas, el -j es para ACCEPT/DROP)
+  Esa regla hace que acepte TODO por defecto, aunque la cadena este en DROP, lo primero que hace un paquete al entrar es pasar por las reglas y luego a la cadena, poreso lo que normalmente se hace es poner la cadena en DROP y aceptar solo lo que tu quieras
+
+
+
+las reglas:
+
+-P INPUT DROP
+-P FORWARD DROP
+-P OUTPUT DROP
+-A INPUT -i enp0s3 -p icmp -j ACCEPT
+-A INPUT -p udp -m udp --sport 53 -j ACCEPT
+-A OUTPUT -o enp0s3 -p icmp -j ACCEPT
+-A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
