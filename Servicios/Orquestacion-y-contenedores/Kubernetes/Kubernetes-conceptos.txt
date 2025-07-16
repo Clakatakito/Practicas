@@ -6,4 +6,4 @@ Ha kubernetes también se lo suele llamar k8s por abreviacion debido a que su no
 
 **ACLARACIÓN 
 
-Kubernetes no es otro sistema de contenedores como docker por ejemplo, es un sistema que administra esos contenedores, ya sean de docker o podman o cualquier otro que use containerd
+Kubernetes no es otro sistema de contenedores como Docker, es una plataforma que se encarga de administrar esos contenedores, ya vengan de Docker, Podman o cualquier otro que use containerd por debajo.
