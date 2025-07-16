@@ -3,3 +3,7 @@ Kubernetes es
 
 
 Ha kubernetes también se lo suele llamar k8s por abreviacion debido a que su nombre es muy largo, el significado de esta abreviatura es que entre la k y la s hay 8 letras: k u(1)b(2)e(3)r(4)n(5)e(6)t(7)e(8) s
+
+**ACLARACIÓN 
+
+Kubernetes no es otro sistema de contenedores 
