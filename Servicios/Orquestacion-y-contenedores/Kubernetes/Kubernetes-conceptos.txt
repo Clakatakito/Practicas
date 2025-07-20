@@ -7,3 +7,41 @@ Ha kubernetes también se lo suele llamar k8s por abreviacion debido a que su no
 **ACLARACIÓN 
 
 Kubernetes no es otro sistema de contenedores como Docker, es una plataforma que se encarga de administrar esos contenedores, ya vengan de Docker, Podman o cualquier otro que use containerd por debajo.
+
+
+Kubernetes se basa en una arquitectura de nodos master (control plane) y workers. El master toma decisiones y administra el estado del clúster, mientras los workers ejecutan los contenedores. El control plane orquesta y supervisa, y los workers hacen el trabajo real corriendo las aplicaciones.
+
+Los nodos master son donde se deciden los contenedore y donde ponerlos, los workes son solo nodos que tienen los procesos que se han declarado en los masters, los masters tambien pueden tener contenedores dentro y un worker no puede declarar contenedor para el cluster
+
+Es importante tener en cunta que solo los nodos masters tienen estos componentes: KubernetesAPI, Kube-Scheduler, Kube-Controller, Etcd
+Los nodos workes tienen: kubelet, kube-proxy, Container runtime
+
+**ACLARACION
+
+Realmete los nodos masters aparte de los que ya he dicho tienen tambien los componentes que usan los workers, pero los nodos masters no suelen usarlos ya que esos nodos solo se reservan a declaran contenedores y pods y no tanto para trabajar
+Igual que Docker Swarm, al fin y alcabo estamos viendo otro orquestador de contenedores
+
+
+**La arquitectura interna de Kubernetes o los componentes fundamentales de Kubernetes**
+La arquitectura interna de Kubernetes o los componentes fundamentales de Kubernetes
+
+Kubernetes API - es la interfaz central y RESTful de Kubernetes que permite interactuar con todos los recursos del clúster como pods, deployments o servicios funcionando como el núcleo del sistema ya que todo —desde herramientas como kubectl hasta controladores internos— se comunica con ella para crear, leer, actualizar o eliminar objetos en el clúster(todo comando escrito por linea de comandos mediante kubectl sera enviado a la API de kubernetes)
+
+Kube-Scheduler - es el componente del plano de control de Kubernetes responsable de decidir en qué nodo se ejecutará cada pod pendiente según varios factores como recursos disponibles, afinidades, restricciones, taints y tolerations, garantizando que los pods se ubiquen de forma eficiente y acorde a las necesidades declaradas por el usuario y el estado del clúster
+
+Kube-Scheduler es el componente de Kubernetes que decide en qué nodo del clúster se ejecutará cada nuevo pod pendiente, basándose en criterios como uso de recursos, afinidades, restricciones y más; por ejemplo, si hay dos nodos y cada uno ya tiene dos contenedores, el scheduler elegirá automáticamente el nodo más adecuado para desplegar un nuevo contenedor, a menos que el usuario especifique lo contrario mediante reglas o configuraciones.
+
+Kube-Controller - es el componente que ejecuta los controladores de Kubernetes, los cuales monitorean el estado del clúster y trabajan para que el estado actual coincida con el estado deseado, gestionando tareas como replicar pods, manejar nodos caídos, y administrar recursos, asegurando que todo funcione correctamente y de forma automática.
+
+el Kube-Controller agrupa varios controladores que se encargan de tareas específicas dentro del clúster. Los principales son:
+
+Node Controller: supervisa el estado de los nodos y actúa si detecta que un nodo está caído o no responde.
+
+Replication Controller: garantiza que un número especificado de réplicas de un pod estén corriendo siempre, creando o eliminando pods según sea necesario.
+
+Endpoints Controller: conecta servicios con pods para asegurar la correcta comunicación.
+
+Service Account & Token Controller: maneja cuentas de servicio y tokens para autenticación dentro del clúster.
+
+
+
