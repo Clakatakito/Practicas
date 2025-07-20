@@ -41,6 +41,8 @@ Replication Controller: garantiza que un número especificado de réplicas de un
 
 Endpoints Controller: conecta servicios con pods para asegurar la correcta comunicación.
 
+ContainerRuntime - Básicamente el sistema de contenedores que tengas instalado, ya sea: docker, cryo, podman, etc...
+
 Service Account & Token Controller: maneja cuentas de servicio y tokens para autenticación dentro del clúster.
 
 
