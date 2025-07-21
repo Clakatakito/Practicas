@@ -41,8 +41,6 @@ Replication Controller: garantiza que un número especificado de réplicas de un
 
 Endpoints Controller: conecta servicios con pods para asegurar la correcta comunicación.
 
-ContainerRuntime - Básicamente el sistema de contenedores que tengas instalado, ya sea: docker, cryo, podman, etc...
-
 Service Account & Token Controller: maneja cuentas de servicio y tokens para autenticación dentro del clúster.
 
 etcd - es la base de datos distribuida clave-valor que utiliza Kubernetes para almacenar toda la información del clúster, incluyendo el estado de los pods, configuraciones, secretos y cualquier recurso; actúa como la fuente de verdad del sistema, permitiendo que los componentes del plano de control lean y escriban datos para mantener la coherencia y el funcionamiento del clúster.
@@ -51,7 +49,74 @@ Kubelet - es el agente que corre en cada nodo del clúster y se encarga de garan
 
 Kube-Proxy - es el componente de red que corre en cada nodo de Kubernetes y se encarga de enrutar el tráfico de red hacia los pods apropiados, gestionando las reglas de red necesarias para exponer servicios dentro del clúster y permitiendo la comunicación entre pods, nodos y servicios, ya sea mediante reglas iptables o eBPF según la configuración del entorno.
 
+ContainerRuntime - Básicamente el sistema de contenedores que tengas instalado, ya sea: docker, cryo, podman, etc...
+
+
+VALE, una vez que nos sabemos la teoria de k8s, vamos a tocar algunos comandos, pera antes la instalacion:
+
+Vamos a usar minikube que es una herramienta que permite crear y ejecutar un clúster de Kubernetes local en una sola máquina, ideal para desarrollo, pruebas y aprendizaje, ya que simula un entorno Kubernetes completo con un solo nodo (o más si se configura), facilitando la experimentación sin necesidad de usar infraestructura en la nube.
+
+TENEMOS QUE TENER DOCKER YA instalado
+
+Vamos a instalar 2 herramienta: kubectl y minikube
+
+kubectl: kubectl es la herramienta de línea de comandos que se usa para comunicarse con un clúster de Kubernetes.
+
+minikube: minikube es una herramienta que crea y ejecuta un clúster de Kubernetes en tu propia máquina, ideal para desarrollo y pruebas.
+
+
+INSTALAR kubectl
+
+    -curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+Verifica:
+
+    -kubectl version --client
+
+
+INSTALAR minikube
+
+    -curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+Verifica:
+
+    -minikube version
 
 
 
+Y por ultimo usaremos como backend de k8s el propio docker
 
+    -minikube start --driver=docker
+    😄  minikube v1.36.0 en Ubuntu 22.04 (vbox/amd64)
+    ✨  Using the docker driver based on user configuration
+    📌  Using Docker driver with root privileges
+    👍  Starting "minikube" primary control-plane node in "minikube" cluster
+    🚜  Pulling base image v0.0.47 ...
+    💾  Descargando Kubernetes v1.33.1 ...
+        > preloaded-images-k8s-v18-v1...:  347.04 MiB / 347.04 MiB  100.00% 21.80 M
+        > gcr.io/k8s-minikube/kicbase...:  501.83 MiB / 502.26 MiB  99.91% 12.83 Mi
+    🔥  Creating docker container (CPUs=2, Memory=2200MB) ...
+    🐳  Preparando Kubernetes v1.33.1 en Docker 28.1.1...
+        ▪ Generando certificados y llaves
+        ▪ Iniciando plano de control
+        ▪ Configurando reglas RBAC...
+    🔗  Configurando CNI bridge CNI ...
+    🔎  Verifying Kubernetes components...
+        ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+    🌟  Complementos habilitados: storage-provisioner, default-storageclass
+    🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+Si hubieras puesto la siqguiente linea te hubiera cojido docker tambien, porque es el por defecto, tambien se puede hacer con virtualbox en caso de que se tenga instalado:
+
+    -minikube start --driver=none/virtualbox
+
+
+COMANDOS BÁSICOS EN Minikube
+
+    
+    -minikube status (muestra info de si las cosas van bien)
+    -minikube stop (detiene el cluster)
+    -minikube start (inicia el cluster)
+    -minikube delete (elimina por completo el cluster, lo puedes volver a tener tu cluster con: minikube start, sino pones el --driver=docker lo hace solo al parecer o el que ya tenias?, no se)
