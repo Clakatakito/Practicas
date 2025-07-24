@@ -120,3 +120,133 @@ COMANDOS BÁSICOS EN Minikube
     -minikube stop (detiene el cluster)
     -minikube start (inicia el cluster)
     -minikube delete (elimina por completo el cluster, lo puedes volver a tener tu cluster con: minikube start, sino pones el --driver=docker lo hace solo al parecer o el que ya tenias?, no se)
+
+
+Una vez tenemos ya el cluster podemos empezar ha aprender ha hecer la unidad mas pequeña que se puede hacer en k82, un pod
+
+**ACLARACIÓN
+
+Si apagas la maquina virtual con el cluster corriendo, luego cuando inicies la maquina de nuevo ese cluster no estara, habra que encenderlo, almenos los pods se quedan
+
+PODS:
+
+Lo mas normal a utilizar es 1 pod por contenedor
+
+Crear un pod
+    -kubectl run podtest --image=nginx:alpine 
+    
+    Sintaxis
+    kubectl run <nombre del pod que quieras> --image=<imagen>
+    pod/podtest created
+
+Si intentas crear un pod con una imagen que no existe igualmente te dira que la hara:
+    -kubectl run podtest --image=enjinx
+
+Pero al momento de ver los pods:
+
+podtest1     0/1     ErrImagePull   0             3s
+
+
+Ver tus pods
+    -kubectl get pods 
+
+
+Por si tienes un monton de pos puedes ver uno especifico con:
+
+    -kubectl get pods nombrepod
+
+
+NAME         READY   STATUS    RESTARTS      AGE
+podapache2   1/1     Running   0             3m47s
+podtest      1/1     Running   1 (25h ago)   25h
+
+Aqui por ejemplo primero cree el pod: podtest ayer digamos, apague la maquina y al dia siguiente la encendi, puse en marcha el cluster y poreso tiene 1 restart, el podapache2 lo he hecho hoy y no he apago la maquina, si lo hiciera tendria 1 restart y el otro 2
+
+
+
+Ver descripcion de tus pods(como el inspect en docker)
+    -kubectl describe pod nombrepod
+
+Ejemplo, vamos a describir el pod que nos dio un error en la imagen:
+
+    -kubectl describe pod podtest1
+
+Name:             podtest1
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Thu, 24 Jul 2025 11:36:21 +0000
+Labels:           run=podtest1
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.8
+IPs:
+  IP:  10.244.0.8
+Containers:
+  podtest1:
+    Container ID:
+    Image:          enjinx
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2glkq (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  kube-api-access-2glkq:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  3m46s                default-scheduler  Successfully assigned default/podtest1 to minikube
+  Normal   Pulling    45s (x5 over 3m46s)  kubelet            Pulling image "enjinx"
+  Warning  Failed     43s (x5 over 3m44s)  kubelet            Failed to pull image "enjinx": Error response from daemon: pull access denied for enjinx, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed     43s (x5 over 3m44s)  kubelet            Error: ErrImagePull
+  Normal   BackOff    6s (x13 over 3m44s)  kubelet            Back-off pulling image "enjinx"
+  Warning  Failed     6s (x13 over 3m44s)  kubelet            Error: ImagePullBackOff
+
+    
+
+Lo que se sule mirar si algo falla son los eventos, lo demas de arriba es decripcion del pod en si
+
+
+Eliminar pods:
+    -kubectl delete pod podtest1
+
+
+Ver todos los comandos y abrebiaciones del cliente de la terminal de k8s:
+
+    -kubectl api-resources
+
+Con esto por ejemplo nos enteramos que no hace falta que escribamos la palabra "pod" tal cual, tambien la podemos escribir asi: "po", entonces se puede hacer esto:
+
+    -kubectl get po
+
+Y funcionara    
+
+
+Obtener el yaml de un pod:
+
+    -kubectl get pod nombrepod -o yaml
+
+Y te da un yaml larguissimo que no voy a poner    
