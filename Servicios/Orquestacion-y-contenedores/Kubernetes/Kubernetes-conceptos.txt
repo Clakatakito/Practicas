@@ -249,4 +249,44 @@ Obtener el yaml de un pod:
 
     -kubectl get pod nombrepod -o yaml
 
-Y te da un yaml larguissimo que no voy a poner    
+Y te da un yaml larguissimo que no voy a poner  
+
+
+**ACLARACION
+
+Una cosa importante de lo que me acabo de dar cuenta respecto a los pods por si no sabias, NO creas un pod y luego creas un contenedor con docker y luego con k8s metes ese contenedor en el pod, NOO, tu creas el pod con la imagen y ya, para sencillo pero yo creia que el pod y el contenedor no se creaban juntos hasta que tu pusieses el contenedor en el pod, se hace automatico, el runtime de docker te lo crea, el contenedro adentro del pod con la imagen que has seleccionado
+
+
+Ip en k8s:
+
+Sabemos que con: "kubectl describe pod nombrepod" no da info del pod y del contenedor, algo que no sabia es que la ip que te da, ej: 172.17.xx.xx y la buscas en el navegador te saldra el contenedor, no se si pasaba igual con docker normal porque tambien podias verles la ip a los contenedores pero esta bastante bien
+
+
+Entrar en el pod(en este caso hay 1 contenedor en este pod asique no no pedia a cual de los 2 ir):
+
+    -kubectl exec -it httpd-pod -- bash (tambien puedes abrirlo con sh)
+
+
+Ver los logs del pod:
+
+    -kubectl logs podtest 
+
+
+
+MANIFIESTOS:
+
+Los manifiestos son archivos yaml que se declaran con una series de normas para crear unidades en k8s, como los pods, y si, son exactamente igual que los docker-compose.yml, sirven para editarlos y larzarlos, mejor que una orden directa en la terminal que se ejecuta y se lanza y no se puede editar, ES LA MISMA METAFORA QUE UN COMPOSE EN DOCKER
+
+Como se vio en la linea 248, se puede ver el yaml de pod que creemos o se pueden construir a mano si eres el puto amo, pero como no lo somos vamos a ver un yaml basico de un pod:
+
+apiVersion: v1
+kind: Pod                            #tipo pod
+metadata:
+  name: nginx                        #nombre del pod
+spec:
+  containers:                        #los contenedor que estaran asignados a ese pod
+  - name: nginx                      #nombre del contenedor
+    image: nginx:1.14.2              #nombre de la imagen del contenedor
+    ports:
+    - containerPort: 80              #puerto del contenedor
+
