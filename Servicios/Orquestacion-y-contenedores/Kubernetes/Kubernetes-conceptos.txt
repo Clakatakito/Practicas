@@ -290,3 +290,121 @@ spec:
     ports:
     - containerPort: 80              #puerto del contenedor
 
+
+
+Podemos confirmar el yaml con: "kubectl apply -f pod.yml"  
+
+Y podemos eliminarlo tambien con: "kubectl delete -f pod.yml", aunque se puede eliminar ese pod como siempre, con: "kubectl delete pod nombrepod"
+
+Editar el manifiesto, con docker lo que haciamos era entrar dentro del archivo, editarlo y volver a levantarlo, se puede hacer de una mejor forma en k8s:
+
+  -kubectl edir pod nombrepod
+
+
+**NOTA
+
+En el mismo archivo yaml puedes crear mas de un pod asi:
+
+
+apiVersion: v1
+kind: Pod  
+metadata:
+  name: nginx    
+spec:
+  containers:                        
+  - name: nginx         
+    image: nginx:1.14.2              
+    ports:
+    - containerPort: 80
+
+---
+
+el otro pod
+
+
+Funciona igual que el compose en docker pero en k8s tienes que indicarlo con "---" sino pensara que hay un pod solo
+
+
+
+PODS CON MÁS DE UN CONTENEDOR:
+
+Ejemplo:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-dos-contenedores
+spec:
+  containers:
+    - name: contenedor-nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+    - name: contenedor-busybox
+      image: busybox:latest
+      command: ["sh", "-c", "while true; do echo Hola desde BusyBox; sleep 10; done"]
+
+
+**ACLARACION
+
+Eso era 1 pod con 2 contenedores, y la explicacion de la linea 302 era 2 pods en un archivo ymal, se podrian haber metido mas contenedores dentro de cualquiera de los pods que creemos
+
+Una vez creado el pod con 2 contenedores nos podemos fijar que cuando hacemos "kubectl get pods", nuesto pod con 2 contenedores sale: pod-dos-contenedores   2/2     Running   0            8s
+
+el 2/2 es porque hay 2 contenedores
+
+
+
+
+Si intentamos entrar en un pod donde haya mas de 1 contenedor NO NOS PREGUNTARA A QUE CONTENEDOR QUIERES ENTRAR, sino que entrara en el primero que se haya creado, en el caso del yaml de la linea 333 en el de nginx, y si queremos entrar al de busybox seria:
+
+  -kubectl logs pod-dos-contenedores -c contenedor-busybox #que es el name que le dimos a ese contenedor
+
+
+Para entrar en un contenedor de dentro de un pod era facil meterse, pero cuando hay 2 que?, pues hay que indicarle a cual:
+
+  -kubectl exec -ti pod-dos-contenedores -c contenedor-busybox -- sh
+
+  El paramentro -c es de indicar, igual que la linea 361 que queremos saber el log de 1 contenedor de un pod donde hay 2 contenedores
+
+
+LABELS Y PODS
+
+Un label en k8s es basicamente una etiqueta es un par clave-valor que se usa para marcar y organizar recursos, para que tu entiendas para que es el pod, ejemplo:
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mi-pod
+  labels:
+    app: web
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+
+
+Ahora por el yml ves que el pod es para la web, por ejemplo, es una indicacion que quieras darle
+
+y aparte de poner etiquetas en el codigo podemos filtrar en la terminal por esas etiquetas con el paramentro -l, l de label:
+
+  -kubectl get pods -l app=web
+
+
+
+
+
+
+
+PROBLEMAS CON LOS PODS  
+
+No son persistentes, No se escalan solos, No se autogestionan, No tienen balanceo de carga entre sí
+
+Todo eso que falla se puede arreglar 
+
+
+
+ReplicaSet
+
+es un objeto que asegura que siempre haya un número fijo de réplicas (pods) en ejecución, basicamente e
