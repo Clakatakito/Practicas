@@ -407,4 +407,22 @@ Todo eso que falla se puede arreglar
 
 ReplicaSet
 
-es un objeto que asegura que siempre haya un número fijo de réplicas (pods) en ejecución, basicamente e
+Es un objeto que asegura que siempre haya un número fijo de réplicas (pods) en ejecución, basicamente asegura que tengas una cantidad exacta de pods por si alguno se muere o tienes que crear 1.000 pods lo haces con replicaset para no ir manualmente haciendolo tu, en la carpeta de yamls teneis un ejemplo de un replicaset
+
+puedes abreviar tambien la palabra "replicaset" asi "rs", que es mas facil
+
+
+Listas los rs:
+
+  -kubectl get rs
+NAME      DESIRED   CURRENT   READY   AGE
+rs-test   5         5         5       3m25s
+
+
+Si vemos los pods que tenemos podemos ver que todo los pods tienen el mismo nombre seguido por un numerin, ese numerin es porque el rs le da eso, porque sino se llamarian todos igual, y para darle constancia de que es un replicaset
+
+Podeis probar a eliminar 1 o todos, si hos fijais se volveran a levartar otros, eso es lo que hace el replicaset
+
+Incluso si volvemos al yml y decimos que queremos 3 replicas el replicaset lo hara y apagara los pods necessarios para que solo hayan los que hemos pedido que tengamos
+
+
