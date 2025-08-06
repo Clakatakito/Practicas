@@ -393,6 +393,21 @@ y aparte de poner etiquetas en el codigo podemos filtrar en la terminal por esas
 
 
 
+Para cambiarle el label a un pod o ponerle otro distinto:
+
+  -kubectl label pod pod_nombre app=front
+
+
+Y se le añadira ese label al pod
+
+
+esa opcion es para añadir nuevos labels, pongamos que el label es: app=front, si te da un error porque lo quieres editar ha: app=back, te da este error:
+
+error: 'app' already has a value (el_nombre_que_tubieras), and --overwrite is false
+
+Prueba esta opcion:
+
+  -kubectl label pod nombrepod app=nuevo_label --overwrite
 
 
 
@@ -426,3 +441,18 @@ Podeis probar a eliminar 1 o todos, si hos fijais se volveran a levartar otros, 
 Incluso si volvemos al yml y decimos que queremos 3 replicas el replicaset lo hara y apagara los pods necessarios para que solo hayan los que hemos pedido que tengamos
 
 
+**NOTA
+
+Realmete hay crear los pod con un objeto superior como lo es un replicaset nunca hay que crear un pod plano por linea de comando porque no es util, tambien decir que no hay que crear pods y ponerle un label que concuerde con un replicaset porque sino va a ser adoptado por el replicaset y va a ser un pod mas, independiente de la imagen que sea, y si el pod plano que hemos creado tienen una imagen diferente a la que el rs crea da igual ya que el label es el mismo y quedara ahy hasta que se elimine 
+
+
+
+
+PROBLEMAS DE REPLICASET
+
+
+Imagina que tienes un rs con imagen x y replicas 1000(servidor promedio) y funciona, pero ahora quieres cambiar las imagen, te pensaras que cambiando la imagen del manifisto y guardando servira, y si que servira para futuros pods cuando queden espacios en blanco, pero esos 1000 pods quedaran ahy hasta que los elimines y el rs los vuelva a hacer, como podemos hacer de cambiar la imagen en vivo en los 1000 pods sin tener que eliminarlo y que el rs los cree mejor, con DEPLYMENTS
+
+
+
+DEPLYMENTS
