@@ -151,6 +151,11 @@ Ver tus pods
     -kubectl get pods 
 
 
+Ver TODO lo de tu cluster pods/rs(mas adelante)/deployments(aun mas adelante):
+
+  -kubectl get all
+
+
 Por si tienes un monton de pos puedes ver uno especifico con:
 
     -kubectl get pods nombrepod
@@ -410,6 +415,11 @@ Prueba esta opcion:
   -kubectl label pod nombrepod app=nuevo_label --overwrite
 
 
+Puedes hacer busquedas por los pods/replicasets/deployments con:
+
+  -kubectl get pods --show-labels
+
+Te mostrara los labels del pod/rs ya sabes  
 
 
 PROBLEMAS CON LOS PODS  
@@ -456,3 +466,34 @@ Imagina que tienes un rs con imagen x y replicas 1000(servidor promedio) y funci
 
 
 DEPLYMENTS
+
+
+Un Deployment en Kubernetes es una forma de decirle al clúster qué aplicación quieres ejecutar, cuántas copias quieres y cómo deben funcionar.
+Kubernetes se encarga de crear, actualizar y mantener esa aplicación automáticamente, sin que tú tengas que hacerlo manualmente.
+
+Hay un ejemplo de deployment que puedes ver es el que ire haciendo
+
+
+Una vez activo el deployment podemos ver si ha sido exitoso el despliegue con:
+
+  -kubectl rollout status deployment deployment-test
+
+Sirve para ver y esperar a que el despliegue termine su actualización, mostrando si fue exitoso o falló
+
+En mi caso fue: 
+
+deployment "deployment-test" successfully rolled out
+
+Osea que bien
+
+deployment-test es el nombre del deployment que obviamente se puede ver con:
+
+  -kubectl get deployments
+
+
+Todso los objetos se pueden ver con get
+
+
+ESCALAR PODS EN DEPLYMENTS
+
+  -kubectl scale --replicas=5 deployment/deployment-test
