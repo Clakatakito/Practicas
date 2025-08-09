@@ -1,2 +1,14 @@
 
-AWS es
+AWS es una plataforma de servicios en la nube ofrecida por Amazon. Permite a empresas y desarrolladores alquilar recursos informáticos como:
+
+Servidores virtuales (EC2)
+
+Almacenamiento de datos (S3)
+
+Bases de datos (RDS, DynamoDB)
+
+
+Entre muchos mas
+
+
+Lo primero que tendremos que hacer es crear una cuenta, SI HOS PIDEN DATOS BANCARIO HACERLO, NO PASARA NADA PORQUE MIRAREMOS COSAS GRATIS, Y SI HOS PIDEN 1€ DA IGUAL LUEGO HOS LO DEVOLVERAN, Y SINO QUE MAS TE DA ES 1€, NO COCMPRES PORROS
