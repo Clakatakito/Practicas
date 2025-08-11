@@ -12,3 +12,35 @@ Entre muchos mas
 
 
 Lo primero que tendremos que hacer es crear una cuenta, SI HOS PIDEN DATOS BANCARIO HACERLO, NO PASARA NADA PORQUE MIRAREMOS COSAS GRATIS, Y SI HOS PIDEN 1€ DA IGUAL LUEGO HOS LO DEVOLVERAN, Y SINO QUE MAS TE DA ES 1€, NO COCMPRES PORROS
+
+
+
+Antes de empezar debemos saber las categorías de servicios en la nube:
+
+
+IaaS (Infrastructure as a Service): Infraestructura básica (servidores, redes, almacenamiento). Ej: AWS EC2, Google Compute Engine.
+
+PaaS (Platform as a Service): Plataforma lista para desarrollar y desplegar apps. Ej: Heroku, Google App Engine.
+
+FaaS (Function as a Service): Funciones de código que se ejecutan bajo demanda (serverless). Ej: AWS Lambda, Azure Functions.
+
+SaaS (Software as a Service): Aplicaciones listas para usar vía internet. Ej: Gmail, Microsoft 365, Dropbox.
+
+
+
+Video que lo explica bastante bien: https://www.youtube.com/watch?v=VR8aXePkQ5M
+
+
+
+
+Tambien hay que entender el diagrama del modelo de responsabilidad compartida, que es de quien tiene la responsabilidad de segun que cosas:
+
+https://aitor-medrano.github.io/bigdata2122/imagenes/cloud/02responsabilidad.png
+
+
+Otro video: https://www.youtube.com/watch?v=pDaZZqVGUyw
+
+
+
+
+
