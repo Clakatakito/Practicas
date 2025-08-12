@@ -43,4 +43,22 @@ Otro video: https://www.youtube.com/watch?v=pDaZZqVGUyw
 
 
 
+Vamos a empezar con los servicios
 
+
+**ACLARACION
+
+Este "tutorial" no va a ser como los de docker, mongodb, kubernetes porque esos servicios son comandos y es mas facil, aqui con la interfaz no se puede explicar mucho, este tutorial sera mas basado en videos de youtube y cosas que me doy cuenta sobre AWS, los servicios puede que los explique yo o un video de youtube, como vea, alomejor 
+
+
+Dicho eso empezemos
+
+
+SERVICIOS
+
+
+IAM
+
+En AWS, el servicio IAM (Identity and Access Management) es una plataforma centralizada que te permite controlar de forma segura quién tiene acceso a tus recursos y qué puede hacer con ellos
+
+No se recomienda tocar servicios con la cuenta root, la cuenta root es la primera cuenta que nos hemos creado, en el dashboard es la que sale arriba a la derecha, siempre se recomienda hacerlo con una cuenta IAM
