@@ -497,3 +497,71 @@ Todso los objetos se pueden ver con get
 ESCALAR PODS EN DEPLYMENTS
 
   -kubectl scale --replicas=5 deployment/deployment-test
+
+
+
+ROLLING UPDATES
+
+Es una forma de actualizar el deployment, rs para cambiar por ejemplo una imagen y que se vea reflejado al instante en los pods, es una manera mas sencilla de editar los pods del deployment sin tener que eliminar nada, solo editar, y los usuarios ni se enteraran, en cambio si eliminas vas a tener que conectarlo con los usuarios de nuevo
+
+Gracias a que ahora si tenemos un deployment es possible entrar en el archivo del deployment y cambiarle la imagen y hacer un: "kubectl appply -f deployment.yml" y los pods cambiaran de imagen, eso no pasaba con los ReplicaSet, pasaba pero habia que eliminar almenos un pod para que se creara el nuevo ya, y eliminarlos todos para que todos estubieran actualizados
+
+Basicamente gracias al deployment podemos editar el yml y luego de lanzarlo ver los cambios en vivo, como si cambias un docker-compose.yml y lo lanzas, veras los cambios de puerto, etc..., tambien puedes cambiar las replicas en en yml y pasara lo mismo que si haces el comando de la linea 499
+
+
+
+HISTÓRICO Y REVISIONES DE DESPLIEGUES
+
+**ACLARACION
+
+Cada vez que haces un Rolling Update en Kubernetes, lo que realmente pasa es que se crea un nuevo ReplicaSet (no un deployment nuevo). Por eso, si miras con: "kubectl get rs" verás varios, representan el mismo deployment pero con distintas versiones de la especificación. Y si ejecutas: "kubectl rollout history deployment deployment-test" verás el historial de cambios que se han ido aplicando a ese deployment, con sus revisiones correspondientes.
+
+Comandos de historial:
+
+  -kubectl rollout history deployment deployment-test
+
+
+Si ejecutas este comando justo despues de hacer un apply veras los "logs" de como se va arrancando el deployment y los pods
+  -kubectl rollout status deployment deployment-test
+
+
+CHANGE-CAUSE
+
+Bien, cuando hacemos:
+  -kubectl rollout history deployment deployment-test
+
+No muestra cada vez que hemos editado ese deployment, CHANGE-CAUSE basicamente traducido seria, CAMBIO-CAUSA, es explicar el cambio que has hecho y porque, es tu historial, es como los commits en git,
+
+Para ello modifiquemos cualquier cosa del deployment.yml y lo lanzamos asi:
+  -kubectl apply -f deployment.yml --record
+
+Asi lo guardara 
+
+Tambien se puede meter dentro del manifiesto y ir cambiandolo cada vez que nosotros cambiemos el manifiesto, simplemete añadir lo siguiente dentro de metadata:
+
+metadata:
+  name: deployment-test
+  annotations:
+    kubernetes.io/change-cause: "Actualización a imagen v2" #aqui es donde cada vez que hagas una modificacion aparte de la modificacion que hayas hecho modificas esto tambien
+
+
+Al fin y algo es literalmete un commit
+
+Y una vez hecho podemos volver a hacer un history y lo vemos:
+
+deployment.apps/deployment-test
+REVISION  CHANGE-CAUSE
+3         <none>
+4         <none>
+5         <none>
+6         kubectl apply --filename=deployment.yml --record=true  #el que habiamos hecho con --record que no lo recomiendo ya que el otro es mas util
+7         Actualización a imagen v2
+
+
+En base a que editemos el deployment.yml y vamos viendo su historia podemos ver sus cambios asi:
+
+  -kubectl rollout history deployment deployment-test --revision 7
+
+El 7 el por el numero 7 que ha pasado nuestro deployment como se ve en la linea 552
+
+Y podremos ir viendo los cambios y que cosas se cambian y cuales no y podemos ir viendo las otras versiones del deployment
