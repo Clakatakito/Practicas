@@ -565,3 +565,58 @@ En base a que editemos el deployment.yml y vamos viendo su historia podemos ver 
 El 7 el por el numero 7 que ha pasado nuestro deployment como se ve en la linea 552
 
 Y podremos ir viendo los cambios y que cosas se cambian y cuales no y podemos ir viendo las otras versiones del deployment
+
+
+
+ROLL BACK
+
+Hacemos un ROLL BACK por si las imagenes de los pods tienen bugs volver a las versiones mas estables, las mas antiguas
+
+Para probar los ROLL BACK vamos a editar y cambiar el deployment por algo incorrecto, por ejemplo cambiarle la imagen por: "nginx:no_existe", eso dara error aposta
+
+Efectivamente da error, bueno, vamos a hacer un rollout hacia atras cuando todo estaba perfecto:
+  -kubectl rollout undo deployment deployment-test --to-revision=7   #en mi caso yo quiero volver a la revision 7 porque estoy en la 8
+
+
+Haya que tener cuidado luego de hacer el rollout porque el archivo yaml no vuelve a estar en el punto deonde quisimos volver, sigue igual al ultimo deployment hecho, es decir, sigue estando la imagen: "nginx:no_existe", pero los pods que estan corriendo ahora si que son los de nginx:alpine normales de la version 7, solo que el yml sigue en la version 8, habra que cambiarlo o modificarlo, pero lo importante es que nos hemos salido del marron con el ROLL BACK  
+
+
+Y con este comando nos vamos 1 version atras:
+  -kubectl rollout undo deployment deployment-test
+
+
+
+No podemos fijar en el history que hay algunas versiones olvidadas:
+
+deployment.apps/deployment-test
+REVISION  CHANGE-CAUSE
+3         <none>
+4         <none>
+5         <none>
+6         kubectl apply --filename=deployment.yml --record=true
+10        Cambio de imagen a una incorrecta a posta2
+11        Actualización a imagen v2
+
+
+En Kubernetes, los números de revisión de un Deployment son siempre crecientes y nunca se reutilizan: cada cambio, incluso un rollback, crea una revisión nueva copiando la configuración de otra, pero con un número siguiente. Si además tienes configurado (explícita o implícitamente) un revisionHistoryLimit, las revisiones más antiguas se eliminan del historial cuando se supera ese límite, dejando huecos en la secuencia. Por eso en tu listado faltan números como 7, 8 y 9: existieron en su momento, pero fueron eliminados del historial, y Kubernetes no renumera ni rellena esos huecos.
+
+Basicamente ls versiones a las que hemos hecho rollbacks se eliminan para dar a indice a esa misma version pero con el numero mas creciente, no me entiende?, veamos:
+
+
+imagina que tengo las versiones:
+
+5   relleno
+6   no_importa_el_nombre
+7   revision
+8   la_revision_salio_mal_intento_de_mejora
+
+Actualmete estamos en la 8, pero aun asi salio mal igual, haremos un rollback a cuando funcionaba, a la 6 y lo llamaremos: "ahora_estbale", pues quedaria asi
+
+5   relleno
+7   revision
+8   la_revision_salio_mal_intento_de_mejora
+9   ahora_estbale
+
+Hemos vuelto a la 6 pero hemos vuelto hacia arriba, mas o menos bien?
+
+En resumen: existieron como revisiones intermedias de tu Deployment, pero Kubernetes los eliminó porque ya no estaban en uso ni eran necesarios para rollback; el contador de revisiones nunca retrocede ni rellena huecos, así que al siguiente cambio la numeración siguió desde el último número usado.
