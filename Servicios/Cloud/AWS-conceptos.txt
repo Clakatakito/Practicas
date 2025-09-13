@@ -62,3 +62,5 @@ IAM
 En AWS, el servicio IAM (Identity and Access Management) es una plataforma centralizada que te permite controlar de forma segura quién tiene acceso a tus recursos y qué puede hacer con ellos
 
 No se recomienda tocar servicios con la cuenta root, la cuenta root es la primera cuenta que nos hemos creado, en el dashboard es la que sale arriba a la derecha, siempre se recomienda hacerlo con una cuenta IAM
+
+El sistema de crear usuarios bien pero es un tema al iniciar sesion con el, porque aunque YO le he dicho de crear una contraseña, NO QUE ME LA GENERE EL, NI QUE LUEGO DE PONER LA CONTRASEÑA CREAR OTRA, igualmente me ha pedido de crear otra, no se si yo lo habre hecho mal o no se, pero una vez sabes hacerlo bien, ya sabes crear usuarios IAM
