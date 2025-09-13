@@ -124,6 +124,27 @@ COMANDOS BÁSICOS EN Minikube
 
 Una vez tenemos ya el cluster podemos empezar ha aprender ha hecer la unidad mas pequeña que se puede hacer en k82, un pod
 
+
+Los comandos kubectl y minikube en si no tienen autocompletar por defecto, que quiere decir eso?, que si tu pones: "kubectl (intentas tabular para ver informacion)" no dejara porque no esta habilitada, tampoco la de minikube
+
+HABILITAR AUTOCOMPLETAR
+
+
+kubectl:
+
+  -sudo apt install bash-completion -y   # ya vendra instalado pero por si las moscas
+  -source <(kubectl completion bash)
+  -source ~/.bashrc
+
+minikube:
+  -sudo apt install bash-completion -y   # ya vendra instalado pero por si las moscas
+  -source <(minikube completion bash)
+  -source ~/.bashrc
+
+
+Y ya se autocompletaran las comandas
+
+
 **ACLARACIÓN
 
 Si apagas la maquina virtual con el cluster corriendo, luego cuando inicies la maquina de nuevo ese cluster no estara, habra que encenderlo, almenos los pods se quedan
@@ -254,7 +275,10 @@ Obtener el yaml de un pod:
 
     -kubectl get pod nombrepod -o yaml
 
-Y te da un yaml larguissimo que no voy a poner  
+Y te da un yaml larguissimo que no voy a poner
+
+Obtener mas informacion de los pods
+  -kubectl get pod nombrepod -o wide
 
 
 **ACLARACION
@@ -626,8 +650,25 @@ SERVICE
 
 El service un objeto que proporciona una dirección IP y un nombre DNS estables para acceder a un conjunto de Pods, permitiendo que las aplicaciones se comuniquen entre sí de forma confiable aunque los Pods se creen, eliminen o cambien; además, distribuye el tráfico entre ellos y puede exponer la aplicación dentro del clúster o hacia el exterior según el tipo de Service configurado
 
+Listar los servicios:
+  -kubectl get svc
+
 el service sera la ip a la que los cliente accederan a ella y lo redirigirá a los pods que tu quieras mediante labels
 
 **NOTA
 
 si con: "kubectl get svc" ves un servicio llamado kubernetes NO LO BORRES, es un servicio de kubernetes para que los services funcionen, yo lo he borrado y no pasa nada pero por si las moscas dejalo
+
+
+PODS & ENDPOINTS
+
+
+Los Endpoints en Kubernetes son básicamente la lista de IPs y puertos de los Pods que cumplen con el selector de un Service. Así, cuando alguien quiere acceder a un Pod, realmente no va directo al Pod, sino que entra a través del Service. El Service actúa como una puerta de entrada estable y, para saber a qué Pods debe enviar la petición, consulta sus Endpoints, que son los IPs (y puertos) de los Pods disponibles en ese momento.
+
+Aunque vayas eliminando pods la lista interna del los endpoints llevada por kube-proxy se ira actualizando mediante se eliminen y se creen pods
+
+
+SERVICIOS Y DNS
+
+Además de tener una IP única dentro del clúster, los Services en Kubernetes también disponen de un nombre DNS interno. Gracias a esto, no solo se puede acceder a ellos mediante su IP, sino también usando ese nombre DNS, lo cual es más práctico, pero el nombre DNS siempre será estable
+
