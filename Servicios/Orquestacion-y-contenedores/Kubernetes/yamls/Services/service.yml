@@ -6,7 +6,6 @@ metadata:
   labels:
     app: front
 spec:
-  type: ClusterIP
   selector:
     app: front
   ports:
