@@ -49,8 +49,11 @@ MySQL, MondoDB, entre otras son SGBD
 
 
 
+
+Las palabras junto a sus significados se pueden especificar en en MySQL también 
+
 entitat = tabla
-atribut = titulo columna
+atribut = titulo de cada columna
 Atribut identificador = La columna que identifica de forma única cada fila (id)
 Domini = Tipo de valores que puede aceptar cada columna (int, str, bool)
 Valors (Valores) = Los datos que hay en cada fila
@@ -60,7 +63,7 @@ Entidad: PRODUCTO
 --------------------------------------------------
 | id        | nombre   | precio      |   ← Atributos (columnas)
 --------------------------------------------------
-|  1        | Laptop   | 1200.50    |
+|  1        | cable    |   60.50    |
 |  2        | Teclado  |   25.99    |
 |  3        | Mouse    |   15.49    |
 |  4        | Monitor  |  199.99    |
