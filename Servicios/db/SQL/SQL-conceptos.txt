@@ -46,3 +46,30 @@ MySQL, MondoDB, entre otras son SGBD
 - Proteger la integridad de los datos.
 - Permitir la concurrencia de usuarios.
 - Contribuir a la seguridad de los datos.
+
+
+
+entitat = tabla
+atribut = titulo columna
+Atribut identificador = La columna que identifica de forma única cada fila (id)
+Domini = Tipo de valores que puede aceptar cada columna (int, str, bool)
+Valors (Valores) = Los datos que hay en cada fila
+
+
+Entidad: PRODUCTO
+--------------------------------------------------
+| id        | nombre   | precio      |   ← Atributos (columnas)
+--------------------------------------------------
+|  1        | Laptop   | 1200.50    |
+|  2        | Teclado  |   25.99    |
+|  3        | Mouse    |   15.49    |
+|  4        | Monitor  |  199.99    |
+--------------------------------------------------
+
+Atributo identificador:
+- id → porque cada fila tiene un id único.
+
+Dominios (valores que puede aceptar cada atributo):
+- id → números enteros positivos (1, 2, 3, 4…)
+- nombre → texto de hasta 100 caracteres (ej. "Laptop")
+- precio → número decimal positivo con 2 decimales (ej. 1200.50)
