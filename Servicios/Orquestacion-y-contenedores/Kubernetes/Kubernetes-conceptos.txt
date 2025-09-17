@@ -672,3 +672,48 @@ SERVICIOS Y DNS
 
 Además de tener una IP única dentro del clúster, los Services en Kubernetes también disponen de un nombre DNS interno. Gracias a esto, no solo se puede acceder a ellos mediante su IP, sino también usando ese nombre DNS, lo cual es más práctico, pero el nombre DNS siempre será estable
 
+
+NODEPORT
+
+El tipo de servicio NodePort es el que hara que nuetros pods sean visibles desde fuera del cluster, en principio desde fuera no podiamos ver nuetros pods, solo desde dentro de nuestro localhost y entre nuestros pod del cluster, ahora si podremos con el servicio NodePort
+
+**ACLARACION IMPORTANTE (LA MAS IMPORTANTE HASTA AHORA VAYA)
+
+He tenido bastantes problemas al intentar mostrar mi pod desde fuera del cluster porque yo uso para practicar k8s ubuntu server y claro este no tiene navegador entonces he intentado acceder a los pods desde mi maquina anfitrion porque uso VirtualBox y nunca he podido, y ahora gracias al NodePort creia que si podria pero no se puede, PERO EL SERVICIO NODEPORT SI FUNCIONA, Explico:
+
+Lo que pasa es que como uso Minikube, el nodo tiene una IP interna (192.168.49.2(la de mi caso)) que solo existe dentro de la red privada que crea Minikube, no en tu red real (192.168.1.0/24(red de la maquina anfitriona)). Por eso desde mi host o desde fuera de mi máquina no se puede entrar al NodePort: no es un problema del Service, sino de cómo Minikube aísla el cluster. En un cluster real (con nodos en mi LAN o en la nube), un NodePort sí abriría el puerto en la IP del nodo y entonces podría acceder desde fuera sin problema.
+
+para comprobar que el service funciona:
+
+Vamos a ver que puerto tiene nuetro servicio:
+  -kubectl get svc -o wide
+
+  my-service   NodePort    10.99.57.57   <none>        8080:31004/TCP   8m23s   app=back
+
+
+Lo que nos interesa es el 31004 que sera el puerto abierto de nuestro cluste y el 8080 el puerto del pod de dentro
+
+Luego vamos a ver que ip de minikube tenemos:
+  -minikube ip
+  192.168.49.2
+
+
+Nos devolvera la ip que usa minikube
+
+
+Por ultimo ver si funciona el service, ahora en nuetra terminal mismo, no en un pod podemos hacer:
+
+  -curl 192.168.49.2:31004
+
+Y veremos el pod  
+
+
+**Nota
+
+Por qué no le hago un curl a la IP del servicio?
+
+La IP 10.99.57.57 no es la del NodePort, es la ClusterIP del Service, y solo funciona dentro del clúster. O sea, desde fuera no me sirve. ¿Para qué hemos hecho el Service entonces? Justo para no tener que entrar a un pod y hacer curl a otro pod directamente.
+
+Como ya he montado el NodePort, lo que toca es hacerle curl a la IP de Minikube usando el puerto del NodePort, y gracias al Service ya me redirige a uno de los pods detrás.
+
+
