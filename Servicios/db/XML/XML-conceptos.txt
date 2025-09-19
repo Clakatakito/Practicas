@@ -59,3 +59,23 @@ Aqui ya estan las 2 personas pero estan en un unico elemento raiz que es la etiq
 XML diferencia entre minusculas y mayusculas por lo que las etiquetas de inicio y fin tienen que ser las mismas clavadas
 
 XML no tiene tipos de datos (no sabe si algo es int, string, boolean, etc.).
+
+
+Lo comentarios se hacen de la misma forma que en HTML:
+
+<!-- Comentario-->
+
+
+Video que ayudo: https://www.youtube.com/watch?v=ApASENQopFU
+
+
+Tambien se pueden poner atributos asi:
+
+<personas>
+    <persona estudiante = "Si">
+        <nombre>Alex</nombre>
+        <edad>19</edad>
+    </persona>
+</personas>
+
+Pero no entiendo muy bien para que porque el "Si" podria ya estar en un etiqueta, no se
