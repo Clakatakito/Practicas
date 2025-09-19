@@ -1,2 +1,61 @@
 
-POR AHORA NADA
+XML (eXtensible Markup Language) es un lenguaje de marcado que sirve para almacenar y transportar datos de forma estructurada, usando etiquetas personalizadas.
+
+Basicamente XML es un es un lenguaje para estructurar objetos y ser enviados como informacion, como json
+
+Es un lenguaje parecido a HTML y Markdown en cuanto a estiquetas se refiere
+
+ejemplo de xml:
+
+<persona>
+    <nombre>Alex</nombre>
+    <edad>19</edad>
+</persona>
+
+
+No deja de ser un objeto para almacenanar informacion, los nombres de la <etiquetas> puede ser el que quieras, son personalizable, no es como html con los <p>, <br>, <h1>, que son las que hay y hacen lo que se programaron para que hicieran
+
+Otra manera de explicarlo es esta:
+
+
+        XML                                      JSON       
+<nombre>Alex</nombre>                      nombre: "Alex"
+<CLAVE>VALOR</CLAVE>                       CLAVE: "VALOR"
+
+
+Es muy sencillo de enteder de verdad
+
+
+SOLO PUEDE HABER UNA ETIQUETA RAIZ
+
+Que quiere decir eso?, que no puedo hacer esto:
+
+<persona>
+    <nombre>Alex</nombre>
+    <edad>19</edad>
+</persona>
+
+<persona>
+    <nombre>Pepe</nombre>
+    <edad>67</edad>
+</persona>
+
+Aqui ya hay 2 etiquetas raiz, se podria mejor asi:
+
+<personas>
+    <persona>
+        <nombre>Alex</nombre>
+        <edad>19</edad>
+    </persona>
+    <persona>
+        <nombre>Alex</nombre>
+        <edad>19</edad>
+    </persona>
+</personas>
+
+
+Aqui ya estan las 2 personas pero estan en un unico elemento raiz que es la etiqueta <personas>
+
+XML diferencia entre minusculas y mayusculas por lo que las etiquetas de inicio y fin tienen que ser las mismas clavadas
+
+XML no tiene tipos de datos (no sabe si algo es int, string, boolean, etc.).
