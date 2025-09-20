@@ -92,7 +92,7 @@ DEV
   
   [Interfaz_Grafica_SQL](https://www.tiktok.com/@midudev/video/7402645409711115553?is_from_webapp=1&sender_device=pc) [Pagina](https://postgres.new/)
   
-  [Interfaz_Grafica_SQL2](https://www.tiktok.com/@midudev/video/7447166209478511905?is_from_webapp=1&sender_device=pc)
+  [Interfaz_Grafica_SQL2](https://www.tiktok.com/@midudev/video/7447166209478511905?is_from_webapp=1&sender_device=pc) [Página](https://chartdb.io/)
   
   APIS
   
