@@ -85,6 +85,7 @@ DEV
   [Extension_Simulador_Movil_Chrome](https://www.tiktok.com/@midudev/video/7394137254819613984?is_from_webapp=1&sender_device=pc)
   
   SQL
+
   [Resumen_Comandos_SQL](https://www.tiktok.com/@dazxirx/photo/7422706446426541345?is_from_webapp=1&sender_device=pc)
   
   [Curso_SQL](https://www.tiktok.com/@mouredev/video/7393005672448740641?is_from_webapp=1&sender_device=pc) [Pagina](https://sqlbolt.com/)
