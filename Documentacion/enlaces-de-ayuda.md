@@ -15,6 +15,8 @@ DEV
   [Cert_Ingles](https://www.freecodecamp.org/espanol/learn/a2-english-for-developers/)
   
   [Cert_Google_HTML_CSS](https://www.tiktok.com/@mouredev/video/7391893440184798497?is_from_webapp=1&sender_device=pc&web_id=7447105662498981409)
+
+  [Certificados Varios](https://www.tiktok.com/@linkfydev/video/7537971086898662679?is_from_webapp=1&sender_device=pc) [Pagina](https://free-certifications.com/)
   
   JavaScript
   
@@ -85,13 +87,14 @@ DEV
   [Extension_Simulador_Movil_Chrome](https://www.tiktok.com/@midudev/video/7394137254819613984?is_from_webapp=1&sender_device=pc)
   
   SQL
+
   [Resumen_Comandos_SQL](https://www.tiktok.com/@dazxirx/photo/7422706446426541345?is_from_webapp=1&sender_device=pc)
   
   [Curso_SQL](https://www.tiktok.com/@mouredev/video/7393005672448740641?is_from_webapp=1&sender_device=pc) [Pagina](https://sqlbolt.com/)
   
   [Interfaz_Grafica_SQL](https://www.tiktok.com/@midudev/video/7402645409711115553?is_from_webapp=1&sender_device=pc) [Pagina](https://postgres.new/)
   
-  [Interfaz_Grafica_SQL2](https://www.tiktok.com/@midudev/video/7447166209478511905?is_from_webapp=1&sender_device=pc)
+  [Interfaz_Grafica_SQL2](https://www.tiktok.com/@midudev/video/7447166209478511905?is_from_webapp=1&sender_device=pc) [Página](https://chartdb.io/)
   
   APIS
   
