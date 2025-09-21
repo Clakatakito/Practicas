@@ -15,6 +15,8 @@ DEV
   [Cert_Ingles](https://www.freecodecamp.org/espanol/learn/a2-english-for-developers/)
   
   [Cert_Google_HTML_CSS](https://www.tiktok.com/@mouredev/video/7391893440184798497?is_from_webapp=1&sender_device=pc&web_id=7447105662498981409)
+
+  [Certificados Varios](https://www.tiktok.com/@linkfydev/video/7537971086898662679?is_from_webapp=1&sender_device=pc) [Pagina](https://free-certifications.com/)
   
   JavaScript
   
