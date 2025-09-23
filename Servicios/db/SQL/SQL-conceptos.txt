@@ -76,3 +76,61 @@ Dominios (valores que puede aceptar cada atributo):
 - id → números enteros positivos (1, 2, 3, 4…)
 - nombre → texto de hasta 100 caracteres (ej. "Laptop")
 - precio → número decimal positivo con 2 decimales (ej. 1200.50)
+
+
+
+
+MAS TEORIA
+
+
+MODELOS DE DATOS:
+
+Los modelos de datos son unos conjuntos de herramientas lógicas para describir los datos, sus interrelaciones, su significado y las restricciones a aplicar para garantizar su coherencia.
+
+Todos los modelos de BD, por lo general, proporcionan tres tipos de herramientas:
+
+• Estructuras de datos. Elementos con los que se construyen las BD, como tablas, árboles, documentos etc.
+• Reglas de integridad. Restricciones que los datos tendrán que respetar, como por ejemplo tipos de dato, dominios, claves, etc.
+• Operaciones a realizar con los datos. Altas, bajas, modificaciones y consultas, como mínimo.
+
+En otras palabras, es una abstracción que permite entender y diseñar la base de datos de forma lógica antes de implementarla físicamente.
+
+
+Existen varios tipos de modelos de datos, los más comunes son:
+Modelo jerárquico: datos organizados en forma de árbol (padre-hijo).
+Modelo en red: datos en nodos conectados por relaciones en forma de grafo.
+Modelo relacional (el más usado): datos en tablas con filas y columnas, relacionados mediante claves primarias y foráneas.
+Modelo orientado a objetos: combina datos y comportamiento (métodos) en objetos.
+Modelo de documentos o clave-valor (NoSQL): datos almacenados en estructuras más flexibles.
+
+
+TIPO DE BD - SEGUN EL MODELO DE DATOS
+
+Bases de dades jeràrquiques
+Organitzen la informació en forma d’arbre (pare-fill).
+Molt ràpides per a consultes estructurades, però poc flexibles.
+Exemple: IMS de IBM.
+
+
+Bases de datos en red(xarxa)
+Los datos se conectan por enlaces (grafos), no sólo jerarquías.
+Más flexibles que las jerárquicas, pero complejas de manejar.
+
+
+Bases de datos NoSQL
+Pensadas para grandes volúmenes de datos (Big Data) y alta velocidad (aplicaciones web):
+Clave-valor (Redis, DynamoDB) → muy rápidas, simples.
+Documentales (MongoDB, CouchDB) → guardan datos en formato JSON/BSON.
+Columnars (Cassandra, HBase) → ideales para grandes cantidades de datos distribuidos.
+De grafos (Neo4j) → para modelar relaciones complejas (redes sociales, recomendaciones).
+Multivalor (Rocket Software) → aplicaciones que gestionan datos complejos y variables
+
+
+TIPO DE BD - SEGUN LA DISTRIBUCION
+
+Centralitzades: totes les dades estan en un únic servidor.
+
+Distribuïdes: la informació està repartida en diferents servidors, però es consulta com si fos una sola BD.
+
+Federades: diverses bases independents que cooperen, però mantenen la seva autonomia.
+

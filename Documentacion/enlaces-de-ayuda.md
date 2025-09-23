@@ -101,6 +101,9 @@ DEV
   [Repertorios_APIS](https://www.tiktok.com/@aristidevs/video/7361393245479390497?is_from_webapp=1&sender_device=pc)
 
 
+  Apche2
+
+  [Cancelar multiples peticiones](https://www.tiktok.com/@elpinguinodemario/video/7502817036494507286?is_from_webapp=1&sender_device=pc)
 
 
 
