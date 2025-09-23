@@ -134,3 +134,47 @@ Distribuïdes: la informació està repartida en diferents servidors, però es c
 
 Federades: diverses bases independents que cooperen, però mantenen la seva autonomia.
 
+
+
+Palabrejas raras:
+
+Redundancia: Repetición innecesaria de datos.
+Fragmentación: División de datos en partes separadas (puede ser física o lógica).
+Inconsistencia: Cuando los datos no coinciden en todas partes donde deberían ser iguales.
+Integridad: Garantía de que los datos son correctos, completos y fiables
+Atómico: Acción que ocurre toda o nada; no queda incompleta.
+
+
+
+EL ACCESO A LOS DATOS: TIPOLOGIAS
+
+De nada sirve estructurar datos y almacenarlos si después no se puede acceder, para consultarlas, modificarlas o transmitirlas.
+En general, existen dos formas básicas de acceder a los datos:
+
+• El acceso secuencial a un registro determinado, que implica el acceso previo a todos
+los registros anteriores.
+• El acceso directo a un registro concreto, que implica la obtención directa del
+registro.
+
+
+Además, existe otra clasificación habitual de tipologías de accesos:
+
+• El acceso por valor, que permite obtener el registro en función del valor de alguno
+(o algunos) de sus campos, sin considerar la posición que ocupa el registro.
+• El acceso por posición, que abre el acceso a un registro que ocupa una posición
+determinada, sin considerar el contenido del registro.
+
+
+TIPOS DE ACCESOS
+
+• SP (accés seqüencial per posició). Després d’haver accedit a un registre
+que es troba en una posició determinada, s’accedeix al registre que ocupa la
+posició immediatament posterior.
+• DP (accés directe per posició). S’obté directament un registre pel fet
+d’ocupar una posició determinada.
+• SV (accés seqüencial per valor). Després d’haver accedit a un registre que
+té un valor concret, s’accedeix al registre que ocupa la posició immediatament posterior, segons l’ordenació establerta a partir d’un camp determinat
+(o més). L’ordre serà creixent o decreixent, si es tracta d’un camp numèric,
+o alfabètic ascendent o descendent, si es tracta d’un camp de caràcters.
+• DV (accés directe per valor). S’obté directament un registre pel fet de tenir
+un valor determinat en un dels seus atributs (o més).
