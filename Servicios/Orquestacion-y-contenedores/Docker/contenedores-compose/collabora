@@ -1,0 +1,27 @@
+
+Se tiene que usar juntamente con nextcloud o owncloud
+
+
+services:
+
+    collabora:
+        image: collabora/code
+        container_name: collabora
+        ports:
+            - "9980:9980"
+        restart: unless-stopped
+        environment:
+            - extra_params=--o:ssl.enable=false
+            - domain=localhost  # 192.168.2.111 | example.com            
+            - username=User
+            - password=p4ssw0rd
+            - dictionaries=es_ES 
+            - TZ=Europe/Madrid         
+
+
+
+Si dice OK esque esta bien, esque no se puede usar por navegador
+
+Nos vamos al nextcloud y tenemos que buscar la opcion que dice: "Collabora Online Built-In-Code-Server", tambien hay que instalar "Nextcloud Office"  
+
+Y ha partir de ahy facil, poner la ip:puerto y ya podemos crear archivos .odt, y mas
