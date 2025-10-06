@@ -1,32 +1,12 @@
 
+La asignatura o tema “Fundamentos del Hardware” trata sobre los principios básicos del funcionamiento físico de los computadores y dispositivos electrónicos
+
+Es mas bien una asignatura teorica de como funciona un ordenador, mucha teoria 
 
 
+Sistema informàtic
 
-
-
-
-Supercomputador:
-
-Mainframe:
-
-Drivers: el programa del fabricante para entender el hardware
-
-Firmware: lenguaje de bajo nivel(python es entendible para el humano), asembly es de bajo nivel, codigo que la maquina entiende 
-
-Algoritmo: una serie de instrucciones hacia un fin(un programa de python es un algoritmo por ejemplo)
-
-buses de datos: lleva los datos
-
-buses de control: 
-
-buses de direccion
-
-CPU: 
-
-UC:
-
-ALU: Hace operaciones logicas(+, -, *,operaciones logicas: AND, OR, IF, ELSE ==, !=) (aritmetical logic unit)
-
-Banco de registro: 
-
-Buses: Camininos por donde pasa la informacion
+Un Sistema Informàtic (SI) permet emmagatzemar i processar informació (tractament de les dades) mitjançant unes parts interrelacionades:
+• Maquinari o Hardware (part física),
+• Programari o Software (part lògica)
+• usuari
