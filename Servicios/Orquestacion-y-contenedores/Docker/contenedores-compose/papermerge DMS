@@ -1,0 +1,30 @@
+
+
+services:
+
+  papermerge:
+    image: papermerge/papermerge:3.5.1
+    environment:
+      PAPERMERGE__SECURITY__SECRET_KEY: 12345
+      PAPERMERGE__AUTH__USERNAME: admin
+      PAPERMERGE__AUTH__PASSWORD: admin
+      PAPERMERGE__DATABASE__URL: postgresql://coco:jumbo@db:5432/pmgdb
+    ports:
+     - "8200:80"
+    depends_on:
+      - db
+      
+  db:
+    image: postgres:16.9
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: jumbo
+      POSTGRES_DB: pmgdb
+      POSTGRES_USER: coco
+    healthcheck:
+      test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
