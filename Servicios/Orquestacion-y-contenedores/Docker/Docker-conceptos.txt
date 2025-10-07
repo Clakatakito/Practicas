@@ -171,6 +171,10 @@ docker ps -a | wc -l
 
 
 
+EXTRA, CONTENEDOR DE HACKER
+
+  -docker run --rm -it bcbcarl/hollywood
+
 
 VER LOS IDS DE LOS CONTENEDORES PARADOS
 
