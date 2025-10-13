@@ -716,4 +716,7 @@ La IP 10.99.57.57 no es la del NodePort, es la ClusterIP del Service, y solo fun
 
 Como ya he montado el NodePort, lo que toca es hacerle curl a la IP de Minikube usando el puerto del NodePort, y gracias al Service ya me redirige a uno de los pods detrás.
 
+LOADBALANCE
+
+No veremos el servicio LoadBalance porque este servicio expone una aplicación al exterior del clúster y distribuye el tráfico entre los Pods de forma equilibrada, pero solo funciona de manera automática en la nube porque depende de que el proveedor (AWS, GCP, Azure, etc.) cree y gestione un balanceador de carga real; en un entorno local como Minikube no existe esa infraestructura externa
 
