@@ -53,7 +53,7 @@ Mecanismos de seguridad física:
 Mecanismos de seguridad lógica:    
 
 
-    Amenazas sobre activos lógicos                            Mecanismos de seguridad lágica
+    Amenazas sobre activos lógicos                            Mecanismos de seguridad logica
 
     Hurtos                                                    Sistemas de cifrado de la información y uso de contraseñas
     Pérdida de información                                    Copias de seguridad y sistemas de discos redundantes (RAID).
