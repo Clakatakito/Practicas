@@ -25,3 +25,5 @@ console.log(filtrar);
 
 const filtrar2 = array.filter(numfil => numfil <= 5);
 console.log(filtrar2);
+
+//EL MAP Y EL FILTER SON MUY UTILES
