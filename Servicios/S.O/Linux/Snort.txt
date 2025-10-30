@@ -1,0 +1,62 @@
+
+
+Snort es un sistema de detección y prevención de intrusos (IDS/IPS) de código abierto que analiza el tráfico de red en tiempo real para detectar ataques, malware o actividades sospechosas usando reglas o firmas.
+
+Vamos a instalar Snort primero.
+
+
+  -sudo apt install snort
+
+Facil eh, a mi me parecia mas dificil tambien
+
+  -snort --version
+
+
+
+Ya tenemos Snort, Snort es un servicio de linea de comanda, NO ES GRAFICO, anoser que te instales otro herramienta para verlo grafico, no se si lo hare de momento
+
+
+COMANDOS BASICO DE SNORT, con sus explicaciones
+
+
+Sniffear la red:
+
+  -sudo snort -v
+
+Sniffeara la red por defecto que tengas en ese momento, la mia por ejemplo la "enp0s3", la de internet, tambien puede sniffear la tarjeta de red que tu quieras
+
+Sniffear una interfaz específica:
+
+  -sudo snort -v -i enp0sX
+
+
+
+Para salir del escanear pulsar Ctrl + C, y te abrira tambien un resumen de todo los escaneado durante ese periodo
+
+
+Sniffea y guarda los paquetes en un archivo
+
+  -sudo snort -b -i enp0s3
+
+
+
+La ubicacion de ese archivo esta en "/var/log/snort"
+
+Son los que empiezan por snort.log.*
+Los snort.alert no
+
+
+
+Ponerle nombre a un archivo sniffeado para que todos no sean los mismos, y destacar alguno que quieras:
+
+  -sudo snort -b -i enp0s3 -L snort-log-con-nombre
+
+Tambien puedes hacer lo mismo sin el paramentro -i y cojera la red por defecto como hemos dicho:
+
+  -sudo snort -b -L snort-log-con-nombre2
+
+
+
+Mostrar todos los paquetes que Snort guardó en ese archivo, funciona tanto en rutas relativas como en absolutas:
+
+  -sudo tcpdump -r snort-log-con-nombre.1761829104
