@@ -60,3 +60,19 @@ Tambien puedes hacer lo mismo sin el paramentro -i y cojera la red por defecto c
 Mostrar todos los paquetes que Snort guardó en ese archivo, funciona tanto en rutas relativas como en absolutas:
 
   -sudo tcpdump -r snort-log-con-nombre.1761829104
+
+Es util para pasarselo al wireshark tambien y filtrarlo ahy
+
+
+Tambien puedes filtrar con el snort mismo, con la comanda "tcpdump", al final de la comanda decirle que quieres filtrar del contenido:
+
+Algunos ejemplos:
+
+  -sudo tcpdump -r snort-log-pings-y-mas.1762173939 port 443
+  -sudo tcpdump -r snort-log-pings-y-mas.1762173939 host 8.8.8.8
+  -sudo tcpdump -r snort-log-pings-y-mas.1762173939 icmp
+  -sudo tcpdump -r snort.log-pings-y-mas.1762173939 tcp
+
+
+
+
