@@ -14,7 +14,7 @@ int main()
 
     printf("Si me dices un numero positivo te hecho!\n");
     scanf("%d", &numerin);
-    while(numerin < 0){
+    while(numerin <= 0){
 
 
         scanf("%d", &numerin);
