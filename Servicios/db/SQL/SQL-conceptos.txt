@@ -194,8 +194,14 @@ DV	Valor	Accedes directamente a un registro por su valor, sin importar el orden 
 
 
 
+Se puede instalar mysql muy sencillo, pero si queremos que al entrar tengamos que ponernos una contraseña propia para entrar y entrar con ese usuario y contraseña, tendremos que hacer esto:
 
-INSTALAR MYSQL
+
+INSTALAR MYSQL CON CONTRASEÑA
+
+si tienes un ambiete grafico ves a 
+
+INSTALAR MYSQL SIN CONTRASEÑA
 
   -sudo apt install mysql-server
 
@@ -204,4 +210,4 @@ ENTRAR AL AMBIENTE MYSQL:
 
   -sudo -u root -p
 
-Te pedira contraseña pero da igual porque pongas la que pongas a mysql le dara igual, asique entramos sin autenticarnos
+Te pedira contraseña pero da igual porque pongas la que pongas a mysql le dara igual
