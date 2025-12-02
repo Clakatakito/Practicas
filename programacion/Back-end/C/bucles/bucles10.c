@@ -1,9 +1,5 @@
 
 
-
-
-FALTA ACABAR
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,13 +11,18 @@ int main()
     int resultado;
     printf("Tablas!\n");
 
-    for(int i = 1;i <= 10;i++){
+    for(int tabla = 1; tabla <= 999;tabla++){
 
-        resultado = i * numero;
-        printf("%d X %d = %d\n", numero, i, resultado);
+        printf("\n");
+        printf("Tabla del %d\n", tabla);
+        printf("\n");
 
+        for(int i = 1;i <= 10;i++){
+
+            resultado = tabla * i;
+            printf("%d X %d = %d\n", tabla, i, resultado);
+        }
 
     }
-
     return 0;
 }
