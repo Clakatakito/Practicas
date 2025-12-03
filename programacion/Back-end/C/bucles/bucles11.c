@@ -21,7 +21,7 @@ int main()
     printf("Cuanto numeros quieres introducir?\n");
     scanf("%d", &total);
 
-    for(int i = 1; i <= total;i++){
+    for(int i = 1; i < total;i++){
 
         printf("Dime numerines y yo te dire si son positivos, negativos o 0\n");
         scanf("%d", &numeros);
