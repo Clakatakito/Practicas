@@ -2,7 +2,7 @@
 
 
 
-FALTA ACABAR
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,6 +19,8 @@ int main()
 
         resultado = i * numero;
         printf("%d X %d = %d\n", numero, i, resultado);
+
+        
 
 
     }
