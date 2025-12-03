@@ -37,6 +37,9 @@ Sistemas Gestores de Bases de Datos (SGBD)
 
 • Los SGBD son un tipo de software que tiene como finalidades la gestión y control de las BD.
 
+
+
+
 MySQL, MondoDB, entre otras son SGBD
 
 • Objetivos y funcionalidades de los SGBD:
@@ -184,3 +187,27 @@ SP	Posición	Empiezas en un registro de una posición y vas registro por registr
 DP	Posición	Accedes directamente a un registro según su posición
 SV	Valor	Empiezas en un registro con un valor concreto y vas registro por registro según un orden (alfabético o numérico)
 DV	Valor	Accedes directamente a un registro por su valor, sin importar el orden ni la posición
+
+
+
+
+
+
+
+Se puede instalar mysql muy sencillo, pero si queremos que al entrar tengamos que ponernos una contraseña propia para entrar y entrar con ese usuario y contraseña, tendremos que hacer esto:
+
+
+INSTALAR MYSQL CON CONTRASEÑA
+
+si tienes un ambiete grafico ves a 
+
+INSTALAR MYSQL SIN CONTRASEÑA
+
+  -sudo apt install mysql-server
+
+
+ENTRAR AL AMBIENTE MYSQL:
+
+  -sudo -u root -p
+
+Te pedira contraseña pero da igual porque pongas la que pongas a mysql le dara igual
