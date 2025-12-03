@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,17 +10,24 @@ int main()
 
     int numeroAdivinar;
     int intento;
-    printf("Dime un numero del 1 al 10, puto");
+    printf("Dime un numero del 1 al 10:\n");
     scanf("%d", &numeroAdivinar);
 
 
     while(numeroAdivinar != intento){
-        printf("HABER SI LO ADIVINAS");
         scanf("%d", &intento);
 
+        if(numeroAdivinar < intento){
+            printf("Muy arriba\n");
+        }
 
+        if(numeroAdivinar > intento){
+
+            printf("Muy abajo\n");
+
+        }
     }
 
-    printf("Hello world!\n");
+    printf("Acertaste, es el: %d\n", intento);
     return 0;
 }
