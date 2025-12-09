@@ -211,3 +211,22 @@ ENTRAR AL AMBIENTE MYSQL:
   -sudo -u root -p
 
 Te pedira contraseña pero da igual porque pongas la que pongas a mysql le dara igual
+
+ya lo explicare
+
+EMPEZAMOS CON LAS COMANDAS
+
+CREAR DATABASES:
+  -Create Database Practica;
+
+
+Nota*
+
+La mayoria de los comanos de mysql estaran en mayusculas, se hacen por costumbre por la facilidad de leerlos
+
+VER DATABASES:
+  -SHOW DATABASES;
+
+
+CAMBIAR A UNA DATABASE:
+  -USE Practica;
