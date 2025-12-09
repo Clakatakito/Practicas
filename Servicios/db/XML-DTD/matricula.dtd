@@ -1,0 +1,8 @@
+<!ELEMENT matricula (cicle+, alumnes)>
+<!ELEMENT cicle (#PCDATA)>
+<!ELEMENT alumnes (alumne+)>
+<!ELEMENT alumne (nom, any, mòduls)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT any (#PCDATA)>
+<!ELEMENT mòduls (mòdul+)>
+<!ELEMENT mòdul (#PCDATA)>

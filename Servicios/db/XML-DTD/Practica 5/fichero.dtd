@@ -1,0 +1,6 @@
+
+<!ELEMENT albara (numero, data, client, articles)>
+<!ELEMENT numero (#PCDATA)>
+<!ELEMENT data (#PCDATA)>
+<!ELEMENT client (nom, poblacio)>
+<!ELEMENT articles (compra+, article)>
