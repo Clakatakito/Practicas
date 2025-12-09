@@ -1,0 +1,1703 @@
+[
+  {
+    "id": 1,
+    "productName": "Chai",
+    "quantityPerUnit": "10 boxes x 20 bags",
+    "discountDay": { "Monday": 0.25,  "Wednesday": 0.15, "Friday": 0.18 },
+    "unitPrice": 18.0,
+    "unitsInStock": 39,
+    "branchOffice": [ "Alabama", "Florida", "Ohio", "California" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Exotic Liquids",
+            "contactName": "Charlotte Cooper",
+            "contactTitle": "Purchasing Manager",
+            "address": "49 Gilbert St.",
+            "city": "London",
+            "region": null,
+            "country": "UK",
+            "phone": "(171) 555-2222"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "productName": "Chang",
+    "quantityPerUnit": "24 - 12 oz bottles",
+    "discountDay": { "Tuesday": 0.25,  "Thursday": 0.14},
+    "unitPrice": 19.0,
+    "unitsInStock": 17,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Exotic Liquids",
+            "contactName": "Charlotte Cooper",
+            "contactTitle": "Purchasing Manager",
+            "address": "49 Gilbert St.",
+            "city": "London",
+            "region": null,
+            "country": "UK",
+            "phone": "(171) 555-2222"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "productName": "Aniseed Syrup",
+    "quantityPerUnit": "12 - 550 ml bottles",
+    "discountDay": { "Saturday": 0.34,  "Sunday": 0.35},
+    "unitPrice": 10.0,
+    "unitsInStock": 13,
+    "branchOffice": [ "Florida", "Misuri", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Exotic Liquids",
+            "contactName": "Charlotte Cooper",
+            "contactTitle": "Purchasing Manager",
+            "address": "49 Gilbert St.",
+            "city": "London",
+            "region": null,
+            "country": "UK",
+            "phone": "(171) 555-2222"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "productName": "Chef Anton's Cajun Seasoning",
+    "quantityPerUnit": "48 - 6 oz jars",
+    "discountDay": { "Monday": 0.32},
+    "unitPrice": 22.0,
+    "unitsInStock": 53,
+    "branchOffice": [ "California", "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "New Orleans Cajun Delights",
+            "contactName": "Shelley Burke",
+            "contactTitle": "Order Administrator",
+            "address": "P.O. Box 78934",
+            "city": "New Orleans",
+            "region": "LA",
+            "country": "USA",
+            "phone": "(100) 555-4822"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "productName": "Chef Anton's Gumbo Mix",
+    "quantityPerUnit": "36 boxes",
+    "discountDay": { "Monday": 0.21, "Tuesday": 0.37, "Wednesday": 0.16},
+    "unitPrice": 21.35,
+    "unitsInStock": 0,
+    "branchOffice": [ "Alabama", "California" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and season ings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "New Orleans Cajun Delights",
+            "contactName": "Shelley Burke",
+            "contactTitle": "Order Administrator",
+            "address": "P.O. Box 78934",
+            "city": "New Orleans",
+            "region": "LA",
+            "country": "USA",
+            "phone": "(100) 555-4822"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "productName": "Grandma's Boysenberry Spread",
+    "quantityPerUnit": "12 - 8 oz jars",
+    "discountDay": { "Tuesday": 0.25},
+    "unitPrice": 25.0,
+    "unitsInStock": 120,
+    "branchOffice": [ "Misuri", "Florida", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Grandma Kelly's Homestead",
+            "contactName": "Regina Murphy",
+            "contactTitle": "Sales Representative",
+            "address": "707 Oxford Rd.",
+            "city": "Ann Arbor",
+            "region": "MI",
+            "country": "USA",
+            "phone": "(313) 555-5735"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "productName": "Uncle Bob's Organic Dried Pears",
+    "quantityPerUnit": "12 - 1 lb pkgs.",
+    "discountDay": { "Wednesday": 0.12},
+    "unitPrice": 30.0,
+    "unitsInStock": 15,
+    "branchOffice": [ "Alabama" ],
+    "categories": [
+      {
+        "categoryName": "Produce",
+        "description": "Dried fruit and bean curd",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Grandma Kelly's Homestead",
+            "contactName": "Regina Murphy",
+            "contactTitle": "Sales Representative",
+            "address": "707 Oxford Rd.",
+            "city": "Ann Arbor",
+            "region": "MI",
+            "country": "USA",
+            "phone": "(313) 555-5735"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "productName": "Northwoods Cranberry Sauce",
+    "quantityPerUnit": "12 - 12 oz jars",
+    "discountDay": { "Thursday": 0.25},
+    "unitPrice": 40.0,
+    "unitsInStock": 6,
+    "branchOffice": [ "California" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Grandma Kelly's Homestead",
+            "contactName": "Regina Murphy",
+            "contactTitle": "Sales Representative",
+            "address": "707 Oxford Rd.",
+            "city": "Ann Arbor",
+            "region": "MI",
+            "country": "USA",
+            "phone": "(313) 555-5735"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "productName": "Mishi Kobe Niku",
+    "quantityPerUnit": "18 - 500 g pkgs.",
+    "discountDay": { "Friday": 0.19},
+    "unitPrice": 97.0,
+    "unitsInStock": 29,
+    "branchOffice": [ "Florida" ],
+    "categories": [
+      {
+        "categoryName": "Meat/Poultry",
+        "description": "Prepared meats",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Tokyo Traders",
+            "contactName": "Yoshi Nagase",
+            "contactTitle": "Marketing Manager",
+            "address": "9-8 Sekimai Musashino-shi",
+            "city": "Tokyo",
+            "region": null,
+            "country": "Japan",
+            "phone": "(03) 3555-5011"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "productName": "Ikura",
+    "quantityPerUnit": "12 - 200 ml jars",
+    "discountDay": { "Saturday": 20},
+    "unitPrice": 31.0,
+    "unitsInStock": 31,
+    "branchOffice": [ "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Tokyo Traders",
+            "contactName": "Yoshi Nagase",
+            "contactTitle": "Marketing Manager",
+            "address": "9-8 Sekimai Musashino-shi",
+            "city": "Tokyo",
+            "region": null,
+            "country": "Japan",
+            "phone": "(03) 3555-5011"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "productName": "Queso Cabrales",
+    "quantityPerUnit": "1 kg pkg.",
+    "discountDay": { "Sunday": 0.31},
+    "unitPrice": 21.0,
+    "unitsInStock": 22,
+    "branchOffice": [ "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Cooperativa de Quesos 'Las Cabras'",
+            "contactName": "Antonio del Valle Saavedra",
+            "contactTitle": "Export Administrator",
+            "address": "Calle del Rosal 4",
+            "city": "Oviedo",
+            "region": "Asturias",
+            "country": "Spain",
+            "phone": "(98) 598 76 54"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "productName": "Queso Manchego La Pastora",
+    "quantityPerUnit": "10 - 500 g pkgs.",
+    "discountDay": { "Monday": 0.23,  "Wednesday": 0.15, "Friday": 0.13},
+    "unitPrice": 38.0,
+    "unitsInStock": 86,
+    "branchOffice": [ "Alabama", "Florida", "Ohio", "California" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Cooperativa de Quesos 'Las Cabras'",
+            "contactName": "Antonio del Valle Saavedra",
+            "contactTitle": "Export Administrator",
+            "address": "Calle del Rosal 4",
+            "city": "Oviedo",
+            "region": "Asturias",
+            "country": "Spain",
+            "phone": "(98) 598 76 54"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "productName": "Konbu",
+    "quantityPerUnit": "2 kg box",
+    "discountDay": { "Tuesday": 0.2,  "Thursday": 0.13},
+    "unitPrice": 6.0,
+    "unitsInStock": 24,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Mayumi's",
+            "contactName": "Mayumi Ohno",
+            "contactTitle": "Marketing Representative",
+            "address": "92 Setsuko Chuo-ku",
+            "city": "Osaka",
+            "region": null,
+            "country": "Japan",
+            "phone": "(06) 431-7877"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "productName": "Tofu",
+    "quantityPerUnit": "40 - 100 g pkgs.",
+    "discountDay": { "Saturday": 0.28,  "Sunday": 0.28},
+    "unitPrice": 23.25,
+    "unitsInStock": 35,
+    "branchOffice": [ "Florida", "Misuri", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Produce",
+        "description": "Dried fruit and bean curd",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Mayumi's",
+            "contactName": "Mayumi Ohno",
+            "contactTitle": "Marketing Representative",
+            "address": "92 Setsuko Chuo-ku",
+            "city": "Osaka",
+            "region": null,
+            "country": "Japan",
+            "phone": "(06) 431-7877"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "productName": "Genen Shouyu",
+    "quantityPerUnit": "24 - 250 ml bottles",
+    "discountDay": { "Monday": 0.39},
+    "unitPrice": 15.5,
+    "unitsInStock": 39,
+    "branchOffice": [ "California", "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Mayumi's",
+            "contactName": "Mayumi Ohno",
+            "contactTitle": "Marketing Representative",
+            "address": "92 Setsuko Chuo-ku",
+            "city": "Osaka",
+            "region": null,
+            "country": "Japan",
+            "phone": "(06) 431-7877"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "productName": "Pavlova",
+    "quantityPerUnit": "32 - 500 g boxes",
+    "discountDay": { "Monday": 0.27, "Tuesday": 0.37, "Wednesday": 0.14},
+    "unitPrice": 17.45,
+    "unitsInStock": 29,
+    "branchOffice": [ "Alabama", "California" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Pavlova, Ltd.",
+            "contactName": "Ian Devling",
+            "contactTitle": "Marketing Manager",
+            "address": "74 Rose St. Moonie Ponds",
+            "city": "Melbourne",
+            "region": "Victoria",
+            "country": "Australia",
+            "phone": "(03) 444-2343"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "productName": "Alice Mutton",
+    "quantityPerUnit": "20 - 1 kg tins",
+    "discountDay": { "Tuesday": 0.27},
+    "unitPrice": 39.0,
+    "unitsInStock": 0,
+    "branchOffice": [ "Misuri", "Florida", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Meat/Poultry",
+        "description": "Prepared meats",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Pavlova, Ltd.",
+            "contactName": "Ian Devling",
+            "contactTitle": "Marketing Manager",
+            "address": "74 Rose St. Moonie Ponds",
+            "city": "Melbourne",
+            "region": "Victoria",
+            "country": "Australia",
+            "phone": "(03) 444-2343"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "productName": "Carnarvon Tigers",
+    "quantityPerUnit": "16 kg pkg.",
+    "discountDay": { "Wednesday": 0.18},
+    "unitPrice": 62.5,
+    "unitsInStock": 42,
+    "branchOffice": [ "Alabama" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Pavlova, Ltd.",
+            "contactName": "Ian Devling",
+            "contactTitle": "Marketing Manager",
+            "address": "74 Rose St. Moonie Ponds",
+            "city": "Melbourne",
+            "region": "Victoria",
+            "country": "Australia",
+            "phone": "(03) 444-2343"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "productName": "Teatime Chocolate Biscuits",
+    "quantityPerUnit": "10 boxes x 12 pieces",
+    "discountDay": { "Thursday": 0.29},
+    "unitPrice": 9.2,
+    "unitsInStock": 25,
+    "branchOffice": [ "California" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Specialty Biscuits, Ltd.",
+            "contactName": "Peter Wilson",
+            "contactTitle": "Sales Representative",
+            "address": "29 King's Way",
+            "city": "Manchester",
+            "region": null,
+            "country": "UK",
+            "phone": "(161) 555-4448"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "productName": "Sir Rodney's Marmalade",
+    "quantityPerUnit": "30 gift boxes",
+    "discountDay": { "Friday": 0.11},
+    "unitPrice": 81.0,
+    "unitsInStock": 40,
+    "branchOffice": [ "Florida" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Specialty Biscuits, Ltd.",
+            "contactName": "Peter Wilson",
+            "contactTitle": "Sales Representative",
+            "address": "29 King's Way",
+            "city": "Manchester",
+            "region": null,
+            "country": "UK",
+            "phone": "(161) 555-4448"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "productName": "Sir Rodney's Scones",
+    "quantityPerUnit": "24 pkgs. x 4 pieces",
+    "discountDay": { "Saturday": 23},
+    "unitPrice": 10.0,
+    "unitsInStock": 3,
+    "branchOffice": [ "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Specialty Biscuits, Ltd.",
+            "contactName": "Peter Wilson",
+            "contactTitle": "Sales Representative",
+            "address": "29 King's Way",
+            "city": "Manchester",
+            "region": null,
+            "country": "UK",
+            "phone": "(161) 555-4448"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "productName": "Guaraná Fantástica",
+    "quantityPerUnit": "12 - 355 ml cans",
+    "discountDay": { "Sunday": 0.36},
+    "unitPrice": 4.5,
+    "unitsInStock": 20,
+    "branchOffice": [ "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Refrescos Americanas LTDA",
+            "contactName": "Carlos Diaz",
+            "contactTitle": "Marketing Manager",
+            "address": "Av. das Americanas 12.890",
+            "city": "Sao Paulo",
+            "region": null,
+            "country": "Brazil",
+            "phone": "(11) 555 4640"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "productName": "Schoggi Schokolade",
+    "quantityPerUnit": "100 - 100 g pieces",
+    "discountDay": { "Monday": 0.21,  "Wednesday": 0.18, "Friday": 0.14},
+    "unitPrice": 43.9,
+    "unitsInStock": 49,
+    "branchOffice": [ "Alabama", "California" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Heli Süßwaren GmbH & Co. KG",
+            "contactName": "Petra Winkler",
+            "contactTitle": "Sales Manager",
+            "address": "Tiergartenstraße 5",
+            "city": "Berlin",
+            "region": null,
+            "country": "Germany",
+            "phone": "(010) 9984510"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "productName": "Nord-Ost Matjeshering",
+    "quantityPerUnit": "10 - 200 g glasses",
+    "discountDay": { "Tuesday": 0.2,  "Thursday": 0.1},
+    "unitPrice": 25.89,
+    "unitsInStock": 10,
+    "branchOffice": [ "Misuri", "Florida", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Nord-Ost-Fisch Handelsgesellschaft mbH",
+            "contactName": "Sven Petersen",
+            "contactTitle": "Coordinator Foreign Markets",
+            "address": "Frahmredder 112a",
+            "city": "Cuxhaven",
+            "region": null,
+            "country": "Germany",
+            "phone": "(04721) 8713"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "productName": "Gorgonzola Telino",
+    "quantityPerUnit": "12 - 100 g pkgs",
+    "discountDay": { "Saturday": 0.2,  "Sunday": 0.1},
+    "unitPrice": 12.5,
+    "unitsInStock": 0,
+    "branchOffice": [ "Alabama", "Florida", "Ohio", "California" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Formaggi Fortini s.r.l.",
+            "contactName": "Elio Rossi",
+            "contactTitle": "Sales Representative",
+            "address": "Viale Dante, 75",
+            "city": "Ravenna",
+            "region": null,
+            "country": "Italy",
+            "phone": "(0544) 60323"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "productName": "Mascarpone Fabioli",
+    "quantityPerUnit": "24 - 200 g pkgs.",
+    "discountDay": { "Monday": 0.14},
+    "unitPrice": 32.0,
+    "unitsInStock": 9,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Formaggi Fortini s.r.l.",
+            "contactName": "Elio Rossi",
+            "contactTitle": "Sales Representative",
+            "address": "Viale Dante, 75",
+            "city": "Ravenna",
+            "region": null,
+            "country": "Italy",
+            "phone": "(0544) 60323"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "productName": "Geitost",
+    "quantityPerUnit": "500 g",
+    "discountDay": { "Monday": 0.26, "Tuesday": 0.33, "Wednesday": 0.12},
+    "unitPrice": 2.5,
+    "unitsInStock": 112,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Norske Meierier",
+            "contactName": "Beate Vileid",
+            "contactTitle": "Marketing Manager",
+            "address": "Hatlevegen 5",
+            "city": "Sandvika",
+            "region": null,
+            "country": "Norway",
+            "phone": "(0)2-953010"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "productName": "Sasquatch Ale",
+    "quantityPerUnit": "24 - 12 oz bottles",
+    "discountDay": { "Tuesday": 0.21},
+    "unitPrice": 14.0,
+    "unitsInStock": 111,
+    "branchOffice": [ "Florida", "Misuri", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Bigfoot Breweries",
+            "contactName": "Cheryl Saylor",
+            "contactTitle": "Regional Account Rep.",
+            "address": "3400 - 8th Avenue Suite 210",
+            "city": "Bend",
+            "region": "OR",
+            "country": "USA",
+            "phone": "(503) 555-9931"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "productName": "Steeleye Stout",
+    "quantityPerUnit": "24 - 12 oz bottles",
+    "discountDay": { "Monday": 0.15,  "Wednesday": 0.15, "Friday": 0.29},
+    "unitPrice": 18.0,
+    "unitsInStock": 20,
+    "branchOffice": [ "Florida", "Misuri", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Bigfoot Breweries",
+            "contactName": "Cheryl Saylor",
+            "contactTitle": "Regional Account Rep.",
+            "address": "3400 - 8th Avenue Suite 210",
+            "city": "Bend",
+            "region": "OR",
+            "country": "USA",
+            "phone": "(503) 555-9931"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "productName": "Inlagd Sill",
+    "quantityPerUnit": "24 - 250 g  jars",
+    "discountDay": { "Tuesday": 0.15,  "Thursday": 0.25},
+    "unitPrice": 19.0,
+    "unitsInStock": 112,
+    "branchOffice": [ "Misuri", "Florida", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Svensk Sjöföda AB",
+            "contactName": "Michael Björn",
+            "contactTitle": "Sales Representative",
+            "address": "Brovallavägen 231",
+            "city": "Stockholm",
+            "region": null,
+            "country": "Sweden",
+            "phone": "08-123 45 67"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "productName": "Gravad lax",
+    "quantityPerUnit": "12 - 500 g pkgs.",
+    "discountDay": { "Saturday": 0.22,  "Sunday": 0.12},
+    "unitPrice": 26.0,
+    "unitsInStock": 11,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Svensk Sjöföda AB",
+            "contactName": "Michael Björn",
+            "contactTitle": "Sales Representative",
+            "address": "Brovallavägen 231",
+            "city": "Stockholm",
+            "region": null,
+            "country": "Sweden",
+            "phone": "08-123 45 67"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "productName": "Côte de Blaye",
+    "quantityPerUnit": "12 - 75 cl bottles",
+    "discountDay": { "Monday": 0.21, "Tuesday": 0.11, "Wednesday": 0.12},
+    "unitPrice": 263.5,
+    "unitsInStock": 17,
+    "branchOffice": [ "California" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Aux joyeux ecclésiastiques",
+            "contactName": "Guylène Nodier",
+            "contactTitle": "Sales Manager",
+            "address": "203, Rue des Francs-Bourgeois",
+            "city": "Paris",
+            "region": null,
+            "country": "France",
+            "phone": "(1) 03.83.00.68"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "productName": "Chartreuse verte",
+    "quantityPerUnit": "750 cc per bottle",
+    "discountDay": { "Monday": 0.15},
+    "unitPrice": 18.0,
+    "unitsInStock": 69,
+    "branchOffice": [ "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Aux joyeux ecclésiastiques",
+            "contactName": "Guylène Nodier",
+            "contactTitle": "Sales Manager",
+            "address": "203, Rue des Francs-Bourgeois",
+            "city": "Paris",
+            "region": null,
+            "country": "France",
+            "phone": "(1) 03.83.00.68"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "productName": "Boston Crab Meat",
+    "quantityPerUnit": "24 - 4 oz tins",
+    "discountDay": { "Tuesday": 0.19},
+    "unitPrice": 18.4,
+    "unitsInStock": 123,
+    "branchOffice": [ "Alabama" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "New England Seafood Cannery",
+            "contactName": "Robb Merchant",
+            "contactTitle": "Wholesale Account Agent",
+            "address": "Order Processing Dept. 2100 Paul Revere Blvd.",
+            "city": "Boston",
+            "region": "MA",
+            "country": "USA",
+            "phone": "(617) 555-3267"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "productName": "Jack's New England Clam Chowder",
+    "quantityPerUnit": "12 - 12 oz cans",
+    "discountDay": { "Wednesday": 0.14},
+    "unitPrice": 9.65,
+    "unitsInStock": 85,
+    "branchOffice": [ "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "New England Seafood Cannery",
+            "contactName": "Robb Merchant",
+            "contactTitle": "Wholesale Account Agent",
+            "address": "Order Processing Dept. 2100 Paul Revere Blvd.",
+            "city": "Boston",
+            "region": "MA",
+            "country": "USA",
+            "phone": "(617) 555-3267"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "productName": "Singaporean Hokkien Fried Mee",
+    "quantityPerUnit": "32 - 1 kg pkgs.",
+    "discountDay": { "Thursday": 0.25},
+    "unitPrice": 14.0,
+    "unitsInStock": 26,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Grains/Cereals",
+        "description": "Breads, crackers, pasta, and cereal",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Leka Trading",
+            "contactName": "Chandra Leka",
+            "contactTitle": "Owner",
+            "address": "471 Serangoon Loop, Suite #402",
+            "city": "Singapore",
+            "region": null,
+            "country": "Singapore",
+            "phone": "555-8787"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "productName": "Ipoh Coffee",
+    "quantityPerUnit": "16 - 500 g tins",
+    "discountDay": { "Friday": 0.15},
+    "unitPrice": 46.0,
+    "unitsInStock": 17,
+    "branchOffice": [ "Alabama", "California" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Leka Trading",
+            "contactName": "Chandra Leka",
+            "contactTitle": "Owner",
+            "address": "471 Serangoon Loop, Suite #402",
+            "city": "Singapore",
+            "region": null,
+            "country": "Singapore",
+            "phone": "555-8787"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "productName": "Gula Malacca",
+    "quantityPerUnit": "20 - 2 kg bags",
+    "discountDay": { "Saturday": 29},
+    "unitPrice": 19.45,
+    "unitsInStock": 27,
+    "branchOffice": [ "Florida", "Misuri", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Leka Trading",
+            "contactName": "Chandra Leka",
+            "contactTitle": "Owner",
+            "address": "471 Serangoon Loop, Suite #402",
+            "city": "Singapore",
+            "region": null,
+            "country": "Singapore",
+            "phone": "555-8787"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "productName": "Rogede sild",
+    "quantityPerUnit": "1k pkg.",
+    "discountDay": { "Sunday": 0.32},
+    "unitPrice": 9.5,
+    "unitsInStock": 5,
+    "branchOffice": [ "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Lyngbysild",
+            "contactName": "Niels Petersen",
+            "contactTitle": "Sales Manager",
+            "address": "Lyngbysild Fiskebakken 10",
+            "city": "Lyngby",
+            "region": null,
+            "country": "Denmark",
+            "phone": "43844108"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "productName": "Spegesild",
+    "quantityPerUnit": "4 - 450 g glasses",
+    "discountDay": { "Sunday": 0.36},
+    "unitPrice": 12.0,
+    "unitsInStock": 95,
+    "branchOffice": [ "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Lyngbysild",
+            "contactName": "Niels Petersen",
+            "contactTitle": "Sales Manager",
+            "address": "Lyngbysild Fiskebakken 10",
+            "city": "Lyngby",
+            "region": null,
+            "country": "Denmark",
+            "phone": "43844108"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "productName": "Zaanse koeken",
+    "quantityPerUnit": "10 - 4 oz boxes",
+    "discountDay": { "Monday": 0.26,  "Wednesday": 0.11, "Friday": 0.1},
+    "unitPrice": 9.5,
+    "unitsInStock": 36,
+    "branchOffice": [ "Florida" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Zaanse Snoepfabriek",
+            "contactName": "Dirk Luchte",
+            "contactTitle": "Accounting Manager",
+            "address": "Verkoop Rijnweg 22",
+            "city": "Zaandam",
+            "region": null,
+            "country": "Netherlands",
+            "phone": "(12345) 1212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "productName": "Chocolade",
+    "quantityPerUnit": "10 pkgs.",
+    "discountDay": { "Tuesday": 0.26,  "Thursday": 0.11},
+    "unitPrice": 12.75,
+    "unitsInStock": 15,
+    "branchOffice": [ "California" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Zaanse Snoepfabriek",
+            "contactName": "Dirk Luchte",
+            "contactTitle": "Accounting Manager",
+            "address": "Verkoop Rijnweg 22",
+            "city": "Zaandam",
+            "region": null,
+            "country": "Netherlands",
+            "phone": "(12345) 1212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "productName": "Maxilaku",
+    "quantityPerUnit": "24 - 50 g pkgs.",
+    "discountDay": { "Monday": 0.1, "Tuesday": 0.1, "Wednesday": 0.12},
+    "unitPrice": 20.0,
+    "unitsInStock": 10,
+    "branchOffice": [ "Alabama" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Karkki Oy",
+            "contactName": "Anne Heikkonen",
+            "contactTitle": "Product Manager",
+            "address": "Valtakatu 12",
+            "city": "Lappeenranta",
+            "region": null,
+            "country": "Finland",
+            "phone": "(953) 10956"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "productName": "Valkoinen suklaa",
+    "quantityPerUnit": "12 - 100 g bars",
+    "discountDay": { "Tuesday": 0.23,  "Thursday": 0.15},
+    "unitPrice": 16.25,
+    "unitsInStock": 65,
+    "branchOffice": [ "Alabama", "Florida", "Ohio", "California" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Karkki Oy",
+            "contactName": "Anne Heikkonen",
+            "contactTitle": "Product Manager",
+            "address": "Valtakatu 12",
+            "city": "Lappeenranta",
+            "region": null,
+            "country": "Finland",
+            "phone": "(953) 10956"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "productName": "Manjimup Dried Apples",
+    "quantityPerUnit": "50 - 300 g pkgs.",
+    "discountDay": { "Monday": 0.21, "Tuesday": 0.32, "Wednesday": 0.12},
+    "unitPrice": 53.0,
+    "unitsInStock": 20,
+    "branchOffice": [ "Alabama", "California" ],
+    "categories": [
+      {
+        "categoryName": "Produce",
+        "description": "Dried fruit and bean curd",
+        "suppliers": [
+          {
+            "supplierCompanyName": "G'day, Mate",
+            "contactName": "Wendy Mackenzie",
+            "contactTitle": "Sales Representative",
+            "address": "170 Prince Edward Parade Hunter's Hill",
+            "city": "Sydney",
+            "region": "NSW",
+            "country": "Australia",
+            "phone": "(02) 555-5914"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "productName": "Filo Mix",
+    "quantityPerUnit": "16 - 2 kg boxes",
+    "discountDay": { "Monday": 0.24, "Tuesday": 0.29, "Wednesday": 0.12},
+    "unitPrice": 7.0,
+    "unitsInStock": 38,
+    "branchOffice": [ "California" ],
+    "categories": [
+      {
+        "categoryName": "Grains/Cereals",
+        "description": "Breads, crackers, pasta, and cereal",
+        "suppliers": [
+          {
+            "supplierCompanyName": "G'day, Mate",
+            "contactName": "Wendy Mackenzie",
+            "contactTitle": "Sales Representative",
+            "address": "170 Prince Edward Parade Hunter's Hill",
+            "city": "Sydney",
+            "region": "NSW",
+            "country": "Australia",
+            "phone": "(02) 555-5914"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "productName": "Perth Pasties",
+    "quantityPerUnit": "48 pieces",
+    "discountDay": { "Wednesday": 0.14},
+    "unitPrice": 32.8,
+    "unitsInStock": 0,
+    "branchOffice": [ "Alabama", "California" ],
+    "categories": [
+      {
+        "categoryName": "Meat/Poultry",
+        "description": "Prepared meats",
+        "suppliers": [
+          {
+            "supplierCompanyName": "G'day, Mate",
+            "contactName": "Wendy Mackenzie",
+            "contactTitle": "Sales Representative",
+            "address": "170 Prince Edward Parade Hunter's Hill",
+            "city": "Sydney",
+            "region": "NSW",
+            "country": "Australia",
+            "phone": "(02) 555-5914"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "productName": "Tourtière",
+    "quantityPerUnit": "16 pies",
+    "discountDay": { "Wednesday": 0.15},
+    "unitPrice": 7.45,
+    "unitsInStock": 21,
+    "branchOffice": [ "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Meat/Poultry",
+        "description": "Prepared meats",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Ma Maison",
+            "contactName": "Jean-Guy Lauzon",
+            "contactTitle": "Marketing Manager",
+            "address": "2960 Rue St. Laurent",
+            "city": "Montréal",
+            "region": "Québec",
+            "country": "Canada",
+            "phone": "(514) 555-9022"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "productName": "Gnocchi di nonna Alice",
+    "quantityPerUnit": "24 - 250 g pkgs.",
+    "discountDay": { "Monday": 0.2},
+    "unitPrice": 38.0,
+    "unitsInStock": 21,
+    "branchOffice": [ "Florida", "Misuri", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Grains/Cereals",
+        "description": "Breads, crackers, pasta, and cereal",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Pasta Buttini s.r.l.",
+            "contactName": "Giovanni Giudici",
+            "contactTitle": "Order Administrator",
+            "address": "Via dei Gelsomini, 153",
+            "city": "Salerno",
+            "region": null,
+            "country": "Italy",
+            "phone": "(089) 6547665"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "productName": "Ravioli Angelo",
+    "quantityPerUnit": "24 - 250 g pkgs.",
+    "discountDay": { "Tuesday": 0.1},
+    "unitPrice": 19.5,
+    "unitsInStock": 36,
+    "branchOffice": [ "Alabama" ],
+    "categories": [
+      {
+        "categoryName": "Grains/Cereals",
+        "description": "Breads, crackers, pasta, and cereal",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Pasta Buttini s.r.l.",
+            "contactName": "Giovanni Giudici",
+            "contactTitle": "Order Administrator",
+            "address": "Via dei Gelsomini, 153",
+            "city": "Salerno",
+            "region": null,
+            "country": "Italy",
+            "phone": "(089) 6547665"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "productName": "Escargots de Bourgogne",
+    "quantityPerUnit": "24 pieces",
+    "discountDay": { "Wednesday": 0.19},
+    "unitPrice": 13.25,
+    "unitsInStock": 62,
+    "branchOffice": [ "California", "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Seafood",
+        "description": "Seaweed and fish",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Escargots Nouveaux",
+            "contactName": "Marie Delamare",
+            "contactTitle": "Sales Manager",
+            "address": "22, rue H. Voiron",
+            "city": "Montceau",
+            "region": null,
+            "country": "France",
+            "phone": "85.57.00.07"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "productName": "Raclette Courdavault",
+    "quantityPerUnit": "5 kg pkg.",
+    "discountDay": { "Monday": 0.38},
+    "unitPrice": 55.0,
+    "unitsInStock": 79,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Gai pâturage",
+            "contactName": "Eliane Noz",
+            "contactTitle": "Sales Representative",
+            "address": "Bat. B 3, rue des Alpes",
+            "city": "Annecy",
+            "region": null,
+            "country": "France",
+            "phone": "38.76.98.06"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "productName": "Tarte au sucre",
+    "quantityPerUnit": "48 pies",
+    "discountDay": { "Monday": 0.23,  "Wednesday": 0.13, "Friday": 0.34},
+    "unitPrice": 49.3,
+    "unitsInStock": 17,
+    "branchOffice": [ "Misuri" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Forêts d'érables",
+            "contactName": "Chantal Goulet",
+            "contactTitle": "Accounting Manager",
+            "address": "148 rue Chasseur",
+            "city": "Ste-Hyacinthe",
+            "region": "Québec",
+            "country": "Canada",
+            "phone": "(514) 555-2955"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "productName": "Vegie-spread",
+    "quantityPerUnit": "15 - 625 g jars",
+    "discountDay": { "Wednesday": 0.18},
+    "unitPrice": 43.9,
+    "unitsInStock": 24,
+    "branchOffice": [ "California" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Pavlova, Ltd.",
+            "contactName": "Ian Devling",
+            "contactTitle": "Marketing Manager",
+            "address": "74 Rose St. Moonie Ponds",
+            "city": "Melbourne",
+            "region": "Victoria",
+            "country": "Australia",
+            "phone": "(03) 444-2343"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "productName": "Louisiana Fiery Hot Pepper Sauce",
+    "quantityPerUnit": "32 - 8 oz bottles",
+    "discountDay": { "Friday": 0.11},
+    "unitPrice": 21.05,
+    "unitsInStock": 76,
+    "branchOffice": [ "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "New Orleans Cajun Delights",
+            "contactName": "Shelley Burke",
+            "contactTitle": "Order Administrator",
+            "address": "P.O. Box 78934",
+            "city": "New Orleans",
+            "region": "LA",
+            "country": "USA",
+            "phone": "(100) 555-4822"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "productName": "Louisiana Hot Spiced Okra",
+    "quantityPerUnit": "24 - 8 oz jars",
+    "discountDay": { "Friday": 0.26},
+    "unitPrice": 17.0,
+    "unitsInStock": 4,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "New Orleans Cajun Delights",
+            "contactName": "Shelley Burke",
+            "contactTitle": "Order Administrator",
+            "address": "P.O. Box 78934",
+            "city": "New Orleans",
+            "region": "LA",
+            "country": "USA",
+            "phone": "(100) 555-4822"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "productName": "Laughing Lumberjack Lager",
+    "quantityPerUnit": "24 - 12 oz bottles",
+    "discountDay": { "Sunday": 0.29},
+    "unitPrice": 14.0,
+    "unitsInStock": 52,
+    "branchOffice": [ "Misuri", "Florida", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Bigfoot Breweries",
+            "contactName": "Cheryl Saylor",
+            "contactTitle": "Regional Account Rep.",
+            "address": "3400 - 8th Avenue Suite 210",
+            "city": "Bend",
+            "region": "OR",
+            "country": "USA",
+            "phone": "(503) 555-9931"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "productName": "Scottish Longbreads",
+    "quantityPerUnit": "10 boxes x 8 pieces",
+    "discountDay": { "Sunday": 0.27},
+    "unitPrice": 12.5,
+    "unitsInStock": 6,
+    "branchOffice": [ "Florida", "Misuri", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Confections",
+        "description": "Desserts, candies, and sweet breads",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Specialty Biscuits, Ltd.",
+            "contactName": "Peter Wilson",
+            "contactTitle": "Sales Representative",
+            "address": "29 King's Way",
+            "city": "Manchester",
+            "region": null,
+            "country": "UK",
+            "phone": "(161) 555-4448"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "productName": "Outback Lager",
+    "quantityPerUnit": "24 - 355 ml bottles",
+    "discountDay": { "Tuesday": 0.2,  "Thursday": 0.1},
+    "unitPrice": 15.0,
+    "unitsInStock": 15,
+    "branchOffice": [ "Misuri", "Florida", "California" ],
+    "categories": [
+      {
+        "categoryName": "Beverages",
+        "description": "Soft drinks, coffees, teas, beers, and ales",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Pavlova, Ltd.",
+            "contactName": "Ian Devling",
+            "contactTitle": "Marketing Manager",
+            "address": "74 Rose St. Moonie Ponds",
+            "city": "Melbourne",
+            "region": "Victoria",
+            "country": "Australia",
+            "phone": "(03) 444-2343"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "productName": "Flotemysost",
+    "quantityPerUnit": "10 - 500 g pkgs.",
+    "discountDay": { "Monday": 0.2,  "Wednesday": 0.1, "Friday": 0.14},
+    "unitPrice": 21.5,
+    "unitsInStock": 26,
+    "branchOffice": [ "Alabama", "Florida", "Ohio", "California" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Norske Meierier",
+            "contactName": "Beate Vileid",
+            "contactTitle": "Marketing Manager",
+            "address": "Hatlevegen 5",
+            "city": "Sandvika",
+            "region": null,
+            "country": "Norway",
+            "phone": "(0)2-953010"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "productName": "Mozzarella di Giovanni",
+    "quantityPerUnit": "24 - 200 g pkgs.",
+    "discountDay": { "Monday": 0.2, "Tuesday": 0.3, "Wednesday": 0.12},
+    "unitPrice": 34.8,
+    "unitsInStock": 14,
+    "branchOffice": [ "Florida" ],
+    "categories": [
+      {
+        "categoryName": "Dairy Products",
+        "description": "Cheeses",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Formaggi Fortini s.r.l.",
+            "contactName": "Elio Rossi",
+            "contactTitle": "Sales Representative",
+            "address": "Viale Dante, 75",
+            "city": "Ravenna",
+            "region": null,
+            "country": "Italy",
+            "phone": "(0544) 60323"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "productName": "Longlife Tofu",
+    "quantityPerUnit": "5 kg pkg.",
+    "discountDay": { "Monday": 0.3},
+    "unitPrice": 10.0,
+    "unitsInStock": 4,
+    "branchOffice": [ "Misuri", "Florida", "Ohio" ],
+    "categories": [
+      {
+        "categoryName": "Produce",
+        "description": "Dried fruit and bean curd",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Tokyo Traders",
+            "contactName": "Yoshi Nagase",
+            "contactTitle": "Marketing Manager",
+            "address": "9-8 Sekimai Musashino-shi",
+            "city": "Tokyo",
+            "region": null,
+            "country": "Japan",
+            "phone": "(03) 3555-5011"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "productName": "Original Frankfurter grüne Soße",
+    "quantityPerUnit": "12 boxes",
+    "discountDay": { "Saturday": 0.3,  "Sunday": 0.35},
+    "unitPrice": 13.0,
+    "unitsInStock": 32,
+    "branchOffice": [ "Florida" ],
+    "categories": [
+      {
+        "categoryName": "Condiments",
+        "description": "Sweet and savory sauces, relishes, spreads, and seasonings",
+        "suppliers": [
+          {
+            "supplierCompanyName": "Plutzer Lebensmittelgroßmärkte AG",
+            "contactName": "Martin Bein",
+            "contactTitle": "International Marketing Mgr.",
+            "address": "Bogenallee 51",
+            "city": "Frankfurt",
+            "region": null,
+            "country": "Germany",
+            "phone": "(069) 992755"
+          }
+        ]
+      }
+    ]
+  }
+]

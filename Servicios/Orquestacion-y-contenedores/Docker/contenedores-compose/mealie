@@ -1,0 +1,11 @@
+
+
+En este link "https://github.com/mealie-recipes/mealie" esta la configuracion de mealie
+
+NO HACE FALTA FALTA CREAR UNA CARPETA ESPECIFICA PARA EL MEALIE, CUANDO HAGAMOS EL GIT CLONE CREA UNA CARPETA YA LLAMADA MEALIE DONDE DEBAJO ESTA LA CONFIGURACION
+
+EMPEZAMOS
+
+sudo git clone https://github.com/mealie-recipes/mealie
+
+sudo nano mealie/docker/docker-compose.yml

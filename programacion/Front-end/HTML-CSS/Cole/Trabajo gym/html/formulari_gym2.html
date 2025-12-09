@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Consulta una visita</title>
+        <link rel="website icon" type="png" href="img/logo_gym_html.png">
+        <style>
+        body {
+            background-color: rgba(212, 173, 171, 0.836);
+        }
+        .menu {
+            background-color: black;
+        }
+        .menu th {
+            padding: 10px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            color: orangered;
+        }
+        footer {
+                background-color: rgb(33, 140, 182);
+                text-align: center;
+                margin-top: 20px;
+                bottom: 0;
+                width: 100%;
+                padding: 10px;
+        }
+        h1{
+            text-shadow: red 4px 10px;
+            font-size: 100px;
+            text-align: center;
+            color: gray;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .titol{
+            text-decoration: none;
+            text-shadow: red 4px 6px;
+            font-size: 45px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        form{
+            text-align: center;
+        }
+        .imgcen{
+            text-align: center;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="menu">
+            <table border="0">
+                <tr>
+                    <th><a href="index.html">Inici</a></th>
+                    <th><a href="clases.html">Classes</a></th>
+                    <th><a href="gym_promocions.html">Promocions</a></th>
+                    <th><a href="horarioclasses2.html">Horari de classes</a></th>
+                    <th><a href="equipo.html">L'Equip</a></th>
+                    <th><a href="fotos gym(1).html">El nostre centre</a></th>
+                    <th><a href="formulari_gym2.html">Contacte</a></th>
+                    <div class="social">
+                        <th>
+                            <a target="_blank" href="https://www.instagram.com/bgbadalona/"><img src="img/insta-removebg-preview.png" width="70px" style="background-color: black;"></a>
+                        </th>
+                    </div>
+                </tr>
+            </table>
+        </div>
+        <h1>International Gym</h1>
+        <div class="imgcen">
+            <img class="img1" src="img/logo_gym_html.png" alt="InternationalGymLogo">
+        </div>  
+        <br>
+        <form action="formulari_gym2.html" method="get">
+            <h1 class="titol">Formulari de Contacte</h1>
+                <label for="user">Nom:</label>
+                <input type="text" id="user" name="user">
+                <br>
+                <br>
+                <label for="Correu electrònic">Email: </label>
+                <input type="email" id="Correu electrònic" name="Correu electrònic">
+                <br>
+                <br>
+                <label for="Descripció">Com has aprés de nosaltres:</label>
+                <textarea id="Descripció:" name="Descripció:" rows="1" cols="37"></textarea>
+                <br>
+                <br>
+                <label for="Sexe">Sexe:  </label><input type="radio" name="Sex" value="Home" checked>Home <input type="radio" value="Dona" name="Sex">Dona <input type="radio" value="No binari" name="Sex">No binari<br><br>
+                <label for="Classe">Quina classe dirigida et vols apuntar:</label><br>
+                <select>
+                    <option id="Tonificació" name="Tonificació">Tonificació</option>
+                    <option id="Zumba" name="Zumba">Zumba</option>
+                    <option id="Cycling" name="Cycling">Cycling</option>
+                    <option id="Esquena_sana" name="Esquena_sana">Esquena sana</option>
+                    <option id="GAC" name="GAC">G.A.C</option>
+                    <option id="Reeducació_Postural" name="Reeducació_Postural">Reeducació Postural</option>
+                    <option id="Power_Pump" name="Power_Pump">Power Pump</option>
+                    <option id="Pilates" name="Pilates">Pilates</option>
+                    <option id="Body Spartans" name="Body Spartans">Body Spartans</option>
+                    <option id="HIT" name="HIT">HIT</option>
+                </select><br><br>
+                <input type="checkbox" checked>Vull rebre informació sobre novetats i ofertes sobre els productes d'aquest gimnàs.<br>
+                <input type="checkbox" required>Declaro haver llegit i acceptar les condicions generals del gimnàs.<br><br>
+                <input type="submit" value="Enviar"><br><br><br><br><br><br><br><br>
+        </form>        
+        <footer>
+            <p>International GYM 2024 | <a href="Politica de privacitat.html">Política de privacitat</a> | <a href="avis legal.html">Avís legal</a> | <a href="cookies.html">Política de cookies</a></p>
+        </footer>
+    </body>
+</html>

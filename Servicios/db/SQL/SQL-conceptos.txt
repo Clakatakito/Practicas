@@ -1,0 +1,213 @@
+
+
+INTRODUCCION A LAS BASES DE DATOS
+
+Las bases de datos guardan informacion de un sin fin de cosas, pero en si la informacion que se introduce tambien puede ser especificada
+
+
+Tres elementos caracterizan fundamentalmente las informaciones:
+
+• Entidades: objetos conceptualizados.
+
+• Atributos: propiedades de las entidades.
+
+• Valores: contenidos concretos de los atributos.
+
+
+Tipo de datos y dominio:
+
+• Dominio: conjunto de valores válidos de un atributo.
+
+• Tipo de dato: define valores y operaciones admisibles.
+
+Un dominio es un subconjunto de los valores posibles de un tipo de dato.
+
+
+Claves e identificadores:
+
+• Un atributo identificador distingue instancias de una entidad.
+
+• Todo atributo o conjunto de atributos que permiten identificar inequívocamente a las instancias de una entidad se llaman claves.
+
+• Ni identificadores ni claves pueden admitir valores nulos.
+
+
+
+Sistemas Gestores de Bases de Datos (SGBD)
+
+• Los SGBD son un tipo de software que tiene como finalidades la gestión y control de las BD.
+
+
+
+
+MySQL, MondoDB, entre otras son SGBD
+
+• Objetivos y funcionalidades de los SGBD:
+- Posibilitar las consultas de cualquier complejidad.
+- Garantizar la independencia física y la independencia lógica de los datos.
+- Evitar o solucionar los problemas derivados de la redundancia.
+- Proteger la integridad de los datos.
+- Permitir la concurrencia de usuarios.
+- Contribuir a la seguridad de los datos.
+
+
+
+
+Las palabras junto a sus significados se pueden especificar en en MySQL también 
+
+entitat = tabla
+atribut = titulo de cada columna
+Atribut identificador = La columna que identifica de forma única cada fila (id)
+Domini = Tipo de valores que puede aceptar cada columna (int, str, bool)
+Valors (Valores) = Los datos que hay en cada fila
+
+
+Entidad: PRODUCTO
+--------------------------------------------------
+| id        | nombre   | precio      |   ← Atributos (columnas)
+--------------------------------------------------
+|  1        | cable    |   60.50    |
+|  2        | Teclado  |   25.99    |
+|  3        | Mouse    |   15.49    |
+|  4        | Monitor  |  199.99    |
+--------------------------------------------------
+
+Atributo identificador:
+- id → porque cada fila tiene un id único.
+
+Dominios (valores que puede aceptar cada atributo):
+- id → números enteros positivos (1, 2, 3, 4…)
+- nombre → texto de hasta 100 caracteres (ej. "Laptop")
+- precio → número decimal positivo con 2 decimales (ej. 1200.50)
+
+
+
+
+MAS TEORIA
+
+
+MODELOS DE DATOS:
+
+Los modelos de datos son unos conjuntos de herramientas lógicas para describir los datos, sus interrelaciones, su significado y las restricciones a aplicar para garantizar su coherencia.
+
+Todos los modelos de BD, por lo general, proporcionan tres tipos de herramientas:
+
+• Estructuras de datos. Elementos con los que se construyen las BD, como tablas, árboles, documentos etc.
+• Reglas de integridad. Restricciones que los datos tendrán que respetar, como por ejemplo tipos de dato, dominios, claves, etc.
+• Operaciones a realizar con los datos. Altas, bajas, modificaciones y consultas, como mínimo.
+
+En otras palabras, es una abstracción que permite entender y diseñar la base de datos de forma lógica antes de implementarla físicamente.
+
+
+Existen varios tipos de modelos de datos, los más comunes son:
+Modelo jerárquico: datos organizados en forma de árbol (padre-hijo).
+Modelo en red: datos en nodos conectados por relaciones en forma de grafo.
+Modelo relacional (el más usado): datos en tablas con filas y columnas, relacionados mediante claves primarias y foráneas.
+Modelo orientado a objetos: combina datos y comportamiento (métodos) en objetos.
+Modelo de documentos o clave-valor (NoSQL): datos almacenados en estructuras más flexibles.
+
+
+TIPO DE BD - SEGUN EL MODELO DE DATOS
+
+Bases de dades jeràrquiques
+Organitzen la informació en forma d’arbre (pare-fill).
+Molt ràpides per a consultes estructurades, però poc flexibles.
+Exemple: IMS de IBM.
+
+
+Bases de datos en red(xarxa)
+Los datos se conectan por enlaces (grafos), no sólo jerarquías.
+Más flexibles que las jerárquicas, pero complejas de manejar.
+
+
+Bases de datos NoSQL
+Pensadas para grandes volúmenes de datos (Big Data) y alta velocidad (aplicaciones web):
+Clave-valor (Redis, DynamoDB) → muy rápidas, simples.
+Documentales (MongoDB, CouchDB) → guardan datos en formato JSON/BSON.
+Columnars (Cassandra, HBase) → ideales para grandes cantidades de datos distribuidos.
+De grafos (Neo4j) → para modelar relaciones complejas (redes sociales, recomendaciones).
+Multivalor (Rocket Software) → aplicaciones que gestionan datos complejos y variables
+
+
+TIPO DE BD - SEGUN LA DISTRIBUCION
+
+Centralitzades: totes les dades estan en un únic servidor.
+
+Distribuïdes: la informació està repartida en diferents servidors, però es consulta com si fos una sola BD.
+
+Federades: diverses bases independents que cooperen, però mantenen la seva autonomia.
+
+
+
+Palabrejas raras:
+
+Redundancia: Repetición innecesaria de datos.
+Fragmentación: División de datos en partes separadas (puede ser física o lógica).
+Inconsistencia: Cuando los datos no coinciden en todas partes donde deberían ser iguales.
+Integridad: Garantía de que los datos son correctos, completos y fiables
+Atómico: Acción que ocurre toda o nada; no queda incompleta.
+
+
+
+EL ACCESO A LOS DATOS: TIPOLOGIAS
+
+De nada sirve estructurar datos y almacenarlos si después no se puede acceder, para consultarlas, modificarlas o transmitirlas.
+En general, existen dos formas básicas de acceder a los datos:
+
+• El acceso secuencial a un registro determinado, que implica el acceso previo a todos
+los registros anteriores.
+• El acceso directo a un registro concreto, que implica la obtención directa del
+registro.
+
+
+Además, existe otra clasificación habitual de tipologías de accesos:
+
+• El acceso por valor, que permite obtener el registro en función del valor de alguno
+(o algunos) de sus campos, sin considerar la posición que ocupa el registro.
+
+• El acceso por posición, que abre el acceso a un registro que ocupa una posición
+determinada, sin considerar el contenido del registro.
+
+
+TIPOS DE ACCESOS
+
+Formas básicas de acceso a los datos
+Hay dos formas principales:
+
+Acceso secuencial:
+Para acceder a un registro concreto, primero hay que recorrer todos los registros anteriores.
+Es como leer un libro página por página hasta llegar a la que te interesa.
+
+Acceso directo:
+Se obtiene un registro de forma inmediata, sin tener que leer los anteriores.
+Es como abrir un libro directamente en la página que te interesa.
+
+Tipo	Basado en	Cómo funciona
+SP	Posición	Empiezas en un registro de una posición y vas registro por registro hasta el siguiente
+DP	Posición	Accedes directamente a un registro según su posición
+SV	Valor	Empiezas en un registro con un valor concreto y vas registro por registro según un orden (alfabético o numérico)
+DV	Valor	Accedes directamente a un registro por su valor, sin importar el orden ni la posición
+
+
+
+
+
+
+
+Se puede instalar mysql muy sencillo, pero si queremos que al entrar tengamos que ponernos una contraseña propia para entrar y entrar con ese usuario y contraseña, tendremos que hacer esto:
+
+
+INSTALAR MYSQL CON CONTRASEÑA
+
+si tienes un ambiete grafico ves a 
+
+INSTALAR MYSQL SIN CONTRASEÑA
+
+  -sudo apt install mysql-server
+
+
+ENTRAR AL AMBIENTE MYSQL:
+
+  -sudo -u root -p
+
+Te pedira contraseña pero da igual porque pongas la que pongas a mysql le dara igual

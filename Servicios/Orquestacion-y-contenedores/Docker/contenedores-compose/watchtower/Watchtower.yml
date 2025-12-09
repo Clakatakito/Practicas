@@ -1,0 +1,11 @@
+
+Ejemplo de watchtower sin configurar que contenedores comprueba (por defecto mira a todos)
+
+
+watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: contenedor1 contenedor2 --interval 10 --cleanup #los contenedores tienen que tener el container_name: contenedor1
+    restart: always

@@ -1,0 +1,722 @@
+
+Kubernetes es
+
+
+Ha kubernetes también se lo suele llamar k8s por abreviacion debido a que su nombre es muy largo, el significado de esta abreviatura es que entre la k y la s hay 8 letras: k u(1)b(2)e(3)r(4)n(5)e(6)t(7)e(8) s
+
+**ACLARACIÓN 
+
+Kubernetes no es otro sistema de contenedores como Docker, es una plataforma que se encarga de administrar esos contenedores, ya vengan de Docker, Podman o cualquier otro que use containerd por debajo.
+
+
+Kubernetes se basa en una arquitectura de nodos master (control plane) y workers. El master toma decisiones y administra el estado del clúster, mientras los workers ejecutan los contenedores. El control plane orquesta y supervisa, y los workers hacen el trabajo real corriendo las aplicaciones.
+
+Los nodos master son donde se deciden los contenedore y donde ponerlos, los workes son solo nodos que tienen los procesos que se han declarado en los masters, los masters tambien pueden tener contenedores dentro y un worker no puede declarar contenedor para el cluster
+
+Es importante tener en cunta que solo los nodos masters tienen estos componentes: KubernetesAPI, Kube-Scheduler, Kube-Controller, Etcd
+Los nodos workes tienen: kubelet, kube-proxy, Container runtime
+
+**ACLARACION
+
+Realmete los nodos masters aparte de los que ya he dicho tienen tambien los componentes que usan los workers, pero los nodos masters no suelen usarlos ya que esos nodos solo se reservan a declaran contenedores y pods y no tanto para trabajar
+Igual que Docker Swarm, al fin y alcabo estamos viendo otro orquestador de contenedores
+
+
+**La arquitectura interna de Kubernetes o los componentes fundamentales de Kubernetes**
+La arquitectura interna de Kubernetes o los componentes fundamentales de Kubernetes
+
+Kubernetes API - es la interfaz central y RESTful de Kubernetes que permite interactuar con todos los recursos del clúster como pods, deployments o servicios funcionando como el núcleo del sistema ya que todo —desde herramientas como kubectl hasta controladores internos— se comunica con ella para crear, leer, actualizar o eliminar objetos en el clúster(todo comando escrito por linea de comandos mediante kubectl sera enviado a la API de kubernetes)
+
+Kube-Scheduler - es el componente del plano de control de Kubernetes responsable de decidir en qué nodo se ejecutará cada pod pendiente según varios factores como recursos disponibles, afinidades, restricciones, taints y tolerations, garantizando que los pods se ubiquen de forma eficiente y acorde a las necesidades declaradas por el usuario y el estado del clúster
+
+Kube-Scheduler es el componente de Kubernetes que decide en qué nodo del clúster se ejecutará cada nuevo pod pendiente, basándose en criterios como uso de recursos, afinidades, restricciones y más; por ejemplo, si hay dos nodos y cada uno ya tiene dos contenedores, el scheduler elegirá automáticamente el nodo más adecuado para desplegar un nuevo contenedor, a menos que el usuario especifique lo contrario mediante reglas o configuraciones.
+
+Kube-Controller - es el componente que ejecuta los controladores de Kubernetes, los cuales monitorean el estado del clúster y trabajan para que el estado actual coincida con el estado deseado, gestionando tareas como replicar pods, manejar nodos caídos, y administrar recursos, asegurando que todo funcione correctamente y de forma automática.
+
+el Kube-Controller agrupa varios controladores que se encargan de tareas específicas dentro del clúster. Los principales son:
+
+Node Controller: supervisa el estado de los nodos y actúa si detecta que un nodo está caído o no responde.
+
+Replication Controller: garantiza que un número especificado de réplicas de un pod estén corriendo siempre, creando o eliminando pods según sea necesario.
+
+Endpoints Controller: conecta servicios con pods para asegurar la correcta comunicación.
+
+Service Account & Token Controller: maneja cuentas de servicio y tokens para autenticación dentro del clúster.
+
+etcd - es la base de datos distribuida clave-valor que utiliza Kubernetes para almacenar toda la información del clúster, incluyendo el estado de los pods, configuraciones, secretos y cualquier recurso; actúa como la fuente de verdad del sistema, permitiendo que los componentes del plano de control lean y escriban datos para mantener la coherencia y el funcionamiento del clúster.
+
+Kubelet - es el agente que corre en cada nodo del clúster y se encarga de garantizar que los contenedores se ejecuten correctamente según las definiciones de los pods que recibe del plano de control; supervisa el estado de los contenedores, informa al API Server y reinicia los pods si es necesario para mantener el estado deseado en ese nodo.
+
+Kube-Proxy - es el componente de red que corre en cada nodo de Kubernetes y se encarga de enrutar el tráfico de red hacia los pods apropiados, gestionando las reglas de red necesarias para exponer servicios dentro del clúster y permitiendo la comunicación entre pods, nodos y servicios, ya sea mediante reglas iptables o eBPF según la configuración del entorno.
+
+ContainerRuntime - Básicamente el sistema de contenedores que tengas instalado, ya sea: docker, cryo, podman, etc...
+
+
+VALE, una vez que nos sabemos la teoria de k8s, vamos a tocar algunos comandos, pera antes la instalacion:
+
+Vamos a usar minikube que es una herramienta que permite crear y ejecutar un clúster de Kubernetes local en una sola máquina, ideal para desarrollo, pruebas y aprendizaje, ya que simula un entorno Kubernetes completo con un solo nodo (o más si se configura), facilitando la experimentación sin necesidad de usar infraestructura en la nube.
+
+TENEMOS QUE TENER DOCKER YA instalado
+
+Vamos a instalar 2 herramienta: kubectl y minikube
+
+kubectl: kubectl es la herramienta de línea de comandos que se usa para comunicarse con un clúster de Kubernetes.
+
+minikube: minikube es una herramienta que crea y ejecuta un clúster de Kubernetes en tu propia máquina, ideal para desarrollo y pruebas.
+
+
+INSTALAR kubectl
+
+    -curl -LO "https://dl.k8s.io/release/$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+Verifica:
+
+    -kubectl version --client
+
+
+INSTALAR minikube
+
+    -curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+Verifica:
+
+    -minikube version
+
+
+
+Y por ultimo usaremos como backend de k8s el propio docker
+
+    -minikube start --driver=docker
+    😄  minikube v1.36.0 en Ubuntu 22.04 (vbox/amd64)
+    ✨  Using the docker driver based on user configuration
+    📌  Using Docker driver with root privileges
+    👍  Starting "minikube" primary control-plane node in "minikube" cluster
+    🚜  Pulling base image v0.0.47 ...
+    💾  Descargando Kubernetes v1.33.1 ...
+        > preloaded-images-k8s-v18-v1...:  347.04 MiB / 347.04 MiB  100.00% 21.80 M
+        > gcr.io/k8s-minikube/kicbase...:  501.83 MiB / 502.26 MiB  99.91% 12.83 Mi
+    🔥  Creating docker container (CPUs=2, Memory=2200MB) ...
+    🐳  Preparando Kubernetes v1.33.1 en Docker 28.1.1...
+        ▪ Generando certificados y llaves
+        ▪ Iniciando plano de control
+        ▪ Configurando reglas RBAC...
+    🔗  Configurando CNI bridge CNI ...
+    🔎  Verifying Kubernetes components...
+        ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+    🌟  Complementos habilitados: storage-provisioner, default-storageclass
+    🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+Si hubieras puesto la siqguiente linea te hubiera cojido docker tambien, porque es el por defecto, tambien se puede hacer con virtualbox en caso de que se tenga instalado:
+
+    -minikube start --driver=none/virtualbox
+
+
+COMANDOS BÁSICOS EN Minikube
+
+    
+    -minikube status (muestra info de si las cosas van bien)
+    -minikube stop (detiene el cluster)
+    -minikube start (inicia el cluster)
+    -minikube delete (elimina por completo el cluster, lo puedes volver a tener tu cluster con: minikube start, sino pones el --driver=docker lo hace solo al parecer o el que ya tenias?, no se)
+
+
+Una vez tenemos ya el cluster podemos empezar ha aprender ha hecer la unidad mas pequeña que se puede hacer en k82, un pod
+
+
+Los comandos kubectl y minikube en si no tienen autocompletar por defecto, que quiere decir eso?, que si tu pones: "kubectl (intentas tabular para ver informacion)" no dejara porque no esta habilitada, tampoco la de minikube
+
+HABILITAR AUTOCOMPLETAR
+
+
+kubectl:
+
+  -sudo apt install bash-completion -y   # ya vendra instalado pero por si las moscas
+  -source <(kubectl completion bash)
+  -source ~/.bashrc
+
+minikube:
+  -sudo apt install bash-completion -y   # ya vendra instalado pero por si las moscas
+  -source <(minikube completion bash)
+  -source ~/.bashrc
+
+
+Y ya se autocompletaran las comandas
+
+
+**ACLARACIÓN
+
+Si apagas la maquina virtual con el cluster corriendo, luego cuando inicies la maquina de nuevo ese cluster no estara, habra que encenderlo, almenos los pods se quedan
+
+PODS:
+
+Lo mas normal a utilizar es 1 pod por contenedor
+
+Crear un pod
+    -kubectl run podtest --image=nginx:alpine 
+    
+    Sintaxis
+    kubectl run <nombre del pod que quieras> --image=<imagen>
+    pod/podtest created
+
+Si intentas crear un pod con una imagen que no existe igualmente te dira que la hara:
+    -kubectl run podtest --image=enjinx
+
+Pero al momento de ver los pods:
+
+podtest1     0/1     ErrImagePull   0             3s
+
+
+Ver tus pods
+    -kubectl get pods 
+
+
+Ver TODO lo de tu cluster pods/rs(mas adelante)/deployments(aun mas adelante):
+
+  -kubectl get all
+
+
+Por si tienes un monton de pos puedes ver uno especifico con:
+
+    -kubectl get pods nombrepod
+
+
+NAME         READY   STATUS    RESTARTS      AGE
+podapache2   1/1     Running   0             3m47s
+podtest      1/1     Running   1 (25h ago)   25h
+
+Aqui por ejemplo primero cree el pod: podtest ayer digamos, apague la maquina y al dia siguiente la encendi, puse en marcha el cluster y poreso tiene 1 restart, el podapache2 lo he hecho hoy y no he apago la maquina, si lo hiciera tendria 1 restart y el otro 2
+
+
+
+Ver descripcion de tus pods(como el inspect en docker)
+    -kubectl describe pod nombrepod
+
+Ejemplo, vamos a describir el pod que nos dio un error en la imagen:
+
+    -kubectl describe pod podtest1
+
+Name:             podtest1
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Thu, 24 Jul 2025 11:36:21 +0000
+Labels:           run=podtest1
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.8
+IPs:
+  IP:  10.244.0.8
+Containers:
+  podtest1:
+    Container ID:
+    Image:          enjinx
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2glkq (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  kube-api-access-2glkq:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  3m46s                default-scheduler  Successfully assigned default/podtest1 to minikube
+  Normal   Pulling    45s (x5 over 3m46s)  kubelet            Pulling image "enjinx"
+  Warning  Failed     43s (x5 over 3m44s)  kubelet            Failed to pull image "enjinx": Error response from daemon: pull access denied for enjinx, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed     43s (x5 over 3m44s)  kubelet            Error: ErrImagePull
+  Normal   BackOff    6s (x13 over 3m44s)  kubelet            Back-off pulling image "enjinx"
+  Warning  Failed     6s (x13 over 3m44s)  kubelet            Error: ImagePullBackOff
+
+    
+
+Lo que se sule mirar si algo falla son los eventos, lo demas de arriba es decripcion del pod en si
+
+
+Eliminar pods:
+    -kubectl delete pod podtest1
+
+
+Ver todos los comandos y abrebiaciones del cliente de la terminal de k8s:
+
+    -kubectl api-resources
+
+Con esto por ejemplo nos enteramos que no hace falta que escribamos la palabra "pod" tal cual, tambien la podemos escribir asi: "po", entonces se puede hacer esto:
+
+    -kubectl get po
+
+Y funcionara    
+
+
+Obtener el yaml de un pod:
+
+    -kubectl get pod nombrepod -o yaml
+
+Y te da un yaml larguissimo que no voy a poner
+
+Obtener mas informacion de los pods
+  -kubectl get pod nombrepod -o wide
+
+
+**ACLARACION
+
+Una cosa importante de lo que me acabo de dar cuenta respecto a los pods por si no sabias, NO creas un pod y luego creas un contenedor con docker y luego con k8s metes ese contenedor en el pod, NOO, tu creas el pod con la imagen y ya, para sencillo pero yo creia que el pod y el contenedor no se creaban juntos hasta que tu pusieses el contenedor en el pod, se hace automatico, el runtime de docker te lo crea, el contenedro adentro del pod con la imagen que has seleccionado
+
+
+Ip en k8s:
+
+Sabemos que con: "kubectl describe pod nombrepod" no da info del pod y del contenedor, algo que no sabia es que la ip que te da, ej: 172.17.xx.xx y la buscas en el navegador te saldra el contenedor, no se si pasaba igual con docker normal porque tambien podias verles la ip a los contenedores pero esta bastante bien
+
+
+Entrar en el pod(en este caso hay 1 contenedor en este pod asique no no pedia a cual de los 2 ir):
+
+    -kubectl exec -it httpd-pod -- bash (tambien puedes abrirlo con sh)
+
+
+Ver los logs del pod:
+
+    -kubectl logs podtest 
+
+
+
+MANIFIESTOS:
+
+Los manifiestos son archivos yaml que se declaran con una series de normas para crear unidades en k8s, como los pods, y si, son exactamente igual que los docker-compose.yml, sirven para editarlos y larzarlos, mejor que una orden directa en la terminal que se ejecuta y se lanza y no se puede editar, ES LA MISMA METAFORA QUE UN COMPOSE EN DOCKER
+
+Como se vio en la linea 248, se puede ver el yaml de pod que creemos o se pueden construir a mano si eres el puto amo, pero como no lo somos vamos a ver un yaml basico de un pod:
+
+apiVersion: v1
+kind: Pod                            #tipo pod
+metadata:
+  name: nginx                        #nombre del pod
+spec:
+  containers:                        #los contenedor que estaran asignados a ese pod
+  - name: nginx                      #nombre del contenedor
+    image: nginx:1.14.2              #nombre de la imagen del contenedor
+    ports:
+    - containerPort: 80              #puerto del contenedor
+
+
+
+Podemos confirmar el yaml con: "kubectl apply -f pod.yml"  
+
+Y podemos eliminarlo tambien con: "kubectl delete -f pod.yml", aunque se puede eliminar ese pod como siempre, con: "kubectl delete pod nombrepod"
+
+Editar el manifiesto, con docker lo que haciamos era entrar dentro del archivo, editarlo y volver a levantarlo, se puede hacer de una mejor forma en k8s:
+
+  -kubectl edir pod nombrepod
+
+
+**NOTA
+
+En el mismo archivo yaml puedes crear mas de un pod asi:
+
+
+apiVersion: v1
+kind: Pod  
+metadata:
+  name: nginx    
+spec:
+  containers:                        
+  - name: nginx         
+    image: nginx:1.14.2              
+    ports:
+    - containerPort: 80
+
+---
+
+el otro pod
+
+
+Funciona igual que el compose en docker pero en k8s tienes que indicarlo con "---" sino pensara que hay un pod solo
+
+
+
+PODS CON MÁS DE UN CONTENEDOR:
+
+Ejemplo:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-dos-contenedores
+spec:
+  containers:
+    - name: contenedor-nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+    - name: contenedor-busybox
+      image: busybox:latest
+      command: ["sh", "-c", "while true; do echo Hola desde BusyBox; sleep 10; done"]
+
+
+**ACLARACION
+
+Eso era 1 pod con 2 contenedores, y la explicacion de la linea 302 era 2 pods en un archivo ymal, se podrian haber metido mas contenedores dentro de cualquiera de los pods que creemos
+
+Una vez creado el pod con 2 contenedores nos podemos fijar que cuando hacemos "kubectl get pods", nuesto pod con 2 contenedores sale: pod-dos-contenedores   2/2     Running   0            8s
+
+el 2/2 es porque hay 2 contenedores
+
+
+
+
+Si intentamos entrar en un pod donde haya mas de 1 contenedor NO NOS PREGUNTARA A QUE CONTENEDOR QUIERES ENTRAR, sino que entrara en el primero que se haya creado, en el caso del yaml de la linea 333 en el de nginx, y si queremos entrar al de busybox seria:
+
+  -kubectl logs pod-dos-contenedores -c contenedor-busybox #que es el name que le dimos a ese contenedor
+
+
+Para entrar en un contenedor de dentro de un pod era facil meterse, pero cuando hay 2 que?, pues hay que indicarle a cual:
+
+  -kubectl exec -ti pod-dos-contenedores -c contenedor-busybox -- sh
+
+  El paramentro -c es de indicar, igual que la linea 361 que queremos saber el log de 1 contenedor de un pod donde hay 2 contenedores
+
+
+LABELS Y PODS
+
+Un label en k8s es basicamente una etiqueta es un par clave-valor que se usa para marcar y organizar recursos, para que tu entiendas para que es el pod, ejemplo:
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mi-pod
+  labels:
+    app: web
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+
+
+Ahora por el yml ves que el pod es para la web, por ejemplo, es una indicacion que quieras darle
+
+y aparte de poner etiquetas en el codigo podemos filtrar en la terminal por esas etiquetas con el paramentro -l, l de label:
+
+  -kubectl get pods -l app=web
+
+
+
+Para cambiarle el label a un pod o ponerle otro distinto:
+
+  -kubectl label pod pod_nombre app=front
+
+
+Y se le añadira ese label al pod
+
+
+esa opcion es para añadir nuevos labels, pongamos que el label es: app=front, si te da un error porque lo quieres editar ha: app=back, te da este error:
+
+error: 'app' already has a value (el_nombre_que_tubieras), and --overwrite is false
+
+Prueba esta opcion:
+
+  -kubectl label pod nombrepod app=nuevo_label --overwrite
+
+
+Puedes hacer busquedas por los pods/replicasets/deployments con:
+
+  -kubectl get pods --show-labels
+
+Te mostrara los labels del pod/rs ya sabes  
+
+
+PROBLEMAS CON LOS PODS  
+
+No son persistentes, No se escalan solos, No se autogestionan, No tienen balanceo de carga entre sí
+
+Todo eso que falla se puede arreglar 
+
+
+
+ReplicaSet
+
+Es un objeto que asegura que siempre haya un número fijo de réplicas (pods) en ejecución, basicamente asegura que tengas una cantidad exacta de pods por si alguno se muere o tienes que crear 1.000 pods lo haces con replicaset para no ir manualmente haciendolo tu, en la carpeta de yamls teneis un ejemplo de un replicaset
+
+puedes abreviar tambien la palabra "replicaset" asi "rs", que es mas facil
+
+
+Listas los rs:
+
+  -kubectl get rs
+NAME      DESIRED   CURRENT   READY   AGE
+rs-test   5         5         5       3m25s
+
+
+Si vemos los pods que tenemos podemos ver que todo los pods tienen el mismo nombre seguido por un numerin, ese numerin es porque el rs le da eso, porque sino se llamarian todos igual, y para darle constancia de que es un replicaset
+
+Podeis probar a eliminar 1 o todos, si hos fijais se volveran a levartar otros, eso es lo que hace el replicaset
+
+Incluso si volvemos al yml y decimos que queremos 3 replicas el replicaset lo hara y apagara los pods necessarios para que solo hayan los que hemos pedido que tengamos
+
+
+**NOTA
+
+Realmete hay crear los pod con un objeto superior como lo es un replicaset nunca hay que crear un pod plano por linea de comando porque no es util, tambien decir que no hay que crear pods y ponerle un label que concuerde con un replicaset porque sino va a ser adoptado por el replicaset y va a ser un pod mas, independiente de la imagen que sea, y si el pod plano que hemos creado tienen una imagen diferente a la que el rs crea da igual ya que el label es el mismo y quedara ahy hasta que se elimine 
+
+
+
+
+PROBLEMAS DE REPLICASET
+
+
+Imagina que tienes un rs con imagen x y replicas 1000(servidor promedio) y funciona, pero ahora quieres cambiar las imagen, te pensaras que cambiando la imagen del manifisto y guardando servira, y si que servira para futuros pods cuando queden espacios en blanco, pero esos 1000 pods quedaran ahy hasta que los elimines y el rs los vuelva a hacer, como podemos hacer de cambiar la imagen en vivo en los 1000 pods sin tener que eliminarlo y que el rs los cree mejor, con DEPLYMENTS
+
+
+
+DEPLYMENTS
+
+
+Un Deployment en Kubernetes es una forma de decirle al clúster qué aplicación quieres ejecutar, cuántas copias quieres y cómo deben funcionar.
+Kubernetes se encarga de crear, actualizar y mantener esa aplicación automáticamente, sin que tú tengas que hacerlo manualmente.
+
+Hay un ejemplo de deployment que puedes ver es el que ire haciendo
+
+
+Una vez activo el deployment podemos ver si ha sido exitoso el despliegue con:
+
+  -kubectl rollout status deployment deployment-test
+
+Sirve para ver y esperar a que el despliegue termine su actualización, mostrando si fue exitoso o falló
+
+En mi caso fue: 
+
+deployment "deployment-test" successfully rolled out
+
+Osea que bien
+
+deployment-test es el nombre del deployment que obviamente se puede ver con:
+
+  -kubectl get deployments
+
+
+Todso los objetos se pueden ver con get
+
+
+ESCALAR PODS EN DEPLYMENTS
+
+  -kubectl scale --replicas=5 deployment/deployment-test
+
+
+
+ROLLING UPDATES
+
+Es una forma de actualizar el deployment, rs para cambiar por ejemplo una imagen y que se vea reflejado al instante en los pods, es una manera mas sencilla de editar los pods del deployment sin tener que eliminar nada, solo editar, y los usuarios ni se enteraran, en cambio si eliminas vas a tener que conectarlo con los usuarios de nuevo
+
+Gracias a que ahora si tenemos un deployment es possible entrar en el archivo del deployment y cambiarle la imagen y hacer un: "kubectl appply -f deployment.yml" y los pods cambiaran de imagen, eso no pasaba con los ReplicaSet, pasaba pero habia que eliminar almenos un pod para que se creara el nuevo ya, y eliminarlos todos para que todos estubieran actualizados
+
+Basicamente gracias al deployment podemos editar el yml y luego de lanzarlo ver los cambios en vivo, como si cambias un docker-compose.yml y lo lanzas, veras los cambios de puerto, etc..., tambien puedes cambiar las replicas en en yml y pasara lo mismo que si haces el comando de la linea 499
+
+
+
+HISTÓRICO Y REVISIONES DE DESPLIEGUES
+
+**ACLARACION
+
+Cada vez que haces un Rolling Update en Kubernetes, lo que realmente pasa es que se crea un nuevo ReplicaSet (no un deployment nuevo). Por eso, si miras con: "kubectl get rs" verás varios, representan el mismo deployment pero con distintas versiones de la especificación. Y si ejecutas: "kubectl rollout history deployment deployment-test" verás el historial de cambios que se han ido aplicando a ese deployment, con sus revisiones correspondientes.
+
+Comandos de historial:
+
+  -kubectl rollout history deployment deployment-test
+
+
+Si ejecutas este comando justo despues de hacer un apply veras los "logs" de como se va arrancando el deployment y los pods
+  -kubectl rollout status deployment deployment-test
+
+
+CHANGE-CAUSE
+
+Bien, cuando hacemos:
+  -kubectl rollout history deployment deployment-test
+
+No muestra cada vez que hemos editado ese deployment, CHANGE-CAUSE basicamente traducido seria, CAMBIO-CAUSA, es explicar el cambio que has hecho y porque, es tu historial, es como los commits en git,
+
+Para ello modifiquemos cualquier cosa del deployment.yml y lo lanzamos asi:
+  -kubectl apply -f deployment.yml --record
+
+Asi lo guardara 
+
+Tambien se puede meter dentro del manifiesto y ir cambiandolo cada vez que nosotros cambiemos el manifiesto, simplemete añadir lo siguiente dentro de metadata:
+
+metadata:
+  name: deployment-test
+  annotations:
+    kubernetes.io/change-cause: "Actualización a imagen v2" #aqui es donde cada vez que hagas una modificacion aparte de la modificacion que hayas hecho modificas esto tambien
+
+
+Al fin y algo es literalmete un commit
+
+Y una vez hecho podemos volver a hacer un history y lo vemos:
+
+deployment.apps/deployment-test
+REVISION  CHANGE-CAUSE
+3         <none>
+4         <none>
+5         <none>
+6         kubectl apply --filename=deployment.yml --record=true  #el que habiamos hecho con --record que no lo recomiendo ya que el otro es mas util
+7         Actualización a imagen v2
+
+
+En base a que editemos el deployment.yml y vamos viendo su historia podemos ver sus cambios asi:
+
+  -kubectl rollout history deployment deployment-test --revision 7
+
+El 7 el por el numero 7 que ha pasado nuestro deployment como se ve en la linea 552
+
+Y podremos ir viendo los cambios y que cosas se cambian y cuales no y podemos ir viendo las otras versiones del deployment
+
+
+
+ROLL BACK
+
+Hacemos un ROLL BACK por si las imagenes de los pods tienen bugs volver a las versiones mas estables, las mas antiguas
+
+Para probar los ROLL BACK vamos a editar y cambiar el deployment por algo incorrecto, por ejemplo cambiarle la imagen por: "nginx:no_existe", eso dara error aposta
+
+Efectivamente da error, bueno, vamos a hacer un rollout hacia atras cuando todo estaba perfecto:
+  -kubectl rollout undo deployment deployment-test --to-revision=7   #en mi caso yo quiero volver a la revision 7 porque estoy en la 8
+
+
+Haya que tener cuidado luego de hacer el rollout porque el archivo yaml no vuelve a estar en el punto deonde quisimos volver, sigue igual al ultimo deployment hecho, es decir, sigue estando la imagen: "nginx:no_existe", pero los pods que estan corriendo ahora si que son los de nginx:alpine normales de la version 7, solo que el yml sigue en la version 8, habra que cambiarlo o modificarlo, pero lo importante es que nos hemos salido del marron con el ROLL BACK  
+
+
+Y con este comando nos vamos 1 version atras:
+  -kubectl rollout undo deployment deployment-test
+
+
+
+No podemos fijar en el history que hay algunas versiones olvidadas:
+
+deployment.apps/deployment-test
+REVISION  CHANGE-CAUSE
+3         <none>
+4         <none>
+5         <none>
+6         kubectl apply --filename=deployment.yml --record=true
+10        Cambio de imagen a una incorrecta a posta2
+11        Actualización a imagen v2
+
+
+En Kubernetes, los números de revisión de un Deployment son siempre crecientes y nunca se reutilizan: cada cambio, incluso un rollback, crea una revisión nueva copiando la configuración de otra, pero con un número siguiente. Si además tienes configurado (explícita o implícitamente) un revisionHistoryLimit, las revisiones más antiguas se eliminan del historial cuando se supera ese límite, dejando huecos en la secuencia. Por eso en tu listado faltan números como 7, 8 y 9: existieron en su momento, pero fueron eliminados del historial, y Kubernetes no renumera ni rellena esos huecos.
+
+Basicamente ls versiones a las que hemos hecho rollbacks se eliminan para dar a indice a esa misma version pero con el numero mas creciente, no me entiende?, veamos:
+
+
+imagina que tengo las versiones:
+
+5   relleno
+6   no_importa_el_nombre
+7   revision
+8   la_revision_salio_mal_intento_de_mejora
+
+Actualmete estamos en la 8, pero aun asi salio mal igual, haremos un rollback a cuando funcionaba, a la 6 y lo llamaremos: "ahora_estbale", pues quedaria asi
+
+5   relleno
+7   revision
+8   la_revision_salio_mal_intento_de_mejora
+9   ahora_estbale
+
+Hemos vuelto a la 6 pero hemos vuelto hacia arriba, mas o menos bien?
+
+En resumen: existieron como revisiones intermedias de tu Deployment, pero Kubernetes los eliminó porque ya no estaban en uso ni eran necesarios para rollback; el contador de revisiones nunca retrocede ni rellena huecos, así que al siguiente cambio la numeración siguió desde el último número usado.
+
+
+SERVICE
+
+El service un objeto que proporciona una dirección IP y un nombre DNS estables para acceder a un conjunto de Pods, permitiendo que las aplicaciones se comuniquen entre sí de forma confiable aunque los Pods se creen, eliminen o cambien; además, distribuye el tráfico entre ellos y puede exponer la aplicación dentro del clúster o hacia el exterior según el tipo de Service configurado
+
+Listar los servicios:
+  -kubectl get svc
+
+el service sera la ip a la que los cliente accederan a ella y lo redirigirá a los pods que tu quieras mediante labels
+
+**NOTA
+
+si con: "kubectl get svc" ves un servicio llamado kubernetes NO LO BORRES, es un servicio de kubernetes para que los services funcionen, yo lo he borrado y no pasa nada pero por si las moscas dejalo
+
+
+PODS & ENDPOINTS
+
+
+Los Endpoints en Kubernetes son básicamente la lista de IPs y puertos de los Pods que cumplen con el selector de un Service. Así, cuando alguien quiere acceder a un Pod, realmente no va directo al Pod, sino que entra a través del Service. El Service actúa como una puerta de entrada estable y, para saber a qué Pods debe enviar la petición, consulta sus Endpoints, que son los IPs (y puertos) de los Pods disponibles en ese momento.
+
+Aunque vayas eliminando pods la lista interna del los endpoints llevada por kube-proxy se ira actualizando mediante se eliminen y se creen pods
+
+
+SERVICIOS Y DNS
+
+Además de tener una IP única dentro del clúster, los Services en Kubernetes también disponen de un nombre DNS interno. Gracias a esto, no solo se puede acceder a ellos mediante su IP, sino también usando ese nombre DNS, lo cual es más práctico, pero el nombre DNS siempre será estable
+
+
+NODEPORT
+
+El tipo de servicio NodePort es el que hara que nuetros pods sean visibles desde fuera del cluster, en principio desde fuera no podiamos ver nuetros pods, solo desde dentro de nuestro localhost y entre nuestros pod del cluster, ahora si podremos con el servicio NodePort
+
+**ACLARACION IMPORTANTE (LA MAS IMPORTANTE HASTA AHORA VAYA)
+
+He tenido bastantes problemas al intentar mostrar mi pod desde fuera del cluster porque yo uso para practicar k8s ubuntu server y claro este no tiene navegador entonces he intentado acceder a los pods desde mi maquina anfitrion porque uso VirtualBox y nunca he podido, y ahora gracias al NodePort creia que si podria pero no se puede, PERO EL SERVICIO NODEPORT SI FUNCIONA, Explico:
+
+Lo que pasa es que como uso Minikube, el nodo tiene una IP interna (192.168.49.2(la de mi caso)) que solo existe dentro de la red privada que crea Minikube, no en tu red real (192.168.1.0/24(red de la maquina anfitriona)). Por eso desde mi host o desde fuera de mi máquina no se puede entrar al NodePort: no es un problema del Service, sino de cómo Minikube aísla el cluster. En un cluster real (con nodos en mi LAN o en la nube), un NodePort sí abriría el puerto en la IP del nodo y entonces podría acceder desde fuera sin problema.
+
+para comprobar que el service funciona:
+
+Vamos a ver que puerto tiene nuetro servicio:
+  -kubectl get svc -o wide
+
+  my-service   NodePort    10.99.57.57   <none>        8080:31004/TCP   8m23s   app=back
+
+
+Lo que nos interesa es el 31004 que sera el puerto abierto de nuestro cluste y el 8080 el puerto del pod de dentro
+
+Luego vamos a ver que ip de minikube tenemos:
+  -minikube ip
+  192.168.49.2
+
+
+Nos devolvera la ip que usa minikube
+
+
+Por ultimo ver si funciona el service, ahora en nuetra terminal mismo, no en un pod podemos hacer:
+
+  -curl 192.168.49.2:31004
+
+Y veremos el pod  
+
+
+**Nota
+
+Por qué no le hago un curl a la IP del servicio?
+
+La IP 10.99.57.57 no es la del NodePort, es la ClusterIP del Service, y solo funciona dentro del clúster. O sea, desde fuera no me sirve. ¿Para qué hemos hecho el Service entonces? Justo para no tener que entrar a un pod y hacer curl a otro pod directamente.
+
+Como ya he montado el NodePort, lo que toca es hacerle curl a la IP de Minikube usando el puerto del NodePort, y gracias al Service ya me redirige a uno de los pods detrás.
+
+LOADBALANCE
+
+No veremos el servicio LoadBalance porque este servicio expone una aplicación al exterior del clúster y distribuye el tráfico entre los Pods de forma equilibrada, pero solo funciona de manera automática en la nube porque depende de que el proveedor (AWS, GCP, Azure, etc.) cree y gestione un balanceador de carga real; en un entorno local como Minikube no existe esa infraestructura externa
+

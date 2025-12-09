@@ -1,0 +1,1286 @@
+
+Docker es una plataforma que permite empaquetar aplicaciones y sus dependencias en contenedores, que son entornos ligeros, portátiles y aislados.
+Estos contenedores aseguran que las aplicaciones se ejecuten de manera consistente en cualquier entorno,
+ya sea en desarrollo, pruebas o producción, eliminando problemas de compatibilidad entre sistemas.
+
+
+
+Instalacion y configuración de Docker:
+
+Empezamos utilizando la siguiente comanda para asegurarnos de que todo esté bien actualizado y no dé problemas:
+    -sudo apt update && sudo apt upgrade
+
+
+  -sudo apt-get install ca-certificates curl
+
+  -sudo install -m 0755 -d /etc/apt/keyrings
+
+  -sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
+  -sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+
+
+# Add the repository to Apt sources:
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Hasta el /dev/null se copia
+
+sudo apt-get update
+
+
+
+INSTALAR LA ÚLTIMA VERSIÓN
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+
+COMPROBAR ESTADO DOCKER
+
+sudo systemctl status docker
+
+docker --version
+
+
+
+INSTALACIÓN DOCKER COMPOSE
+COMPROBAR VERSIÓN ACTUAL
+https://github.com/docker/compose/releases
+
+DESCARGAR ÚLTIMA VERSIÓN
+sudo curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+OTORGAR PERMISOS DE EJECUCIÓN A DOCKER COMPOSE
+sudo chmod +x /usr/local/bin/docker-compose
+
+COMPROBAR VERSIÓN DOCKER COMPOSE
+docker-compose --version
+
+
+
+AÑADIR USUARIO administrador A GRUPO DOCKER
+
+sudo usermod -aG docker administrador
+
+su - administrador
+
+
+
+COMPROBAR USUARIOS GRUPO DOCKER
+
+id -nG
+
+
+
+VER SUBCOMANDOS
+
+docker
+
+
+
+DESCARGAR UNA IMAGEN Y EJECUTARLA ej: hello-world
+
+docker run hello-world #Instala y lo ejecuta
+
+
+DESCARGAR UNA IMAGEN
+
+docker pull hello-world
+
+
+BUSCAR IMAGEN UBUNTU EN DOCKERHUB
+
+docker search ubuntu
+
+
+VER TUS IMAGENES EN DOCKER
+
+docker images
+
+
+
+EJECUTAR UN CONTENEDOR DE DOCKER
+
+docker run -it ubuntu
+
+
+ADMINISTRAR CONTENEDORES DOCKER
+
+VER CONTENEDORES ACTIVOS
+
+docker ps
+
+DETENER CONTENEDOR
+
+docker stop IDCONTENEDOR
+
+DETENER TODOS LOS CONTENEDORES
+
+docker stop $(docker ps -q)
+
+ELIMINAR TODAS LAS IMAGENES
+
+docker rmi -f $(docker images -q)
+
+ELIMINAR LAS REDES QUE NO ESTAN EN USO:
+
+docker network prune
+
+ELIMINAR LOS PROCESOS INACTIVOS:
+
+docker rm $(docker ps -a -f status=exited -q)
+
+VER LA IP DE UN CONTENEDOR:
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [contenedor]
+
+Crear un contenedor con un nombre
+
+docker create --name claka mongo
+
+Crear un contenedor y ponerle los puertos
+
+docker create -p27018 --name claka mysql
+
+
+
+ELIMINAR CONTENEDOR
+
+docker rm IDCONTENEDOR
+
+
+VER TODOS LO CONTENEDORES ACTIVOS E INACTIVOS
+
+docker ps -a
+
+
+
+VER ÚLTIMO CONTENEDOR CREADO
+
+docker ps -l
+
+
+VER CUANTOS CONTENEDORES TENEMOS EN TOTAL
+
+docker ps -a | wc -l
+
+
+
+EXTRA, CONTENEDOR DE HACKER
+
+  -docker run --rm -it bcbcarl/hollywood
+
+
+VER LOS IDS DE LOS CONTENEDORES PARADOS
+
+
+docker ps -ak
+
+
+
+INICIAR UN CONTENEDOR
+
+docker start IDCONTENEDOR
+
+VER CUANTO OCUPAPAN LOS CONTENEDORES Y IMAGENES
+
+docker system df
+
+COPIAR FICHEROS Y METERLOS EN UN CONTENEDOR
+
+docker cp fichero.txt contenedor1:/home
+
+COPIAR FICHEROS DE UN CONTENEDOR A LA MAQUINA
+
+*no hay que estar dentro del contenedor
+
+docker cp contendedor1:/home/fichero.txt . #el "." es donde te encuentras actualmente
+
+
+
+VER LOS CAMBIOS HECHOS EN UN CONTENEDOR
+
+docker diff (contenedor)
+
+A - AÑADIDO (APPEND)
+C - CAMBIO (CHANGED)
+D - ELIMINADO (DELETED)
+
+La diferencia que muestra docker diff es entre el sistema de archivos actual del contenedor y el sistema de archivos original de la imagen en la que se basó.
+Es decir, compara el estado actual del contenedor con el estado de la imagen al momento de crearse el contenedor.
+
+Así, si haces cambios en el contenedor después de arrancarlo (como crear, modificar o eliminar archivos), docker diff listará esos cambios,
+ya que son diferencias con respecto a la imagen base.
+
+No compara un arranque anterior con uno posterior, sino el estado actual del contenedor contra el sistema de archivos de la imagen inicial.
+
+
+
+
+CREAR TUS PODRIAS IMAGENES
+
+cuando tenga una imagen, ejemplo ubuntu(la predeterminada), y quieres que predeterminadamente tenga servicios en ella y no cada vez que ejecutes tu imagen tengas que instalar paquetes, sino que ya estén en la propia imagen:
+
+docker commit (contenedor_al_que_copiar) (como_llamar_a_la_imagen)
+docker commit ubuntu1 ubuntu_mejora
+
+te saldra como imagen incluso:
+
+  docker images
+  REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+  ubuntu_mejora latest    1e3c0825dfb3   5 seconds ago   124MB
+  ubuntu        latest    59ab366372d5   3 weeks ago     78.1MB  
+
+
+  docker run -it -d --name ubuntu3 ubuntu_mejora bash
+
+
+
+
+DATO CURIOSO
+
+Las imagenes de S.0 solo tienen 1 capa, se puede mirar asi:
+
+docker image inspect (IMAGEN)
+
+UBUNTU:
+  "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:a46a5fb872b554648d9d0262f302b2c1ded46eeb1ef4dc727ecc5274605937af"
+            ]
+        },
+
+una imagen de microservicio que me gusta:
+DOCUSEAL:
+  "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:78561cef0761903dd2f7d09856150a6d4fb48967a8f113f3e33d79effbf59a07",
+                "sha256:6e3d66f7c387dd4331b32d32954ebaee7a666c103015a29a7ca5c4f01fe5d690",
+                "sha256:cd7e80b727b807d777b65222e74bd9392159d02d4606bb3028137916963f1dc4",
+                "sha256:6c389d3b854a6a1b02f427dfabccbd4b742494af5ee249effafc9b7078ecea53",
+                "sha256:9b8dee3bb3e10e25ce31aa7c52fbca050584e7947b177017d49deb922b38b34e",
+                "sha256:ea23f1f76c095298c4ffbc5a5b9b29539d3604ebaa46f0ac5da62b7e9697a85d",
+                "sha256:5aa460b9a45ca01c7a9f314ef6d46367741db830c0726169e9ea6b9190aa6d58",
+                "sha256:fce52c012bc5af8a40fd5451c7356587ccf501f04fd3afeecc7ad079d3730c0a",
+                "sha256:b5e82aeb0cb42cd79c32006981987c035eff1e29965c0277343df336fee7e69d",
+                "sha256:5fab0a737ed60b5c2d967cb3b4cc6b6e458434e8213dc265a521ac963d075f00",
+                "sha256:43e78d21f2cbb4b012453d3df9b66fe9da3dc954e54ec4cac8ceef2571d26dd7",
+                "sha256:419941d73ab4bb793383870e02f5837d1738916483f672f55e9f0991ca9fb9a9",
+                "sha256:c09d8cac30a44e58a99eb5d989162c18bb0a9cf9354d7851827c4ca7bc98e011",
+                "sha256:14b5fa5033262c0af8cded092034ecc239210b8a359f0eb5a2b5fbc10a0c843d",
+                "sha256:7baf304a9d54a0f5a04a3075abbb4e47ba3bf70a25b58df3a96be074c04f0711",
+                "sha256:2621cd15ce1e12c8aaecab710775e05b2847091454b7670299a0b29d67ffe6d1",
+                "sha256:1af19a9e7332a588794f254f590a0431f15a09f8d2423b6c3afb822997e06e69",
+                "sha256:8827586cf28360e67ed9488cd0193037e16fbd864558b6877b79cdcfdf543928",
+                "sha256:0587a5bd0ad7dda1f7512e5e6ea15f63e2c4298f74c143626ef9fb1401476e00",
+                "sha256:4462b2190d4e6d835374bda6c3fe7af83f74a1d8044c9571b74b35b0fe2d14a0",
+                "sha256:29c70a551074c9c9be8d521821f9e51edbc5fcefbde1b1b76a9af77311fbdd13",
+                "sha256:6ba0a212b79ef6a3b1eb9490759640868fb3d8d7848a4c99e41e9edf3ed8ad77",
+                "sha256:a95fca15ee49d09b7789808c81b6de80966e1c6f154d2971179c172ea94c222e",
+                "sha256:e7bd3c9dfa69097c66e9153a82ef73f114c35a7f15b97a0390b56d7dddf01921",
+                "sha256:7dcce2938571678a79f38d7253487214a216e912c42a21586b6b0f83eef891f1"
+            ]
+        },          
+
+
+Se van creado mas capas a medida que tu escribas en ellas
+
+
+
+
+TAG
+*El comando docker tag se usa para crear un alias (o etiqueta) para una imagen existente. Esto es útil para organizar imágenes o prepararlas para subirlas a un registro, como Docker Hub.
+
+docker images     
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+docker tag ubuntu miubuntu
+docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+miubuntu     latest    278628f08d49   5 weeks ago   117MB
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+
+Apuntan al mismo id
+
+
+
+
+
+COMPRIMIR IMAGENES EN .tar
+
+  -docker image save imagen -o(output) nombreimagen.tar
+
+Ejemplo
+
+  -docker image save ubuntu -o ubuntucomprimido.tar
+
+Y lo creara donde te situes
+
+Vamos a hacer una prueba:
+
+docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+docker rmi ubuntu                
+Untagged: ubuntu:latest
+Deleted: sha256:278628f08d4979fb9af9ead44277dbc9c92c2465922310916ad0c46ec9999295
+docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+Ya no tengo la imagen de ubuntu pero si tengo el ubuntucomprimido.tar
+
+
+DESCOMPRIMIR IMAGENES EN .tar
+
+  --docker image load -i(intput) nombreimagen.tar
+
+Ejemplo
+
+  -docker image load -i ubuntucomprimido.tar
+
+docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+docker image load -i ubuntucomprimido.tar
+Loaded image: ubuntu:latest
+docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       latest    278628f08d49   5 weeks ago   117MB
+
+
+
+
+MEMORIA EN LOS CONTENEDORES
+
+Ejemplo:
+
+  -docker run -it --name apachesinlimite -d httpd
+  -docker run -it --name apacheconlimite -d -m 12m httpd
+  -docker stats
+
+CONTAINER ID   NAME              CPU %     MEM USAGE / LIMIT    MEM %     NET I/O       BLOCK I/O   PIDS
+3b5968946bfb   apacheconlimite   0.00%     10.79MiB / 12MiB     89.91%    746B / 0B     0B / 0B     82
+c4fb228fbece   apachesinlimite   0.00%     24.1MiB / 7.692GiB   0.31%     1.05kB / 0B   0B / 0B     82
+
+Vemos que que el apacheconlimite tiene el limite de 12m porque se lo pusimos en "docker run -it --name apacheconlimite -d -m 12m httpd",
+poreso tiene un % mas alto que el otro, aparte de ello por defecto tambien viene con swap que es una parte del disco duro que el sistema usa como memoria virtual cuando la RAM está llena.
+Es más lento que la RAM porque depende del almacenamiento, pero evita que el sistema se quede sin memoria por completo.
+
+Por defecto aprte del -m 12(limite de 12m) tambien te asigna 12m de memoria swap por si te pasas del limite establecido no detener o matar al contenedor
+
+Por defecto, también permite usar 12 MB adicionales de swap (RAM + swap = 24 MB).
+
+12 + 12 = 24, docker siempre te asignara Xm y te pondra Xm de memoria swap
+
+
+
+  -docker run --name apache1 -it -d -m 256m --memory-swap 1G httpd
+
+-m 256m:
+Limita la memoria RAM del contenedor a 256 MB.
+
+--memory-swap 1G:
+Configura el límite total de memoria (RAM + swap) en 1 GB. Esto significa que:
+
+El contenedor puede usar hasta 256 MB de RAM.
+Si necesita más memoria, puede usar hasta 744 MB de swap (1 GB total - 256 MB RAM).
+
+
+
+
+
+CPU EN LOS CONTENEDORES
+
+  -docker run -it -d --name apache --cpus=X httpd
+
+--cpus=X: 
+Limita el contenedor a utilizar X núcleos de CPU, en lugar de los recursos predeterminados. 
+
+
+*Si poneis:
+  -docker info
+
+Hos sale el numero de cpu's que teneis
+
+Ejemplo
+
+Yo tengo 16 cpu's y lanzo esto:
+
+  -docker run -it -d --name apache --cpus=5 httpd
+
+Quiere decir eso ahora que solo puedo usar 11 cpu's?, NO
+
+Lo que estás haciendo es limitar el contenedor a utilizar solo 5 núcleos de CPU. No significa que el sistema no pueda usar los 11 núcleos restantes, ya que el límite de --cpus=5 solo se aplica al contenedor de Docker y no al host en general.
+En otras palabras, con este comando:
+El contenedor Apache podrá usar hasta 5 núcleos de CPU.
+
+Y puedo usar esto sin problema:
+
+  -docker run -it -d --name apache --cpus=15 httpd
+
+Y no habra problema ya que el primer contenedor su limite sera 5 cpu's y el del segundo 15
+
+
+PERO QUE PASA CUANDO NOS PASAMOS DE LAS CPU'S QUE TENEMOS?
+
+  -docker run -it -d --name apache --cpus=17 httpd
+docker: Error response from daemon: Range of CPUs is from 0.01 to 16.00, as there are only 16 CPUs available.
+See 'docker run --help'.
+
+Pues que sale un ERROR
+
+
+
+CPU EN LOS CONTENEDORES 2
+
+  -docker run --name apache1 -it -d --cpu-shares=X httpd
+
+--cpu-shares=X  
+
+La opción --cpu-shares=1024 asigna una prioridad relativa para el uso de la CPU al contenedor,
+indicando cómo se dividirán los recursos de CPU si varios contenedores compiten por ellos.
+Un valor más alto significa mayor prioridad frente a otros contenedores; por defecto,
+1024 es la prioridad estándar.
+No limita el uso de CPU, solo influye en la proporción de recursos asignados durante la competencia.
+
+Que cuanto mas --cpu-shares=X pongas priorizara el acceso a la CPU si hay competencia entre varios contenedores
+
+
+
+
+CONTEXTOS EN DOCKER
+
+En Docker, los contextos son configuraciones que permiten a los usuarios administrar múltiples entornos de Docker desde una sola máquina. Esto es útil para trabajar con diferentes hosts o configuraciones de Docker, como un clúster remoto, una máquina virtual, o un entorno local. Los contextos simplifican el cambio entre estos entornos sin necesidad de configurar repetidamente las variables de conexión.
+
+*Es decir: Con Docker Context puedes conectarte a diferentes servidores Docker(que tengan Docker instalado) para administrarlos desde tu máquina local.
+Esto incluye interactuar con los contenedores,
+imágenes y volúmenes que se encuentran en esos servidores.
+
+*Basicamente lo que haces es un "ssh" a otro servidor docker donde le estas pasando los contendores, imagenes etc...
+
+
+
+La idea es muy parecida a lo que hace SSH, pero con Docker, en lugar de acceder a una terminal remota,
+lo que haces es conectarte a un servidor Docker remoto para poder ejecutar comandos de Docker allí (como si estuvieras trabajando directamente en ese servidor), pero sin necesidad de interactuar manualmente con la terminal del servidor.
+
+Comparación con SSH:
+SSH: Accedes a una terminal remota donde puedes ejecutar cualquier comando, incluida la gestión de Docker.
+
+Docker Context: Te conectas a un servidor Docker remoto y ejecutas comandos de Docker directamente sobre ese servidor (sin necesidad de usar SSH). Es como si estuvieras gestionando Docker en esa máquina como si fuera local.
+
+
+*SIMULACION
+
+tengo un servidor ubuntu server con docker instalado con la ip 192.168.1.199 y quiero conectarme a el y uso docker-desktop
+
+
+en el docker-desktop:
+
+  -docker context create servidor-remoto --docker "host=tcp://192.168.1.199:2375(puerto que escuche docker)"
+
+Sino funciona yo use esta:
+
+  -docker context create docker-server --docker "host=ssh://user@ip-server"
+  -docker context use docker-server
+  docker-server
+Current context is now "docker-server"
+docker info
+user@ip-server's password: user@ip-server's password:
+
+
+*ACLARACION
+
+Cuando te conectas a un servidor remoto usando un contexto de Docker (como docker context use servidor-remoto),
+Docker solo te da acceso a la interfaz de Docker en ese servidor remoto.
+No tienes acceso directo al sistema de archivos del servidor para ejecutar comandos como mkdir o ver un archivo Docker Compose.
+
+
+
+DOCKER COMPOSE
+
+*Yo uso la version del "-", es decir que hago: "docker-compose up -d" por ejemplo, si no hos deja y hos da un erro alomejor teneis que poner "docker compose..."
+
+
+Parar/Iniciar los contenedores que cuelgan de una carpeta, ejemplo:
+
+  -docker-compose stop/start
+
+Ese comando parar o iniciara los contenedores que cuelguen del directorio en el que estes  
+
+
+LIMPIEZA TOTAL DE CONTENEDORES: DETENER, ELIMINAR TODOS LOS CONTENEDORES, REDES, VOLUMENES Y SERVICIOS
+
+  -docker-compose down
+
+
+
+PAUSE/UNPAUSE
+
+  -docker-compose pause
+  (pausa a todos)
+
+  -docker pause contenedor1
+  (pausa solo a ese contenedor)
+
+
+RESTART
+
+  -docker-compose restart
+
+
+
+
+PROYECTO
+
+  -docker-compose -p proyecto1 up -d
+
+*Despues de haber creado el docker-compose.yml, en vez de levartarlo y que nos de el nombre del directorio en el que estemos podemos poner la clausula -p, que permite personalizar el nombre del proyecto, evitando que Docker Compose use el nombre del directorio por defecto como prefijo  
+
+
+*Prueba
+
+Yo estoy en: Servicios\Docker\Linux\docuseal2
+
+cd .\Servicios\Docker\Linux\docuseal2\
+Servicios\Docker\Linux\docuseal2> docker-compose -p proyecto1 up -d
+[+] Running 30/2
+ ✔ docuseal Pulled                                                                                                                                                                                   21.3s 
+ ✔ postgres Pulled                                                                                                                                                                                   19.7s 
+[+] Running 3/3
+ ✔ Network proyecto1_default       Created                                                                                                                                                            0.1s 
+ ✔ Container proyecto1-postgres-1  Healthy                                                                                                                                                           16.1s 
+ ✔ Container docuseal              Started                                                                                                                                                           12.0s 
+Servicios\Docker\Linux\docuseal2> docker-compose ps
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+
+*Porque no nos dice los contenedores levantados?
+Porque cuando haces docker-compose ps lo que busca es el nombre del directorio en el que te encuentras, para verlo tenemos que poner tambien la clausula -p
+
+
+Servicios\Docker\Linux\docuseal2> docker-compose -p proyecto1 ps
+NAME                   IMAGE                      COMMAND                  SERVICE    CREATED         STATUS                   PORTS
+docuseal               docuseal/docuseal:latest   "/app/bin/bundle exe…"   docuseal   8 minutes ago   Up 7 minutes             0.0.0.0:3000->3000/tcp
+proyecto1-postgres-1   postgres:15                "docker-entrypoint.s…"   postgres   8 minutes ago   Up 8 minutes (healthy)   5432/tcp
+
+
+*Pues hacerlo desde cualquier parte:
+
+Servicios> docker-compose -p proyecto1 ps
+NAME                   IMAGE                      COMMAND                  SERVICE    CREATED          STATUS                    PORTS
+docuseal               docuseal/docuseal:latest   "/app/bin/bundle exe…"   docuseal   10 minutes ago   Up 10 minutes             0.0.0.0:3000->3000/tcp
+proyecto1-postgres-1   postgres:15                "docker-entrypoint.s…"   postgres   10 minutes ago   Up 10 minutes (healthy)   5432/tcp
+
+
+
+
+PROFILES
+
+*Los Profiles (perfiles) son una característica que permite gestionar diferentes configuraciones dentro de un archivo docker-compose.yml.
+Los perfiles son útiles cuando tienes varios entornos (como desarrollo, pruebas y producción) y necesitas activar o desactivar servicios específicos dependiendo del entorno en el que estés trabajando.
+
+
+
+
+services:
+  web:
+    image: my-web-app
+    ports:
+      - "8080:80"
+
+  database:
+    image: mysql
+    profiles:
+      - prod
+
+  debugger:
+    image: debug-tool
+    profiles:
+      - dev
+
+
+
+Que hara?:
+  -docker-compose --profile dev up -d
+
+
+Lo que haces es levantar el contenedor web y el contenedor debugger
+
+*Siempre se inician por defecto cuando ejecutas docker-compose up, independientemente de los perfiles que actives.
+*En el ejemplo anterior, el servicio web no tiene un perfil asignado, así que siempre se iniciará.
+
+
+*Ejemplo
+
+docker-compose --profile dev up -d
+[+] Running 14/9
+ ✔ web                                                       #el web lo que coje siempre Pulled                                                                                                                                                                                        14.6s 
+ ✔ debugger                                                  #al ponerle --profile dev, ha cojido el debugger que esta asocisdo a ese profile   Pulled                                                                                                                                                                                   41.8s 
+[+] Running 2/3
+ ✔ Network prueba_default       Created                                                                                                                                                               0.0s 
+ - Container prueba-web-1       Starting                                                                                                                                                              3.0s 
+ ✔ Container prueba-debugger-1  Started                                                                                                                                                               3.0s 
+Error response from daemon: driver failed programming external connectivity on endpoint prueba-web-1 (9f302277fa21699e244ab029d034fc7b55ce0d5dc94c3fb282de26e7ec51ab87): Bind for 0.0.0.0:8080 failed: port is already allocated
+Servicios\Docker\Linux\prueba> docker-compose down
+[+] Running 2/2
+ ✔ Container prueba-web-1  Removed                                                                                                                                                                    0.0s 
+ ✔ Network prueba_default  Removed                                                                                                                                                                    0.2s 
+Servicios\Docker\Linux\prueba> docker-compose --profile prod up -d  #al ponerle ahora el prod, solo cojera el mysql y la web
+[+] Running 11/11
+ ✔ database              Pulled                                                                                                                                                                                    22.6s 
+   ✔ 1f87d67b89c6 Download complete                                                                                                                                                                   0.4s 
+   ✔ a841bff36f3c Download complete                                                                                                                                                                   2.9s 
+   ✔ cd0d5df9937b Download complete                                                                                                                                                                  13.1s 
+   ✔ cb5a6a8519b2 Download complete                                                                                                                                                                   0.6s 
+   ✔ 570d30cf82c5 Download complete                                                                                                                                                                   0.4s 
+   ✔ 5e49e1f26961 Download complete                                                                                                                                                                   0.5s 
+   ✔ 80ba30c57782 Download complete                                                                                                                                                                   0.5s 
+   ✔ 2c0a233485c3 Download complete                                                                                                                                                                  15.5s 
+   ✔ 0b9dc7ad7f03 Download complete                                                                                                                                                                   0.6s 
+   ✔ ced670fc7f1c Download complete                                                                                                                                                                  14.9s 
+[+] Running 2/3
+ ✔ Network prueba_default       Created                                                                                                                                                               0.0s 
+ - Container prueba-web-1       Starting                                                                                                                                                              3.1s 
+ ✔ Container prueba-database-1  Started                                                                                                                                                               3.1s 
+Error response from daemon: driver failed programming external connectivity on endpoint prueba-web-1 (2a0b601339d35e463c99d9e3ed6cf387bd0ea526bf7f6b03d0297aa46b1b4ed7): Bind for 0.0.0.0:8080 failed: port is already allocated
+Servicios\Docker\Linux\prueba> docker-compose --profile dev/prod down
+
+
+CPU/MEORIA
+
+
+services:
+  app:
+    image: node:18
+    memory: 256M            # Reserva al menos 256 MB de memoria
+    cpus: "0.25"            # Reserva al menos 25% de un solo núcleo de CPU
+    cpu_count: 1            # Le da acceso a 1 núcleo de CPU
+    cpu_shares: 512         # Le asigna una prioridad media de uso de CPU
+    mem_limit: 50m          # Limita el contenedor a usar máximo 50 MB de memoria
+
+
+
+
+REGISTRY/REGISTRO
+
+*Un registro en Docker es un lugar donde se guardan imágenes, que son como paquetes que contienen todo lo necesario para ejecutar una aplicación.
+Estos registros pueden ser públicos, como Docker Hub, donde cualquiera puede buscar y descargar imágenes,
+o privados, usados por empresas para guardar sus propias aplicaciones de forma segura. Es una forma de compartir y organizar aplicaciones listas para usar.
+
+
+Para usar registros en docker hay que bajarse una imagen
+
+  -docker run -d -p 5000:5000 --restart always --name registry registry:2
+
+Normalmente es esta instruccion la predeterminada para usar registros, pero claro que puedes cambiarle el puerto y el nombre
+
+
+docker ps
+CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS          PORTS                    NAMES
+64532115568f   registry:2                   "/entrypoint.sh /etc…"   25 minutes ago   Up 25 minutes   0.0.0.0:5000->5000/tcp   registry
+
+
+Para guardar la imagen en el repositorio la imagen tiene que tener la misma regla que para subir a Docker Hub:
+
+mi-maquina-local:5000/mi-imagen
+
+El "mi-maquina-local" tiene que ser accesible
+
+
+Ejemplo
+
+docker images                      
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+localhost:5000/ubuntu       latest    80dd3c3b9c6c   2 weeks ago     117MB
+
+
+*ACLARACION
+
+El 5000 es el puerto en el que tu registro Docker está escuchando para recibir peticiones y está corriendo en el puerto 5000 de tu máquina.
+
+Cuando usas localhost:5000/ubuntu, estás indicando que la imagen ubuntu se encuentra en tu registro privado (localhost), y que el puerto de acceso al registro es el 5000.
+
+Así que sí, el nombre localhost:5000/ubuntu es correcto, siempre y cuando el puerto 5000 esté configurado y accesible desde donde estás haciendo la consulta o la carga de la imagen.
+
+
+Vamos que si al poner "docker run -d -p 5000:5000 --restart always --name registry registry:2" le poner 5000 o cualquier valor, luego en el nombre tienes que referenciar ese puerto "localhost:5000/ubuntu"
+
+Y para subirlo es sencillo:
+
+  -docker push localhost:5000/ubuntu
+Using default tag: latest
+The push refers to repository [localhost:5000/ubuntu]
+de44b265507a: Pushed
+latest: digest: sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7 size: 424
+
+i Info → Not all multiplatform-content is present and only the available single-platform image was pushed
+         sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab -> sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7
+
+
+
+
+Y descargarmela es incluso mas sencillo:
+
+docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+ubuntu                  latest    80dd3c3b9c6c   2 weeks ago     117MB
+localhost:5000/ubuntu   latest    80dd3c3b9c6c   2 weeks ago     117MB
+cloudreve/cloudreve     latest    b6c8bfd46389   14 months ago   169MB
+registry                2         543dade69668   14 months ago   37.2MB
+mysql                   8.1.0     f61944ff3f29   16 months ago   784MB
+phpmyadmin/phpmyadmin   latest    67ba2550fd00   16 months ago   803MB
+docker rmi localhost:5000/ubuntu
+Untagged: localhost:5000/ubuntu:latest
+docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+ubuntu                  latest    80dd3c3b9c6c   2 weeks ago     117MB
+cloudreve/cloudreve     latest    b6c8bfd46389   14 months ago   169MB
+registry                2         543dade69668   14 months ago   37.2MB
+mysql                   8.1.0     f61944ff3f29   16 months ago   784MB
+phpmyadmin/phpmyadmin   latest    67ba2550fd00   16 months ago   803MB
+docker pull localhost:5000/ubuntu
+Using default tag: latest
+latest: Pulling from ubuntu
+Digest: sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7
+Status: Downloaded newer image for localhost:5000/ubuntu:latest
+localhost:5000/ubuntu:latest
+PS C:\Users\PC GAMING\Desktop\vs code> docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+localhost:5000/ubuntu   latest    6e75a10070b0   2 weeks ago     117MB
+ubuntu                  latest    80dd3c3b9c6c   2 weeks ago     117MB
+cloudreve/cloudreve     latest    b6c8bfd46389   14 months ago   169MB
+registry                2         543dade69668   14 months ago   37.2MB
+mysql                   8.1.0     f61944ff3f29   16 months ago   784MB
+phpmyadmin/phpmyadmin   latest    67ba2550fd00   16 months ago   803MB
+
+
+Es mas, tambien se puede hacer esto:
+
+  -docker pull 127.0.0.1:5000/ubuntu
+
+
+docker pull 127.0.0.1:5000/ubuntu
+Using default tag: latest
+latest: Pulling from ubuntu
+Digest: sha256:6e75a10070b0fcb0bead763c5118a369bc7cc30dfc1b0749c491bbb21f15c3c7
+Status: Downloaded newer image for 127.0.0.1:5000/ubuntu:latest
+127.0.0.1:5000/ubuntu:latest
+PS C:\Users\PC GAMING\Desktop\vs code> docker images
+REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
+127.0.0.1:5000/ubuntu   latest    6e75a10070b0   2 weeks ago     117MB
+localhost:5000/ubuntu   latest    6e75a10070b0   2 weeks ago     117MB
+
+
+
+Porque localhost = 127.0.0.1, lo importante es que tu maquina reconoxca los nombres
+
+
+
+REGISTRY API
+
+
+Es dificil saber que imagenes tenemos en los registros, poreso si nos vamos al navegador y ponemos "localhost:puerto-del-registro/v2/_catalog" nos aparecen las imagenes
+  -localhost:5000/v2/_catalog
+
+{"repositories":["mi-ubuntu","ubuntu"]}
+
+Tambien estan los tags de una determinada imagen, "http://localhost:puerto-del-registro/v2/imagen/tags/list"
+  -http://localhost:5000/v2/mi-ubuntu/tags/list
+
+{"name":"mi-ubuntu","tags":["v1","latest"]}  
+
+
+
+REGISTROS INSEGUROS
+
+*En Docker, registros inseguros (también llamados "insecure registries") se refieren a configuraciones de registro de imágenes de contenedores que no utilizan conexiones seguras (HTTPS). Estos registros permiten transferir imágenes mediante HTTP, lo que expone las comunicaciones a posibles ataques de interceptación o manipulación.
+
+Hay diferencia entre 127.0.0.1:5000/ubuntu y nombredetumaquinalocal:5000/ubuntu, aunque sea la misma
+
+Esto es dificil de explicar, lo entiendo pero no se explicarlo, aqui va Chat GPT:
+
+
+
+
+
+La razón por la que Docker no se queja cuando usas 127.0.0.1:5000/ubuntu en lugar de nombredetumaquinalocal:5000/ubuntu tiene que ver con cómo Docker maneja las conexiones y los registros locales.
+
+Diferencias clave entre 127.0.0.1 y nombredetumaquinalocal:
+127.0.0.1 (localhost):
+
+Localidad: 127.0.0.1 es la dirección de loopback que siempre apunta a tu propia máquina, sin importar el nombre de la computadora. Es una dirección especial que los sistemas operativos usan para referirse a sí mismos.
+No requiere resolución DNS: Cuando Docker ve 127.0.0.1, sabe inmediatamente que está hablando de la máquina local, sin necesidad de hacer ninguna búsqueda de nombre de host.
+Comunicación sin DNS: Dado que no hay un nombre de host involucrado, Docker no realiza ninguna resolución de nombre y se conecta directamente a la IP. Como es una dirección local, Docker no intenta usar HTTPS, lo que significa que simplemente usa HTTP, que es el comportamiento esperado para registros inseguros.
+nombredetumaquinalocal:
+
+Nombre de máquina: nombredetumaquinalocal es un nombre de máquina en tu red local, y Docker intenta hacer una resolución DNS de este nombre para encontrar la dirección IP correspondiente.
+Resolución DNS: Al intentar conectarse a nombredetumaquinalocal, Docker trata de resolver este nombre usando HTTPS por defecto, porque muchas configuraciones predeterminadas de Docker están configuradas para usar HTTPS para registros. Si el registro no está configurado para usar HTTPS, obtienes el error que mencionaste.
+¿Por qué 127.0.0.1 no causa problemas?
+El comportamiento de Docker con 127.0.0.1 es más "directo", ya que no realiza ninguna resolución de DNS ni intenta usar HTTPS. Docker simplemente asume que estás trabajando en un entorno local y conecta sin verificar si la conexión es segura (HTTP). En cambio, cuando usas un nombre de máquina como nombredetumaquinalocal, Docker asume que el tráfico puede estar destinado a un servidor remoto y, por eso, trata de usar HTTPS por defecto, lo que causa el error si el servidor no está configurado para manejar conexiones seguras.
+
+
+Espero que mas o menos se entienda, pero el tema es que es por culpa de las DNS
+
+Para solucionarlo tenemos que ir al daemon.json de docker
+
+windows: C:\ProgramData\Docker\config\daemon.json #si no lo veis crearlo
+linux /etc/docker/daemon.json  #si no lo veis crearlo
+
+Y poner esto:
+
+{
+  "insecure-registries": ["nombredetumaquinalocal"]
+}
+
+Y reinicias el servicio de docker, ya sea un "systemctl restart docker" o "Quit Docker Desktop" en Windows
+
+
+
+
+
+DOCKER SWARM
+
+Docker Swarm es una herramienta de orquestación de contenedores integrada en Docker, diseñada para administrar y coordinar varios contenedores distribuidos en diferentes nodos (máquinas) como si fueran un solo clúster.
+
+
+INICIAR SWARM
+  -docker swarm init --advertise-addr ip-de-tu-maquina
+Swarm initialized: current node (psa4zo6fa5vd7e0j2cvmr3ts8) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-xxx... ip-de-tu-maquina:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+Listar nodos:
+  -docker node ls
+ID                            HOSTNAME     STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo1        Ready     Active         Leader           27.3.1
+
+
+*ACLARACIONES
+
+Cuando ejecutas el comando "docker swarm join-token worker" después de haber inicializado el clúster con docker swarm init, no genera un nuevo token, sino que muestra el token existente para los nodos Worker.
+
+1. Si ya iniciaste el clúster con docker swarm init, se genera un token único que sirve para unir nodos como Worker.
+
+2. El comando "docker swarm join-token worker" muestra el token que ya existe en el nodo Manager. No lo modifica ni crea uno nuevo.
+
+3. La salida incluye el comando completo que otro nodo debe ejecutar para unirse al clúster como Worker.
+
+
+AHORA VAMOS A UNIRNOS AL CLUSTER:
+
+En otra maquina con Docker ponemos el comando que no brinda docker:
+  -docker swarm join --token SWMTKN-1-xxx... ip-de-tu-maquina:2377
+  This node joined a swarm as a worker.
+
+Ahora ya tenemos un worker, que pasa si listamos?:
+  -sudo docker node ls
+Error response from daemon: This node is not a swarm manager. Worker nodes can't be used to view or modify cluster state. Please run this command on a manager node or promote the current node to a manager.
+
+
+Pero desde la maquina que hicimos "docker swarm init --advertise-addr ip-de-tu-maquina" si se puede porque es el manager
+  -docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   node1         Ready     Active         Leader           27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     node2         Ready     Active                          27.3.1
+
+
+Para añadir un nodo de tipo manager lo mismo que "docker swarm join-token worker" pero con manager, "docker swarm join-token manager" y creara el token y lo ponemos en la mauina nodo3:
+
+desde nodo1:
+
+docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo1         Ready     Active         Leader           27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3         Ready     Active         Reachable        27.3.1
+
+desde node3:
+
+sudo docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8     nodo1         Ready     Active         Leader           27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l *   nodo3         Ready     Active         Reachable        27.3.1
+
+desde node2 nos daria error porque es un worker
+
+Reachable: Manager (estado Reachable, es decir, disponible como respaldo), aunque sea manager solo puede haber un lider
+
+
+Caida de manager:
+
+Que pasa si se cae un manager?
+Vamos a verlos, vamos a parar nodo1:
+
+  -sudo systemctl stop docker
+
+nodo3:
+docker node ls
+Error response from daemon: rpc error: code = Unknown desc = The swarm does not have a leader. It's possible that too few managers are online. Make sure more than half of the managers are online.  
+
+Que pasa?
+
+Tengo 3 nodos, pero uno de ellos (el líder) fue apagado. El quorum es el número mínimo de nodos necesarios para tomar decisiones en el clúster, y en un clúster con 3 managers, el quorum es 2. Si uno de los managers (como el nodo líder) está apagado y no tienes al menos 2 managers activos, Docker Swarm no puede elegir un nuevo líder.
+
+Que tengo que tener minimo 3 nodos manager para cuando se caiga uno, entre los 2 nodos manager restantes que tomen la decision
+
+NO PUEDE TOMAR LA DECISION UN SOLO NODO MANAGER?:
+
+NO, un solo manager no puede ser el líder si no hay quorum.
+
+
+
+Si hubiera tenido 3 nodos manager no hubiera salido ese error y se hubiera cambiado el lider a nodo3 o nodox(que hubiera tenido), da igual cuantos workers tengas, mientras haya 2 managers por si uno se cae
+
+nodo1:
+  -sudo systemctl start docker
+
+Ahora vemos que nodo1 ya no es el lider:  
+docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo          Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3         Ready     Active         Leader           27.3.1
+
+Ahora es lider el nodo3
+
+
+PROMOVER O DEGRADAR NODOS
+
+  -docker node promote/demote
+
+promote: Este comando se usa para promover un nodo worker a nodo manager
+demote: Este comando se usa para degradar un nodo manager a nodo worker
+
+EMPEZAMOS POR EL PROMOTE:
+
+docker node ls
+ID                            HOSTNAME     STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo         Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2        Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3        Ready     Active         Leader           27.3.1
+docker node promote liiaa5bg5xmddtqx1vj2zhu6u
+Node liiaa5bg5xmddtqx1vj2zhu6u promoted to a manager in the swarm.
+docker node ls
+ID                            HOSTNAME     STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo         Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2        Ready     Active         Reachable        27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3        Ready     Active         Leader           27.3.1
+
+Y LO MISMO CON EL "demote"
+
+  -docker node demote liiaa5bg5xmddtqx1vj2zhu6u
+Manager liiaa5bg5xmddtqx1vj2zhu6u demoted in the swarm.
+docker node ls
+ID                            HOSTNAME      STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+psa4zo6fa5vd7e0j2cvmr3ts8 *   nodo          Ready     Active         Reachable        27.3.1
+liiaa5bg5xmddtqx1vj2zhu6u     nodo2         Ready     Active                          27.3.1
+w95nxk2n0axup4uyvpcsvre5l     nodo3         Ready     Active         Leader           27.3.1
+
+TAMBIEN SE PUEDE HACER CON EL HOSTNAME Y CON OTRA OPCION
+  -docker node demote/promote node2
+  -docker node update --role manager/worker node2
+
+
+
+SERVICES
+
+En Docker Swarm, los servicios son una capa adicional sobre los contenedores individuales que permite gestionar y orquestar aplicaciones distribuidas. Un servicio en Docker Swarm es una descripción de una tarea que el clúster debe ejecutar.
+
+  -docker service create --name apache2 httpd
+
+
+docker service create --name apache2 httpd
+1mykw777ej8nmv2m440fbv03d
+overall progress: 1 out of 1 tasks
+1/1: running   [==================================================>]
+verify: Service 1mykw777ej8nmv2m440fbv03d converged
+docker node ps
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE            ERROR     PORTS
+pkdry1bc91up   apache2.1   httpd:latest   nodo1        Running         Running 12 seconds ago
+
+docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+1mykw777ej8n   apache2   replicated   1/1        httpd:latest
+
+
+docker service ps apache2
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE           ERROR     PORTS
+pkdry1bc91up   apache2.1   httpd:latest   node1        Running         Running 2 minutes ago
+
+
+
+docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+1mykw777ej8n   apache2   replicated   1/1        httpd:latest
+lv2d1gtdm69a   apache3   replicated   1/1        httpd:latest   *:80->80/tcp
+mwxehmw11r3a   apache4   replicated   1/1        httpd:latest   *:81->80/tcp
+izvz02ncnt8n   apache5   replicated   1/1        httpd:latest   *:82->80/tcp
+docker service ps apache3
+ID             NAME        IMAGE          NODE          DESIRED STATE   CURRENT STATE            ERROR     PORTS
+lydrv6ouppad   apache3.1   httpd:latest   nodo3          Running         Running 10 minutes ago
+docker service ps apache4
+ID             NAME        IMAGE          NODE          DESIRED STATE   CURRENT STATE           ERROR     PORTS
+zeaidavv5spy   apache4.1   httpd:latest   nodo2          Running         Running 9 minutes ago
+docker service ps apache5
+ID             NAME        IMAGE          NODE          DESIRED STATE   CURRENT STATE           ERROR     PORTS
+is2plxflqwgf   apache5.1   httpd:latest   nodo3          Running         Running 2 minutes ago
+docker service ps apache2
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE            ERROR     PORTS
+pkdry1bc91up   apache2.1   httpd:latest   nodo         Running         Running 23 minutes ago
+
+Como veis he creado mas servicion sin decir mucho mas que "docker service create --name apachex --publish published=8x,target=80 httpd"
+
+Lo guay del docker swarm es que te lo conecta todo no?, mirar el "apache3" por ejemplo que funciona en el nodo3 sobre la ip 192.168.1.197:80
+Si en el navegador pongo "http://192.168.1.197:82/" funciona, aunque no sea su puerto
+
+Puedes entrar con cualquien dirrcion ip del cluster mientras sea por su puerto
+
+Cuando creas un servicio en Docker Swarm, Docker configura automáticamente una red virtual llamada ingress. Esta red permite que el servicio sea accesible desde cualquier nodo del clúster, independientemente de dónde se esté ejecutando el contenedor.
+
+
+
+que diferencia hay entre "docker service create --name apache5 --publish published=82,target=80 httpd" y "docker service create --name apache5 -p 82:80 httpd"?
+
+
+
+Comparación general:
+Característica	                                        --publish	                                                  -p
+Flexibilidad	                                  Alta (permite protocolos, modos, etc.)	                   Baja (sólo mapeo básico)
+Modo Swarm	                                            Totalmente compatible	                            Menos usado en modo Swarm
+Simplicidad	                                               Más detallado	                                Más sencillo y rápido
+Recomendado para producción	                                    Sí	                                          No generalmente
+
+
+Para crear un servicio ya con las replicas:
+  -docker service create --name apache2 --replicas=x --publish published=81,target=80 httpd
+
+Si hemos creado un servicio sin replicas nos vendra con 1 replica, podemos añadir mas con:
+  -docker service scale nombre_del_servicio/ID=X
+
+
+*ACLARACION MUUY IMPORTANTE
+
+Cuanto intentes entrar a un servicio para cambiar algo dentro de el recuenrda que tienes que entrar por el ID DE CONTENEDOR NO EL ID DEL SERVICIO/TAREA, entonces hay que identificar en que maquina esta corriendo el servicio, eso lo hacemos con "docker service ps <servicio>" y nos dira el nodo en el que esta, entonces vamos al nodo y hacemos un "docker ps" normal, y nos saldra, pues es ese ID
+
+
+Para eso podemos hacer un "docker commit" del contenedor modificado y lo podemos poner como imagen en "docker service create --name apache5 --publish published=82,target=80 imagen_commit"
+
+A mi me salta error:
+
+image imagen_commit:latest could not be accessed on a registry to record
+its digest. Each node will access imagen_commit:latest independently,
+possibly leading to different nodes running different
+versions of the image.
+
+mtgqcrfxb06460q0d30laury4
+overall progress: 0 out of 1 tasks
+1/1: No such image: imagen_commit:latest
+
+Saldra cargando infinitamente, quedate igualmete y se cansara de buscar esa imagen en el Docker Hub y te la cojera
+
+
+
+IMPEDIR QUE UN NODO RECIBA TAREAS
+
+  -docker node update --availability drain w95nxk2n0axup4uyvpcsvre5l #no le pone tareas
+  -docker node update --availability pause w95nxk2n0axup4uyvpcsvre5l #pausa
+  -docker node update --availability active w95nxk2n0axup4uyvpcsvre5l #activa
+
+con "docker services ls" se puede ver cuales nodos estan: drain, pause y active  
+
+SERVICIOS GLOBALES
+
+  -docker service create --name apache2 --mode global --publish published=81,target=80 httpd
+  bxju5ke23tmyzifvw9akdpbbh
+  overall progress: 3 out of 3 tasks
+  psa4zo6fa5vd: running   [==================================================>]
+  liiaa5bg5xmd: running   [==================================================>]
+  w95nxk2n0axu: running   [==================================================>]
+  verify: Service bxju5ke23tmyzifvw9akdpbbh converged
+
+Ha creado 3 instancias/replicas, pero porque?, porque solo tengo 3 nodos en el cluster, en cada nodo hay una replica
+
+
+DOCKER SWARM CON DOCKER-COMPOSE
+
+Para compartir el compose en docker swarm es importante tener en el compose la clausula "deploy":
+
+deploy:
+  mode: replicated #modo replicas
+  replicas: 6      #numero de replicas
+  restart_policy:  #politica de reinicio
+    condition: on-failure
+
+
+Y ejecutarlo con:
+  -docker stack deploy --compose-file docker-compose.yml nombreservicio
+
+Es posible que hos de fallos de algo pero podeis scalarlo y probar ha ver si funciona  
+
+Ejemplo de un docker-compose.yml preparado para la orquestacion:
+
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - target: 9000
+        published: 9000
+        protocol: tcp
+        mode: host #ingress para swarm
+    deploy:
+      mode: replicated
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
+    driver: local
+
+
+
+**ACLARACION SUPER IMPORTANTE
+
+Si intentas usar tu propia imagen en el cluster y no te deja es porque los demas nodos no saben de tu imagen, me explico:
+
+Cuando en un nodo(manager tendria que se) creas una imagen, ya sea de un Dockerfile o commit solo ese nodo sabe de tu imagen local, los demas restantes no, es poreso que si te bajas una imagen de Docker Hub TODOS los nodos saben cual es
+
+
+MODIFICAR SERVICIOS
+
+  -docker services update --help
+
+Algunos ejemplos:
+
+  -docker service update nombre servicio --limit-memory 10m #limitar memoria
+  -docker service update nombreservicio_portainer --limit-cpu 0.5 #limitar cpu
+
+
+ETIQUETAR NODOS:
+  -docker node update --label-add seccion=valor nodo
+  -docker node update --label-add rack=r2 w95nxk2n0axup4uyvpcsvre5l
+
+Este comando se usa para modificar la configuración de un nodo en un clúster de Docker Swarm.
+
+Aquí, estás agregando una etiqueta al nodo con la clave rack y el valor r1. Las etiquetas son pares clave-valor que puedes usar para identificar o clasificar los nodos de manera lógica. En este caso, se está etiquetando el nodo con la etiqueta rack=r1.
+
+Puedes poner varias etiquetas
+
+
+DESETIQUETAR NODOS:
+  -docker node update --label-rm seccion id
+  -docker node update --label-rm seccion hostname
+
+comandos para ver las etiquetas:
+  -docker node ls -q | xargs docker node inspect -f '{{ .ID }} [{{ .Description.Hostname }}]: {{ .Spec.Labels }}'
+
+
+
+RESTRINGIR NODOS EN EL DESPLIEGUE DE SERVICIOS
+
+Vale, con las etiquetas puestas podemos hacer que segun que nodos no trabajen o si en segun que servicios
+
+ejemplo:
+
+
+psa4zo6fa5vd7e0j2cvmr3ts8 [nodo]: map[rack:r1]
+liiaa5bg5xmddtqx1vj2zhu6u [nodo2]: map[personas:p1 rack:r2]
+w95nxk2n0axup4uyvpcsvre5l [nodo3]: map[]
+
+
+docker service create --name apache2 --constraint node.labels.rack==r1 httpd
+wq5agqfkf4xc2lq6uxoegohn6
+overall progress: 1 out of 1 tasks
+1/1: running
+verify: Service wq5agqfkf4xc2lq6uxoegohn6 converged
+ docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+wq5agqfkf4xc   apache2   replicated   1/1        httpd:latest
+ docker service ps apache2
+ID             NAME        IMAGE          NODE         DESIRED STATE   CURRENT STATE            ERROR     PORTS
+glv2dwu3odui   apache2.1   httpd:latest   nodo         Running         Running 29 seconds ago
+
+ docker service scale apache2=3
+apache2 scaled to 3
+overall progress: 3 out of 3 tasks
+1/3: running
+2/3: running
+3/3: running
+verify: Service apache2 converged
+ docker service ls
+ID             NAME      MODE         REPLICAS   IMAGE          PORTS
+wq5agqfkf4xc   apache2   replicated   3/3        httpd:latest
+
+
+docker service ps apache2
+ID             NAME            IMAGE          NODE         DESIRED STATE   CURRENT STATE           ERROR
+              PORTS
+i4nxfo9hx2ac   apache2.1       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+6kl2iqsl0eye    \_ apache2.1   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.1.…"
+jl4y8b45rywe   apache2.2       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+c14te3tgt4qy    \_ apache2.2   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.2.…"
+bixsjbvvnvr5   apache2.3       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+34y8efzjgyzy    \_ apache2.3   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.3.…"
+vjxou0lcaow9   apache2.4       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+zntn1b2pix9p    \_ apache2.4   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.4.…"
+473qzl8wdnbi   apache2.5       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+u78k2f86705l    \_ apache2.5   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2.5.…"
+p0y6aklub7ju   apache2.6       httpd:latest   nodo1         Running         Running 2 minutes ago
+
+kkpaum8kssae    \_ apache2.6   httpd:latest   nodo1         Shutdown        Failed 2 minutes ago    "No such container: apache2
+
+Todos los servicios van al nodo cuyo label sea rack, y su valor sea 1, osea el nodo1
+
+
+RESTRINGIR NODOS EN EL DESPLIEGUE DE SERVICIOS 2
+
+Vale ya sabemos ponerle servicios a los nodos, pero y si queremos ponerle servicios a los que no sea igual a la etiqueta?
+
+  -docker service create --name apache2 --constraint node.labels.rack==r1 httpd #Para ponerle el servicio httpd a los dodos que tengan la etiqueta "rack=r1"
+  -docker service create --name apache2 --constraint node.labels.rack!=r1 httpd #Para ponerle el servicio httpd a los nodos diferentes a la etiqueta "rack=r1"
+
+
+NODOS PREFERENTES
+
+Vale y si ahora queremos hacer lo mismo pero queremos que coja a TODOS, pero preferentemente a unos por su etiqueta?:
+  -docker service create --name apache2 --replicas=6 --placement-pref "spread=node.labels.desarrollo" httpd #la etiqueta "desarrollo" no exixte, pero si exixtiera pondria los servicios preferentemente ahy, veis que no ponemos el "etiqueta=numero como en rack=r2, eso es porque cojera a todas las etiquetas"
+
+
+Quitar nodos del cluster
+
+  -docker swarm leave #Hacer en el nodo en el que te quieras ir
+  Node left the swarm.
+
+Desde un manager ahora si lo podemos eliminar:
+  -docker node rm id/hostanme
+
+
+Para los espabilados(como yo), no se puede hacer un "docker node rm id/hostanme" sin hacer el "docker swarm leave" antes
+
+
+HASTA AQUI HA LLEGADO EL MEGA TUTORIAL DE DOCKER DE 1279 LINEAS(MUCHAS DE ELLAS ESPACIOS INNECESARIOS, PERO ME AYUDAN A SEPARAR SECCIONES), SI HAS LLEGADO HASTA AQUI LO DUDO PORQUE NO CREERIA QUE ALGUIEN HUBIERA LLEGADO PERO GRACIAS SI LO HICISTE, ESTA GUIA PRIMORDIALMENTE ES PARA MI, PERO SI LE SIRVE A OTRA PERSONA GENIAL!

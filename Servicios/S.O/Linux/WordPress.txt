@@ -1,0 +1,79 @@
+
+WordPress es un sistema de gestión de contenidos (CMS) de código abierto, gratuito y fácil de usar que permite crear y administrar sitios web, desde blogs personales hasta tiendas online complejas
+
+VAMOS A INSTALAR WORDPRESS EN UBUNTU SERVER
+
+Video que me ayudo: https://www.youtube.com/watch?v=ZS75YrE3HAk&t=1162s
+
+
+INSTALACION
+
+**Requiere tener apache2 instalado
+
+Vamos a descargarnos el archivo comprido de wordpress, se descarga en la ubicacion exacta de donde estemos:
+  -wget https://wordpress.org/latest.tar.gz
+
+Vamos a descomprimirlo:
+  -tar -xzvf latest.tar.gz
+
+Ahora podemos ver la carpeta "wordpress" que es el archivo que descomprimimos antes:
+  -ls
+
+
+Ahora vamos a mover la carpeta de wordpress hacia "/var/www/html" ya que esa ubicacion es donde le decimos a apache que webs queremos mostrar:
+  -sudo mv wordpress/ /var/www/html/
+
+Nos movemos a la ruta:
+  -cd /var/www/html/
+
+Ahora vamos a instalarnos algunos paquetes que necesita wordpress para funcionar:
+  -sudo apt install php-mysql php
+
+
+Y le ponemos permisos a la carpeta de wordpress para que sea ejecutada por el user "www-data":
+  -sudo chown -R www-data:www-data wordpress/
+
+
+Ahora nos podriamos ir al navegador a buscar por nuetra ip/wordpress y se abriria el desplagable para iniciarlo, pero aun no, ya que no tenemos una base de datos
+
+Instalamos mysql:
+  -sudo apt install mysql-server -y
+
+Y entramos en ella con:
+  -sudo mysql -u root -p
+
+**NOTA
+
+Podemos entrar en el ambiente de mysql sin tener realmente un contraseña pero es mejor tenerla, por ahora podemos entrar danle simplemente al espacio del teclado
+
+
+Creamos una database:
+  -CREATE DATABASE wordpress_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+Y no entramos en ella, podemos ver si la hemos creado correctamente:
+  -show databases;
+
+Y con que la veamos esta bien
+
+Ahora vamos a crear al usuario con el que nos autenticaremos con la base de datos:
+  -CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'Wordpress2025'; #creamos en usuario: wordpress con la contraseña Wordpress2025
+
+Le das permisos sobre tu base de datos:
+  -GRANT ALL PRIVILEGES ON wordpress_db.* TO 'wordpress'@'localhost';
+
+Y YA ESTA, ya nos podriamos salir del ambiente de mysql y ir al navegador de nuevo, seleccionas el idioma y cuando te pregunte por base de datos estas serian nuestras credenciales
+
+
+DATABASE NAME: wordpress_dn
+USERNAME: wordpress
+PASSWORD: Wordpress2025
+
+DATABASE HOST y TABLE PREFIX las dejamos vacias, ya seria poner nombre al sitio, la contraseña(nada que ver con mysql) y el usuario(nada que ver con mysql)
+
+Para ver la pagina seria en: ip-server/wordpress/
+Para editar la pagina seria en: ip-server/wordpress/wp-login.php
+
+Ya tenemos wordpress, podemos hacer nuestra pagiana web, blog, ponerle plugins, y sin preocuparse por la database
+
+YA ESTA
+

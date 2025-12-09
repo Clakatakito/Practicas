@@ -1,0 +1,36 @@
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-test
+  labels:
+    app: back
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: back
+  template:
+    metadata:
+      labels:
+        app: back
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  labels:
+    app: back
+spec:
+  type: NodePort
+  selector:
+    app: back
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80

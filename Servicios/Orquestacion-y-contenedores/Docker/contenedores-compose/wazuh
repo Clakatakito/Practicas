@@ -1,0 +1,42 @@
+
+https://www.youtube.com/watch?v=EdZMe_zYg2g&t=904s
+
+
+Hacemos un git clone, lo puedes hacer directamente en la carpeta donde tengas tus otros contenedores ya que creara una carpeta de donde colgara todo
+
+git clone https://github.com/wazuh/wazuh-docker.git -b v4.7.3
+
+Iremos a: /wazuh-docker/single-node y haremos:
+    -docker compose -f generate-indexer-certs.yml run --rm generator
+    -docker-compose up -d
+
+Luego nos iremos a nuestro navegador nuestra ip
+
+Usuario: admin
+Contraseña: SecretPassword
+
+Esas dos credenciales se pueden cambiar en el docker-compose.yml
+
+services:
+  wazuh.manager:
+    image: wazuh/wazuh-manager:4.7.3
+    hostname: wazuh.manager
+    restart: always
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 655360
+        hard: 655360
+    ports:
+      - "1514:1514"
+      - "1515:1515"
+      - "514:514/udp"
+      - "55000:55000"
+    environment:
+      - INDEXER_URL=https://wazuh.indexer:9200
+      - INDEXER_USERNAME=admin                  #cambiar?
+      - INDEXER_PASSWORD=SecretPassword         #cambiar?
+
+Y ahy mas debajo, dar crt + w en nano para buscar

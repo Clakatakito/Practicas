@@ -1,0 +1,107 @@
+
+Apache2 es un servidor web que muestra páginas web al navegador cuando alguien visita tu sitio. Básicamente, responde a peticiones HTTP enviando archivos HTML, imágenes, etc., desde tu servidor al cliente.
+
+Es uno de los mejores servicios web junto a NGINX
+
+instalamos apache2
+
+  -sudo apt install apche2
+
+Una vez instalado iremos a "/etc/apache2/" y observaremos que hay
+
+  -cd /etc/apache2/
+  -ls
+
+Tenemos varios directorios y archivos, veremos lo que son:
+
+apache2.conf    conf-enabled  magic           mods-enabled  sites-available
+conf-available  envvars       mods-available  ports.conf    sites-enabled
+
+**ACLARACION
+Un enlace simbólico es como un atajo a otro archivo o carpeta. No es una copia, solo apunta al original.
+
+
+📄 apache2.conf
+Archivo principal de configuración. Aquí se ponen ajustes globales que afectan a todo Apache.(no recomendable tocar)
+
+📁 conf-available/
+Contiene archivos de configuración opcionales (por ejemplo, seguridad, charset, etc.). Están disponibles, pero no activos aún.
+
+📁 conf-enabled/
+Aquí van los archivos de configuración que sí están activados (son enlaces simbólicos a conf-available).
+
+📁 mods-available/
+Todos los módulos que se pueden activar (SSL, rewrite, PHP, etc.). Están instalados pero no todos se usan.
+
+📁 mods-enabled/
+Aquí van los módulos que están activos. Son enlaces a los que están en mods-available.
+
+📁 sites-available/
+Aquí pones las configuraciones de tus sitios web. Por ejemplo, miweb.conf, donde defines el dominio, ruta al proyecto, puertos, etc.
+
+📁 sites-enabled/
+Aquí van los sitios que están activos. Son enlaces a los que tienes en sites-available.
+
+📄 ports.conf
+Define en qué puertos escucha Apache, normalmente el 80 (HTTP) y el 443 (HTTPS).
+
+📄 envvars
+Aquí se definen variables de entorno que Apache usa al iniciarse (como el usuario que ejecuta el servicio).(no recomendable tocar)
+
+📄 magic
+Sirve para que Apache intente adivinar el tipo de archivo cuando no tiene extensión, usando firmas mágicas.(no recomendable tocar)
+
+
+Bien, casi los unicos directorios que vamos a tocar son: sites-avaibles y sites-anabled
+
+
+EMPEZEMOS
+
+Una vez tengamos apache2 instalado ya tendremos una pagina web que podemos ver, la de por defecto de apache2 que nos demuestra que el servicio esta funcionando, esa pagina estara en "/var/www/html/" en su fichero index.html que es modificable, tambien podemos modificar la ruta de donde estara la pagina web, ejemplo: "/var/www/mi-web" y decirle a apache2 que indique ahy, asi no es necessario modificar ni eliminar la pagina web por defecto, podemos verla porque apache ya la tiene habilitada
+
+La podremos visualizar buscando en el navegor la ip de la maquina donde esta instalado apache2, apache2 por defecto usa el puerto 80, que es el puerto para mostrar las paginas web, algo interesante del puerto 80 es que no hace falta poner la ip y el puerto tipo: 192.168.0.1:80, sino que solo con la ip vale y si le pones el 80 atras tambien funcionara, recomiendo dejarlo asi pero es modificable desde el fichero de configuracion "ports.conf"
+
+Una vez podemos ver nuestra pagina web es hora de explicar los "Virtualhosts":
+
+Los VirtualHosts en Apache2 sirven para tener varias páginas web en un mismo servidor. Básicamente, es como decirle al servidor:
+"Si alguien entra al dominio X, le enseñas esta carpeta; si entra al dominio Y, le enseñas otra."
+
+Entonces, tú puedes tener por ejemplo:
+
+mipagina.com → /var/www/mipaginaderopa -> mostrara el contenido del index.html que haya ahy
+
+otracosa.com → /var/www/mipaginadeproductos -> mostrara el contenido del index.html que haya ahy
+
+Aunque sea la misma ip ya que una ip puede tener nombres DNS diferentes
+
+Todo en la misma máquina y usando la misma IP.
+El servidor detecta el dominio que pidió la persona y carga la web correcta.
+
+Vamos a ver el contenido del Virtualhost de la pagina web por defecto:
+
+**ACLARACION IMPORTANTE
+
+En "/etc/apache2/" hay 2 directorios que parecen iguales pero no lo son: el "sites-available" y el "sites-enabled", dije las diferencias en la linea 39 y 42 pero las volvere a decir:
+
+sites-available es donde guardas todas las configuraciones de los sitios que quieres tener, estén activos o no. Es como el almacén, ahí puedes tener las webs listas pero apagadas.
+sites-enabled es donde están los sitios que realmente están activos en el servidor. Apache solo lee lo que está en esta carpeta.
+
+Es decir que si tengo un virtualhost que apunta a una pagina web solo en sites-available no lo podre ver porque no esta en el sites-enabled
+Es decir otra vez que primero se crea en sites-available y luego se pone en sites-enabled, si hos fijais hay un 000-default.conf en "sites-available" y en "sites-enabled" si lo quitaramos de "sites-enabled" nos quedariamos sin pagina web por defecto, el que esta en "sites-available" llamado "default-ssl.conf" es un ejemplo de los que seria un virtualhost con ssl que ya veremos
+
+Si vemos el contenido de 000-default.conf seria literalmente esto entre mas cosas:
+
+<VirtualHost *:80>                                                                             #Aqui declaramos el virtualhost que escucha a cualquier ip que venga al puerto 80, si tendremos varios virtualhost se tendria que cambiar por un dns personalizado
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html                                                            #Aqui le decimos que la pagina web esta justo ahy, ruta que obviamente se puede cambiar
+
+

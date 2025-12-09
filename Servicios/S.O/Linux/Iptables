@@ -1,0 +1,101 @@
+
+iptables es una herramienta de línea de comandos en Linux que permite configurar reglas para el firewall del sistema.
+
+Sirve para controlar el tráfico de red que entra o sale del equipo, permitiendo o bloqueando conexiones según ciertas condiciones, como dirección IP, puerto o protocolo.
+
+#Eliminar reglas iptables definidas, -F=Flush(Borrar)
+
+  -sudo iptables -F
+
+
+Iptables funciona en "tablas" con el parametro "-t" hacemos referencia, por defecto si no usamos el "-t" todo se creara en la tabla "filter", NO SE PUEDEN CREAR TABLAS
+
+Iptables tiene las siguientes tablas:
+
+filter (la tabla por defecto para permitir o denegar paquetes)
+
+nat (traducción de direcciones)
+
+mangle (modificación avanzada de paquetes)
+
+raw (para omitir el seguimiento de conexiones)
+
+security (integración con SELinux)
+
+
+#Ver las reglas iptables de una tabla, -L=lista las reglas, -v=muestra detalles (como los contadores de paquetes/bytes), -n=no resuelve DNS (más rápido).
+
+  -sudo iptables -L -v -n #ver reglas en la tabla filter(la tabla por defecto)
+  -sudo iptables -t nat -L -v -n #ver reglas en la tabla nat
+
+#Reiniciar contador(Un contador en iptables es un número que cuenta los paquetes que coinciden con una regla)
+
+  -sudo iptables -Z
+
+
+En iptables, una cadena es una lista de reglas que se revisan una por una para decidir qué hacer con un paquete de red (aceptarlo, bloquearlo, redirigirlo, etc.).
+
+🔗 Cadenas principales (predefinidas por el sistema):
+INPUT → controla el tráfico que llega al sistema.
+
+OUTPUT → controla el tráfico que sale del sistema.
+
+FORWARD → controla el tráfico que pasa a través del sistema (como si fuera un router).
+
+Estas están en la tabla filter, que es la más común.
+
+
+Jerarquia en iptables:
+Tabla > Cadena > Regla
+
+
+                                                    ┌─────────────┐
+                                                    │   Tabla     │
+                                                    │ (filter,    │
+                                                    │  nat, etc.) │
+                                                    └─────┬───────┘
+                                                          │
+                                                          ▼
+                                                    ┌─────────────┐
+                                                    │   Cadena    │
+                                                    │ (INPUT,     │
+                                                    │  OUTPUT,    │
+                                                    │  FORWARD)   │
+                                                    └─────┬───────┘
+                                                          │
+                                                          ▼
+                                                    ┌─────────────┐
+                                                    │   Regla     │
+                                                    │ (Condición  │
+                                                    │  + Acción)  │
+                                                    └─────────────┘
+
+
+
+#Poner las cadenas en ACCEPT/DROP
+  -sudo iptables -P INPUT/FORDWARD/OUTPUT DROP/ACCEPT
+
+Una vez explicado eso vamos ha explicar las politicas por defecto, que es lo que va a hacer un paquete cuando la regla no coincide, es decir, si tenemos las cadenas INPUT, FORWARD y OUTPUT en DROP por ejemplo, por defecto no entra nada ni sale nada al menos hasta que tu lo dictamines, si lo tubieramos en ACCEPT aceptaria TODO, y ya podriamos poner las reglas de lo que no queremos que entre
+
+#muestra todas las reglas actuales de iptables en formato de línea de comandos
+  -sudo iptables -S
+  -P INPUT DROP
+  -P FORWARD ACCEPT
+  -P OUTPUT ACCEPT
+
+
+#Añadir una regla iptable sencilla
+  -sudo iptables -A INPUT -j ACCEPT (el -A la añade al principio de todas las reglas, y el -I al final de las reglas, el -j es para ACCEPT/DROP)
+  Esa regla hace que acepte TODO por defecto, aunque la cadena este en DROP, lo primero que hace un paquete al entrar es pasar por las reglas y luego a la cadena, poreso lo que normalmente se hace es poner la cadena en DROP y aceptar solo lo que tu quieras
+
+
+
+las reglas:
+
+-P INPUT DROP
+-P FORWARD DROP
+-P OUTPUT DROP
+-A INPUT -i enp0s3 -p icmp -j ACCEPT
+-A INPUT -p udp -m udp --sport 53 -j ACCEPT
+-A OUTPUT -o enp0s3 -p icmp -j ACCEPT
+-A OUTPUT -p udp -m udp --dport 53 -j ACCEPT

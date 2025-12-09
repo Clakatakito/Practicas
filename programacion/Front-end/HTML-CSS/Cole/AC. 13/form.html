@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Alex Serrano Lledo-->
+</head>
+
+<body>
+    <form action="M8UF5AC13_acognom.html" method="get">
+        <h1>Formulari de registre</h1>
+        <fieldset>
+            <legend>Dades bàsiques</legend><br>
+            <label for="user">Su usuario:</label><br>
+            <input type="text" id="user" name="user"><br><br>
+            <label for="password">Contraseña</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <label for="Nom">Nom</label><br>
+            <input type="text" id="Nom" name="Nom" required maxlength="50"><br><br>
+            <label for="Congnom">Congnom</label><br>
+            <input type="text" id="Cognom" name="Cognom" required maxlength="50"><br><br>
+            <label for="Sexe">Sexe: </label><input type="radio" name="Sex" value="Home" checked>Home <input type="radio"
+                value="Dona" name="Sex">Dona <input type="radio" value="No binari" name="Sex">No binari<br><br>
+            <label for="Correu electrònic">Correu electrònic</label><br>
+            <input type="email" id="Correu electrònic" name="Correu electrònic"><br><br>
+            <label for="Població">Població:</label><br>
+            <select>
+                <option id="Arbúcies" name="Arbúcies">Arbúcies</option>
+                <option id="Badalona" name="Badalona">Badalona</option>
+                <option id="Barcelona" name="Barcelona">Barcelona</option>
+                <option id="Girona" name="Girona">Girona</option>
+                <option id="Vilassar de Mar" name="Vilassar de Mar">Vilassar de Mar</option>
+            </select><br><br>
+            <label for="Descripció">Descripció:</label><br>
+            <textarea id="Descripció:" name="Descripció:" rows="4" cols="40"></textarea><br>
+            <input type="checkbox" checked>Vull rebre informació sobre novetats i ofertes<br>
+            <input type="checkbox" required>Declaro haver llegit i acceptar les condicions generals del programa i la
+            normativa sobre protecció de dades indicada al RGPD<br><br>
+            <input type="reset" value="Reset"><input type="submit" value="Enviar">
+        </fieldset>
+    </form>
+</body>
+
+</html>

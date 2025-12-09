@@ -1,0 +1,197 @@
+
+Moodle es una plataforma de aprendizaje en línea (LMS, Learning Management System) de código abierto que permite crear y gestionar cursos virtuales. Se usa principalmente en entornos educativos para facilitar la enseñanza y el aprendizaje a distancia. En Moodle, los profesores pueden subir materiales, crear actividades como cuestionarios o foros, calificar tareas y comunicarse con los alumnos, mientras que los estudiantes pueden acceder a los contenidos, entregar trabajos y participar en las actividades desde cualquier dispositivo con internet.
+
+
+No he podido crear un docker-compose con moodle asique habra que instalarlo como servicio:
+
+Con ayuda del video: https://www.youtube.com/watch?v=FGMgXphhTj4&t=32s
+Y su pagina web: https://tuadmindesistemas.com/como-instalar-moodle-5-0-1-en-ubuntu-24-04-paso-a-paso/
+
+INSTALACION:
+
+
+  -sudo apt update && sudo apt upgrade -y
+
+
+Instalar Apache, MariaDB y PHP:
+
+  -sudo apt install -y software-properties-common ca-certificates lsb-release apt-transport-https
+  -sudo add-apt-repository ppa:ondrej/php
+  -ENTER
+  -sudo apt-get update && sudo apt install apache2 mariadb-server php8.2 php8.2-mysql php8.2-xml php8.2-gd php8.2-zip php8.2-intl php8.2-curl php8.2-mbstring php8.2-soap -y
+  -OK
+  -OK
+
+
+Configurar MariaDB:
+
+
+  -sudo mysql_secure_installation
+  -contraseña-que-tu-quieras
+  -n
+  -n
+  -y
+  -y
+  -y
+  -y
+
+Entramos en mysql:
+
+  -sudo mysql -u root -p
+  -contraseña-que-tu-pusiste
+
+
+Insertamos estos comandos, todos juntos o 1 a 1:
+Hos los dejo sin "-" para que sea mas facil copiarlos
+
+Leerlo y cambiar alguna cosa como el nombre de la base de datos, el nombre de tu base de datos o la contraseña
+
+CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'moodleuser'@'localhost' IDENTIFIED BY 'TuPasswordSeguro';
+GRANT ALL PRIVILEGES ON moodle.* TO 'moodleuser'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+
+
+DESCARGAR MOODLE
+
+Podeis ponerlos todos seguidos tambien no hay problema:
+
+cd /tmp/
+sudo wget https://download.moodle.org/download.php/direct/stable500/moodle-latest-500.tgz
+sudo tar -xvzf moodle-latest-500.tgz
+sudo mv moodle /var/www/html/moodle
+sudo rm -rf moodle-latest-500.tgz
+
+Basicamente nos descargamos el comprimido de moodle y lo descomprimimos y lo movemos al servidor de apache2
+
+
+ASIGNAR PERMISOS
+
+sudo chown -R www-data:www-data /var/www/html/moodle
+sudo chmod -R 755 /var/www/html/moodle
+
+
+Crear directorio de datos:
+
+sudo mkdir /var/moodledata
+sudo chown www-data:www-data /var/moodledata
+sudo chmod 770 /var/moodledata
+
+Ir a:
+
+  -sudo nano /etc/apache2/sites-available/moodle.conf
+
+Y pegar lo siguiente:
+
+<VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot /var/www/html/moodle
+
+    <Directory /var/www/html/moodle>
+        Options +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/moodle_error.log
+    CustomLog ${APACHE_LOG_DIR}/moodle_access.log combined
+
+    # Habilitar HTTP/2
+    Protocols h2 http/1.1
+</VirtualHost>
+
+Activar modulos necesarios:
+
+sudo a2ensite moodle.conf
+sudo a2enmod rewrite http2
+sudo systemctl restart apache2
+
+
+YA PODEMOS IR A TU NAVEGADOR DE CONFIANZA Y BUSCAR:
+
+ip-server/moodle
+
+
+
+Si te sale este problema: "Moodle 5.0 or later requires at least PHP 8.2.0 (currently using version 8.1.2-1ubuntu2.22). Some servers may have multiple PHP versions installed, are you using the correct executable?", te explico el como solucionarlo abajo sino sigue en la linea 134
+Vale problemilla, tenemos la version 8.2 de php y moodle necesita esa si, pero si apache2 esta usando la 8.1 no nos dejara visualizar:
+
+Ver que version php usa apache2:
+
+  -ls /etc/apache2/mods-enabled/ | grep php
+
+
+Si te aparece algo como php8.1.conf o php8.1.load, significa que Apache está cargando PHP 8.1.
+
+Desactiva PHP 8.1 y activa PHP 8.2 en Apache
+
+sudo a2dismod php8.1
+sudo a2enmod php8.2
+sudo systemctl restart apache2
+
+
+
+IMPORTANTE NO HACER NEXT, NEXT TODO EL ARTO CALMA O HOS JODEIS LA INSTALACION
+
+YA ESTAMOS EN MOODLE, a partir de aqui es una instalacion grafica normal, ponemos el idioma que queramos y next
+
+aqui importante porque el "Directorio de Datos" NO LO QUEREMOS EN "/var/www/moodledata" SINO QUE LO QUEREMOS EN: "/var/moodledata" y next
+
+En el tipo de db NO QUEREMOS "mysql mejorado" SINO QUE QUEREMOS: "MariaDB nativo" y next
+
+
+
+
+Servidor de la base de datos        localhost
+Nombre de la base de datos          moodle
+Usuario de la base de datos         moodleuser
+Contraseña de la base de datos      contraseña-que-tu-pusiste
+Prefijo de tablas                   mdl_
+
+Lo demas nada
+
+y next
+
+Aceptamos nuestra alma al diablo y next
+
+
+Lo ultimo de topo, alfinal de todo donde todo pone "OK" hay algo de los "max_input_vars" que tiene que estar a 5000, vamos a arreglarlo
+
+Volvemos al servidor y vamos a:
+
+  -sudo nano /etc/php/8.2/apache2/php.ini
+
+Buscamos la linea "max_input_vars", con nano se puede buscar con Crtl + w y tiene que quedar asi:
+
+  -max_input_vars = 5000
+
+Reiniciamos apache2:
+
+  -sudo systemctl restart apache2.service
+
+
+Vale oto problema, necesitamos como minimo la version de mariadb 10.11.0, entonces vamos a actualizar la version si no hay problema con esto pues ya estaria la instalacion completa, igualmente leer la linea 193 si teneis el error seguirme:
+
+copia de seguridad por si acaso
+  -sudo mysqldump -u root -p --all-databases > /home/$USER/todo_backup.sql
+
+  -sudo systemctl stop mariadb
+  -sudo apt remove mariadb-server mariadb-client
+  -sudo apt autoremove
+  -curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=10.11
+  -sudo apt update
+  -sudo apt install mariadb-server mariadb-client
+  -sudo systemctl start mariadb
+  -sudo mysql_upgrade -u root -p
+
+Y ya esta no hace falta reiniciar apache2
+
+
+
+A partir de aqui la configuracion del moodle es dificil de explicar con texto plano sin fotos ni nada asique hos recomiendo ir al video del que he sacado los comandos igualmente hos lo dejo abajo de aqui y configurar agustos
+
+ver el video a partir del min 13:09
+video: https://www.youtube.com/watch?v=FGMgXphhTj4&t=32s
+pagina web: https://tuadmindesistemas.com/como-instalar-moodle-5-0-1-en-ubuntu-24-04-paso-a-paso/

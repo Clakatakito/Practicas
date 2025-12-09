@@ -1,0 +1,12 @@
+
+La asignatura o tema “Fundamentos del Hardware” trata sobre los principios básicos del funcionamiento físico de los computadores y dispositivos electrónicos
+
+Es mas bien una asignatura teorica de como funciona un ordenador, mucha teoria 
+
+
+Sistema informàtic
+
+Un Sistema Informàtic (SI) permet emmagatzemar i processar informació (tractament de les dades) mitjançant unes parts interrelacionades:
+• Maquinari o Hardware (part física),
+• Programari o Software (part lògica)
+• usuari

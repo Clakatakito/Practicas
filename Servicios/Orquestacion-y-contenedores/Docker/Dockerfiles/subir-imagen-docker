@@ -1,0 +1,13 @@
+
+Linux:
+
+    -docker login
+    (poner usuario)
+    (poner contraseña)
+    -docker push usuario/imagen
+
+Windows:
+
+    -docker login
+    (Te logea directamente si usas docker-desktop con las extension de vscode de docker)
+    -docker push usuario/imagen
