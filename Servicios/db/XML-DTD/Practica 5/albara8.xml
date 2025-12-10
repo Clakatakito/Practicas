@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE albara SYSTEM "fichero.dtd">
 <albara>
     <numero>8</numero>
     <data>2011-10-03</data>
-    <client id="1">
+    <client id="m1">
         <nom>Pere Garcia</nom>
         <poblacio>Figueres</poblacio>        
     </client>
     <articles>
         <compra>
-            <article codi="9">
+            <article codi="m9">
                 <descripcio>Vi Valdepeñas gran reserva. Viña Albali 75cl</descripcio>
                 <ampolla/>
                 <preu>4.98</preu>
@@ -16,7 +17,7 @@
             <quantitat>3</quantitat>
         </compra>                
         <compra>
-            <article codi="12">
+            <article codi="m12">
                 <descripcio>Vi negre Rioja reserva. Marques de Riscal 75 cl</descripcio>
                 <ampolla/>
                 <preu>12.85</preu>
@@ -24,7 +25,7 @@
             <quantitat>1</quantitat>
         </compra>
         <compra>
-            <article codi="58">
+            <article codi="m58">
                 <descripcio>Vi Ribera de Duero criança. Valpicia 75 cl</descripcio>
                 <ampolla/>
                 <preu>5,49</preu>
@@ -33,4 +34,3 @@
         </compra>                        
     </articles>    
 </albara>
-

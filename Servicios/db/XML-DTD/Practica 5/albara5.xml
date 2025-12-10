@@ -3,13 +3,13 @@
 <albara>
     <numero>5</numero>
     <data>2011-10-02</data>
-    <client id="1">
+    <client id="m1">
         <nom>Pere Garcia</nom>
         <poblacio>Figueres</poblacio>        
     </client>
     <articles>
         <compra>
-            <article codi="12">
+            <article codi="m12">
                 <descripcio>Vi negre Rioja reserva. Marques de Riscal 75 cl</descripcio>
                 <ampolla/>
                 <preu>12.85</preu>
@@ -17,7 +17,7 @@
             <quantitat>2</quantitat>
         </compra>
         <compra>
-            <article codi="10">
+            <article codi="m10">
                 <descripcio>Vi Blanc D.O.Penedès. Vinya Sol Torres 75 cl</descripcio>
                 <ampolla/>
                 <preu>4.80</preu>

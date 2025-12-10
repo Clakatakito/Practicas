@@ -3,4 +3,17 @@
 <!ELEMENT numero (#PCDATA)>
 <!ELEMENT data (#PCDATA)>
 <!ELEMENT client (nom, poblacio)>
-<!ELEMENT articles (compra+, article)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT poblacio (#PCDATA)>
+<!ELEMENT articles (compra+)>
+<!ELEMENT compra (article, quantitat, descompte?)>
+<!ELEMENT granel EMPTY>
+<!ELEMENT descompte (#PCDATA)>
+<!ELEMENT quantitat (#PCDATA)>
+<!ELEMENT article (descripcio, granel?, ampolla?, preu)>
+<!ELEMENT descripcio (#PCDATA)>
+<!ELEMENT ampolla EMPTY>
+<!ELEMENT preu (#PCDATA)>
+
+<!ATTLIST client id ID #REQUIRED>
+<!ATTLIST article codi ID #REQUIRED>
