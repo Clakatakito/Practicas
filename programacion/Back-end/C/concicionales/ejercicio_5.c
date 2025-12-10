@@ -6,7 +6,7 @@ int main()
 {
     // Caràcter majúscula o minúscula. Llegeix un caràcter i indica si és una lletra majúscula o minúscula.
 
-    char letra = 'ninguna';
+    char letra = 'nada';
 
     printf("Ponme un caracter en mayusculas o minusculas y te digo cual es:\n");
     scanf("%s", &letra);
