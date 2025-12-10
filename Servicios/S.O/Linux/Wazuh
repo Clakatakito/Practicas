@@ -1,0 +1,22 @@
+
+sudo apt update
+
+sudo apt curl
+
+sudo curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh
+
+sudo bash ./wazuh-install.sh -a
+
+Si dice que no cumples con el hardware necesario
+
+sudo bash ./wazuh-install.sh -a -i
+
+
+https://ip-server
+
+
+#otra instalacion
+
+https://www.youtube.com/watch?v=EdZMe_zYg2g&t=904s
+
+git clone https://github.com/wazuh/wazuh-docker.git -b v4.7.3

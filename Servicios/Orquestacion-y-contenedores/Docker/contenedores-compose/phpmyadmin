@@ -1,0 +1,26 @@
+services:
+  web:
+    image: php:8.2-apache    
+    ports:
+      - "80:80"    
+    depends_on:
+      - db    
+    volumes:
+      - ./html:/var/www/html    
+  db:
+    image: mysql:8.1.0   
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password  
+      MYSQL_DATABASE: concesionario    
+    volumes:
+      - ./mysql_data:/var/lib/mysql    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"    
+    depends_on:
+      - db    
+    environment:
+      PMA_HOST: db

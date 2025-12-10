@@ -1,0 +1,55 @@
+
+
+
+
+
+
+Imaginatelo asi (servidor1 y servidor2)
+
+servidor1: donde tener las cosas metidas de respaldo para el servidor2
+servidor2: el que tiene la chicha del funcionamiento
+
+servidor1:
+  -sudo apt install sshfs
+  -mkdir -p /mnt/servidor2
+  -sshfs user@ip-otro-server:/ruta/del/archivo/a/copiar /mnt/servidor2
+
+
+Desde el servidor1 no te dejara ni ver el archivo por lo que hay que tocar varias cosas:
+servidor2
+  -sudo chmod 664 /ruta/del/archivo/a/copiar
+  -sudo chown user:user /home/alex/texto/texto.txt
+
+servidor1:
+  -sudo umount /mnt/servidor2
+  -sshfs alex@ip-otro-server:/ruta/del/archivo/a/copiar /mnt/servidor2 -o allow_other
+
+ya podras tocarlo desde los dos servidores
+
+al reiniciar se quitara todo asique:
+
+servidor1:
+  -sudo nano /etc/fstab
+
+nos vamos abajo del todo y ponemos:
+  -user@ip-otro-server:/ruta/del/archivo/a/copiar /mnt/servidor2 fuse.sshfs defaults,_netdev,allow_other 0 0
+
+y cada vez que reiniciemos ponemos:
+  -sudo mount -a
+
+podemos ponerlo en un scrip de inicio para cuando encendamos el server
+
+
+
+
+
+
+si en el servidor1 vas al recurso y no sale, (tabuleas y no aparece los archivos), es porque hay que ponerle permisos desde el servidor2, algunos ejemplos:
+
+  -sudo chmod +rx /ruta
+  -sudo chmod +r /ruta
+  
+
+
+sudo sshfs alex@192.168.0.2:/home/alex/docker/home-assistant /mnt/sshfs/home-assistant -o al
+low_other

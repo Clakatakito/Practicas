@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Fernanda",
+        "language": [ "Python", "Java", "PHP" ],
+        "age": 29,
+        "qualification": [
+            { "difficulty": 5, "score": 18.3 },
+            { "difficulty": 7, "score": 14.1 },
+            { "difficulty": 3, "score": 19.7 }
+        ]
+    },
+    {
+        "name": "Juan",
+        "language": [ "JavaScript", "PHP" ],
+        "age": 30,
+        "qualification": [
+            { "difficulty": 9, "score": 16.9 },
+            { "difficulty": 4, "score": 15.9 },
+            { "difficulty": 2, "score": 19.5 }
+        ]
+    },
+    {
+        "name": "Martha",
+        "language": [ "C#", "GO", "Python" ],
+        "age": 29,
+        "qualification": [
+            { "difficulty": 6, "score": 17.3 },
+            { "difficulty": 3, "score": 15.1 },
+            { "difficulty": 8, "score": 13.9 }
+        ]
+    }
+]

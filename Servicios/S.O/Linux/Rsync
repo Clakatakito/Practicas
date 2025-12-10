@@ -1,0 +1,24 @@
+
+servidor1:
+
+  permisos:
+    -sudo chmod 755 /home/user/backup/
+    -sudo chown -R user:user /home/user/backup/
+
+
+
+servidor2:
+
+  permisos:
+    -sudo chmod -R 755 /home/user/sitio/backup
+
+  orden:
+    -sudo rsync -avz -e ssh /home/user/backup user@ip-server:/home/user/sitio/backup
+
+
+
+
+
+
+servidor2:
+sudo rsync -avz -e ssh alex@192.168.1.199:/home/user/ruta/servidor1/ /home/user/ruta/servidor2/

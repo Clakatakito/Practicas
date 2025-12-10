@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE albara SYSTEM "fichero.dtd">
+<albara>
+    <numero>7</numero>
+    <data>2011-10-03</data>
+    <client id="m15">
+        <nom>Pitu González</nom>
+        <poblacio>Vilanova de la Muga</poblacio>        
+    </client>
+    <articles>
+        <compra>
+            <article codi="m0">
+                <descripcio>Vi a granel</descripcio> 
+                <granel/>
+                <preu>0.10</preu>
+            </article>
+            <quantitat>5</quantitat>
+        </compra>        
+    </articles>    
+</albara>

@@ -1,0 +1,2006 @@
+
+
+MongoDB es un sistema de bases de datos NoSQL que almacena datos en un formato similar a JSON llamado BSON (Binary JSON). Es conocido por ser escalable, flexible y adecuado para manejar grandes volúmenes de datos no estructurados o semi-estructurados.
+
+
+MODELO DE DATOS:
+
+SQL: Usa un modelo relacional, donde los datos se organizan en tablas con filas y columnas. Las relaciones entre las tablas se definen mediante claves primarias y foráneas.
+NoSQL: Utiliza modelos más flexibles, como documentos (por ejemplo, en MongoDB), clave-valor, grafos o columnas. No es necesario definir un esquema rígido, lo que permite una mayor flexibilidad.
+
+2. Estructura de datos:
+SQL: Los datos deben seguir una estructura predefinida, es decir, el tipo de cada campo debe definirse al crear la base de datos.
+NoSQL: Los datos no tienen una estructura fija. Pueden ser documentos JSON, valores clave, o datos organizados de manera libre.
+
+3. Escalabilidad:
+SQL: Escala principalmente de forma vertical (aumentando la capacidad del servidor).
+NoSQL: Escala de manera horizontal (añadiendo más servidores o nodos), lo que lo hace más adecuado para manejar grandes cantidades de datos distribuidos.
+
+4. Consultas:
+SQL: Usa el lenguaje SQL para consultas complejas. Es potente y permite realizar uniones (JOINs) entre tablas.
+NoSQL: Depende del tipo de base de datos, pero generalmente las consultas son más simples y menos estructuradas. No todas las bases de datos NoSQL soportan operaciones complejas como los JOINs.
+
+5. Transacciones:
+SQL: Proporciona ACID (Atomicidad, Consistencia, Aislamiento, Durabilidad), lo que garantiza que las transacciones sean seguras y consistentes.
+NoSQL: Muchas bases de datos NoSQL priorizan el rendimiento y la escalabilidad, por lo que no siempre garantizan ACID, aunque algunas ofrecen configuraciones de transacciones en un alcance limitado (por ejemplo, MongoDB con Multi-Document Transactions).
+
+6. Casos de uso:
+SQL: Ideal para aplicaciones con datos estructurados, como sistemas de gestión de relaciones (CRM), ERP, y aplicaciones financieras donde las relaciones entre datos son clave.
+NoSQL: Mejor para aplicaciones con grandes volúmenes de datos no estructurados o semi-estructurados, como redes sociales, big data, análisis en tiempo real o aplicaciones móviles.
+
+7. Ejemplos:
+SQL: MySQL, PostgreSQL, Microsoft SQL Server, Oracle DB.
+NoSQL: MongoDB, Cassandra, CouchDB, Redis, Firebase.
+En resumen, las bases de datos SQL son más adecuadas para aplicaciones con datos muy estructurados y relaciones complejas, mientras que NoSQL ofrece flexibilidad y escalabilidad para manejar grandes volúmenes de datos no estructurados.
+
+
+
+Básicamente, SQL trabaja con columnas y tablas, centralizando todo ahí dentro. Es una base de datos estructurada, que tiene lo que necesita tener. Es decir, tiene un esquema predefinido y relaciones entre los datos a través de claves primarias y foráneas. Debido a esta estructura rígida, no es tan apta para escalar horizontalmente como las bases de datos NoSQL.
+
+En cambio, MongoDB no es relacional. Es decir, no usa tablas ni relaciones fijas entre los datos. En lugar de eso, utiliza documentos en formato JSON, que pueden tener diferentes estructuras y campos. Esto le da mucha más flexibilidad y la hace más apta para manejar grandes volúmenes de datos no estructurados o semi-estructurados. Además, MongoDB puede escalar de manera más eficiente horizontalmente, agregando más nodos según sea necesario.
+
+Mientras que SQL es ideal para sistemas que requieren integridad de datos y relaciones complejas entre entidades (como aplicaciones bancarias o de inventarios), MongoDB y otras bases de datos NoSQL son mejores para aplicaciones que manejan grandes volúmenes de datos, como redes sociales, IoT o análisis de big data.
+
+
+
+TIPOS DE BASE DE DATOS NoSQL
+
+Clave-valor: Este tipo de base de datos almacena los datos como un par de clave y valor. Cada valor se asocia a una clave única, y es muy eficiente para buscar datos cuando conoces la clave. Es ideal para aplicaciones que necesitan almacenamiento rápido y simple, como cachés o configuraciones de usuario.
+
+Documentales: En este tipo de base de datos, los datos se almacenan como documentos (normalmente en formato JSON o BSON). Cada documento puede tener diferentes campos y estructuras, lo que da mucha flexibilidad. MongoDB es un ejemplo de base de datos documental. Son útiles cuando los datos no tienen un esquema fijo o cambian con frecuencia.
+
+Grafos: Las bases de datos de grafos están diseñadas para almacenar datos interconectados. Utilizan nodos, aristas y relaciones para representar la estructura de los datos. Son ideales para aplicaciones donde las relaciones entre los datos son clave, como redes sociales, recomendaciones y análisis de rutas.
+
+Columnas: Las bases de datos basadas en columnas almacenan los datos en formato de columnas en lugar de filas, como en las bases de datos tradicionales SQL. Cada columna puede contener una gran cantidad de datos relacionados, lo que hace que sean muy eficientes para consultas analíticas sobre grandes volúmenes de datos. En lugar de leer filas completas (como en una base de datos relacional), solo se leen las columnas que realmente se necesitan, lo que mejora el rendimiento en ciertos casos.
+
+
+
+INSTALACION DE MONGODB
+
+
+WINDOWS
+
+Vale, la instalacion es un poco tiquismiquis pero se puede
+
+Ir a: "https://www.mongodb.com/try/download/community" y bajar hasta encontrar el boton "Download", podemos ingresar que tipo de instalacion queremos, yo escogi la msi por facil, y nos lo bajamos, luego instalamos el wizard, muy importante si lo quires como servicio o no, como servicio es que cada vez que ingreses a la maquina tendras al demonio mongod corriendo predeterminadamente, o bien si quieres no estar corriendolo hasta que lo habras tambien puedes, yo lo he hecho sin servicio, tambien nos podemos instalar el compass, pero da igual porque luego se puede instalar tambien.
+
+Luego de esperar y alomejor dar consentimientos de algunas cosas tenemos que bajarnos la mongosh, la shell, en: "https://www.mongodb.com/try/download/shell" ingresamos las cosas y facil de instalar, yo he escojido msi, que es mas facil y automatico, tambien tenemos que ir a "C:\" y crear "data\db", vamos que tenemos que tener "C:\data\db" porque sino mongod no funcionara, luego de todo eso en "C:\Program Files\MongoDB\Server\8.0\bin" habra principalmente "mongod" que es el demonio, si eso no corre no nos conectara, lo ejecutamos y nos quedamos tranquilos, ya que el demonio esta listo nos podemos ir al "CMD" y podemos poner "mongosh" y veras que sale lo siguiente:
+
+mongosh
+Current Mongosh Log ID: 6761560c284f41d56779a1b5
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.6
+Using MongoDB:          8.0.4
+Using Mongosh:          2.3.6
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-12-17T11:44:18.959+01:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-12-17T11:44:18.960+01:00: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+------
+
+test>
+
+Ya esta, ya estamos dentro, si no tenemos mongod arrancado saldria esto:
+
+mongosh
+Current Mongosh Log ID: 6761569bde1b27e5a079a1b5
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.6
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+
+Que no se puede conectar vamos, y tu estaras pensado, joder tengo que ir cada vez que quiera trabajar con mongodb tengo que ir a "C:\Program Files\MongoDB\Server\8.0\bin" y ejecutar el mongod, pues no, nos iremos al buscador y windows y pondremos "editar las variables de entorno del sistema" abajo en "Variables de entorno", clickaremos "Path" y luego "editar", "nuevo" y ponemos "C:\Program Files\MongoDB\Server\8.0\bin\", luego aceptamos todo y eso creara una variable para que no tengas que ir todo el rato a "C:\Program Files\MongoDB\Server\8.0\bin", con esa variable solo escribre "mongod" en el CMD y arrancara el demonio, luego en otra pestaña escribes "mongosh" y listo 
+
+
+
+LINUX(Ubuntu):
+
+Nos vamos a "https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/#std-label-install-mdb-community-ubuntu" para ver la documentacion(igualmnte pondre los comandos)
+
+    -sudo apt-get install gnupg curl
+
+    -curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+    --dearmor
+
+    #dale "s"
+    #si no se encuentra la comanda "curl" instala con "sudo apt install curl", y vuelve a poner el segundo comando
+
+Selecciona tu distribucion de ubuntu
+
+    -echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+
+    -sudo apt-get update
+
+    -sudo apt-get install -y mongodb-org
+
+    -ps --no-headers -o comm 1 #depende del que te salga tendras que tomar una opcion u otra en el comando de abajo
+
+    -sudo systemctl start mongod #o sudo service mongod start
+
+    -sudo systemctl start mongodb
+
+    -sudo systemctl enable mongodb
+
+    -mongosh
+
+
+PRIMEROS PASOS EN MONGODB:
+
+CREAR UNA BASE DE DATOS:
+    -use NuevaBaseDeDatos
+    switched to db NuevaBaseDeDatos
+
+El use es para usar, pero si la db "NuevaBaseDeDatos" no existe mongodb la creara    
+
+MOSTRAR LAS BASES DE DATOS:
+    -show dbs
+    admin    40.00 KiB
+    config  108.00 KiB
+    local    72.00 KiB
+
+La db "Test" no es una db en si, es al principio donde nos posiciona para luego decidir cual es nuestro proximo movimiento, cuando salgas de "Test", esta no vuelve a salir    
+
+*Aclaracion
+
+No veras la base de datos que has creado hasta que haya colecciones dentro de ella
+
+VER EL NOMBRE DE LA BASE DE DATOS EN USO:
+    -NuevaBaseDeDatos> db.getName()
+    NuevaBaseDeDatos
+
+Tambien puedes usar:
+    -test> db
+    test
+    test> use NuevaBaseDeDatos
+    switched to db NuevaBaseDeDatos
+    NuevaBaseDeDatos> db
+    NuevaBaseDeDatos
+    NuevaBaseDeDatos>
+
+APAGAR EL SERVIDOR:
+    -db.shutdownServer()
+
+
+CREATE
+
+CREACION DE COLECCION
+
+Una vez "creada"(porque no se crea hasta que ingreses datos) la db hay que ingresar la coleccion:
+    -db.nombredelacoleccion.insertOne()
+
+Vamos a desglosarlo, el "db" hace referencia a la db donde estamos, en este caso "NuevaBaseDeDatos", el "nombredelacoleccion" es el nombre que queramos darle a la coleccion, y el "insertOne()" ya si es la funcion de ingresar un documento, entonces podemos poner algo como:
+
+    -NuevaBase> db.usuarios.insertOne({nombre: "Alfredo", edad: 15}) //No lo he dicho pero tiene que tener formato JSON
+    {
+    acknowledged: true,
+    insertedId: ObjectId('6762a3599715157f0579a1ba')
+    }
+    NuevaBase>
+
+Y ahora si se vera la db "NuevaBase"
+    -show dbs
+    NuevaBase  40.00 KiB
+    admin      40.00 KiB
+    config     96.00 KiB
+    local      72.00 KiB    
+
+Aunque lo veas desde "Test"
+    -test> show dbs
+    NuevaBase  40.00 KiB
+    admin      40.00 KiB
+    config     96.00 KiB
+    local      72.00 KiB
+    test>
+
+ Para ver las colecciones que tenemos en una db usamos:
+    -show collections
+
+Para borrar un coleccion es:
+    -db.nombrecoleccion.drop()    
+
+Cuidado si usas "show collections" en una db que no tenga colecciones o en "Test" sino no te saldra nada:
+    -test> show collections
+
+    test>
+
+Hay que usarlo dentro de la db:
+    -test> use NuevaBase
+    switched to db NuevaBase
+    NuevaBase> show collections
+    usuarios
+    NuevaBase>
+
+
+VER CONTENIDO DE LA DB:
+    -NuevaBase> db.usuarios.find() //El find encuentra
+    [
+    {
+        _id: ObjectId('6762a3599715157f0579a1ba'),
+        nombre: 'Alfredo',
+        edad: 15
+    }
+    ]
+    NuevaBase>
+
+CREAR UNA COLECCION VACIA:
+
+    -NuevaBase> db.createCollection("Nueva_Coleccion")
+    { ok: 1 }
+    NuevaBase> show dbs
+    NuevaBase    8.00 KiB
+    admin       40.00 KiB
+    config     108.00 KiB
+    local       72.00 KiB
+
+
+COMENTAR:
+
+Se puede comentar asi "//" o "/**/" para bloque, selecciona y copia el codigo de abajo:
+    -show dbs //mostrar databases
+
+
+
+ELIMINAR DB
+
+Puedes eliminar todos las colecciones hasta que no haya ninguna con:
+    -db.coleccion.drop()
+
+O tambien puedes usar:
+    -db.dropDatabase()
+
+*ACLARACION:
+
+Si creas un coleccion ya se vacia o con datos, no dejes espacios en ellos porque pasara algo como esto:
+    -NuevaBase> db.createCollection("Nueva Coleccion")
+    { ok: 1 }
+    NuevaBase> show collections
+    Nueva Coleccion
+    NuevaBase> db.Nueva Coleccion.find()
+    Uncaught:
+    SyntaxError: Missing semicolon. (1:8)
+
+    > 1 | db.Nueva Coleccion.find()
+        |         ^
+      2 |
+
+Y para borrarla tiene tela porque no le vale esto:
+    -db.Nueva Coleccion.drop()
+    Uncaught:
+    SyntaxError: Missing semicolon. (1:8)
+
+    > 1 | db.Nueva Coleccion.drop()
+        |         ^
+      2 |
+
+Tines que hacer esto:
+    -db["Nueva Coleccion"].drop()
+    true
+    NuevaBase> show collections
+
+    NuevaBase>
+
+
+ID:
+
+Cada documento tiene su _id aunque no se lo pongamos nosotro mongodb ya se encargara de ponerlo:
+    -NuevaBase> db.usuarios.insertOne({nombre: "Claka", edad: 18}) //no le decimos nada de id:
+    {
+    acknowledged: true,
+    insertedId: ObjectId('6762ae45474b8ec7c679a1b6') //mongodb ha visto que no tenemos un campo llamado _id, asique nos lo crea el
+    }
+    NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'), //se ve como este _id y el de arriba es el mismo
+        nombre: 'Claka',
+        edad: 18
+    }
+    ]
+
+
+VARIABLES
+
+Podemos crear nuestra propias variables en mongodb y luego insertarlas como si de JavaScript se refiere:
+
+    -NuevaBase> let = documento = { _id: 1, nombre: "Teresa", edad: 67 }
+    { _id: 1, nombre: 'Teresa', edad: 67 }
+    -NuevaBase> documento
+    { _id: 1, nombre: 'Teresa', edad: 67 }
+    -db.usuarios.insertOne(documento)
+    { acknowledged: true, insertedId: 1 }
+    NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+        nombre: 'Alex',
+        edad: 18
+    },
+    { _id: 1, nombre: 'Teresa', edad: 67 }
+    ]
+    NuevaBase>
+    
+
+*ACLARACION    
+
+Siempre hemos podido poner el "_id", no solo es en la creacion de variables
+
+
+Que pasara si volvemos a insertar la variable con el mismo "_id"?:
+    -NuevaBase> db.usuarios.insertOne(documento)
+    MongoServerError: E11000 duplicate key error collection: NuevaBase.usuarios index: _id_ dup key: { _id: 1 }
+    NuevaBase>
+
+Pues que no deja
+
+
+
+READ
+
+    -db.usuarios.find() //ver toda la db
+    -db.usuarios.find({}) //ver toda la db
+    -db.usuarios.find({nombre: "Carlos"}) //ver los documento cuyo nombre sea "Carlos", si no lo encuentra no devuelve nada
+
+Cuando tienes mas de 20 documento y intentas verlos con "db.usuarios.find()" solo te mostrara los primeros 20, por si en la db tienes miles de documentos no sobresaturarlo, pero puedes hacer "db.usuarios.find().toArray()" para mostrarlos todos aunque sea una mala practica, en su lugar puedes hacer:
+    -db.usuarios.find().forEach(empleadoData => { printjson(empleadoData)})
+
+Filtrar por solo un campo:
+    -db.usuarios.find({},{nombre: 1}) //solo te mostrara los 20 primeros documentos y solo mostrara los nombres y el _id
+    -db.usuarios.find({},{nombre: 1}).toArray() //TODOS y solo mostrara los nombres y el _id
+
+El _id sale por defecto pero podemos quitarlo tambien:
+    -db.usuarios.find({},{nombre: 1, _id: 0})  //sino lo haces saldra siempre
+
+
+Filtrar por anidamiento:
+    venta: {
+      pago: 'Efectivo',
+      monto: 5,
+      detalle: { responsable: 'Alex Serrano' }
+    }
+
+    -db.usuarios.find({"venta.detalle.responsable": "Alex Serrano"}) //usar las ""    
+
+    
+ordered inserts:
+
+Es cuando ya tiene un documento con ese _id: X, y intentas ponerle otro igual junto a mas documentos, te saldra un error y no te deja insertar ninguno, aunque el otro tenga un _id valido.
+
+EJemplo:
+
+Tenemos 2 documentos en la db, uno con "el _id: 1" y el otro con el "_id: 2"
+Estos: [ { _id: 1, nombre: 'Patricias' }, { _id: 2, nombre: 'Agustin' } ]
+
+ y hago esto:
+    -db.prueba.insertMany([{_id: 1, nombre: "Pedro"}, {_id: 3, nombre: "Bartolo"}])
+    Uncaught:
+    MongoBulkWriteError: E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }
+    Result: BulkWriteResult {
+    insertedCount: 0, //no ha insertado nada
+    matchedCount: 0,
+    modifiedCount: 0,
+    deletedCount: 0,
+    upsertedCount: 0,
+    upsertedIds: {},
+    insertedIds: {}
+    }
+    Write Errors: [
+    WriteError {
+        err: {
+        index: 0,
+        code: 11000,
+        errmsg: 'E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }',
+        errInfo: undefined,
+        op: { _id: 1, nombre: 'Pedro' }
+        }
+    }
+    ]
+
+Un error de duplicidad por parte del "_id: 1" que intentamos insertar, pero que pasa?, que el "_id: 3" no tiene culpa y no se ha insertado, para eso esta el ordered, por defecto esta en "true" pero nosotros lo queremos en "false" para que funcione
+    -db.prueba.insertMany([{_id: 1, nombre: "Pedro"}, {_id: 3, nombre: "Bartolo"}], {ordered: false})
+    Uncaught:
+    MongoBulkWriteError: E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }n //da el error de duplicado
+    Result: BulkWriteResult {
+    insertedCount: 1, //pero vemos que ha insertado un documento, antes no
+    matchedCount: 0,
+    modifiedCount: 0,
+    deletedCount: 0,
+    upsertedCount: 0,
+    upsertedIds: {},
+    insertedIds: { '1': 3 }
+    }
+    Write Errors: [
+    WriteError {
+        err: {
+        index: 0,
+        code: 11000,
+        errmsg: 'E11000 duplicate key error collection: NuevaBase.prueba index: _id_ dup key: { _id: 1 }',
+        errInfo: undefined,
+        op: { _id: 1, nombre: 'Pedro' }
+        }
+    }
+    ]
+    NuevaBase> db.prueba.find()
+    [
+    { _id: 1, nombre: 'Patricias' },
+    { _id: 2, nombre: 'Agustin' },
+    { _id: 3, nombre: 'Bartolo' }
+    ]  
+
+
+
+UPDATE:
+
+Vamos a ponerle una nueva clave llamada "etiqueta" a los que se llamen "Alex"
+
+    -NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+        nombre: 'Alex',
+        edad: 18
+    },
+    { _id: 1, nombre: 'Teresa', edad: 68 }
+    ]
+    NuevaBase> db.usuarios.updateOne({nombre: "Alex"}, { $set: {etiqueta: "atendido"}})
+    {
+    acknowledged: true,
+    insertedId: null,
+    matchedCount: 1,
+    modifiedCount: 1,
+    upsertedCount: 0
+    }
+    NuevaBase> db.usuarios.find()
+    [
+    {
+        _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+        nombre: 'Alex',
+        edad: 18,
+        etiqueta: 'atendido'
+    },
+    { _id: 1, nombre: 'Teresa', edad: 68 }
+    ]
+    NuevaBase>
+
+Tambien puedes eliminar:
+
+NuevaBase> db.usuarios.find()
+[
+  {
+    _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+    nombre: 'Alex',
+    edad: 18,
+    etiqueta: 'atendido',
+    trabajo: true
+  }
+]
+NuevaBase> db.usuarios.updateOne(
+...   { nombre: "Alex" },
+...   { $unset: { edad: "" } } //eliminamos la clave y el valor del campo edad, tambien puedes poner true en vez de los ""
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+NuevaBase> db.usuarios.find()
+[
+  {
+    _id: ObjectId('6762ae45474b8ec7c679a1b6'),
+    nombre: 'Alex',
+    etiqueta: 'atendido',
+    trabajo: true
+  }
+]
+
+
+Tambien puedes actualizar por el "ObjectID":
+
+    -db.usuarios.updateOne({ _id: ObjectId('676412da0251d01c9379a1b7') }, { $set: { nombre: "Mariano" }}) //puedes actualizar cojiendo el filtro de lo que quieras
+
+
+DELETE 
+
+El metodo deletOne() y deletMany() borra documentos, no borra una clave-valor, borra el documento en si
+
+    -db.usuarios.deleteMany({}) //borra toda la base
+    -db.usuarios.deleteOne({}) //borra el primer documento de la db
+    -db.usuarios.deleteOne({nombre: "Maria"}) //Borra el documento de maria, NO SOLO BORRA EL NOMBRE "MARIA", eso en update con el $unset
+
+
+ARRAYS
+
+En los documentos se pueden tener arrays tambien:
+    -db.empleados.insertOne({nombre: "Marcus Ortega", email: "marcus@example.com", empleado: "si", diasLaborables: ["Sabado", "Domingo"]})
+    -db.empleados.updateOne({nombre: "Lewis Coleman"}, { $set : {diasLaborables: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]}})
+
+Filtrar por arrays:
+    -db.empleados.findOne({nombre: "Marcus Ortega"}).diasLaborables //tiene que ser el mismo nombre proporcionado en el documento
+    -
+
+
+DESCARGAR MONGOIMPORT WINDOWS:
+
+En "https://www.mongodb.com/try/download/database-tools" elegimos la opcion de msi
+
+Vamos a "C:\Program Files\MongoDB\Tools\version\bin", hay estan los archivos que tenemos que pasar a "C:\Program Files\MongoDB\Server\version\bin"
+
+Poneros cada ventana del "Explorador de archivos" y ir copiando a la "C:\Program Files\MongoDB\Server\version\bin"
+
+*Aclaracion:
+
+Lo que hemos hecho es para poder importar documentos de nuestra maquina al servidor, NO FUNCIONA LA COMANDa "mongoimport" DENTRO DEL SERVIDOR, es como "mongod" que se tiene que hacer el "CMD".
+
+Comando:
+    -mongoimport .\product.json -d product -c productData --jsonArray --drop
+
+mongoimport: la opcion de importar
+.\product.json: el archivo que queremos importar
+-d product: a la database product //si no existe la crea
+-c productData: a la coleccion productData //si no existe la crea
+--jsonArray: si el archivo tiene Array //si los tiene y lo pones no funcionara
+--drop: Si existe la base de datos la eliminara y hara el comando
+
+
+
+OPERADORES
+
+$eq: Igual que   
+    -db.LosProductos.find({productName: {$eq: "Chai"}})    
+    Es lo mismo que 
+    -db.LosProductos.find({productName: "Chai"})
+
+$ne: Diferente de 
+    -db.LosProductos.find({branchOffice: {$ne: "Florida"}})
+
+$gt: Mayor que 
+    -db.LosProductos.find({unitsInStock: { $gt: 43}}) //mayor que 43, el 43 no incluido
+
+$gte: Mayor o igual que   
+    -db.LosProductos.find({unitsInStock: { $gte: 43}}) //mayor o igual a 43, 43 incluido
+
+$lt: Menor que    
+    -db.LosProductos.find({unitsInStock: { $lt: 43}}) //menor que 43, 43 no incluido
+
+$lte: Menor o igual que 
+    -db.LosProductos.find({unitsInStock: { $lte: 43}}) //menor o igual a 43, 43 incluido
+
+$in: Valor en una matriz 
+    -db.LosProductos.find({branchOffice: {$in: ["Florida"]}}) // es lo mismo que - db.LosProductos.find({branchOffice: "Florida"})
+
+$nin: Valor no está en una matriz/Array    
+    -db.LosProductos.find({branchOffice: {$nin: ["Florida", "California", "Ohio"]}})
+
+
+OPERADORES LOGICOS
+
+$and: Une dos o mas valores si son verdaderos 
+    -db.LosProductos.find({ $and: [{ "discountDay.Monday": { $gt: 0.25 } }, { branchOffice: "Florida" }] }, { "discountDay.Monday": 1, branchOffice: 1 }) 
+    Es lo mismo que 
+    -db.LosProductos.find({ "discountDay.Monday": { $gt: 0.25 }, branchOffice: "Florida" }, { "discountDay.Monday": 1, branchOffice: 1 }) //esta buscando los documentos que el discountDay.Monday sera mayor a 0.25 y que este en la sucursal de Florida, junto a unas proyecciones, CON ESTE METODO NO PODRAS BUSCAR A MAS DE 2, que la comanda de arriba si podras buscar mas de 2
+
+$or: Une dos valores si alguno de ellos es verdadero 
+    -db.LosProductos.find({$or: [{"categories.categoryName": {$eq: "Confections"}}, {"categories.categoryName": {$eq: "Produce"}}]}) //Busca documentos donde el nombre de la caterogia sea "Confections" o "Produce"
+
+$not: Niega la condición dada, selecciona documentos donde no se cumpla 
+    -db.LosProductos.find({branchOffice: {$not: {$in: ["California", "Misuri"]}}},{branchOffice: 1}) //Muestra los documneto que no esten ni "California" ni "Misuri", mas una proyeccion
+
+$nor: Selecciona documentos donde NINGUNA de las condiciones sea verdadera(basicamente en un $and pero los 2 o mas valores tienen que ser falsos, lo contrario del $and) 
+    -db.LosProductos.find({ $nor: [{ branchOffice: "California" }, { branchOffice: "Misuri" }] }, { branchOffice: 1 })
+
+
+OPERACIONES DE CONSULTA
+
+$exist: Busca en un documento si exixte/o no la clave que queramos 
+    -db.empleados.find({ age: {$exists: true}}) 
+    Tambien puedes poner false para buscar por los que no existan(he hecho esto por diversion): 
+    -db.empleados.find({ age: {$not: {$exists: true}}})) //Es lo mismo que db.empleados.find({ age: {$exists: false}})
+
+$type: verifica el tipo de dato 
+    -db.empleados.find({homePhone: {$type: "number"}}) 
+    Puedes hacer que filtre X2 o mas tambien: 
+    -db.empleados.find({homePhone: {$type: ["number", "string"]}})
+
+*ACLARACION
+
+Aunque "db.empleados.find({$and: [{age: {$exists: true}}, {age: {$gt: 35}}]})" y "db.empleados.find({ age: {$exists: true, $gt: 35}})" hagan lo mismo yo te recomiendo el segundo porque como ya hemos dicho cuando hacemos un db.empleados.find({campo: "valor", otrocampo: "otrovalor"}) es igual al $and
+
+
+OPERADORES DE EVALUACION
+
+$regex: Busca patrones en cadenas de texto usando expresiones regulares 
+    -db.empleados.find({description: {$regex: "travel"}}) //salen todos los documentos que tengan la palabra "travel" en el campo de description
+    -db.empleados.find({title: {$regex: "support"}})
+
+Puedes añadir opciones a las busquedas con $regex con $options($options SOLO ESTA SI USAS $regex, NO SE PUEDE USAR SINO), el comando de arriba solo busca exactamente por "support" pero podemos hacer que no:
+    -db.empleados.find({title: {$regex: "support", $options: "i"}}) //sin importar mayusculas o minusculas
+
+Para que acaben con una letra o palabra determinada:
+    -db.empleados.find({ firstName: { $regex: "y$" } } )  
+
+Tambien puedes buscar caracteres asi:
+    -db.empleados.find({ description: /loves/ })
+
+$expr: Permite usar expresiones que comparan valores de campos o realizan cálculos 
+    -db.empleados.find({$expr: {$lt: ["$delay", "$tolerance"]}}) //estara devolviendo los documentos que $delay no sea mayor a $tolerance  //tambien puedes usar $eq, $gt, $ne,         
+
+$mod: No se muy bien lo que hace 
+    -db.empleados.find({ age: { $mod: [2, 0] } }) //devuelve los documento que age sea par, solo coje el entero, un $mod: [2.66, 0] NO, cojeria solo el primer numero, el 2
+    -db.empleados.find({$expr: {$lt: ["$delay", "$tolerance"]}}) //estara devolviendo los documentos que $delay no sea mayor a $tolerance  //tambien puedes usar $eq, $gt, $ne, etc...         
+
+$mod: No se muy bien lo que hace 
+    -db.empleados.find({ age: { $mod: [2, 0] } }) //devuelve los documento que age sea par, solo coje el entero, un $mod: [2.66, 0] NO, cojeria solo el primero, el 2
+
+
+OPERACIONES DE ARRAYS
+
+$all: Verificar si un campo de tipo arreglo contiene todos los valores especificados 
+    -db.empleados.find({state: {$all: ["Florida", "Ohio"]}}) 
+    Igual que: 
+    -db.empleados.find({$and: [{state: {$eq: "Florida"}}, {state: {$eq: "Ohio"}}]})
+    NO IGUAL QUE:
+    -db.empleados.find({state: ["Florida", "Ohio"]}) //Porque eso buscara un documento que en ese mismo array este primero "Florida", y luego "Ohio"
+
+$elemMatch: coincide con documentos que contienen un campo de matriz con al menos un elemento que coincide con todos los criterios de consulta especificados. 
+    -db.empleados.find({hobbies: {$elemMatch: {title: "Dance"} }}) 
+    Tambien: 
+    -db.empleados.find({hobbies: {$elemMatch: {title: "Voley", frequency: {$gte: 3}}}})
+
+$size: verificar la cantidad de elementos en un arreglo/array 
+    -db.empleados.find({hobbies: {$size: 2}}) 
+    Tambien: 
+    -db.empleados.find({state: {$size: 5}})
+
+
+
+METODO CURSOR
+
+.next(): obtiene un solo documento a la vez del cursor, lo que da más control sobre la iteración, ya que debes llamarlo repetidamente para acceder a cada documento. Por otro lado, .it (utilizado en la shell interactiva de MongoDB) permite recorrer automáticamente todos los documentos del cursor, devolviendo uno a uno sin necesidad de llamarlo explícitamente cada vez, lo que facilita iterar sobre todos los resultados sin control manual.
+
+.hasNext(): Devuelve un booleado de si puedes hacer otro .next() o no, es solo informativo
+
+.sort(): Devuelve los documentos ordenados - db.LosProductos.find().sort({id: 1})//Los ordena ascendente, si quieres que sea descente es con "-1"
+
+.toArray(): Devuelve todos los documentos del la db especificados
+
+.skip(): Omite los primeros X documentos de la consulta - db.LosProductos.find().sort({ id: 1 }).skip(10) //se ordenan en ascendente pero se omiten los 10 primeros:
+
+    -db.LosProductos.find().sort({ id: 1 }).skip(10).toArray()
+[
+  {
+    _id: ObjectId('6767fdfa2e58910481c31b8e'),
+    id: 11, //empieza por el id 11
+
+.limit(): Limita el número de documentos que se devuelven a X - db.LosProductos.find().sort({ id: 1 }).skip(10).limit(15) //se ordenan en ascendente pero se omiten los 10 primeros y solo habra 15 documentos
+
+.count(): Te dice cuantos documentos tienes(ponlo siempre en el final de la comanda):
+
+    -db.LosProductos.find().count()
+    63
+
+Asi no:
+    -db.LosProductos.find().count().limit(15)
+    TypeError: db.LosProducto ... ount().limit is not a function
+Asi:
+    -db.LosProductos.find().limit(15).count()
+    15
+
+
+OPERADORES DE PROYECCION    
+
+".$": La proyección con ".$": Devuelve únicamente el primer elemento de un array que cumple con la condición especificada en el filtro. Esto permite mostrar solo el dato relevante en lugar de devolver el array completo - db.empleados.find({"hobbies.frequency": {$gte: 3}}, {"hobbies.frequency.$": 1}) //o "hobbies.$": 1
+
+$slice: itar la cantidad de elementos devueltos de un array en los documentos resultantes - db.empleados.find({},{score: {$slice: 2}})//devuelve el "0" y "1", los 2 primeros vaya, si quieres los 2 ultimos pues -2
+
+
+
+PROFUNDIZANDO CON OPERACIONES UPDATE
+
+-replaceOne(): Reemplaza completamente un documento existente en una colección con un nuevo documento. Es útil cuando quieres modificar un documento entero en lugar de actualizar campos específicos 
+    -db.movies.replaceOne({title: 'Toy Story 3'}, {movieID: 'mv06', title: "Toy Story 3", runtime: 103, voteAverage: 7.6, dateRelease: "2015-08-15", dateExpired: "2015-11-15", isView: true}) // es util por si quieres cambiar un solo documento, no pequeñas cosas de el
+
+-updateOne(): Actualiza el primer documento que cumpla con un filtro específico, aplicando los cambios definidos, incluso si no existe el campo que quieras añadir 
+    -db.movies.updateOne({title: "Toy Story 3"}, {$set: {voteAverage: 64}}) // si existiera el campo voteAverage lo hubiera cambiado a 64, sino existia lo crea y le da el valor de 64, si hubiera otro campo de title: "Toy Story 3", osea 2 mismo        documentos con title: "Toy Story 3" solo actualizaria el primero que encuentre 
+
+-updateMany(): Lo mismo que el updateOne() pero con TODOS los que cumplan con el filtro 
+ -db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}}) //Actualiza toda la db porque no hay filtros, y actualiza/crea los campos: lenguaje y price
+
+}
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 7,
+  modifiedCount: 7,
+  upsertedCount: 0
+}
+
+Si volvieramos a ejecutar el comando "db.movies.updateMany({}, {$set: {lenguaje: "in", price: 7}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 7, //se encuentran 7 documentos
+  modifiedCount: 0, //pero como no hay nada ha cambiar no se cambia nada
+  upsertedCount: 0
+}
+
+$inc: Se utiliza para incrementar o decrementar valores numéricos de un campo en un documento. Si el campo no existe, $inc lo crea con el valor proporcionado 
+    -db.movies.updateOne({movieID: 'mv07'}, {$inc: {price: 6}}) //le suma 6 al valor que havia antes, si quieres que reste pondias un "-", "-6", sino existe lo crea
+
+Tambien puedes crear nuevas claves-valores con $inc: db.movies.updateMany({},{$inc: {"%tax": 0.2}}) //le asigna a todos los documentos una nueva clave llamada "%tax" con el valor de "0.2" o "20%" tambien
+
+$min: Actualizar el valor de un campo únicamente si el valor proporcionado es menor que el valor actual del campo. Si el campo no existe, $min lo añade con el valor proporcionado 
+    -db.movies.updateMany({},{$min: {VoteAverage: 7.5}}) //actualiza los campos si "VoteAverage" es mayor que "7.5" y le pone ese valor, si el "VoteAverage" es 9 despues de la comando puesta su valor sera de 7.5
+
+$max: Actualiza el valor de un campo únicamente si el valor proporcionado es mayor que el valor actual del campo. Si el campo no existe, $max lo añade con el valor proporcionado(lo contrario que el $min) 
+    -db.movies.updateMany({},{$max: {VoteAverage: 6}}) //los que sean inferior a 6 los convertira a 6
+
+Un truco, si te lias con $min y $max piensa que de lo que estas pensando es al reves, me explico, cuando piensas en $min piensas en minimo obvio, pues no, en la comanda: "db.movies.updateMany({},{$min: {VoteAverage: 7.5}})" lo que hace es buscar los que sean MAYOR a 7.5, NO MENOR, LOS QUE SEAN MAYOR A 7.5 LOS CONVERTIRA A 7.5, y pasa lo mismo que con $max solo que no es "maximo", es menor, si cambiamos la comanda de antes el $min por el $max lo que hara es buscar a LOS MENORES A 7.5 y los convertira en 7.5
+
+$mul: multiplicar el valor de un campo por un número especificado 
+    -db.movies.updateOne({movieID: 'mv07'},{$mul: {price: 2}}) //si price valia 7, ahora vale 14
+
+$rename: cambiar el nombre de una clave en un documento 
+    -db.movies.updateMany({},{$rename: {'%tax': "percentTax"}}) // cambia la clave "%tax" por "percentTax"
+
+*ACLARACION
+
+$rename solo cambia la clave no el valor, aqui un error comun: db.movies.updateOne({movieID: 'mv07'},{$rename: {title: "Minions 2"}}) //lo que estas haciendo es cambiar la clave "title" por "Minions 2", lo que quedaria asi: 'Minions 2': 'Minions'
+
+$unset: eliminar un campo específico de un documento. Cuando se aplica, el campo desaparece por completo del documento, junto con su valor. 
+    -db.movies.updateMany({},{$unset: {percentTax: 1}}) //elimina "percentTax" junto a su valor en todos los documentos, (en vez de poner un 1 tambien puedes usar "")
+
+$currentDate: establecer el valor de un campo como la fecha y hora actuales 
+    -db.movies.updateOne({title: 'Minions'},{$currentDate: {dateRelease: true}})// obvio que solo funciona con fechas 
+    Tambien puedes usar: 
+    -db.movies.updateOne( { title: 'Minions' }, { $currentDate: { dateExpired: { $type: "date" } } } );
+
+$push: Añade un elemento al array 
+    -db.empleados.updateOne({employeeID: 5}, {$push: {score: 50}}) //puede estar duplicada dentro de la array
+
+$addToSet: Añade un elemento único al array (sin duplicados) 
+    -db.empleados.updateOne({employeeID: 5}, {$addToSet: {score: 81}}) // si pones un numero que ya estaba en la array: modifiedCount: 0
+
+$pull: Elimina un elemento del array 
+    -db.empleados.updateOne({employeeID: 5}, {$pull: {score: 81}}) //si intentas quitar un numero que no esta: modifiedCount: 0
+
+upsert: El parámetro upsert en MongoDB permite combinar las operaciones de actualización e inserción. Si el documento especificado en el filtro no existe, MongoDB crea uno nuevo usando los datos de la operación de actualización; si ya existe, simplemente lo actualiza 
+    -db.movies.updateOne({movieID: "MVO8"}, {$set: {title: "Capitan America"}}, {upsert: true}) //El movieID "MV08" NO EXISTE, lo que queremos hacer aqui es añadirlo si no existe o actualizarlo en caso de que si exista, si no existe el parametro upsert se encargara de crearlo y saldra asi: upsertedCount: 1 ya que lo ha insertado, si el movieID "MV08" SI HUBIESE EXISTIDO el title que hubiera en el movieID "MV08" se cambiara por el ingresado en la comanda, en este caso "Capitan America"
+
+$setOnInsert: se usa en operaciones de actualización con la opción upsert. Permite especificar los campos que deben establecerse solo cuando se inserta un nuevo documento (es decir, cuando el filtro no encuentra coincidencias y se crea un nuevo documento). Si el documento ya existe y se actualiza, los campos definidos en $setOnInsert no se aplican:
+
+db.movies.updateOne(
+  { movieID: "mv02" }, // Filtro: busca el documento con movieID "mv02"
+  {
+    $set: { title: "Interstellar", year: 2014 }, // Si existe, actualiza estos campos
+    $setOnInsert: { genre: "Sci-Fi" } // Si se inserta, agrega el campo "genre"
+  },
+  { upsert: true } // Si no existe, crea un nuevo documento
+);
+
+
+
+
+OPERADOR POSICIONAL DE ARRAY ($)
+
+$: db.movie.updateOne({movieID: "mv01", ratings: 70}, {$set: {"ratings.$": 71}}) - La comanda busca un documento con movieID: "mv01" y un 70 en el array ratings, luego actualiza el primer 70 encontrado a 71, otro: db.movie.updateMany({productionCompany: {$elemMatch: {employee: {$eq: 70}, hoursWorkedAverage: {$gt: 9}}}}, {$set: {"productionCompany.$.salaryAverage": 8000}})
+
+$[]: Actualiza todos los elementos de un array dentro de un documento que coincidan con la consulta - db.movie.updateMany({movieID: {$in: ["mv01", "mv02"]}}, {$inc: {"ratings.$[]": 5}}) // otra: db.movie.updateMany({movieID: {$in: ["mv06", "mv07"]}}, {$set: {"productionCompany.$[elem].salaryAverage": 5000}}, {arrayFilters: [{"elem.employee": {$gte: 60}}]}), //otra: db.movie.updateMany({movieID: {$in: ["mv06", "mv07"]}}, {$inc: {"productionCompany.$[elem].employee": -10}}, {arrayFilters: [{"elem.name": "Marvel Studios", "elem.salaryAverage": 5000}]})
+
+
+OPERADORES MODIFICADORES DE ACTUALIZACION
+
+$each: se utiliza con operadores como $push o $addToSet para agregar múltiples valores a un array - db.movie.updateOne({movieID: 'mv07'}, {$addToSet: {language: {$each: ["Spanish", "English", "French"]}}})
+
+$position: Se utiliza con $push para especificar la posición exacta donde insertar elementos en un array. Por defecto, $push agrega los elementos al final, pero con $position puedes insertar en cualquier índice del array - db.movie.updateOne({ movieID: 'mv07' }, { $push: {ratings: {$each: [10,20,30], $position: 0}}}) // lo añade la principio(en la posicion 0 de la cadena)
+
+$slice: El operador $slice en MongoDB se utiliza junto con $push y $each para limitar el tamaño de un array después de insertar nuevos elementos. Esto es útil cuando quieres mantener un array con un número máximo de elementos, eliminando los más antiguos o los últimos según el orden - db.movie.updateOne({movieID: "mv05"}, {$push: {productionCompany: {$each: [{name: "Revolution Sun Studios", employee: 65, salaryAverage: 4500, hoursWorkedAverage: 8}], $slice: -2 }}}) //añadira ese documento y dejara los dos ultimos
+
+otro: db.movie.updateOne({movieID: "mv05"}, {$push: {ratings: {$each: [94,98], $position: 0, $slice: 4 }}})//añade 94 y 98 al principio de la array y solo enseña los 4 primeros
+
+$sort: se utiliza junto con $push y $each para ordenar los elementos de un array después de insertar nuevos valores. Es especialmente útil cuando deseas mantener un array ordenado automáticamente, ya sea en orden ascendente o descendente - db.movie.updateOne({ movieID: "mv05" }, { $push: { ratings: {$each: [3,9,7,5,1], $sort: 1} } } ) //si no quieres que se añada ningun documento y solo quieres ordenar deja la array vacia, []
+
+otro: db.movie.updateOne({ movieID: "mv05" }, { $push: { productionCompany: {$each: [{name: "Illumination Entertaiment", employee: 45, salaryAverage: 5000, hoursWorkedAverage: 7}], $sort: {employee: 1}, $slice: 2} } } ) //añade un documento nuevo y de ordenara segun el los employee y cojera los 2 primeros
+
+$pop: elimina un elemento de un array al principio o al final, dependiendo del valor que le asignes - db.movie.updateOne({movieID: "mv05"}, {$pop: {ratings: -1}})// el 1 elimina el ultimo y el -1 elimina el primero
+
+$pullAll: eliminar todos los valores especificados de un array dentro de un documento - db.movie.updateOne({movieID: "mv05"}, {$pullAll: {language: ["Italiano", "Latin"]}}) 
+
+
+CAMBIAR TIPOS DE DATOS
+
+Comanda para cambiar de un tipo de dato a otro, con fechas:
+    -db.catalog.updateMany({},{$set: {release_date: {"$toDate": "$release_data"}}})
+
+Con Strings:
+    -db.catalog.updateOne( { movie_id: 11 }, [ { $set: { runtime: { $toString: "$runtime" } } }] ) //muy importante poner las []   
+
+MAS
+
+$toDate: Convierte un valor a un tipo de dato Date.
+$toString: Convierte un valor a una cadena de texto.
+$toInt: Convierte un valor a un entero (int).
+$toLong: Convierte un valor a un entero largo (long).
+$toDouble: Convierte un valor a un número de punto flotante (double).
+$toDecimal: Convierte un valor a un tipo decimal (decimal).
+$toBool: Convierte un valor a un valor booleano (true o false).
+$toObjectId: Convierte un valor a un ObjectId.
+
+
+TIPOS DE DATOS
+
+NO NUMEROS
+
+Saber que tipo de dato es un valor:
+    -typeof db.data.findOne().user 
+
+Antes lo haciamos asi:
+    -db.data.find({user: {$type: "string"}}) //podriamos poner tanto boolean, number, etc...
+
+Pero si no sabes que tipo es un valor yo te recomiendo la primera, es mas directa, la segunda es mas para filtar por los que tengan ese tipo no es para salir de dudas si no sabes que tipo es    
+
+Puedes ver informacion de la db actual:
+    -db.stats()
+
+Puedes ver informacion de la coleccion actual:
+    -db.coleccion.stats()
+
+Puedes buscar por un valor en especifico:
+    -db.coleccion.stats().size  
+
+Puedes insertar el tipo de dato que tu quieras tambien en mongodb:
+    -db.coleccion.insertOne({valor: Int32(30)}) //si pasa de cierto numero larguisimo dara erro y tendras que llamarlo con NumberLong
+
+    rango de valores desde -2,147,483,648 hasta 2,147,483,647 con Int32
+    rango de valores desde -9,223,372,036,854,775,808 a 9,223,372,036,854,775,807 con NumberLong
+
+fECHAS    
+
+Con este comando puedes capturar la fecha actual diferente de como seria "new Date("xxxx-xx-x")" o ISODate("xxxx-xx-xx"):
+    -db.data.updateMany({},{$set: {FechaActual: Date()}})
+
+Saldria algo asi:
+        FechaActual: 'Sat Jan 11 2025 11:43:35 GMT+0100 (hora estándar de Europa central)'
+
+
+Usa ISODate cuando trabajes directamente con MongoDB, especialmente si estás insertando o consultando documentos en la base de datos.
+Usa new Date si estás manejando fechas desde JavaScript y necesitas construir o manipular datos antes de enviarlos a MongoDB.
+
+Timestamp
+
+    -db.data.updateMany({},{$set: {con_timestamp: new Timestamp()}})
+
+Te dara algo asi o no:
+
+con_timestamp: Timestamp({ t: 0, i: 0 })
+
+Lo actualizaremos:
+    -db.data.updateMany({}, {$currentDate: {con_timestamp: {$type: "timestamp"}}})
+
+Y ahora si
+
+con_timestamp: Timestamp({ t: 1736592921, i: 1 })
+
+
+
+Recomendación para usar números en MongoDB:
+Usa int32 para datos pequeños como edades, cantidades o IDs dentro de un rango limitado.
+Usa int64 cuando necesites manejar enteros grandes como números de serie o totales acumulados.
+Usa double para datos que incluyen fracciones o cuando la precisión decimal no sea crítica.
+Usa Decimal128 si trabajas con datos financieros o cálculos que requieran una precisión exacta.
+
+
+int32 (32-bit Integer):
+Constructor: Int32(30). //tampoco hace falta especificarlo ya que se pone predeterminado
+Ejemplo: { "edad": 25 }
+
+
+int64 (64-bit Integer):
+Constructor: NumberLong(838383615611093745)
+Ejemplo: { "grandesVentas": NumberLong(9223372036854775807) }
+
+
+double (64-bit Floating Point):
+Constructor: Number()
+Ejemplo: { "precio": Number(199.99) }
+Decimal128 (128-bit Decimal):
+
+Constructor: NumberDecimal()
+Ejemplo: { "saldo": NumberDecimal("123456.789") }
+
+
+
+No te comas mucho la cabeza pensando
+
+
+
+MODELO DE DATOS
+
+El modelo de datos no es más que la forma en que decides estructurar los datos dentro de los documentos y cómo gestionas las relaciones entre ellos.
+
+1. Relación Uno a Uno
+Definición: Un elemento de una colección está relacionado con exactamente un elemento de otra colección.
+Ejemplo: Un usuario tiene una tarjeta de identificación.
+Implementación:
+Incrustar: Si siempre necesitas ambos datos juntos.
+
+{
+  "_id": 1,
+  "nombre": "Alex",
+  "identificacion": {
+    "tipo": "DNI",
+    "numero": "123456789"
+  }
+}
+Referenciar: Si los datos de identificación se gestionan aparte.
+
+{
+  "_id": 1,
+  "nombre": "Alex",
+  "identificacion_id": "A123"
+}
+2. Relación Uno a Muchos
+Definición: Un elemento de una colección está relacionado con muchos elementos de otra colección.
+Ejemplo: Una categoría tiene varios productos.
+Implementación:
+Incrustar: Si el número de productos por categoría es pequeño.
+
+{
+  "_id": 1,
+  "categoria": "Electrónica",
+  "productos": [
+    { "nombre": "Teléfono", "precio": 300 },
+    { "nombre": "Laptop", "precio": 1000 }
+  ]
+}
+Referenciar: Si hay muchos productos o se reutilizan en varias categorías.
+
+{
+  "_id": 1,
+  "categoria": "Electrónica",
+  "productos_ids": [101, 102]
+}
+3. Relación Muchos a Muchos
+Definición: Muchos elementos de una colección están relacionados con muchos elementos de otra colección.
+Ejemplo: Usuarios que tienen roles múltiples, y cada rol puede pertenecer a varios usuarios.
+Implementación:
+Intersección con una colección puente: Usas una colección extra para almacenar las relaciones.
+Usuarios:
+
+{ "_id": 1, "nombre": "Alex" }
+{ "_id": 2, "nombre": "Rodolfo" }
+Roles:
+json
+Copiar código
+{ "_id": 101, "rol": "Admin" }
+{ "_id": 102, "rol": "Editor" }
+Relaciones (puente):
+
+{ "usuario_id": 1, "rol_id": 101 }
+{ "usuario_id": 1, "rol_id": 102 }
+{ "usuario_id": 2, "rol_id": 102 }
+
+*Aclaracion:
+
+Una estructura "ideal" en MongoDB seria que no falten valores, ejemplo de estructura mala:
+
+[
+  {
+    _id: ObjectId('6783a45b079082d76b79a1b6'),
+    name: 'Jamon',
+    price: 2
+  },
+  {
+    _id: ObjectId('6783a483079082d76b79a1b7'),
+    name: 'tablet',
+    price: 200,
+    detail: { storage: 256, ram: 12 } //aqui hay detail y en el otro documento no
+  }
+]
+
+Asi seria mejor:
+
+[
+  {
+    _id: ObjectId('6783a45b079082d76b79a1b6'),
+    name: 'Jamon',
+    price: 2
+    detail: null
+  },
+  {
+    _id: ObjectId('6783a483079082d76b79a1b7'),
+    name: 'tablet',
+    price: 200,
+    detail: { storage: 256, ram: 12 }
+  }
+]
+
+Aunque no haya detalles
+
+
+
+VALIDAR CAMPOS OBLIGATORIOS Y VALORES DE CAMPO
+
+La validación de campos asegura que los datos ingresados o almacenados en una base de datos cumplan con ciertos criterios predefinidos. Esto ayuda a prevenir errores, inconsistencias y datos no deseados.
+
+db.createCollection( "product", { //crea la coleccion "product"
+    validator: { //añade un validador
+        $jsonSchema: { 
+            bsonType: "object", //acepta documentos
+            required: [ "name", "price", "ammount", "available", "orderDate" ], //requiere estos campos obligatorios, pero puedes agregar nuevos
+            description: "Los campos name, price, ammount, available y orderDate son obligatorios.", //por si sale error
+            properties: { //propiedades que tienen que tener los campos
+                name: {
+                    bsonType: "string", //tipo de dato
+                    description: "Solo acepta tipo de dato string." //si sale error
+                },
+                price: {
+                    bsonType: "double", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta valores decimales." //si sale error
+                },
+                ammount: {
+                    bsonType: "int", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta valores enteros." //si sale error
+                },
+                available: {
+                    bsonType: "bool", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta true o false." //si sale error
+                },
+                orderDate: {
+                    bsonType: "date", //tipo de dato       //tambien puedes poner varios con una [], ejemplo: ["string", "number"]
+                    description: "Solo acepta fecha." //si sale error
+                }
+            }
+        }, //QUITAR O PONER LA , SI QUIERES/NO QUIERES LAS "additionalProperties"
+        "additionalProperties": false //esto es por si solo quieres que se pongan los campos que hayas requerido, NO MAS, tambien tendras que poner la propiedad de _id, porque todo documento necesita un _id 
+    } 
+} )
+
+
+Mismo comando en una linea:
+    -db.createCollection("product", { validator: { $jsonSchema: { bsonType: "object", required: ["name", "price", "ammount", "available", "orderDate"], description: "Los campos name, price, ammount, available y orderDate son obligatorios.", properties: { name: { bsonType: "string", description: "Solo acepta tipo de dato string." }, price: { bsonType: "double", description: "Solo acepta valores decimales." }, ammount: { bsonType: "int", description: "Solo acepta valores enteros." }, available: { bsonType: "bool", description: "Solo acepta true o false." }, orderDate: { bsonType: "date", description: "Solo acepta fecha." } } } } });
+
+
+VALIDAR MAXIMOS Y MINIMOS
+
+
+db.createCollection( "user", {
+    validator: { 
+        $jsonSchema: { 
+            bsonType: "object",
+            required: [ "name", "age"],
+            description: "Los campos name y age son obligatorios",
+            properties: { 
+                name: {
+                    bsonType: "string",
+                    description: "Solo acepta tipo de dato string." 
+                },
+                age: {
+                    bsonType: "int",
+                    minimum: 20, //minimo
+                    maximum: 110, //maximo
+                    description: "Solo acepta valores enterros y que sea entre 18 y 100 años"
+                }
+            }
+        }
+    } 
+} )
+
+
+VALIDAR SUBDOCUMENTOS
+
+db.createCollection( "customer", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [ "name", "age", "address" ], //nuevo campo address
+            description: "Los campos name, age y address son obligatorios.",
+            properties: {
+                name: {
+                    bsonType: "string",
+                    description: "Agregar el nombre del cliente."
+                },
+                age: {
+                    bsonType: "int",
+                    minimum: 18,
+                    maximum: 110,
+                    description: "La edad debe estar entre el rango de 18 a 110 años."
+                },
+                address:{ //propiedades de address
+                    bsonType: "object", //tipo object ya que es un documento
+                    required: [ "country", "city", "avenue" ], //tambien puede requerir sus propios valores
+                    description: "Los campos country, city y avenue son obligatorios",
+                    properties: { //a partir de aqui ya te imaginas
+                        country: {
+                            bsonType: "string",
+                            description: "Debe ingresar el nombre del país."
+                        },
+                        city: {
+                            bsonType: "string",
+                            description: "Debe ingresar el nombre de la ciudad."
+                        },
+                        avenue: {
+                            bsonType: "string",
+                            description: "Debe ingresar la avenida de su domicilio."
+                        }
+                    }
+                }
+            }
+        }
+    }
+} )
+
+
+VALIDAR ARRAYS
+
+db.createCollection( "employee", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                employees: {
+                    bsonType: "array",
+                    description: "Debemos agregar una matriz.",
+                    items: {
+                        bsonType: "object",
+                        required: [ "name", "lastName" ],
+                        properties: {
+                            name: {
+                                bsonType: "string",
+                                description: "Debe ingresar el nombre."
+                            },
+                            lastName: {
+                                bsonType: "string",
+                                description: "Debe ingresar el apellido."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+} )
+
+
+db.employee.insertOne(
+    {
+        employees: [
+            {
+                name: "Hugo",
+                lastName: "Fernandez"
+            },
+            {
+                name: "Marco",
+                lastName: "Prado"
+            },
+            {
+                name: "Micaela",
+                lastName: "Rojas"
+            }
+        ]
+    }
+)
+
+
+Consultar TODAS las validaciones:
+    -db.getCollectionInfos()
+
+Consultar UNA validacion:
+    -db.getCollectionInfos({name: "Coleccion"})    
+
+
+MODIFICAR LA VALIDACIÓN DE ESQUEMA
+
+Cambiar como se valida una coleccion:
+    -db.runCommand( { collMod: "user", //con CollMod decimos que queremos cambiar la validacion de la coleccion "user"
+        validator: { 
+            $jsonSchema: { 
+                bsonType: "object",
+                required: [ "name", "age"],
+                description: "Los campos name y age son obligatorios",
+                properties: { 
+                    name: {
+                        bsonType: "string",
+                        description: "Solo acepta tipo de dato string." 
+                    },
+                    age: {
+                        bsonType: "int",
+                        minimum: 20, //minimo
+                        maximum: 110, //maximo
+                        description: "Solo acepta valores enterros y que sea entre 18 y 100 años"
+                    }
+                }
+            }
+        }
+    })
+
+
+
+
+VALIDAR LISTA DE VALORES EN UN ARRAY
+
+Tambien puedes validar una array:
+
+db.createCollection("color", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["color"],
+            properties: {
+                color: {
+                    bsonType: "array",
+                    description: "Agregar los colores disponibles del producto.",
+                    items: {
+                        bsonType: "string",
+                        enum: ["Rojo", "Azul", "Amarillo", "Verde"] // solo acepta estos valores
+                    },
+                    minItems: 1 // mínimo puede haber 1 elemento
+                }
+            }
+        }
+    }
+})
+
+
+*ACLARACION
+
+Si insertas un documento con solo el campo x (por ejemplo: { x: "x" }) y luego configuras una validación que requiere un campo adicional llamado y, MongoDB no aplicará retroactivamente las validaciones a los documentos existentes. Esto significa que el documento que ya está en la colección no se verá afectado y permanecerá intacto.
+
+Sin embargo, después de habilitar la validación, cualquier operación de escritura (como insertar o actualizar documentos) que no cumpla con las nuevas reglas de validación será rechazada.
+
+
+
+
+El validationLevel es una opción en MongoDB que determina cómo se aplican las reglas de validación en una colección. Afecta si los documentos existentes o ciertas operaciones de escritura están sujetos a las reglas de validación configuradas.
+
+Valores de validationLevel
+MongoDB soporta tres valores principales para esta configuración:
+
+strict (predeterminado):
+
+Reglas de validación aplicadas estrictamente.
+Todas las operaciones de escritura (inserciones y actualizaciones) deben cumplir con las reglas de validación. Si un documento no cumple, la operación se rechaza.
+Nota: Los documentos existentes antes de la configuración de validación no se ven afectados, pero cualquier actualización que intente modificar un documento debe cumplir con las reglas.
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: { $jsonSchema: { bsonType: "object", required: ["x"] } },
+    validationLevel: "strict"
+});
+moderate:
+
+Validación aplicada solo a documentos que cambian.
+Durante las actualizaciones, MongoDB valida solo los documentos que se están modificando.
+No bloquea documentos existentes que no cumplan con las reglas de validación, siempre y cuando la operación de escritura no modifique esos documentos.
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: { $jsonSchema: { bsonType: "object", required: ["x"] } },
+    validationLevel: "moderate"
+});
+off:
+
+Desactiva la validación.
+MongoDB no valida ningún documento al momento de realizar operaciones de escritura, pero las reglas de validación siguen estando configuradas y pueden reactivarse más tarde.
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: { $jsonSchema: { bsonType: "object", required: ["x"] } },
+    validationLevel: "off"
+});
+Cuándo usar cada nivel:
+
+strict:
+Es la opción más segura para asegurar la integridad de los datos. Úsalo si necesitas que todos los documentos cumplan siempre con las reglas de validación.
+
+moderate:
+Útil cuando estás migrando datos o aplicando validaciones de manera progresiva. Permite trabajar con documentos antiguos sin necesidad de modificarlos inmediatamente y cuando ya tenias un documento en la db y pones una nueva validacion que ese documento no cumple no lo contara cuando lo actualizes ya que estaba antes de la validacion.
+
+off:
+Ideal para casos en los que las reglas de validación están en desarrollo o en un entorno de pruebas donde no deseas que las validaciones interfieran con las operaciones de escritura.
+
+Ejemplo completo:
+
+db.runCommand({
+    collMod: "miColeccion",
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["x", "y"],
+            properties: {
+                x: { bsonType: "string" },
+                y: { bsonType: "string" }
+            }
+        }
+    },
+    validationLevel: "moderate"
+});
+Esto asegura que los documentos que ya están en la colección no se ven afectados, pero cualquier documento nuevo o actualizado deberá cumplir con las reglas de validación.
+
+
+validationAction
+
+En MongoDB, el campo validationAction se utiliza en la creación de una colección con validación de documentos. Este campo determina qué acción tomará MongoDB cuando un documento no cumpla con las reglas de validación definidas en el esquema
+
+error (por defecto):
+Si un documento no cumple con las reglas de validación, MongoDB rechaza la operación y lanza un error.
+
+warn:
+Si un documento no cumple con las reglas de validación, MongoDB permite la operación, pero registra una advertencia en los logs.
+
+db.createCollection("usuarios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["nombre", "edad"],
+      properties: {
+        nombre: {
+          bsonType: "string",
+          description: "Debe ser una cadena de texto y es obligatorio"
+        },
+        edad: {
+          bsonType: "int",
+          minimum: 18,
+          description: "Debe ser un número entero y mayor o igual a 18"
+        }
+      }
+    }
+  },
+  validationAction: "warn"
+})
+
+
+
+*ACLARACION
+
+Si quieres cambiar la validacion no tienes porque volver a poner toda la estructura de la validacion, puedes poner solo el cambio:
+
+Ejemplo, el validationAction esta en "warm" y lo quieres cambiar a "error", pues haces esto:
+
+db.runCommand({
+  collMod: "usuarios",
+  validationAction: "error"
+})
+
+Tambien sirve para otros campos
+
+ELIMINAR UNA VALIDACIÓN
+
+db.runCommand({
+  collMod: "usuarios", // Nombre de la colección
+  validator: {}, // Eliminamos las reglas de validación
+  validationAction: "warn", // (Opcional) Cambia a "warn" o "error" si fuera necesario
+  validationLevel: "off" // (Opcional) Desactiva cualquier validación a nivel de colección
+});
+
+
+ÍNDICES
+
+¿Qué son los índices en MongoDB?
+Los índices en MongoDB son estructuras de datos que mejoran el rendimiento de las consultas al permitir que la base de datos localice rápidamente los documentos que coinciden con una consulta. Funcionan de manera similar a los índices en libros: en lugar de buscar página por página, puedes ir directamente al tema o capítulo que necesitas.
+
+¿Para qué sirven?
+Mejoran el rendimiento de las consultas: Reducen el tiempo que MongoDB tarda en encontrar y devolver resultados, especialmente en colecciones grandes.
+Ordenación más rápida: Cuando se consulta con un sort, el índice puede optimizar el proceso.
+Evitan escaneos completos: Sin un índice, MongoDB tiene que revisar todos los documentos de una colección, lo que es costoso en términos de tiempo y recursos.
+
+Tipos de índices en MongoDB
+Índice único (Single Field Index): Indexa un solo campo. Ejemplo: { "nombre": 1 }.
+Índice compuesto (Compound Index): Indexa múltiples campos combinados. Ejemplo: { "nombre": 1, "edad": -1 }.
+Índice único (Unique Index): Impide que existan valores duplicados en un campo indexado.
+Índice geoespacial: Optimiza las consultas de datos de coordenadas.
+Índices de texto: Permiten búsquedas de texto complejas en documentos.
+Índices parciales: Aplican índices solo a un subconjunto de documentos.
+Índices multiclave: Indexan arrays, permitiendo búsquedas en cada valor de un array.
+
+¿Qué desventajas o cosas malas tienen?
+Consumen espacio en disco: Cada índice ocupa espacio adicional en el almacenamiento, lo que puede ser significativo en bases de datos grandes.
+Impactan el rendimiento de escritura: Insertar, actualizar o eliminar documentos en una colección con índices lleva más tiempo porque MongoDB debe actualizar los índices además de los datos.
+Mantenimiento adicional: Con índices mal diseñados o redundantes, las consultas pueden no ser óptimas y el sistema podría gastar recursos innecesarios.
+Complejidad en las consultas: Si hay demasiados índices, MongoDB debe decidir cuál usar, lo que podría generar un mal rendimiento si selecciona un índice menos eficiente.
+Fragmentación en sistemas distribuidos: En configuraciones como un clúster con sharding, los índices deben estar bien diseñados para evitar problemas de balanceo entre shards.
+Coste en tiempo de creación: Crear índices en colecciones muy grandes puede ser un proceso lento y consumir muchos recursos.
+
+¿Cuándo evitarlos o usarlos con cuidado?
+No indexar cada campo: Aunque podría parecer útil, indexar todo puede sobrecargar el sistema.
+Para datos en constante cambio: Si una colección tiene muchas operaciones de escritura y los índices no son esenciales, es mejor limitar su uso.
+Índices innecesarios: Evalúa si el índice mejora realmente la consulta. Usa explain() para analizar el plan de ejecución.
+
+ver tus indices:
+    -db.coleccion.getIndexes()
+
+Cuando creas una coleccion, MongoDB por defecto crea un indice para el campo _id, que evita que puedas insertar 2 veces el campo _id
+
+crear un indice:
+    -db.usuarios.createIndex({ nombre: 1 }) //te dara el name "nombre_1"
+    -db.catalog.createIndex({runtime: 1}, {name: "corrertiempo"}) //te dara el nombre corrertiempo
+
+Obviamente se tiene que hacer en una db que ya este creada y con documentos insertados que concuerden con el indice de lo que dices
+El índice optimiza las búsquedas en el campo nombre
+
+Puedes ver mas informacion con los comandos:
+db.catalog.find({runtime: {$gt: 100}}).explain()
+db.catalog.find({runtime: {$gt: 100}}).explain("executionStats") //muestra mas informacion como executionTimeMillis y totalDocsExamined.
+
+
+Algunas de las salidas de: db.catalog.find({runtime: {$gt: 100}}).explain("executionStats")
+
+stage: 'IXSCAN'
+stage: 'COLLSCAN'
+executionTimeMillis: X
+totalDocsExamined: X
+
+IXSCAN es cuando haces la consulta que tenga en Indice y COLLSCAN es un escaner general, la diferencia radica que IXSCAN escanea menos documento gracias al Indice y poreso se supone que su executionTimeMillis y totalDocsExamined tiene que ser mas bajo
+
+IXSCAN ocurre cuando MongoDB utiliza un índice que coincide con la consulta, reduciendo la cantidad de documentos examinados
+COLLSCAN ocurre cuando no hay un índice adecuado o cuando la consulta requiere escanear toda la colección
+
+La primera consulta que hagas con un Indice y te haga la busqueda con IXCAN te dara menos executionTimeMillis como ya dijimos pero llegara un momento en el que el Indice aprendera y el executionTimeMillis sera nulo(0), no tardara ni consumira memeria porque lo tiene asimilado
+
+
+Crear índice en campo de un documento embebido:
+    -db.usuarios.createIndex({ "main_character.character_name": 1 })
+
+    Es la misma teria de los campos embebidos de siempre    
+
+
+ELIMINAR ÍNDICES
+
+Lo primero saber que nombre tiene el Indice:
+    -db.catalog.getIndexes() //te mostrara el nombre en name
+
+Borrar:
+    -db.catalog.dropIndex("main_character.character_name_1") //documentos embebidos
+    { nIndexesWas: 5, ok: 1 }
+    -db.catalog.dropIndex("runtime_1") //campos unicos
+    { nIndexesWas: 4, ok: 1 }
+
+borrar sin utilizar las {}
+
+Que pasa si intentamos borrar el Indice del campo _id_?
+    -db.catalog.dropIndex("_id_")
+    MongoServerError[InvalidOptions]: cannot drop _id index
+
+    Pues que no deja    
+
+
+CREAR UN INDICE SOBRE TODO EL DOCUMENTO EMBEBIDO
+
+Imagina que tienes esto en la db:
+
+main_character: { character_name: 'Luke Skywalker', person_name: 'Mark Hamill' }
+
+El campo main_character que tiene mas campos, y quieres volver los campos: character_name y person_name
+
+NO LOS CREES ASI:
+    -db.catalog.createIndex({"main_character.noseque_name"})
+
+    Porque en este caso hay 2 pero imaginate que hay MUCHISSIMOS
+
+HAZ ESTO:
+    -db.catalog.createIndex({main_character})
+
+    Esa comanda ya cojera a los subdocumentos que cuelguen de main_character
+
+    Pero la comanda tendra que se asi:
+    -db.catalog.find({main_character: {character_name: 'Joe', person_name: 'Nicolas Cage' }})
+
+    NO asi:
+    -db.catalog.find({ "main_character.character_name": "Joe", "main_character.person_name": "Nicolas Cage" }).explain("executionStats")
+
+    El resultado sera el mismo pero la primera comanda si usara el Indice y la segunda no
+
+
+RESTRICCIONES DE ÍNDICE
+
+Las restricciones de índice en MongoDB son reglas que regulan cómo se crean y utilizan los índices para garantizar eficiencia y consistencia. Aquí tienes un resumen:
+
+Tamaño máximo de clave: Cada clave de índice no puede superar los 1024 bytes.
+Número máximo de índices: Una colección puede tener hasta 64 índices (incluido _id).
+Índices únicos: Garantizan que no haya valores duplicados en el campo indexado.
+Campos nulos o ausentes: Los índices permiten valores null o documentos sin el campo, pero en índices únicos solo puede haber uno.
+Índices compuestos: El orden de los campos es importante y debe respetarse en las consultas.
+Campos embebidos: Se indexan con la notación de puntos (campo.subcampo).
+Índices TTL: Solo funcionan en campos de tipo fecha y hay un único índice TTL por colección.
+Índices de texto: Solo se permite un índice de texto por colección.
+Índices geoespaciales: Los datos deben seguir formatos específicos ([x, y] o GeoJSON).
+Arrays: Los índices incluyen cada elemento del array como clave, pero los índices únicos no funcionan con valores duplicados dentro del array.
+
+
+ÍNDICES COMPUESTOS
+
+Los índices compuestos en MongoDB son índices que incluyen más de un campo de un documento en una colección
+
+Crear un Indice compuesto
+    -db.catalog.createIndex({campo1: 1, campo2: 1}) //es lo mismo que crea un Indice normal
+    -db.catalog.createIndex({campo1: 1, campo2: 1}, {name: campo1_campo2}) //Tambien puedes ponerle nombre
+
+
+*ACLARACION
+
+
+Al crear un Indice con un campo ej: db.catalog.createIndex({patatas: 1}) da lo mismo el orden porque solo hay 1 entonces si buscas por el campo patata lo buscara por el Indice, osea hara la busqueda por IXSCAN
+
+Pero al hacer un Indice compuesto, ej: db.catalog.createIndex({manzana: 1, platano: 1}) si en la busqueda de datos con find() no especificas eso 2 campos hara la busqueda con COLLSCAN, osea sin Indice
+
+    -db.catalog.findOne({manzana: "Apple", platano: "Banana"}) //Bien, estan manazana y platano en el orden correcto, IXCAN
+    -db.catalog.findOne({manzana: "Apple"}) Bien/Mal, al se el primer campo del Indice compuesto/falta platano, IXSCAN/COLLSCAN (Haciendo pruebas me dio IXSCAN, pueden las 2?)
+    -db.catalog.findOne({platano: "Banana"}) Mal, falta manzana, COLLSCAN
+    -db.catalog.findOne({platano: "Banana", manzana: "Apple"}) Mal, el orden correcto es primero platano y luego manzana, COLLSCAN
+
+
+*ACLARACION
+
+En una ocasion he hecho una prueba para ver si al poner el primer campo del Indice compuesto te daba IXSCAN y me lo dio,entonces probe esto
+
+Indice compuesto:
+
+{ v: 2, key: { budget: 1, revenue: 1 }, name: 'budget_revenue' } //esta primero budget y luego revenue
+
+Pues al hacer esta comanda: db.catalog.find({revenue: {$gt: 4300000}, budget: 1}).explain("executionStats") que deberia hacer COLLSCAN no?, pues da IXSCAN
+
+winningPlan: {
+      isCached: false,
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { budget: 1, revenue: 1 },
+        indexName: 'budget_revenue',
+        ETC...
+
+
+Yo se que se puede de izquierda a derecha pero creia que de derecha a izquierda no, para buenas practicas igualmente mejor hacerlo de izquierda a derecha        
+
+ChatGPT:
+
+    Tienes razón al pensar que, en general, los índices compuestos en MongoDB se deberían utilizar de izquierda a derecha, es decir, el orden de los campos en el índice es relevante para las consultas. Sin embargo, el comportamiento que has observado tiene que ver con la flexibilidad y la inteligencia del motor de consultas de MongoDB.
+
+    ¿Por qué ocurre esto?
+    MongoDB es lo suficientemente inteligente para realizar un IXSCAN en un índice compuesto incluso si no sigue el orden exacto de los campos de la consulta. Esto sucede por varias razones:
+
+    Condición de igualdad (budget: 1):
+
+    Aunque el campo revenue aparece primero en tu consulta, el motor de MongoDB ve que budget está siendo filtrado por un valor exacto (budget: 1). Esto es algo que MongoDB puede usar para avanzar rápidamente en el índice.
+    Dado que budget está al principio del índice, MongoDB puede encontrar rápidamente los documentos con budget: 1 y luego proceder a filtrar por revenue.
+    Flexibilidad del índice compuesto:
+
+    El índice compuesto { budget: 1, revenue: 1 } es bastante flexible y, aunque el orden de los campos en la consulta sea diferente, MongoDB puede todavía hacer uso de los dos campos del índice. Lo hace de la siguiente manera:
+    Primero filtra por budget, ya que es un valor exacto.
+    Luego utiliza el campo revenue con el operador $gt para encontrar documentos con valores mayores que 4,300,000.
+    IXSCAN incluso con el orden invertido: MongoDB es capaz de usar el índice para realizar un Index Scan (IXSCAN) incluso cuando los campos de la consulta no coinciden exactamente con el orden del índice, siempre que la condición de filtrado permita la utilización eficiente del índice.
+
+    ¿Es una buena práctica usar este comportamiento?
+    Aunque MongoDB sea capaz de realizar un IXSCAN incluso cuando los campos no siguen estrictamente el orden del índice, la mejor práctica sigue siendo diseñar los índices y las consultas para que coincidan en el orden de los campos. Esto es importante por varias razones:
+
+    Rendimiento óptimo:
+
+    Si sigues el orden natural del índice, el motor de consultas puede ser más eficiente. Forzar a MongoDB a "usar" el índice en orden inverso puede generar un mayor costo de ejecución, aunque en este caso no sea tan evidente.
+    Previsibilidad:
+
+    Si tus índices siempre siguen el mismo patrón (de izquierda a derecha), puedes predecir mejor cómo se comportará MongoDB con diferentes consultas.
+    Recomendaciones:
+    Para mantener buenas prácticas, es recomendable que reordenes las consultas para que coincidan con el orden del índice, y además el índice debería ser diseñado con las consultas más comunes en mente.
+    Si frecuentemente haces consultas con revenue primero, entonces sería más adecuado crear un índice compuesto { revenue: 1, budget: 1 }.
+    En resumen, MongoDB es muy flexible y hace un uso bastante inteligente de los índices, pero para obtener el mejor rendimiento y coherencia en tus aplicaciones, es ideal mantener un diseño de índices que coincida con el patrón de tus consultas.
+
+
+
+USANDO ÍNDICES PARA ORDENAR
+
+Ya que tenemos los indices podemos hacer busquedas con el metodo find(), eso tambien incluye al .sort()
+
+Entonces podemos hacer:
+    -db.catalog.find().sort({budget: 1, revenue: 1}).explain("executionStats") //recordar que para que salga el IXSCAN tenemos que tener los dos del indice compuesto en el orden que toca(tambien se puede hacer con un indice de un solo campo), saldra IXSCAN
+
+Si los filtrados por descendentes, osea asi:
+    -db.catalog.find().sort({budget: -1, revenue: -1}).explain("executionStats") //sera un COLLSCAN
+
+    Porque el Indice es ascendente:
+    -{ v: 2, key: { budget: 1, revenue: 1 }, name: 'budget_revenue' }
+
+
+Si ponemos solo el campo "budget" tambien sera IXSCAN porque es el primero del indice a la izquierda pero si pones solo al "revenue" sera COLLSCAN, algo que contradice segun la pruebas de la linea 1479, para buenas practicas siempre de izquierda a derecha
+
+
+
+
+INDICES TIME-TO-LIVE(TTL)
+
+Solo funcionan con campos tipo fecha, este tipo de índice es útil para manejar datos que tienen un tiempo de vida limitado, como sesiones de usuario, logs temporales o cachés.
+
+Crear un Indice TTL:
+    -db.session.createIndex({fecha: 1}, {expireAfterSeconds: 5})//puedes ponerle nombre tambien, {name: "expired", expireAfterSeconds: 5}
+    -{ v: 2, key: { fecha: 1 }, name: 'fecha_1', expireAfterSeconds: 5 }//el Indice
+    -db.session.insertOne({name: "Manolo", fecha: new Date()})
+
+En 5 segundos el documento de Manolo se eliminara
+
+
+
+
+INDICES ÚNICOS
+
+los índices únicos son un tipo especial de índice que asegura que los valores en un campo (o conjunto de campos) sean únicos en todos los documentos de una colección
+
+Es como el _id, que no deja repetirse, un momento, os acordais del Indice que crea automaticamente MongoDB al crear una coleccion?, este: { v: 2, key: { _id: 1 }, name: '_id_' }, y que sale un error cuando intenetamos poner 2 iguales, pues ese es un Indice unico
+
+crear un indice unico:
+    -db.session.createIndex({email: 1}, {name: "email", unique: true}) //tiene que ser unico
+    email
+    -db.session.insertOne({name: "Manolo", email: "manolo@gmail.com"})
+    {
+    acknowledged: true,
+    insertedId: ObjectId('678f7c7a54180dfd6e79a1b9')
+    }
+    -db.session.find()
+    [
+    {
+        _id: ObjectId('678f7c7a54180dfd6e79a1b9'),
+        name: 'Manolo',
+        email: 'manolo@gmail.com'
+    }
+    ]
+    -db.session.insertOne({name: "Manolo", email: "manolo@gmail.com"})
+    MongoServerError: E11000 duplicate key error collection: movies.session index: email dup key: { email: "manolo@gmail.com" }
+    -db.session.insertOne({name: "Manolo", email: "manoloelegante@gmail.com"})
+    {
+    acknowledged: true,
+    insertedId: ObjectId('678f7c9f54180dfd6e79a1bb')
+    }
+    movies> db.session.find()
+    [
+    {
+        _id: ObjectId('678f7c7a54180dfd6e79a1b9'),
+        name: 'Manolo',
+        email: 'manolo@gmail.com'
+    },
+    {
+        _id: ObjectId('678f7c9f54180dfd6e79a1bb'),
+        name: 'Manolo',
+        email: 'manoloelegante@gmail.com'
+    }
+    ]
+
+
+
+
+ÍNDICES PARCIALES    
+
+los índices parciales son una funcionalidad avanzada que permite crear índices sobre un subconjunto de los documentos en una colección. Esto significa que solo los documentos que cumplen una condición específica serán indexados.
+
+crear un indice parcial_
+    -db.catalog.createIndex({vote_average: 1}, {name: "vote_average", partialFilterExpression: {vote_average: {$eq: 8}}}) //nos buscara por IXSCAN cuando preguntemos si el campo "vote_average" es igual a 8
+    -v: 2, key: { vote_average: 1 }, name: 'vote_average', partialFilterExpression: { vote_average: { '$eq': 8 } }
+
+Ojo que tambien he creado el siguiente indice parcial:
+    -v: 2, key: { vote_average: 1 }, name: 'vote_average1', partialFilterExpression: { vote_average: 4 } //el numero es diferente si pero este no tiene el $eq, las 2 comandas hazen exactamente lo mismo pero de manera diferente y con un numero diferente
+
+Vamos a probar:
+    -db.catalog.find({vote_average: {$eq: 8}}).explain("executionStats") //IXSCAN, es el de la linea 1620
+    -db.catalog.find({vote_average: 8}).explain("executionStats") //TAMBIEN DA IXSCAN, este me ha sorprendido la verdad, claro, esque por detras ha hecho un parsedQuery: { vote_average: { '$eq': 8 } }, entonces claro, concuerda con el indice
+
+
+Tambien se puede crear un Índice parcial compuesto
+    -db.catalog.createIndex({title: 1, runtime: 1}, {partialFilterExpression: {title: {$exists: true}}})//mientras el campo title exista, las consultas sera IXSCAN
+    -db.catalog.find({title: {$regex: "^S"}}).explain()//IXSCAN
+
+    Un truquito muy guarro es el {partialFilterExpression: {campo: {$exists: true}}} porque da igual que operadores le metas en la consulta, ejemplo: si en el indice tienes el $exists pero en la consulta le pones un $gt sera un IXSCAN porque el valor existe
+
+    El operador $gt está actuando como un filtro adicional, pero lo que importa aquí es que el campo campo existe en los documentos indexados.
+
+    El truco del índice parcial con $exists: true permite que cualquier consulta que busque el campo indexado (incluso con operadores como $gt, $lt, etc.) pueda aprovechar el índice, ya que garantiza que el campo esté presente.
+
+    Esto se traduce en un IXSCAN (Index Scan) eficiente, incluso si la consulta usa operadores como $gt, que normalmente no se beneficiarían de un índice si el filtro del índice no estuviera alineado con la consulta.
+
+
+Aparte del metodo .explain("executionStats") y el .explain() esta el .explain("allPlansExecution") que describe la ejecucion del plan ganador y las estadisticas de otros planes candidatos
+
+
+
+ÍNDICES MULTI-key
+
+
+Un índice multi-key en MongoDB es un tipo especial de índice que se utiliza para campos que contienen arrays. Este índice permite que MongoDB indexe cada elemento individual del array en lugar de tratar el array como un único valor, no hay que especificar nada en la creacion del índice
+
+
+Restricciones importantes:
+
+No se pueden crear índices multi-key en campos que son arrays y contienen documentos anidados con otros arrays.
+Solo se permite un índice multi-key por consulta.
+Si el índice multi-key está compuesto (más de un campo), uno de los campos puede ser un array, pero no ambos.
+
+
+Dentro de eso es simplemente un índice mas, pero MongoDB se lo pone a los arrays, MongoDB creará índices individuales para cada valor dentro de la array
+
+Y ya solo es hacer la busqueda: db.catalog.find({language: {$all: ["English", "French"]}}).explain()
+
+Crear el indice es lo mismo de siempre, mongodb vera si es de tipo array o mo
+
+
+
+ÍNDICES DE TEXTO:
+
+Los índices de texto en MongoDB son un tipo de índice diseñado para facilitar búsquedas rápidas y eficientes en contenido de tipo texto dentro de tus documentos. Permiten realizar consultas como búsquedas por palabras clave o frases dentro de campos específicos.
+
+Eliminar palabras comunes (como "el", "de", "y" en español).
+
+Los indices de textos son lo mismo que el $regex buscaras la palabra y si conicide con el resultado de un documento que este indexado con un indice de texto tendras tu IXSCAN
+
+MongoDB, solo se puede crear un índice de texto por colección. Esto significa que no puedes tener múltiples índices de texto independientes dentro de la misma colección. Sin embargo, puedes incluir varios campos dentro del mismo índice de texto.
+
+Tambien se puede hacer un indice de texto combinado, con mas de 1 campo vaya
+
+
+Crear un indice de tipo texto:
+    -db.prueba.createIndex({descripcion: "text"}, {name: "buzca_buzca"})
+    -db.prueba.getIndexes() //luego veremos como cambiar algunos datos
+    [
+    { v: 2, key: { _id: 1 }, name: '_id_' },
+    {
+        v: 2,
+        key: { _fts: 'text', _ftsx: 1 },
+        name: 'buzca_buzca',
+        weights: { descripcion: 1 },
+        default_language: 'english',
+        language_override: 'language',
+        textIndexVersion: 3
+    }
+    ]
+
+Mis 2 documentos:
+    [
+    {
+        _id: ObjectId('6790cb887a41c5fc6d79a1b6'),
+        nombre: 'Raton',
+        descripcion: 'Es un buen raton para jugar al Fortnite, pero no al Lego Fortnite'
+    },
+    {
+        _id: ObjectId('6790cb887a41c5fc6d79a1b7'),
+        nombre: 'manta',
+        descripcion: 'Es una buena manta para taparse el ojete durante el inviero que hace frio'
+    }
+    ]
+
+    -db.prueba.find({$text: {$search: "Fortnite"}})//No usamos el campo descripción porque, como se menciona en la línea 1676, solo se puede tener un índice de texto por colección. El índice ya se encarga de buscar las palabras coincidentes en los campos definidos, por lo que no es necesario buscar directamente en el campo.
+    [
+    {
+        _id: ObjectId('6790cb887a41c5fc6d79a1b6'),
+        nombre: 'Raton',
+        descripcion: 'Es un buen raton para jugar al Fortnite, pero no al Lego Fortnite'
+    }
+    ]
+
+Busca palabras por separado:
+    -db.prueba.find({$text: {$search: "ojete Fortnite"}})//busca un documento que coincida con ojete y otro con Fortnite, no busca un documento donde esten esas 2 palabras juntas
+
+Si quieres que si que busque una concatenacion de palabras hay que usar \
+    -db.prueba.find({$text: {$search: "\"buena manta\""}})  
+
+
+
+ÍNDICE DE TEXTO - SCORING    
+
+el scoring (o puntuación) es un valor que indica la relevancia de un documento en los resultados de una búsqueda de texto. Este puntaje se calcula automáticamente cuando utilizas un índice de texto con una consulta $text.
+
+Cómo funciona el scoring
+El scoring evalúa qué tan bien un documento coincide con los términos de búsqueda, considerando aspectos como:
+
+Frecuencia: Los términos más frecuentes en un documento tienen mayor peso.
+
+Coincidencias exactas: Una frase completa entre comillas dobles ("termino exacto") tiene mayor puntuación.
+
+Se usa asi:
+    -db.prueba.find( { $text: { $search: "Fortnite manta //palabras de tu documento" } }, { score: { $meta: "textScore" } } ).sort({ score: { $meta: "textScore" } })
+
+A mi me ha dado esto:
+
+    [
+        {
+            _id: ObjectId('6790cb887a41c5fc6d79a1b6'),
+            nombre: 'Raton',
+            descripcion: 'Es un buen raton para jugar al Fortnite, pero no al Lego Fortnite',
+            score: 0.875
+        },
+        {
+            _id: ObjectId('6790cb887a41c5fc6d79a1b7'),
+            nombre: 'manta',
+            descripcion: 'Es una buena manta para taparse el ojete durante el inviero que hace frio',
+            score: 0.5357142857142857
+        }
+    ]
+
+Factores que influyen en el scoring:
+
+Frecuencia de los términos de búsqueda:
+Si un término aparece más veces en un documento, este será considerado más relevante.
+Por ejemplo, si la palabra "ratón" aparece dos veces en un documento y solo una vez en otro, el primero obtendrá un puntaje más alto.
+
+Posición del término:
+Los términos que aparecen en campos con mayor peso (weights) definidos en el índice de texto tendrán mayor impacto en el puntaje.
+Si no se definen pesos, MongoDB asigna el mismo peso a todos los campos del índice.
+
+Coincidencia exacta:
+Si el término de búsqueda coincide completamente con palabras del documento (o con frases exactas usando comillas dobles), el score será más alto.
+
+Longitud del texto:
+Documentos con textos más cortos tienden a obtener un puntaje más alto si contienen los términos de búsqueda, ya que la densidad de coincidencias es mayor.
+Consulta avanzada:
+
+MongoDB permite realizar búsquedas específicas como frases exactas, exclusión de términos o combinaciones. Estas pueden influir en el cálculo del score.
+   
+
+
+
+
+ÍNDICE DE TEXTO - EXCLUIR PALABRAS
+
+Tan facil como:
+    -db.prueba.find({$text: {$search: "Es -Fortnite"}})//En las 2 descripciones esta la palabra "Es", tendrian que salir los 2 documento pero he excluido el documento que tenga la palabra "Fortnite"
+
+
+
+ÍNDICE DE TEXTO - ESPECIFICAR UN IDIOMA Y WEIGHTS
+
+Ahora lo explico tranquilos:
+    -db.prueba.createIndex({name: "text", descripcion: "text"}, {name: "name_descripcion-text", default_language: "spanish", weights: {name: 1, descripcion: 10}})
+
+    Voy a explicar solo lo nuevo: en la linea 1683 os dije que se podian cambia mas cosas, el lenguaje predeterminado es el ingles pero lo podemos cambiar como se ve, luego el weight es que asigna un peso diferente a cada campo del índice(lo del: { score: { $meta: "textScore" } })
+
+
+
+ÍNDICES GEOESPACIALES
+
+Los índices geoespaciales en MongoDB son herramientas especializadas para trabajar con datos relacionados con la geolocalización, como coordenadas, ubicaciones o formas geométricas. Te permiten realizar consultas espaciales eficientes, como buscar puntos cercanos, dentro de un área específica o en un rango determinado.
+
+Crear un campo geoespacial:
+    -db.sitios.insertOne({name: "Sagrada Familia", lugar: {type: "Point", coordinates: [2.17447, 41.40356]}})//dentro de la matriz se pone primero la longitud y luego la latitud
+    Es importante entender tambien que usamos los indices geoespaciales para algo mas que simplemente mostrar coordenadas, claro que podrias usar:
+    -db.sitios.insertOne({name: "Sagrada Familia", lugar: {coordinates: [2.17447, 41.40356]}})//porque aqui no estas haciendo nada geoespacial, luego no podras usar ciertos operadores para aprovechas los indices geoespaciales
+
+
+Crear un indice geoespacial
+    -db.sitios.createIndex({lugar: "2dsphere"})
+
+El indice:
+    -{ v: 2, key: { lugar: '2dsphere' }, name: 'lugar_2dsphere', '2dsphereIndexVersion': 3 }
+
+Comanda para ver:
+    -db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [2.17447, 41.40356]}}}})    
+
+*ACLARACION
+
+Hay que crear primero el indice geoespacial antes de haxer la buscaqueda, aunque el campo sea tipo geospacial si no tenemos un indice geoespacial no funcionara
+
+Vale, una vez tengas tu sitio o sitios vamos a hacer esto para que se entienda:
+
+yo tengo esto, son ligeramente diferentes en las coordenadas si hos fijais:
+    [
+        {
+            _id: ObjectId('67921af9a7fdaf608279a1b6'),
+            name: 'Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17447, 41.40356 ] }
+        },
+        {
+            _id: ObjectId('679225e5a7fdaf608279a1b8'),
+            name: 'Metro Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17462, 41.40446 ] }
+        }
+    ]
+
+Y bien yo puedo poner esto:
+    -db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}}}})
+    [
+        {
+            _id: ObjectId('67921af9a7fdaf608279a1b6'),
+            name: 'Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17447, 41.40356 ] }
+        },
+        {
+            _id: ObjectId('679225e5a7fdaf608279a1b8'),
+            name: 'Metro Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17462, 41.40446 ] }
+        }
+    ]  
+
+Si hos fijais en las coordenadas son totalmente inventadas por mi, ni se acercan a las que son en realidad, entonces porque salen?, bien, las coordenadas [11.111, 2.345] es donde estas en realidad, y te empareja con los resultados porque no tenemos filto, ahora mismo ha buscado los puntos mas cercanos a ti, en un area sin filtro, osea todo el globo terraqueo, poreso estan los operados $masDistance y $minDistance
+
+$maxDistance: Se utiliza para limitar los resultados de una consulta geoespacial a aquellos documentos que estén dentro de una distancia máxima específica desde un punto de referencia.
+
+Ahora si probamos con el operador $maxDistance:
+    -sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 1000}}}) // 1KM
+
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 17000}}}) // 17 KM
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 170000}}}) // 170 KM
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 1700000}}}) // 1.700 KM
+
+    sitios> db.sitios.find({lugar: {$near: {$geometry: {type: "Point", coordinates: [11.111, 2.345]}, $maxDistance: 17000000}}}) // 17.000 km
+    [
+        {
+            _id: ObjectId('67921af9a7fdaf608279a1b6'),
+            name: 'Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17447, 41.40356 ] }
+        },
+        {
+            _id: ObjectId('679225e5a7fdaf608279a1b8'),
+            name: 'Metro Sagrada Familia',
+            lugar: { type: 'Point', coordinates: [ 2.17462, 41.40446 ] }
+        }
+    ]
+
+
+Porcierto en la linea 1866 que sepais que ese rango es lo suficientemente grande para incluir cualquier punto en la superficie terrestre, ya que el diámetro de la Tierra es de aproximadamente 12,742 km, pero se entiende
+
+
+AREAS
+
+Tambien puedes hacer areas y que te enseñe todos los dosumentos que esten dentro de esa area
+
+Te recomiendo hacer los puntos y meterlos en variables, como esto es un archivo txt no puedo poner imagines asique usar la imaginacion
+
+
+
+            punto1                                                                                                  punto4
+
+                                                punto_interes-1
+                                                                AREA
+                                                                                                                                        punto_interes-3
+                                                                                    punto_interes-2
+                punto2                                                                              punto3
+
+
+Vale, imaginaos ese mapa y cojer la longitud y latitud de cada uno de los puntos y meterlo en variables o constantes y quedaria una comanda tal que asi:
+    -db.sitios.find({lugar: {$geoWithin: {$geometry: {type: "Polygon", coordinates: [ [punto1, punto2, punto3, punto4, punto1] ]}}}}) //si esta bien saldran los punto_interes menos el "punto_interes-3"
+
+    No seais bobo y vayáis de punto1 a punto3 o de punto2 a punto4, porcierto el ultimo punto en la matriz, el punto1, se repite si, pero es porque hay que cerrar el area
+
+
+RADIO
+
+Tambien puedes definir un area y que te enseñe los documentos que esten en ese radio, la comanda:
+    -db.sitios.find({lugar: {$geoWithin: {$centerSphere: [ [2.17318, 41.40401 //donde se encuentra el user o lo que sea], 1 / 6378.1 ] }}}) // el 1 / 6378.1 tan raro que es, es para conseguir los km, en ente caso radio de un 1 km
+
+
+Area2
+
+tambien podemos crear un documento que tenga el area anterior, lo que queremos ahora es que al saber las coordenadas de algo o alguien nos diga en que zona esta, el anterior nos decia que habia en esa zona, nosotros ahora queremos saber en que area esta
+
+Poreso podemos crear un campo area
+    -db.area.insertOne({name "barrio", area: {type: "Polygon", coordinates: [ [punto1, punto2, punto3, punto4, punto1] ]}})
+    Si no tenemos variables se puede hacer de esta manera:
+    -db.area.insertOne({name: "barrio", area: {type: "Polygon", coordinates: [[[longitud, latitud], [longitud, latitud], [longitud, latitud], [longitud, latitud], [longitud, latitud]]]}})
+
+
+
+Luego creamos en indice geoespacial:
+    -db.sitios.createIndex({area: "2dsphere"})
+
+Y ahora buscamos:
+    -db.sitios.find({area: {$geoIntersects: {$geometry: {type: "Point", coordinates: [LongitudDeLoQueQuieroBuscar, LatitudDeLoQueQuieroBuscar]}}}})    
+
+
+Diferencias entre: AREA(linea 1884) y AREA2(linea 1913)
+
+
+1. Primer enfoque (búsqueda de elementos dentro de un área):
+Este enfoque se usa cuando tienes un polígono que define un área y deseas consultar qué documentos están dentro de esa área. Utilizas $geoWithin para encontrar los documentos dentro de un polígono dado.
+
+Objetivo: Buscar documentos dentro de un área específica definida por el polígono.
+
+
+2. Segundo enfoque (determinar en qué área está un punto):
+En este caso, lo que haces es consultar en qué área o zona está un punto dado. Si tienes un conjunto de áreas definidas, usas $geoIntersects para saber si un punto dado se encuentra dentro de algún área o polígono. En este caso, la búsqueda se hace en el área, no dentro de ella.
+
+Objetivo: Determinar en qué área o zona se encuentra un punto específico.
+Operador utilizado: $geoIntersects se utiliza para ver si un punto intersecta con cualquier polígono.
+
+
+Resumen de diferencias:
+$geoWithin: Se utiliza cuando quieres encontrar elementos dentro de un área geoespacial (p. ej., encontrar todos los sitios dentro de un barrio).
+$geoIntersects: Se usa para determinar si un punto está dentro de un área (p. ej., saber en qué barrio se encuentra una coordenada específica).
+
+
+Sigue en MongoDB-conceptos-2.txt

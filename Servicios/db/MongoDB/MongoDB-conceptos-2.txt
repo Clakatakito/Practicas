@@ -1,0 +1,426 @@
+
+
+AGREGACIONES
+
+((se esta trabajando sobre (se esta trabajando sobre profesionalPractitioner.json).json))
+
+Las agregaciones son operaciones que procesan datos de una colección y devuelven resultados calculados o transformados. Estas operaciones son muy útiles para realizar análisis, filtrado y transformación de datos sin necesidad de mover los datos fuera de la base de datos.
+
+El núcleo del sistema de agregaciones es el pipeline de agregación, que permite definir una serie de etapas que se aplican secuencialmente a los documentos de la colección. Cada etapa transforma los documentos y pasa el resultado a la siguiente etapa.
+
+Cada vez que diga: "stage $operador" lo que significa que este es una etapa independiente dentro del pipeline de agregación
+Cada vez que diga: "$operador" lo que significa que se usa dentro de un stage (como: $match, $group, $project)
+
+stage $match: Filtra los documentos según una condición, similar a una consulta con find 
+    -db.employee.aggregate([{$match: {maritalStatus: "S"}}])
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}])
+
+
+stage $group: Agrupa documentos por un campo específico y calcula valores agregados como sumas, promedios, conteos, etc, y poner el campo _id es obligatorio, los campos a partir del $group tendran que representarse como $campo
+
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: "$location.country"}}]) //filtra y agrupa por el pais, la salia parece decir que el _id son los paises pero es mentira, se puede cambiar
+
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}}}]) //le puedes agregar un nombre, en este caso tambien es  "country"
+
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}}}]) //cuenta los empleados segun el pais
+
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}]) //el maximo de algo, lo contrario sera el $min
+
+
+$sort: Se utiliza para ordenar los resultados de una agregación según uno o más campos. Puedes ordenar de manera ascendente o descendente, voy utilizando comandas del pasado que no tengan nada que ver que el tema de la linea para ver como se conbinan
+
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}, {$sort: {countEmployee: -1, country: 1, maximoquehepagado: -1}}]) //veis como a partir del $sort vuelvo a utilizar los nombres que he creado en el $group?, se pueden reusar en la comanda
+
+stage $count: se utiliza en una tubería de agregación para contar el número de documentos que pasan por las etapas anteriores y asignar ese valor a un campo llamado count (o como prefieras llamarlo)
+
+    -db.employee.aggregate([{$match: {$and: [{maritalStatus: "S"}, {gender: "male"}]}}, {$group: {_id: {country: "$location.country"}, countEmployee: {$count: {}}, maximoquehepagado: {$max: "$yearlyPayment"}}}, {$sort: {countEmployee: -1, county: 1, maximoquehepagado: -1}}, {$count: "TotalDocumentos"}])
+    [ { TotalDocumentos: 6 } ]
+
+ACLARACION*
+
+En la comanda de la linea 34 hay 2 $count, el primero es para contar el numero de trabajadores de "countEmployee", que porcierto parece magico no?, porque el cuenta sin haberle pasado ningun valor no?, Esto es porque el primer $count cuenta automáticamente la cantidad de documentos que llegan a esa etapa del pipeline, independientemente de los campos que tengan.
+
+Cuando usas $count dentro de $group, no necesita un valor específico para contar. Simplemente incrementa un contador por cada documento que pertenece al grupo actual. Esto significa que no importa qué campos estén presentes en los documentos, $count simplemente cuenta cuántos hay en total para cada grupo.
+
+Como el primer $count esta en la segunda etapa de pipeline, primero de haber pasado por el $match y el { country: "$location.country" } cuenta para cada documento que hay
+
+El segundo $count cuenta los documentos, NO LOS EMPLEADOS, NO SALEN VALORES, AL PONER AL FINAL EL $count simplemente cuenta los documentos
+
+
+stage $project: se utiliza para controlar qué campos aparecen en el resultado final y cómo se formatean. Básicamente, selecciona, excluye o modifica los campos del documento resultante después de que se hayan procesado las etapas anteriores del pipeline.
+
+-db.employee.aggregate([{$match: {gender: "male"}}, {$group: {_id: {country: "$location.country"}, CountEmployee: {$count: {}}, maximopagado: {$max: "$yearlyPayment"}}}, {$sort: {maximopagado: -1}}, {$project: {country: "$_id.country", CountEmployee: 1,maximopagado: 1, _id: 0}}]) //el $project es basicamnete una projeccion, pero con el puedes agregar nuevos campos, modificarlos, excluirlo
+
+
+$concat: se utiliza para unir (concatenar) cadenas de texto en un solo campo. Es útil cuando necesitas combinar varios valores, como juntar el nombre y apellido de una persona, o crear un formato personalizado para un campo.
+
+    -db.employee.aggregate([{$match: {gender: "male"}}, {$group: {_id: {country: "$location.country"}, CountEmployee: {$count: {}}, maximopagado: {$max: "$yearlyPayment"}}}, {$sort: {maximopagado: -1}}, {$project: {country: "$_id.country", CountEmployee: 1,maximopagado: 1, _id: 0, concatenar: {$concat: ["Hey que pasa ", "$_id.country"]}}}]) //concatena el texto "Hey que pasa" con el pais que este
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $project: { fullnombre: { $concat: [ "$name.FirstName", " ",
+    "$name.MiddleName", " ", "$name.LastName"] } } }] ) //si alguno de los campos es null no funcionara
+
+
+$ifNull: se utiliza para manejar valores null o undefined dentro de una agregación. Su propósito es devolver un valor alternativo cuando el valor de un campo es null o no existe (es undefined).
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $project: { fullnombre: { $concat: [ "$name.FirstName", " ", {$ifNull: ["$name.MiddleName", ""]}, " ", "$name.LastName"]}, maritalStatus: 1, _id: 1}}]) //esto arregla el problema de la linea 55, ahora almenos aparecera el campo de "FirstName" y el de "LastName" sin que el "MiddleName" moleste porque es null
+
+
+$replaceOne: se usa para reemplazar la primera coincidencia que encuentre dentro de una cadena. 
+$replaceAll: es similar, pero en lugar de reemplazar solo la primera coincidencia, reemplaza todas las ocurrencias de un texto dentro de una cadena.
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $project: { fullnombre: { $concat: ["$name.FirstName", " ", { $ifNull: ["$name.MiddleName", ""] }, " ", "$name.LastName"] }, maritalStatus: 1, _id: 1 } }, { $project: { fullnombre: 1, maritalStatus: 1, _id: 1, name: { $replaceOne: { input: "$fullnombre", find: "  ", replacement: " " } } } }] ) //remplaza los "  "(espacios dobles) por un solo espacio, " "
+
+
+$toLower: Convierte una cadena de texto a minúsculas
+$toUpper: Convierte una cadena de texto a mayúsculas
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $project: { fullnombre: { $concat: [ {$toUpper: "$name.FirstName"}, " ", {$toLower: { $ifNull: ["$name.MiddleName", ""] }}, " ", {$toLower: "$name.LastName"}] }, maritalStatus: 1, _id: 1 } }, { $project: { fullnombre: 1, maritalStatus: 1, _id: 1, name: { $replaceOne: { input: "$fullnombre", find: "  ", replacement: " " } } } }] ) //el nombre esta en minuscula y los apellidos en mayusculas
+
+
+$cond: permite crear expresiones condicionales dentro del pipeline de agregación, Es similar a un if-else en lenguajes de programación.
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $group: { _id: { country: "$location.country", maritalStatus: "$maritalStatus" }, countemployee: { $count: {} }, maximopagado: { $max: "$yearlyPayment" } } }, { $project: { country: "$_id.country", maritalStatus: "$_id.maritalStatus", countemployee: 1, _id: 0, concat: {$concat: ["Hola ", "$_id.country"]}, maritalStatus: {$cond: {if: {$eq: ["$_id.maritalStatus", "S"]}, then: "Single", else: "Married"}}}}]) //if "$_id.maritalStatus" $eq "S" then: "Single" else: "Married"(creo que se entiende)
+
+
+$strLenCP: calcula la longitud de una cadena(incluido los espacios)
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $project: { fullnombre: { $concat: [ {$toUpper: "$name.FirstName"}, " ", {$toLower: { $ifNull: ["$name.MiddleName", ""] }}, " ", {$toLower: "$name.LastName"}] }, maritalStatus: 1, _id: 1 } }, { $project: { fullnombre: 1, maritalStatus: 1, _id: 1, fullnombre: { $replaceOne: { input: "$fullnombre", find: "  ", replacement: " " } }, conteo_nombre: {$strLenCP: "$fullnombre"}}}]) //conteo_nombre te dice el numero de caracteres que tiene un campo de tipo "string"
+
+
+
+$indexOfCP: se utiliza para encontrar la posición de la primera aparición de una subcadena dentro de una cadena
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $project: { fullnombre: { $concat: [ {$toUpper: "$name.FirstName"}, " ", {$toLower: { $ifNull: ["$name.MiddleName", ""] }}, " ", {$toLower: "$name.LastName"}] }, maritalStatus: 1, _id: 1 } }, { $project: { fullnombre: 1, maritalStatus: 1, _id: 1, fullnombre: { $replaceOne: { input: "$fullnombre", find: "  ", replacement: " " } }, conteo_nombre: {$strLenCP: "$fullnombre"}, index: {$indexOfCP: ["$fullnombre", " "]}}}]) //muestra la posicion en la que se encuentra lo que busques
+
+
+$substrCP: se utiliza para extraer una subcadena de una cadena, comenzando en una posición especificada y tomando una longitud determinada, el $indexOfCP y el $substrCP hacen muy buena convinacion
+
+    -db.employee.aggregate([ { $match: { gender: "male" } }, { $project: { fullnombre: { $concat: [ {$toUpper: "$name.FirstName"}, " ", {$toLower: { $ifNull: ["$name.MiddleName", ""] }}, " ", {$toLower: "$name.LastName"}] }, maritalStatus: 1, _id: 1 } }, { $project: { fullnombre: 1, maritalStatus: 1, _id: 1, fullnombre: { $replaceOne: { input: "$fullnombre", find: "  ", replacement: " " } }, conteo_nombre: {$strLenCP: "$fullnombre"}, index: {$indexOfCP: ["$fullnombre", " "]}, firstname: {$substrCP: ["$fullnombre", 0, {$indexOfCP: ["$fullnombre", " "]}]}}}]) //vamos a cojer el primer nombre del campo "$fullnombre" desde la posicion 0, pero como no sabemos hasta cuando parar nos apoyamos del $indexOfCP que hemos hecho antes que para cuando nos encontremos con un " "
+
+
+
+$switch: es una forma más compleja de realizar decisiones condicionales, similar a una declaración switch en otros lenguajes de programación
+
+    -db.employee.aggregate([{ $project: { gender: 1, newgender: { $switch: { branches: [{ case: { $eq: ["$gender", "male"] }, then: "M" }, { case: { $eq: ["$gender", "female"] }, then: "F" }], default: "other" } } } }])
+
+
+$convert: convertir valores de un tipo de dato a otro, es similar a la linea 811 en MongoDB-conceptos.txt, solo que ahora en agregaciones
+
+    -db.employee.aggregate([{$project: {_id: 0, name: 1, coordinates_latitud: {$convert: {input: "$coordinates.latitude", to: "double"}}, coordinates_longitud: {$convert: {input: "$coordinates.longitude", to: "double"}}}}])
+
+    -db.employee.aggregate([{$project: {_id: 0, name: 1, birthDate: {$convert: {input: "$date.birthDate", to: "date"}}}}])
+
+    Tambien puedes comprovar si alguno de los valores da error o es null:
+    -db.employee.aggregate([{$project: {_id: 0, name: 1, birthDate: {$convert: {input: "$date.birthDate", to: "date", onError: 0.0, onNull: 0.0}}}}]) //controla si hay valores nulos o errores
+
+
+$toDataType: El conjunto de operadores $toString, $toInt, $toDouble, $toBool, etc..., tiene una sintaxis mas clara que el $convert pero no maneja errores ni nulos, es incluso mas similar a la linea 811 en MongoDB-conceptos.txt, solo que ahora en agregaciones
+
+    -db.employee.aggregate([{$project: {name: 1, gender: 1, yearlyPayment: {$toString: "$yearlyPayment"}}}])
+
+
+Datos Date
+
+
+Hay muchos, pero muchos datos Date, para mas info: "https://www.mongodb.com/docs/manual/reference/operator/aggregation/" y buscar con "crt + f" esto: "Date Expression Operators" y hos saldran todos, vamos a hacer la prueba con 1
+
+
+
+    -db.employee.aggregate([{$project: {name: 1, gender: 1, data: {$toDate: "$date.hireDate"}}}, {$group: {_id: {year: {$year: "$data"}}, totalemployee: {$count: {}}}}, {$sort: {year: -1}}]) //cuenta los empleados contratados en cada respectivo año
+
+
+AHORA TOCA VER AGREGACIONES EN ARRAYS
+
+$push: se usa dentro de $group para agrupar documentos y almacenar valores en un array. Permite crear listas de elementos dentro de cada grupo, (se esta trabajando sobre profesionalPractitioner.json)
+
+    -db.employee.aggregate([{$group: {_id: {age: "$age"}, allLanguajes: {$push: "$language"}}}])
+
+stage $unwind: descompone un array en múltiples documentos individuales. Cada elemento del array se convierte en un nuevo documento.
+
+    -db.employee.aggregate([{$unwind: "$language"}]) //descompone el array en documentos individuales
+
+    [
+        {
+            "_id": ObjectId("679a0fbe97cd379c879c36f9"),
+            "name": "Juan",
+            "language": "JavaScript",
+            "age": 30,
+            "qualification": [
+            { "difficulty": 9, "score": 16.9 },
+            { "difficulty": 4, "score": 15.9 },
+            { "difficulty": 2, "score": 19.5 }
+            ]
+        },
+        {
+            "_id": ObjectId("679a0fbe97cd379c879c36f9"),
+            "name": "Juan",
+            "language": "PHP",
+            "age": 30,
+            "qualification": [
+            { "difficulty": 9, "score": 16.9 },
+            { "difficulty": 4, "score": 15.9 },
+            { "difficulty": 2, "score": 19.5 }
+            ]
+        }
+    ]
+    etc...
+
+Pero podemos separarlo para luego volver a juntarlos
+
+    -db.employee.aggregate([{$unwind: "$language"}, {$group: {_id: {age: "$age"}, allLanguajes: {$push: "$language"}}}]) //ahora estan todas en una misma array y no en 2 separadas como en la linea 136  
+
+
+$addToSet: para agregar valores a un array sin duplicados. Es similar a $push, pero mientras que $push agrega un valor a un array incluso si ya está presente, $addToSet asegura que solo se agregue si el valor no está ya en el array, (el $addToSet de siempre)  
+
+    -db.employee.aggregate([{$unwind: "$language"}, {$group: {_id: {age: "$age"}, allLanguajes: {$addToSet: "$language"}}}]) //Python ya no esta repetido
+
+
+$filter: filtrar elementos dentro de un array según una condición
+
+    -db.employee.aggregate([{$project: {name: 1, language: {$filter: {input: "$qualification.score",
+    as: "sc", cond: {$gt: ["$$sc", 19]}}}}}])
+
+*Aclaracion
+
+La razón por la que $filter usa "cond" en lugar de "$cond" es porque "cond" es un parámetro dentro del operador $filter, mientras que "$cond" es un operador de expresión condicional que se usa para evaluar condiciones en una agregación.
+
+*Aclaracion2
+
+El "$$sc" usa 2 "$$" al ser un alias, y $filter necessita el alias
+
+
+stage $set: agregar nuevos campos o modificar los existentes, es parecido al $project pero en este no hace falta que en cada stage que uses $project vayas repitiendo los campo
+
+    -db.employee.aggregate([{$set: {departamento: "este", totalscore: {$sum: "$qualification.score"}, media: {$round: [{$avg: "$qualification.score"}, 2]}}}]) //de paso el $round redonde segun el valor que le pongas, en mi caso 2, 2 decimales
+
+stage $unset: eliminar uno o más campos de los documentos durante una operación de agregación
+
+    -db.employee.aggregate([{$unset: ["age", "language", "qualification.difficulty"]}]) //si solo quieres eliminar 1, quitale las []
+
+
+stage $skip: omitir un número específico de documentos en el resultado de la agregación  
+
+    -db.employee.aggregate([{ $match: { gender: "male" } }, { $project: { fullnombre: { $concat: ["$name.FirstName", " ", {$ifNull: ["$name.MiddleName", " "]}, " ", "$name.LastName"]}, email: 1, yearlyPayment: 1}}, {$sort: {yearlyPayment: -1}}, {$skip: 20}, {$count: "totalDocumentos"}]) //si vas jugando con el $skip, veras como el $count le va restando
+
+stage $limit: limitar la cantidad de documentos que devuelve una consulta
+
+    -db.employee.aggregate([{ $match: { gender: "male" } }, { $project: { fullnombre: { $concat: ["$name.FirstName", " ", {$ifNull: ["$name.MiddleName", " "]}, " ", "$name.LastName"]}, email: 1, yearlyPayment: 1}}, {$sort: {yearlyPayment: -1}}, {$limit: 20}, {$count: "totalDocumentos"}]) //la misma comanda de arriba pero con el $limit
+
+
+
+Crear una nueva colección a partir del Pipeline
+
+Es un stage, llamado $out, ponlo asi al final del pipeline: {$out: "NombreColeccion"}
+
+
+stage $geoNear: encontrar documentos cercanos a un punto de referencia específico en un espacio geográfico
+
+    -db.NombreColeccion.aggregate([ { $geoNear: { near: { type: "Point", coordinates: [ -74.00203, 40.71678 ] }, maxDistance: 10000, query: { "name.MiddleName": null }, distanceField: "distance" } }, { $sort: { distance: 1 } }, { $limit: 5 } ]);
+
+    {
+        $geoNear: {
+            near: { <punto de referencia> },  // Punto de referencia
+            distanceField: "<campo>",         // El campo donde se almacenará la distancia
+            maxDistance: <distancia máxima>,  // Opcional: limitar la distancia máxima
+            query: <consulta>,                // Opcional: realizar una consulta adicional sobre otros campos
+            spherical: true,                  // Opcional: activar la búsqueda esférica
+            limit: <número>                   // Opcional: limitar la cantidad de resultados
+        }
+    }
+
+
+
+SEGURIDAD
+
+Siempre entramos al servidor mongod con "mongosh" sin ninguna importancia no?, pues eso es un fallo enorme, vamos a crear un usuario admin para que pueda entrar, tambien modificaremos permisos para que no puedan hacer todo cualquier usuario
+
+userAdminAnyDatabase: Permite administrar usuarios en cualquier base de datos.
+dbAdminAnyDatabase: Permite administrar cualquier base de datos, como crear índices, obtener estadísticas, etc.
+readWriteAnyDatabase: Permite leer y escribir en cualquier base de datos.
+root: Proporciona acceso completo a todas las operaciones administrativas.
+etc...
+
+
+crear user:
+    -db.createUser({user: "claka", pwd: "1234", roles: [{role: "readWriteAnyDatabase", db: "admin"}]}) 
+    
+    si volveis atras con la flechita vereis que no sale la comanda, al ser "privada", y porque digo "privada"?, porque la contraseña esta en texto plano, aun nos pueden ver la contraseña, si alguin lee la db admin
+
+Poreso podemos hacer esto:
+    -admin> db.createUser({user: "claka2", pwd: passwordPrompt(), roles: [{role: "readWriteAnyDatabase", db: "admin"}]})
+    Enter password
+    ****{ ok: 1 }
+    Mas seguro
+
+
+Deslogearme:
+    -db.logout()
+
+
+Tambien podemos ver que en la db "admin" tenemos 2 colecciones, la "system.users" y la "system.version", la primera es donde se almacenan las configuraciones de los usuarios creados, y la segunda almacena información sobre la versión actual de MongoDB, así como algunas configuraciones internas del sistema, yo no tocaria la segunda  
+
+
+
+multiples permisos:
+
+read: Permite leer datos de una base de datos específica.
+
+readWrite: Permite leer y escribir datos en una base de datos específica.
+
+dbAdmin: Permite realizar tareas administrativas (como crear índices, analizar la base de datos y ver estadísticas) en una base de datos, sin modificar los datos.
+
+dbOwner: Combina los privilegios de dbAdmin con permisos adicionales para gestionar roles y usuarios en la base de datos.
+
+userAdmin: Permite crear, modificar y eliminar usuarios y roles, pero únicamente en la base de datos en la que se asigna.
+
+readAnyDatabase: Permite leer datos en todas las bases de datos del servidor.
+
+readWriteAnyDatabase: Permite leer y escribir datos en todas las bases de datos del servidor.
+
+dbAdminAnyDatabase: Permite realizar tareas administrativas en todas las bases de datos del servidor.
+
+userAdminAnyDatabase: Permite crear, modificar y eliminar usuarios y roles en todas las bases de datos.
+
+clusterMonitor: Permite ver el estado y la configuración del clúster sin posibilidad de realizar cambios.
+
+clusterManager: Permite realizar tareas de gestión del clúster, como operaciones de mantenimiento y configuración, sin gestionar usuarios.
+
+clusterAdmin: Otorga amplios privilegios para administrar el clúster (incluyendo replica sets y sharded clusters) y ver toda su configuración.
+
+hostManager: Permite realizar tareas administrativas a nivel del host, como la gestión de procesos y recursos del sistema.
+
+backup: Permite realizar copias de seguridad de la base de datos.
+
+restore: Permite restaurar datos a partir de una copia de seguridad.
+
+root: Es el rol de superusuario que otorga todos los privilegios de administración, lectura, escritura y gestión de usuarios en todas las bases de datos del servidor.
+
+
+
+base de datos "local":
+
+Propósito: La base de datos local es una base de datos especial que MongoDB usa para almacenar información de sistema interna que no debe replicarse en una configuración de replica set.
+
+coleccion "startup_log":
+
+Logs de inicio: Esta colección registra los eventos de inicio de MongoDB, proporcionando detalles sobre los procesos de arranque, como la versión de MongoDB, el estado del sistema de archivos, y otros eventos importantes que ocurren cuando el servidor MongoDB inicia.
+
+Depuración: Es útil para diagnosticar problemas relacionados con el arranque del servidor, ya que contiene detalles de lo que hizo MongoDB durante el proceso de inicio.
+
+
+Ahora que tenemos el usuario vamos a ver:
+
+video que me ayudo: "https://www.youtube.com/watch?v=_w6GnVEzA8s&t=95s"
+
+lo primero es que tenemos que tener el servicio/mongod apagado, lo segundo vamos a editar el archivo de configuracion de mongodb que esta en: "C:\Program Files\MongoDB\Server\8.0\bin", es el mongod que no tiene el arbol/planta esa, el archivo de configuracion
+
+le añadiremos esto al final:
+
+security:
+  authorization: enabled
+
+
+puede que venga comentado asique podeis descomentarlo
+
+luego tendremos que reiniciar mongodb, hacerlo en la cmd modo administrador, poner esto:
+    -mongod --config "C:\Program Files\MongoDB\Server\8.0\bin\mongod.cfg"
+
+Hos pueden dar multiples errores, sobretodo a los que tengais variables de entorno activadas hos tengo esto: "https://chatgpt.com/share/679d14a2-f420-8006-b77e-0fffc1ed3cd5", verlo a partir de las decima pregunta que le hago
+
+aparte de eso te pueden dar mas errores, si en "C:\Program Files\MongoDB\Server\8.0" no tenias la carpeta "data" o "log" yo las he creado por si acaso
+
+luego de todo eso ya podremos iniciar "mongod", pero si lo iniciamos no habra login y tendremos todo abierto y accessible que antes, tenemos que usar "mongod -auth", y cuando entremos con mongosh ya no nos dejara hacer nada hasta logearnos
+
+Una vez estando dentro de la base de datos no te dejara hasta que te loges como ya he dicho, vamos a logearnos:
+    -use admin 
+    -db.auth("myUserAdmin", passwordPrompt()) o la contraseña en texto plano que tambien puedes poner, linea 244
+
+    seria asi sin el "passwordPrompt()":
+    -db.auth("claka", "1234")
+
+Otra forma es antes de entrar a la db:
+
+    -mongosh --authenticationDatabase "admin" -u "claka" -p #podriamos poner la contraseña despues del "-p" pero no es muy seguro, en la forma que esta hecho es mejor
+    Enter password: ****
+
+
+
+Ver información del usuario:
+    -db.getUser("user") //solo se puede hacer si tu eres ese usuario, con esa comanda no puedes ver stats de otros usuarios, solo del tuyo
+
+
+Actualizar usuarios:
+
+No se puede cambiar el nombre del usuario
+
+Actualizar roles a los usuarios:
+    -db.updateUser("user", {role: [role: "readWrite", db: "db"]})  
+
+Actualizar contraseña a los usuarios:
+    -db.updateUser("user", { pwd: "nuevaContraseña" })
+
+actualizar ambas a la vez:
+    -db.updateUser("user", { pwd: "nuevaContraseña", roles: [{ role: "readWrite", db: "db" }]})
+
+
+con "db.grantRolesToUser" agrega roles adicionales a un usuario existente sin necesidad de recrearlo. Esto es útil cuando quieres ampliar los permisos de un usuario sin modificar otros atributos como su contraseña.
+
+
+
+Ver con que usuarios estas logeado:
+    -db.runCommand({ connectionStatus: 1 })
+
+
+Eliminar usuarios
+
+Se tiene que eliminar con un usuario administrador, y en la misma db donde se creo:
+    -db.dropUser("user")   
+
+
+
+BACKUPS
+
+Crear un usuario con permisos de backup:
+    -db.createUser({user: "userbackup", pwd: passwordPrompt(), roles: [{role: "backup", db: "admin"}, {role: "restore", db: "admin"}]})
+
+lanzar la comanda para hacer el backup:
+    -mongodump -h localhost:27017 -u "userbackup" -p "12345" //es igual que cuando usamos mongoimport, se tiene que hacer desde linea de comandos y con el servidor mongod abierto, se te descargara el backup segun en que ruta te encuentres    
+
+
+restaurar un backup:
+
+crear o eliminar alguna db para ver las diferencias y posicionarnos donde este la capeta del backup:
+    -mongorestore -h localhost:27017 -u "userbackup" -p "12345"
+
+
+
+
+MONGODB ATLAS    
+
+MongoDB Atlas es una base de datos en la nube totalmente administrada que se encarga de toda la complejidad de implementar, administrar y reparar sus implementaciones en el proveedor de servicios en la nube que elija (AWS, Azure y GCP). MongoDB Atlas es la mejor manera de implementar, ejecutar y escalar MongoDB en la nube.
+
+
+Crear cuenta en: "https://www.mongodb.com/es/cloud/atlas/register"
+Iniciar sesion en: "https://account.mongodb.com/account/login/"
+
+
+Configuraciones en MongoDB Atlas
+
+ir a "Quickstart", dentro de "Security" y crearnos un usuario o varios
+
+
+Conectarnos a MongoDB Atlas desde la shell:
+
+Ir a "Cluster" y a "Conect", seleccionamos la "shell" y que tenemos mongodb instalado, ya seria copiar el comando que te proporcionan y poner la contraseña del usuario creado en mongod atlas
+
+
+Conectarnos a MongoDB Atlas desde la shell:
+
+Ir a "Cluster" y a "Conect", seleccionamos la "Compass" y que tenemos mongodb compass instalado, ya seria copiar el comando que te proporcionan y ingresarlo en "Add a new conection" en MongoDB Compass, el password hay que ingresarlo manualmente
+
+
+Proximamente hare una app de lo que sea que use mongodb, en el curso que hacia de mongodb la hacen con python y yo solo se python basico asique algunas cosas no las pillo, la haremos con JavaScript
+
+HASTA AQUI HA LLEGADO EL MEGA SUPER HIPER TUTORIAL DE MONGODB DE APROXIMADAS 2.429 LINEAS(MUCHAS DE ELLAS ESPACIOS INNECESARIOS, PERO ME AYUDAN A SEPARAR SECCIONES), SI HAS LLEGADO HASTA AQUI LO DUDO PORQUE NO CREERIA QUE ALGUIEN HUBIERA LLEGADO PERO GRACIAS SI LO HICISTE, ESTA GUIA PRIMORDIALMENTE ES PARA MI, PERO SI LE SIRVE A OTRA PERSONA GENIAL!
+
+La despedida ha sido un copi-pega de Docker-conceptos.txt

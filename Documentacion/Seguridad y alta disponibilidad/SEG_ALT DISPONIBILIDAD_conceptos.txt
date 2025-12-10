@@ -1,0 +1,203 @@
+
+
+
+Conceptos básicos de la seguridad informática
+
+
+
+Seguridad informática
+
+Disciplina que se ocupa de diseñar las normas, procedimientos, métodos y técnicas destinadas a conseguir un sistema de información seguro.
+
+Un sistema de información seguro es un sistema que garantiza:
+
+    -Confidencialidad (que no haya terceros, es decir que sea una comunicacion de a 2)
+    - Integridad (el archivo no ha sido modificado, que sea integro)
+    - Disponibilidad (que siempre este disponible el archivo)
+    - Auteniicació (que el que dices ser sea de verdad es el que eres)
+    - No repudiación (tanto en origen como en destino)
+
+
+Algunos mecanismos para conseguirlo:
+
+    - Autorización
+    - Auditoría
+    - Encriptación
+    - Copias de seguridad
+    - Antivirus
+    - Firewalls
+    - Servidores intermediarios (proxys)
+    - Firma electrónica y certificados digitales
+    - Leyes de protección de datos
+
+
+
+Tipo de seguridad en función del recurso a proteger:
+
+    - Seguridad física: proteger el hardware (equipos informáticos, cableado...)
+    - Seguridad lógica: proteger el software (aplicaciones, datos)
+
+
+Mecanismos de seguridad física:    
+
+
+    Amenaces sobre actius físics                              Mecanismes de seguretat física
+
+    Incendis                                                  Sistema contra incendis (material ignifug, sistema de detecció).
+    Hurtos                                                    Sistemas de control de acceso (medidas biometricas, vigilantes, etc.).
+    Interferencias EM                                         Uso de fibra óptica
+    Apagones de luz                                           SAI
+
+
+
+Mecanismos de seguridad lógica:    
+
+
+    Amenazas sobre activos lógicos                            Mecanismos de seguridad logica
+
+    Hurtos                                                    Sistemas de cifrado de la información y uso de contraseñas
+    Pérdida de información                                    Copias de seguridad y sistemas de discos redundantes (RAID).
+    Pérdida de integridad de la información                   Herramientas de revisión de los equipos y firma digital.
+    Programas malintencionados                                Antivirus
+    Ataques desde la red                                      Cortafuegos y Proxys
+
+
+
+
+Tipo de seguridad en función de cuando actúa:
+
+
+    -Seguridad activa: actuar antes de producirse el percance para evitar los daños en el sistema.
+    -Seguridad pasiva: actuar después del contratiempo para minimizar los efectos y facilitando la recuperación.
+
+
+
+    Mecanismos de seguridad activa                           Mecanismos de seguridad pasiva
+
+    Uso de contraseñas
+    Listas de control de acceso(ACL)                         Conjunto de discos redundantes (RAID)                         
+    Encriptación                                             SAI
+    Uso de software de seguridad                             Realización de copias de seguridad
+    Firma digital
+    Certificado digital
+    Sistemas de archivos con tolerancia a
+    fallos
+    Cuotas de disco
+
+
+
+
+
+Proceso de análisis de riesgos (1)
+
+“Una cadena siempre se rompe por el eslabón más débil”
+
+
+Elementos de estudio
+Activos (lo que hay que proteger):
+    - Personas
+    - Hardware
+    - Red
+    - Software
+
+Amenazas e impactos (evento y consecuencia)
+    - Interrupción
+    - Intercepción
+    - Modificación
+
+
+
+
+Procés d'anàlisi de riscos (2)
+
+Elementos de estudio
+Riesgos
+    - muy alto
+    - alto
+    - medio
+    - abajo
+    - muy bajo
+
+Mecanismo de seguridad
+    - Medidas para evitar el mal
+
+
+
+
+Palabrejas raras de ataques:
+
+
+spoofing: suplantar la identidad de una persona o dispositivo, por ejemplo falsificando una dirección IP o un correo electrónico.
+
+sniffing: interceptar y analizar el tráfico de red para capturar datos como contraseñas o mensajes.
+
+malware: software malicioso diseñado para dañar, robar información o controlar un sistema.
+
+keyloggers: tipo de malware que registra todo lo que se escribe en el teclado para robar contraseñas u otros datos.
+
+enginyeria social: manipulación psicológica para engañar a las personas y hacer que revelen información confidencial.
+
+phishing: ataque de ingeniería social que usa mensajes falsos (como correos) para robar datos personales o credenciales.
+
+DoS: ataque que satura un servidor o red para que deje de funcionar (en su versión distribuida se llama DDoS).
+
+
+Palabrejas raras de usuarios de la red:
+
+furoner (hacker / white hat hacker): experto en informática que utiliza sus conocimientos para mejorar la seguridad de los sistemas, detectando fallos y ayudando a corregirlos sin causar daño.
+
+cracker (black hat hacker): persona que usa sus habilidades para romper sistemas, robar información o causar daños con fines maliciosos.
+
+ciberaprenent (newbie): usuario nuevo o inexperto en el mundo de la informática o la ciberseguridad.
+
+lamer: persona que presume de saber mucho sobre informática o hacking, pero en realidad tiene pocos conocimientos reales.
+
+luser: combinación de “loser” y “user”; se usa de forma despectiva para describir a un usuario torpe o que comete errores básicos.
+
+
+
+
+SAI's
+
+Tipos de SAI y como funcionan:
+
+Offline (Standby): La corriente va directamente al equipo. Solo usa la batería cuando hay un corte de luz (con un pequeño retraso de unos milisegundos), No protege frente a pequeñas variaciones de voltaje; ese breve retraso puede afectar a equipos sensibles.
+
+Interactivo (Line-Interactive): Funciona como el offline, pero puede regular el voltaje sin pasar a batería (corrige picos y caídas leves), No elimina completamente las imperfecciones eléctricas.
+
+Online (Doble conversión): La energía pasa siempre por el inversor: convierte la corriente a continua (DC) y luego otra vez a alterna (AC). Así, la batería suministra energía de forma continua, Máxima protección, sin tiempo de conmutación, salida eléctrica muy estable.
+
+
+Tipos de copias de seguridad:
+
+Completa: copia todos los datos cada vez que se realiza, muy fácil de restaurar porque todo está en una sola copia, pero tarda mucho y ocupa mucho espacio.
+
+Incremental: copia solo los archivos modificados desde la última copia, es rápida y ocupa poco espacio, pero restaurarla es más lenta porque necesita la copia completa y todas las incrementales.
+
+Diferencial: copia los archivos modificados desde la última copia completa, se restaura más rápido que la incremental y es sencilla de usar, pero ocupa más espacio y tarda algo más en hacerse.
+
+
+Tipos de amenazas:
+
+Herramienta de seguridad: aunque suena “amenaza”, realmente es un programa legítimo usado para proteger sistemas, como antivirus o firewalls. Puede ser mal utilizado si cae en manos equivocadas, pero no es dañino por sí mismo.
+
+Rogueware: software que finge ser una herramienta de seguridad (antivirus, limpiadores de malware) pero en realidad es malicioso, intenta engañarte para que pagues o instales malware.
+
+Puerta de atras (Backdoor): es un acceso oculto que permite a un atacante entrar en un sistema sin pasar por los controles normales de seguridad. Se puede usar para robar información o controlar el sistema.
+
+Virus: programa malicioso que se adjunta a archivos o programas y se propaga cuando esos archivos se comparten. Puede dañar datos, ralentizar sistemas o robar información.
+
+Caballo de Troja (Troyano): programa que parece inofensivo pero que al ejecutarlo permite al atacante tomar control del equipo o robar datos. A diferencia del virus, no se replica por sí mismo.
+
+Gusano (Worm): programa que se replica solo y se propaga por redes o dispositivos, sin necesidad de infectar archivos. Puede saturar sistemas y redes rápidamente.
+
+Programa cpnejo o bacteria (Rabbit/Bacterium): tipo de malware que se reproduce sin control, consumiendo todos los recursos del sistema y ralentizando o bloqueando el equipo. Es más un problema de saturación que de daño directo a archivos.
+
+
+Tipos de almacenamientos:
+
+DAS (Direct Attached Storage): almacenamiento conectado directamente a un servidor o equipo (por ejemplo, un disco duro interno o externo). Es rápido y simple, pero solo accesible desde ese equipo.
+
+NAS (Network Attached Storage): almacenamiento conectado a la red, accesible por varios usuarios y equipos al mismo tiempo. Ideal para compartir archivos en oficinas o pequeñas empresas.
+
+SAN (Storage Area Network): red de almacenamiento especializada, de alto rendimiento, que conecta múltiples servidores con grandes cantidades de almacenamiento. Usado en centros de datos y entornos empresariales que requieren velocidad y disponibilidad alta.

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<inmobiliaria>
+    <ciudad nombre="Badalona">
+        <barrio nombre="Bufala">
+            <piso>
+                <calle>calle falsa 1234</calle>
+                <numero>1</numero>
+                <puerta>2</puerta>
+                <años_del_piso>165</años_del_piso>
+            </piso>
+        </barrio>
+        <barrio nombre="Llefià">
+            <piso>
+                <calle>avenida del mar 45</calle>
+                <numero>3</numero>
+                <puerta>1</puerta>
+                <años_del_piso>42</años_del_piso>
+            </piso>
+            <piso>
+                <calle>calle progreso 10</calle>
+                <numero>2</numero>
+                <puerta>4</puerta>
+                <años_del_piso>25</años_del_piso>
+            </piso>
+        </barrio>
+    </ciudad>
+
+    <ciudad nombre="Barcelona">
+        <barrio nombre="Glories">
+            <piso>
+                <calle>calle verdadera 1234</calle>
+                <numero>1</numero>
+                <puerta>2</puerta>
+                <años_del_piso>15</años_del_piso>
+            </piso>
+        </barrio>
+        <barrio nombre="Eixample">
+            <piso>
+                <calle>paseo de gracia 45</calle>
+                <numero>5</numero>
+                <puerta>3</puerta>
+                <años_del_piso>80</años_del_piso>
+            </piso>
+            <piso>
+                <calle>calle aragó 210</calle>
+                <numero>8</numero>
+                <puerta>1</puerta>
+                <años_del_piso>60</años_del_piso>
+            </piso>
+        </barrio>
+    </ciudad>
+
+    <ciudad nombre="Hospitalet de Llobregat">
+        <barrio nombre="Centre">
+            <piso>
+                <calle>plaza europa 12</calle>
+                <numero>4</numero>
+                <puerta>5</puerta>
+                <años_del_piso>5</años_del_piso>
+            </piso>
+        </barrio>
+        <barrio nombre="Collblanc">
+            <piso>
+                <calle>carrer del sol 23</calle>
+                <numero>2</numero>
+                <puerta>3</puerta>
+                <años_del_piso>35</años_del_piso>
+            </piso>
+        </barrio>
+    </ciudad>
+</inmobiliaria>

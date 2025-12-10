@@ -1,0 +1,23 @@
+
+
+Suite para editor de pdf's
+
+
+services:
+
+  stirling-pdf:
+    image: frooodle/s-pdf
+    restart: always
+    container_name: s-pdf
+    ports:
+      - '8200:8080'
+    volumes:
+      - ./spdf/trainingData:/usr/share/tesseract-ocr/4.00/tessdata
+      - ./spdf/extraConfigs:/configs
+    environment:
+      APP_LOCALE: es-ES
+      APP_HOME_NAME: Stirling PDF
+      APP_HOME_DESCRIPTION: Un único sitio, alojado localmente, para todas sus necesidades de PDF.
+      APP_NAVBAR_NAME: Stirling PDF
+      APP_ROOT_PATH: /
+      ALLOW_GOOGLE_VISIBILITY: true
