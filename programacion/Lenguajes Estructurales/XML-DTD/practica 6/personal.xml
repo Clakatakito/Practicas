@@ -14,8 +14,8 @@
 
     <persona id="m2">
         <dades>
-            <nom>Pedro</nom>
             <cognom>Ramirez</cognom>
+            <nom>Pedro</nom>
         </dades>
         <email>pedroramirez@gmail.com</email>
         <url href="http://pedroramirez.com"></url>

@@ -14,4 +14,3 @@
 <!ELEMENT relació EMPTY>
 <!ATTLIST relació director IDREF #IMPLIED>
 <!ATTLIST relació treballador IDREFS #IMPLIED>
-
