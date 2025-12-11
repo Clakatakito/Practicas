@@ -14,11 +14,11 @@ int main()
     printf("Dame una base\n");
     scanf("%d", &base);
     printf("Dame exponente\n");
-    scanf("%d", &exponente);
+    scanf("%d", &exponent);
     resultado = base;
     for(int i = 1;i < exponent;i++){
 
-        resultado = resultado * base:
+        resultado = resultado * base;
     }
 
     printf("%d", resultado);
