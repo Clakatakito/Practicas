@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE temps SYSTEM "previsio.dtd">
+<temps>
+    <poblacio>
+        <nom>Figueres</nom>
+        <comarca>Alt Empordà</comarca>
+        <data dia="19-05-2011">
+            <maxima>24</maxima>
+            <minima>15</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>ennuvolat</estat>
+                <graus>16</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>ennuvolat</estat>
+                <graus>24</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>clarianes</estat>
+                <graus>20</graus>
+            </previsio>
+        </data>
+
+        <data dia="20-05-2011">
+            <maxima>23</maxima>
+            <minima>13</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>16</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>25</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>22</graus>
+            </previsio>
+        </data>
+        
+        <data dia="21-05-2011">
+            <maxima>26</maxima>
+            <minima>14</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>17</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>26</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+        </data>
+        
+        <data dia="22-05-2011">
+            <maxima>28</maxima>
+            <minima>16</minima>
+            <vent>18 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>18</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>clarianes</estat>
+                <graus>26</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>algun núvol</estat>
+                <graus>23</graus>
+            </previsio>
+        </data>
+        
+        <data dia="23-05-2011">
+            <maxima>29</maxima>
+            <minima>19</minima>
+            <vent>25 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>21</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>29</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>26</graus>
+            </previsio>
+        </data>      
+
+        <data dia="24-05-2011">
+            <maxima>30</maxima>
+            <minima>19</minima>
+            <vent>32 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>30</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>26</graus>
+            </previsio>
+        </data>                  
+    </poblacio>
+    
+    <poblacio>
+        <nom>Roses</nom>
+        <comarca>Alt Empordà</comarca>
+        <data dia="19-05-2011">
+            <maxima>23</maxima>
+            <minima>16</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>clarianes</estat>
+                <graus>17</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>clarianes</estat>
+                <graus>21</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>clarianes</estat>
+                <graus>20</graus>
+            </previsio>
+        </data>
+        
+        <data dia="20-05-2011">
+            <maxima>24</maxima>
+            <minima>14</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>17</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>24</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>22</graus>
+            </previsio>
+        </data>
+        
+        <data dia="21-05-2011">
+            <maxima>26</maxima>
+            <minima>14</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>18</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>26</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+        </data>
+        
+        <data dia="22-05-2011">
+            <maxima>27</maxima>
+            <minima>17</minima>
+            <vent>18 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>18</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>clarianes</estat>
+                <graus>27</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>algun núvol</estat>
+                <graus>25</graus>
+            </previsio>
+        </data>
+        
+        <data dia="23-05-2011">
+            <maxima>29</maxima>
+            <minima>20</minima>
+            <vent>25 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>22</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>29</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>26</graus>
+            </previsio>
+        </data>      
+        
+        <data dia="24-05-2011">
+            <maxima>30</maxima>
+            <minima>20</minima>
+            <vent>32 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>24</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>30</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>26</graus>
+            </previsio>
+        </data>                  
+    </poblacio>
+    
+    <poblacio>
+        <nom>Olot</nom>
+        <comarca>Garrotxa</comarca>
+        <data dia="19-05-2011">
+            <maxima>22</maxima>
+            <minima>11</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>ennuvolat</estat>
+                <graus>11</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>ennuvolat</estat>
+                <graus>22</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>clarianes</estat>
+                <graus>17</graus>
+            </previsio>
+        </data>
+        
+        <data dia="20-05-2011">
+            <maxima>23</maxima>
+            <minima>9</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>11</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>19</graus>
+            </previsio>
+        </data>
+        
+        <data dia="21-05-2011">
+            <maxima>24</maxima>
+            <minima>9</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>13</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>24</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>20</graus>
+            </previsio>
+        </data>
+        
+        <data dia="22-05-2011">
+            <maxima>24</maxima>
+            <minima>9</minima>
+            <vent>7 km/h</vent>
+            <pluja>2,6 mm</pluja>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>12</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>pluja lleu</estat>
+                <graus>24</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>pluja lleu</estat>
+                <graus>20</graus>
+            </previsio>
+        </data>
+        
+        <data dia="23-05-2011">
+            <maxima>27</maxima>
+            <minima>10</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>11</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>27</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+        </data>      
+        
+        <data dia="24-05-2011">
+            <maxima>28</maxima>
+            <minima>12</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>13</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>algun núvol</estat>
+                <graus>28</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>23</graus>
+            </previsio>
+        </data>                  
+    </poblacio>
+    
+    <poblacio>
+        <nom>Girona</nom>
+        <comarca>Gironès</comarca>
+        <data dia="19-05-2011">
+            <maxima>24</maxima>
+            <minima>14</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>algun núvol</estat>
+                <graus>14</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>20</graus>
+            </previsio>
+        </data>
+        
+        <data dia="20-05-2011">
+            <maxima>25</maxima>
+            <minima>11</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>15</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>algun núvol</estat>
+                <graus>25</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>21</graus>
+            </previsio>
+        </data>
+        
+        <data dia="21-05-2011">
+            <maxima>26</maxima>
+            <minima>11</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>15</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>26</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>21</graus>
+            </previsio>
+        </data>
+        
+        <data dia="22-05-2011">
+            <maxima>27</maxima>
+            <minima>13</minima>
+            <vent>7 km/h</vent>
+            <pluja>1,9 mm</pluja>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>15</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>clarianes</estat>
+                <graus>27</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>pluja</estat>
+                <graus>22</graus>
+            </previsio>
+        </data>
+        
+        <data dia="23-05-2011">
+            <maxima>29</maxima>
+            <minima>14</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>16</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>29</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>25</graus>
+            </previsio>
+        </data>      
+        
+        <data dia="24-05-2011">
+            <maxima>30</maxima>
+            <minima>16</minima>
+            <vent>22 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>18</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>algun núvol</estat>
+                <graus>30</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>25</graus>
+            </previsio>
+        </data>                  
+    </poblacio>
+    
+    <poblacio>
+        <nom>Salt</nom>
+        <comarca>Gironès</comarca>
+        <data dia="19-05-2011">
+            <maxima>24</maxima>
+            <minima>14</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>algun núvol</estat>
+                <graus>14</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>20</graus>
+            </previsio>
+        </data>
+        
+        <data dia="20-05-2011">
+            <maxima>25</maxima>
+            <minima>11</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>14</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>algun núvol</estat>
+                <graus>25</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>21</graus>
+            </previsio>
+        </data>
+        
+        <data dia="21-05-2011">
+            <maxima>26</maxima>
+            <minima>11</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>15</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>26</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>21</graus>
+            </previsio>
+        </data>
+        
+        <data dia="22-05-2011">
+            <maxima>27</maxima>
+            <minima>13</minima>
+            <vent>7 km/h</vent>
+            <pluja>1,5 mm</pluja>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>15</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>clarianes</estat>
+                <graus>27</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>pluja</estat>
+                <graus>22</graus>
+            </previsio>
+        </data>
+        
+        <data dia="23-05-2011">
+            <maxima>29</maxima>
+            <minima>14</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>16</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>29</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>25</graus>
+            </previsio>
+        </data>      
+        
+        <data dia="24-05-2011">
+            <maxima>30</maxima>
+            <minima>16</minima>
+            <vent>22 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>18</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>algun núvol</estat>
+                <graus>30</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>25</graus>
+            </previsio>
+        </data>                  
+    </poblacio>
+    
+    <poblacio>
+        <nom>Camprodon</nom>
+        <comarca>Garrotxa</comarca>
+        <data dia="19-05-2011">
+            <maxima>18</maxima>
+            <minima>8</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>ennuvolat</estat>
+                <graus>8</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>ennuvolat</estat>
+                <graus>18</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>14</graus>
+            </previsio>
+        </data>
+        
+        <data dia="20-05-2011">
+            <maxima>20</maxima>
+            <minima>7</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>8</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>algun núvol</estat>
+                <graus>20</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>15</graus>
+            </previsio>
+        </data>
+        
+        <data dia="21-05-2011">
+            <maxima>20</maxima>
+            <minima>8</minima>
+            <vent>14 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>9</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>clarianes</estat>
+                <graus>20</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>algun núvol</estat>
+                <graus>17</graus>
+            </previsio>
+        </data>
+        
+        <data dia="22-05-2011">
+            <maxima>20</maxima>
+            <minima>5</minima>
+            <vent>7 km/h</vent>
+            <pluja>13 mm</pluja>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>9</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>pluja</estat>
+                <graus>19</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>pluja</estat>
+                <graus>16</graus>
+            </previsio>
+        </data>
+        
+        <data dia="23-05-2011">
+            <maxima>23</maxima>
+            <minima>7</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>8</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>solejat</estat>
+                <graus>23</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>solejat</estat>
+                <graus>19</graus>
+            </previsio>
+        </data>      
+        
+        <data dia="24-05-2011">
+            <maxima>24</maxima>
+            <minima>9</minima>
+            <vent>11 km/h</vent>
+            <previsio hora="08:00">
+                <estat>solejat</estat>
+                <graus>10</graus>
+            </previsio>
+            <previsio hora="14:00">
+                <estat>algun núvol</estat>
+                <graus>24</graus>
+            </previsio>
+            <previsio hora="20:00">
+                <estat>ennuvolat</estat>
+                <graus>19</graus>
+            </previsio>
+        </data>                  
+    </poblacio>
+    
+</temps>
