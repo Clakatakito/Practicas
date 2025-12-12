@@ -1,0 +1,46 @@
+<!DOCTYPE projectes SYSTEM "gestioProjectes.dtd">
+<projectes>
+    <projecte id_proj="P001">
+        <nom>App Mòbil de Viatges</nom>
+        <descripcio>Desenvolupament d'una aplicació per a la reserva de vols i hotels.</descripcio>
+        <data_llancament>2025-01-30</data_llancament>
+        <equip>
+            <membre funció="Desenvolupador">
+                <nom>Albert Soler</nom>
+            </membre>
+            <membre funció="Analista">
+                <nom>Marta Roca</nom>
+            </membre>
+        </equip>
+        <tasques>
+            <tasca id_unic="T101" estat="Finalitzada">
+                <data_inici>2024-11-01</data_inici>
+                <data_fi>2024-11-15</data_fi>
+                <prioritat>Alta</prioritat>
+            </tasca>
+            <tasca id_unic="T102" estat="Progres">
+                <data_inici>2024-11-16</data_inici>
+                <data_fi>2024-12-30</data_fi>
+                <prioritat>Mitjana</prioritat>
+            </tasca>
+        </tasques>
+    </projecte>
+
+    <projecte id_proj="P002">
+        <nom>Plataforma E-commerce</nom>
+        <descripcio>Migració de la botiga online a un nou CMS.</descripcio>
+        <data_llancament>2025-04-01</data_llancament>
+        <equip>
+            <membre funció="Tester">
+                <nom>Núria Bosch</nom>
+            </membre>
+        </equip>
+        <tasques>
+            <tasca id_unic="T201" estat="Pendent">
+                <data_inici>2025-01-05</data_inici>
+                <data_fi>2025-02-15</data_fi>
+                <prioritat>Baixa</prioritat>
+            </tasca>
+        </tasques>
+    </projecte>
+</projectes>
