@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT projectes (projecte+, tasques?)>
+<!ELEMENT projecte (nom, descripcio, data_llancament, equip, tasques)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT descripcio (#PCDATA)>
+<!ELEMENT data_llancament (#PCDATA)>
+<!ELEMENT equip (membre+)>
+<!ELEMENT membre (nom)>
+<!ELEMENT tasques (tasca+)>
+<!ELEMENT tasca (data_inici, data_fi, prioritat)>
+<!ELEMENT data_inici (#PCDATA)>
+<!ELEMENT data_fi (#PCDATA)>
+<!ELEMENT prioritat (#PCDATA)>
+
+
+
+<!ATTLIST projecte id_proj ID #REQUIRED>
+<!ATTLIST membre funció CDATA #REQUIRED>
+<!ATTLIST tasca id_unic ID #REQUIRED>
+<!ATTLIST tasca estat (Finalitzada | Progres | Pendent) #REQUIRED>

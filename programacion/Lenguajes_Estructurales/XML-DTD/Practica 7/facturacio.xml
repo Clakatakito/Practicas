@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE facturacio SYSTEM "personal.dtd">
+<facturacio>
+    <empresa>
+        <raosocial tipus="empresa">
+            <nom>Porquets, SL</nom>
+            <adreca>c/Truges, 12</adreca>
+            <codipostal>17760</codipostal>
+            <poblacio>Vilabertran</poblacio>
+            <NIF>B17818181NK</NIF>
+        </raosocial>
+    </empresa>
+    
+    <factura numero="m12">
+        <client codi="m234">
+            <raosocial tipus="persona" >
+                <nom>Filomeno</nom>
+                <cognom>Garcia</cognom>
+                <cognom>Puig</cognom>
+                <adreca>c/Pollastres, 23</adreca>
+                <codipostal>17600</codipostal>
+                <poblacio>Figueres</poblacio>
+                <DNI>40444444-M</DNI>
+            </raosocial>
+        </client>
+        <rebut numero="m23">
+            <data>12-10-2010</data>
+            <totalrebut>524</totalrebut>
+            <linies>
+                <producte codi="m11115">
+                    <descripcio>Porquet de xocolata negra</descripcio>
+                    <quantitat>1</quantitat>
+                    <preuunitari>100</preuunitari>
+                </producte>
+                <producte codi="m1112">
+                     <descripcio>Porquet de xocolata blanca</descripcio>
+                     <quantitat>4</quantitat>
+                     <preuunitari>106</preuunitari>
+                </producte>
+            </linies>
+        </rebut>
+        <rebut numero="m28">
+            <data>14-10-2010</data>
+            <totalrebut>220</totalrebut>
+            <linies>
+                <producte codi="m11111">
+                    <descripcio>Porquet de xocolata amb llet</descripcio>
+                    <quantitat>2</quantitat>
+                    <preuunitari>110</preuunitari>
+                </producte>
+            </linies>
+        </rebut>
+        <data>15-10-2010</data>
+        <subtotal>744</subtotal>
+        <iva>18</iva>
+        <total>877,92</total>        
+    </factura>
+    
+    <factura numero="m13">
+        <client>
+            <raosocial tipus="empresa">
+                <nom>Telemonica, SA</nom>
+                <adreca>c/De la Gran Gran Via, 28</adreca>
+                <codipostal>28013</codipostal>
+                <poblacio>Madrid</poblacio>
+                <NIF>A88888888</NIF>                
+            </raosocial>
+            <idioma>castellà</idioma>
+            <Contacte>Manolo Antena</Contacte>
+            <Contacte>Marcial Porras</Contacte>            
+        </client>
+        <rebut numero="m24">
+            <data>12-10-2010</data>
+            <totalrebut>5000</totalrebut>
+            <linies>
+                <producte codi="m11115">
+                    <descripcio>Porquet de xocolata negra</descripcio>
+                    <quantitat>50</quantitat>
+                    <preuunitari>100</preuunitari>
+                </producte>                    
+            </linies>
+        </rebut>
+        <data>15-10-2010</data>
+        <subtotal>5000</subtotal>
+        <iva>18</iva>
+        <total>5900</total>
+    </factura>
+    
+    <factura numero="m14">
+        <client>
+            <raosocial tipus="empresa">              
+                <nom>MenjaXocolata, SL</nom>
+                <adreca></adreca>
+                <codipostal>17600</codipostal>
+                <poblacio>Figueres</poblacio>
+                <NIF>A177777777</NIF>
+            </raosocial>
+            <Contacte>Jimmy Gras</Contacte>            
+        </client>
+        <rebut numero="m25">
+            <data>13-10-2010</data>
+            <totalrebut>110</totalrebut>
+            <linies>
+                <producte codi="m11111">
+                    <descripcio>Porquet de xocolata amb llet</descripcio>
+                    <quantitat>1</quantitat>
+                    <preuunitari>110</preuunitari>
+                </producte>                
+            </linies>
+        </rebut>
+        <rebut numero="m26">
+            <data>14-10-2010</data>
+            <totalrebut>110</totalrebut>
+            <linies>
+                <producte codi="m11111">
+                    <descripcio>Porquet de xocolata amb llet</descripcio>
+                    <quantitat>1</quantitat>
+                    <preuunitari>110</preuunitari>
+                </producte>                
+            </linies>
+        </rebut>
+        <rebut numero="m27">
+            <data>14-10-2010</data>
+            <totalrebut>110</totalrebut>
+            <linies>
+                <producte codi="m11111">
+                    <descripcio>Porquet de xocolata amb llet</descripcio>
+                    <quantitat>1</quantitat>
+                    <preuunitari>110</preuunitari>
+                </producte>                
+            </linies>
+        </rebut>
+        <data>15-10-2010</data>
+        <subtotal>330</subtotal>
+        <iva>18</iva>
+        <total>389,4</total>        
+    </factura>    
+</facturacio>

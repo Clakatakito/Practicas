@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE personal SYSTEM "personal.dtd">
+
+<personal>
+    <persona id="m1">
+        <dades>
+            <nom>Sandra</nom>
+            <cognom>Ramirez</cognom>
+        </dades>
+        <email>sandraramirez@gmail.com</email>
+        <url href="http://sandraramirez.com"></url>
+        <relació director="m1"></relació>
+    </persona>
+
+    <persona id="m2">
+        <dades>
+            <cognom>Ramirez</cognom>
+            <nom>Pedro</nom>
+        </dades>
+        <email>pedroramirez@gmail.com</email>
+        <url href="http://pedroramirez.com"></url>
+        <relació></relació>
+    </persona>
+</personal>
