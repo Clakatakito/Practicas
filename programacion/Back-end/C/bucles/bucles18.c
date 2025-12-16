@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 int main()
 {
@@ -13,6 +14,10 @@ int main()
     int present = 1;
 
     int esta_alumno;
+
+    int continuar = 0;
+
+    do{
     int no_alumno = 0;
     int si_alumno = 0;
 
@@ -34,8 +39,11 @@ int main()
     }
 
     printf("Hay %d alumnos presentes\n", si_alumno);
-    printf("Hay %d alumnos que no hay venido\n", no_alumno);
-
+    printf("Hay %d alumnos que no han venido\n", no_alumno);
+    printf("Quieres pasar clase en otra clase?");
+    scanf("%d", &continuar);
+    }
+    while(continuar == 1);
 
     return 0;
 }
