@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 int main()
 {
@@ -12,7 +13,8 @@ int main()
     float cont = 0;
     float nota = 0;
     float escoje_user;
-    float resultado;
+    float resultado = 0;
+    bool suspendidos = false;
 
     printf("Cuantas notas quieres añadir?\n");
     scanf("%d", &num_notes);
@@ -22,12 +24,24 @@ int main()
         printf("Pon la nota:\n");
         scanf("%f", &escoje_user);
 
-        resultado = nota + escoje_user;
+        resultado = resultado + escoje_user;
         cont++;
+        if(escoje_user < 5){
+
+            suspendidos = true;
+
+        }
+
 
     }
     resultado = resultado / cont;
-    printf("La Mediana es %f", resultado);
+    printf("La Mediana es %f\n", resultado);
+    if (suspendidos == true){
+
+        printf("Hay susendidos");
+
+    }
 
     return 0;
 }
+
