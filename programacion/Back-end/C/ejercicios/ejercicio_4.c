@@ -36,7 +36,7 @@ int main()
 
             correcto = true;
 
-            if(cont == 4){
+            if(cont == 3){
 
                 printf("Que buena, a la ultima");
                 correcto = true;
