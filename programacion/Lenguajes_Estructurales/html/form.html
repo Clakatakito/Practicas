@@ -14,35 +14,44 @@
                 <legend>Dades bàsiques</legend><br>
                 
                 <label for="Nom">Nom</label><br>
-                <input type="text" id="Nom" name="Nom" required maxlength="50"><br><br>
+                <input type="text" id="Nom" name="Nom" required maxlength="15"><br><br>
                 <label for="Cognom">Congnom</label><br>
-                <input type="text" id="Cognom" name="Cognom" required maxlength="50"><br><br>
+                <input type="text" id="Cognom" name="Cognom" required maxlength="25"><br><br>
                 <label for="Telefon">Telefon</label><br>
-                <input type="number" id="Telefon" name="Telefon" maxlength="9"><br><br>
+                <input type="number" id="Telefon" name="Telefon"><br><br>
                 <label for="password">Contraseña</label><br>
                 <input type="password" id="password" name="password" maxlength="9"><br><br>
                 
                 
                 <label for="Sexe">Sexe:</label>
-                <input id="Sexe" type="radio" name="Sexe" value="Home" checked> Home
-                <input type="radio" value="Dona" name="Sexe"> Dona <br><br>
+                <input id="Sexe" type="radio" name="Sexe" value="Home"> Home
+                <input type="radio" value="Dona" name="Sexe" checked> Dona <br><br>
 
-                <label for="Correu_electrònic">Correu electrònic</label><br>
-                <input id="Correu_electrònic" type="email" name="Correu_electrònic"><br><br>
-                <label for="Població">Població:</label><br>
-                <select id="Població">
-                    <option id="Arbúcies" name="Arbúcies">Arbúcies</option>
-                    <option id="Badalona" name="Badalona">Badalona</option>
-                    <option id="Barcelona" name="Barcelona">Barcelona</option>
-                    <option id="Girona" name="Girona">Girona</option>
-                    <option id="Vilassar_de_Mar" name="Vilassar_de_Mar">Vilassar de Mar</option>
-                </select><br><br>
+                
                 <label for="Descripció">Descripció:</label><br>
-                <textarea id="Descripció" name="Descripció" rows="4" cols="40"></textarea><br>
-                <input type="checkbox" checked>Vull rebre informació sobre novetats i ofertes<br>
-                <input type="checkbox" required>Declaro haver llegit i acceptar les condicions generals del programa i la
-                normativa sobre protecció de dades indicada al RGPD<br><br>
-                <input type="reset" value="Reset"><input type="submit" value="Enviar">
+                <textarea id="Descripció" name="Descripció" rows="5" cols="30"></textarea><br>
+                <input type="checkbox" checked>Quiero recibir novedades y actualizaciones.<br><br>
+
+
+                
+                <label for="Qualificació">Qualificació:</label><br>
+                <select id="Qualificació">
+                    <option id="m1" name="m1">1</option>
+                    <option id="m2" name="m2">2</option>
+                    <option id="m3" name="m3">3</option>
+                    <option id="m4" name="m4">4</option>
+                    <option id="m5" name="m5">5</option>
+                    <option id="m6" name="m6">6</option>
+                    <option id="m7" name="m7">7</option>
+                    <option id="m8" name="m8">8</option>
+                    <option id="m9" name="m9">9</option>
+                    <option id="m10" name="m10">10</option>
+
+                </select><br><br>
+
+
+                <input type="reset" value="Reset">
+                <input type="submit" value="Enviar">
             </fieldset>
         </form>
     </body>
