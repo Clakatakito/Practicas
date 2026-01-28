@@ -1,1 +1,27 @@
 
+.p2008 {
+    background-color: rgb(195, 255, 127);
+}
+
+.borde_arriba{
+    border-top: 1px solid black;
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+.fondo-gris{
+
+background-color: gray;
+
+}
+
+table{
+
+    border-collapse: collapse;
+
+}
+
+.meses{
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
