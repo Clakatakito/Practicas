@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoja de Inscripción</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>HOJA DE INSCRIPCIÓN <br> EN LOS CICLOS FORMATIVOS DE GRADO SUPERIOR</h1>
+
+        <form action="#" method="post">
+            
+            <fieldset class="section-personal">
+                <legend>Datos Personales</legend>
+                <div class="row">
+                    <div class="field">
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre">
+                    </div>
+                    <div class="field">
+                        <label>Apellidos:</label>
+                        <input type="text" name="apellidos">
+                    </div>
+                    <div class="field">
+                        <label>DNI</label>
+                        <input type="text" name="dni">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <label>Localidad Nacimiento</label>
+                        <input type="text" name="localidad">
+                    </div>
+                    <div class="field">
+                        <label>Provincia:</label>
+                        <select name="provincia">
+                            <option value="">- selecciona -</option>
+                            <option value="madrid">Madrid</option>
+                            <option value="barcelona">Barcelona</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Fecha Nacimiento:</label>
+                        <input type="date" name="fecha_nacimiento">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field large">
+                        <label>Dirección:</label>
+                        <input type="text" name="direccion">
+                    </div>
+                    <div class="field">
+                        <label>Código Postal:</label>
+                        <input type="text" name="cp">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="section-acceso">
+                <legend>Forma de Acceso</legend>
+                <div class="radio-group">
+                    <label><input type="radio" name="acceso" value="directo"> Directo</label>
+                    <div class="sub-options">
+                        <div class="option">
+                            <input type="radio" name="sub_acceso"> 
+                            <span>Bachillerato LOGSE. Modalidad</span>
+                            <input type="text" >
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="sub_acceso"> 
+                            <span>Bachillerato Experimental</span>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="sub_acceso"> 
+                            <span>COU. Opción</span>
+                            <input type="text" >
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="sub_acceso"> 
+                            <span>FP2</span>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="sub_acceso"> 
+                            <span>Otros (especifique)</span>
+                            <input type="text" >
+                        </div>
+                    </div>
+                    <label><input type="radio" name="acceso" value="prueba"> Prueba Libre</label>
+                </div>
+            </fieldset>
+
+            <fieldset class="section-docs">
+                <legend>Documentos Adjuntados</legend>
+                <div class="row">
+                    <label><input type="checkbox" name="doc1"> Fotocopia DNI</label>
+                    <label><input type="checkbox" name="doc2"> Certificado Académico</label>
+                </div>
+                <div class="row">
+                    <label><input type="checkbox" name="doc3"> Otros documentos (especifique)</label>
+                    <input type="text">
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn-enviar">Enviar Solicitud</button>
+        </form>
+    </div>
+
+</body>
+</html>
