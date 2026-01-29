@@ -4,4 +4,48 @@ h1{
 }
 legend{
     border: 1px solid;
+    background-color: white;
+}
+
+.section-personal{
+    background-color: rgb(170, 170, 170);
+    
+}
+.section-acceso{
+    background-color: rgb(225, 231, 139);
+}
+
+.section-docs{
+    background-color: rgb(219, 127, 127);
+}
+
+label{
+    display: block;
+    
+    
+}
+.field{
+    float: left;
+    margin-right: 50px;
+    width: 200px;
+}
+.row{
+    clear: left;
+    
+}
+
+#input{
+    float: left;
+}
+
+#div{
+    clear: both;
+}
+
+.sub-options{
+    padding-left: 40px;
+}
+
+.radio-group{
+    padding-left: 50px;
 }
