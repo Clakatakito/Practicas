@@ -21,7 +21,7 @@ legend{
 
 label{
     display: block;
-    
+    float: left;
     
 }
 .field{
@@ -48,4 +48,13 @@ label{
 
 .radio-group{
     padding-left: 50px;
+}
+
+.certificado{
+
+    margin-left: 80px;
+}
+
+.mover-izquierda {
+    margin-left: -28px;
 }
