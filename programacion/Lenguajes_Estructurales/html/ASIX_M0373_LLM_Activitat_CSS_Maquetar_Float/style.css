@@ -2,3 +2,12 @@ html{
     background-color: rgb(211, 199, 169);
     margin: 50px;
 }
+
+.div1{
+    width: 250px;
+    text-align: center;
+}
+
+.no-centrar{
+    text-align: left;
+}
