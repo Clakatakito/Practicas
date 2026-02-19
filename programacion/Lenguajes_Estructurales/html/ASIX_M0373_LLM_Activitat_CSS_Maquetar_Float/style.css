@@ -1,14 +1,27 @@
 html{
     background-color: rgba(219, 216, 199);
-    margin: 50px;
+    margin-top: 100px;
+    
+}
+
+.div-gigante{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .div1{
     width: 270px;
     text-align: center;
     float: left;
+<<<<<<< HEAD
     margin-right: 25%;
     border-bottom: 2px solid black;
+=======
+    margin-right: 200px;
+    border-bottom: 1px solid black;
+>>>>>>> 218de0563752738c4b9f1b22a1a4daa1fda64275
     height: 600px;
 }
 
@@ -27,9 +40,14 @@ html{
     text-align: center;
     float: left;
     margin-right: 200px;
+<<<<<<< HEAD
     border-bottom: 2px solid black;
     height: 600px;
 
+=======
+    border-bottom: 1px solid black;
+    height: 600px;
+>>>>>>> 218de0563752738c4b9f1b22a1a4daa1fda64275
 }
 
 .div2 ul {
@@ -38,3 +56,17 @@ html{
     padding-left: 1.5rem;
 }
 
+.div3{
+    width: 270px;
+    text-align: center;
+    float: left;
+    margin-right: 200px;
+    border-bottom: 1px solid black;
+    height: 600px;
+}
+
+.div3 ul {
+    text-align: left;
+    margin-left: 0;
+    padding-left: 1.5rem;
+}
