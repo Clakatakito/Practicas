@@ -13,16 +13,18 @@ body{
     display: flex;       
     justify-content: center;  
     align-items: center;
+    position: relative;
 }
 
 .middler{
-    background-color: #007bff;
+    background-color: #a7c4e2;
     width: 100%;
     height: 500px;
     display: flex;       
     justify-content: center;  
     align-items: center;
     flex-direction: column;
+    
     
     
     
@@ -35,6 +37,7 @@ body{
     width: 55%;
     font-size: 30px;
     margin-top: 30px;
+    position: relative;
     
     
 
@@ -78,4 +81,7 @@ footer{
     display: flex;       
     justify-content: center;  
     align-items: center;
+    position: absolute;
+    top: -20px;
+    
 }
