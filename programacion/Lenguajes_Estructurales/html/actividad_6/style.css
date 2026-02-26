@@ -52,6 +52,7 @@ footer{
     justify-content: center;  
     align-items: center;
     font-size: 25px;
+    position: relative;
 }
 
 .bot-header{
@@ -84,4 +85,19 @@ footer{
     position: absolute;
     top: -20px;
     
+}
+
+.bot-foot{
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    height: 35px;
+    width: 150px;
+    display: flex;       
+    justify-content: center;  
+    align-items: center;
+    position: absolute;
+    top: -20px;
+    left: 100px;
+
 }
