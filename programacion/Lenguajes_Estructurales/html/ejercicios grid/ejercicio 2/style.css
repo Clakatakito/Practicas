@@ -1,0 +1,20 @@
+
+
+body{
+    display: grid;
+    grid-template-rows: 60% 40%;
+    width: 600px;
+    height: 600px;
+}
+
+main{
+    grid-column: 50% 50%;
+}
+
+.amarillo{
+    background-color: yellow;
+}
+
+.verde{
+    background-color: green;
+}

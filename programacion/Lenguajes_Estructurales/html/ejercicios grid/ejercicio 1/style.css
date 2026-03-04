@@ -1,0 +1,32 @@
+
+body{
+    display: grid;
+    grid-template-rows: 30% 60% 10%;
+    width: 600px;
+    height: 600px;
+}
+
+header{
+    background-color: yellow;
+}
+
+footer{
+    background-color: blue;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 100px auto 200px;
+}
+
+article{
+    background-color: red;
+}
+
+nav{
+    background-color: green;
+}
+
+aside{
+    background-color: rgb(226, 141, 120);
+}
