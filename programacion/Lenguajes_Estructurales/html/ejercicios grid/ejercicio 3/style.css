@@ -1,0 +1,11 @@
+
+.container{
+    display: grid;
+    width: 600px;
+    height: 700px;
+    grid-template-columns: 3fr 7fr;
+}
+
+.container1{
+    display: grid;
+}
