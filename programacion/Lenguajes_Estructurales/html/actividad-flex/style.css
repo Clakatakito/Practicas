@@ -20,22 +20,44 @@ h1, p{
     
 }
 
-.cielo1, .cielo2{
+.cielos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.cielo2, .cielo3, .cielo4, .cielo5{
     display: flex;
     border: 1px solid black;
+    border-radius: 1px;
     padding: 40px;
     flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
+    width: 27%;
     
+    
+}
+
+
+.cielo1{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    border: 1px solid black;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 27%;
     
 }
 
 
 
 img{
-    width: 100%;
+    width: 50%;
     border-radius: 10px;
     
 }
