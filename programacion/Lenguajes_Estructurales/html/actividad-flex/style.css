@@ -1,0 +1,41 @@
+
+h1, p{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.container{
+    width: 90%;
+    display: flex;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 10%;
+    
+}
+
+.cielo1, .cielo2{
+    display: flex;
+    border: 1px solid black;
+    padding: 40px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+img{
+    width: 1000px;
+    height: 100px;
+    
+}
+
+
+
