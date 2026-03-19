@@ -1,0 +1,88 @@
+.grid-contenidor {
+    display: grid; 
+    grid-template-columns: 150px 150px; 
+    grid-template-rows: 150px 150px; 
+    gap: 0; 
+    margin: 100px; /* Margen para ver bien los solapamientos */
+    position: relative;
+}
+
+        /* Estilos generales para los ítems [cite: 29] */
+.grid.item {
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+        /* La cajita punteada dentro de cada ítem [cite: 29] */
+.box {
+    border: 2px dashed black;
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+        /* --- POSICIONAMIENTO ESPECÍFICO --- */
+
+        .item.a { 
+            background-color: yellow; 
+            border-radius: 50%; /* Es un círculo  */
+            grid-column: 1; 
+            grid-row: 1;
+            z-index: 5; /* Por encima de todos  */
+            justify-self: start; 
+            align-self: start; 
+            width: 160px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .item.b { 
+            background-color: orange; 
+            grid-column: 2; 
+            grid-row: 1;
+            z-index: 1;
+            justify-self: end; 
+            align-self: start; 
+            width: 130px;
+            height: 130px;
+        }
+
+        .item.c { 
+            background-color: red; 
+            /* Se posiciona en el centro solapando filas y columnas  */
+            grid-column: 1 / span 2; 
+            grid-row: 1 / span 2;
+            z-index: 4; 
+            justify-self: center; 
+            align-self: center; 
+            width: 120px;
+            height: 160px;
+        }
+
+        .item.d { 
+            background-color: limegreen; 
+            grid-column: 1; 
+            grid-row: 2;
+            z-index: 3;
+            justify-self: start; 
+            align-self: end; 
+            width: 150px;
+            height: 120px;
+        }
+
+        .item.e { 
+            background-color: skyblue; 
+            grid-column: 2; 
+            grid-row: 2;
+            z-index: 2;
+            justify-self: end; 
+            align-self: end; 
+            width: 100px;
+            height: 200px;
+        }
