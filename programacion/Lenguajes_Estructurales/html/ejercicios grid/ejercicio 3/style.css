@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Configuración base */
 body {
     background-color: #f8cbad; /* Color melocotón de fondo general */
@@ -54,3 +55,117 @@ div {
 
 .claro { background-color: #fce4d6; } /* Color melocotón clarito */
 .naranja { background-color: #ed7d31; } /* Naranja fuerte */
+=======
+
+.container0 {
+    display: grid;
+    width: 600px;
+    height: 600px;
+    grid-template-rows: 0.5fr 2fr 0.5fr;
+    grid-template-columns: 1fr 3fr;
+    gap: 10px;
+    padding: 10px;
+    border: 10px;
+    border-bottom: 4px;
+    background-color: orange;}
+
+.container1 {
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 5px;
+    padding: 5px;
+    background-color: rgb(73, 121, 57);
+}
+
+.container2 {
+
+    grid-column: 1/2;
+
+    display: grid;
+    grid-template-rows: 1.3fr 4fr;
+    gap: 5px;
+    padding: 5px;
+    background-color: rgb(73, 121, 57);
+
+}
+
+.padre{
+    background-color: rgb(248, 211, 156);
+    display: grid;
+    grid-template-columns: 1.5fr 3fr;
+    gap: 5px;
+    padding: 5px;
+}
+
+.container3 {
+    grid-column: 2/2;
+
+    display: grid;
+    grid-template-rows: 2fr 6fr;
+    gap: 5px;
+    padding: 5px;
+    background-color: rgb(73, 121, 57);
+
+}
+
+.container4 {
+   grid-column: 1/3;
+    grid-template-rows: 2fr;
+
+    display: grid;
+    gap: 5px;
+    padding: 5px;
+    background-color: rgb(73, 121, 57);
+}
+
+.cuadrado1 {
+    background-color: rgb(252, 201, 106);
+
+}
+
+.cuadrado2 {
+    background-color: rgb(252, 201, 106);
+
+}
+
+.cuadrado3 {
+
+    background-color: rgb(252, 201, 106);
+
+}
+
+.cuadrado4 {
+    background-color: rgb(252, 201, 106);
+}
+
+.cuadrado5 {
+    background-color: rgb(252, 201, 106);
+
+}
+
+.cuadrado6 {
+    background-color: orange;
+}
+
+.cuadrado7 {
+
+    background-color: orange;
+}
+
+.cuadrado8{
+    background-color: rgb(252, 201, 106);
+}
+.cuadrado9{
+    background-color: rgb(252, 201, 106);
+}
+.cuadrado10{
+    background-color: orange;
+
+}
+
+.cuadrado11{
+    background-color: orange;
+}
+>>>>>>> 153bf8f5ccab341ffb8d145dbe8ade7b69fa2552
