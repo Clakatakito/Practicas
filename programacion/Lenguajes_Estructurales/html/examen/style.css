@@ -1,0 +1,104 @@
+
+html{
+    background-color: #fcfcfc;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;   
+    padding: 50px;
+}
+
+.cartelera{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    
+}
+
+.contact{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    
+
+}
+
+a{
+    color: rgba(29, 185, 84, 1);
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+h1{
+    color: rgba(29, 185, 84, 1);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+hr{
+    border: 3px solid rgba(29, 185, 84, 1);
+    
+}
+
+.titol{
+    margin-left: 300px;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 300px;
+    flex-wrap: wrap;
+    
+}
+
+img{
+    width: 50%;
+}
+
+.card1, .card2, .card3{
+    
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 100px;
+    margin-bottom: 50px;
+    align-items: flex-start;
+    width: 700px;
+    border: 1px solid black;
+    
+}
+
+.imagen{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+button{
+    background-color: rgba(29, 185, 84, 1);
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+footer{
+    background-color: black;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    color: white;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
