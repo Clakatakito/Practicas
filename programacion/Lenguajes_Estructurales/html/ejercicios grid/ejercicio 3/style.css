@@ -1,11 +1,56 @@
-
-.container{
-    display: grid;
-    width: 600px;
-    height: 700px;
-    grid-template-columns: 3fr 7fr;
+/* Configuración base */
+body {
+    background-color: #f8cbad; /* Color melocotón de fondo general */
+    padding: 20px;
 }
 
-.container1{
+/* El contenedor principal que envuelve todo */
+.container {
     display: grid;
+    grid-template-rows: 100px 1fr 80px; /* Tres secciones: Header, Cuerpo, Footer */
+    gap: 15px;
+    max-width: 900px;
+    margin: auto;
 }
+
+/* Fila Superior: 4 columnas */
+.container1 {
+    display: grid;
+    grid-template-columns: 1.5fr 3.5fr 1.5fr 1.5fr;
+    gap: 10px;
+}
+
+/* Fila Central: Izquierda (Sidebar) y Derecha (Main) */
+.container2 {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 15px;
+}
+
+/* Sidebar (Izquierda): Título arriba y dos bloques naranjas */
+.sidebar-grid {
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    gap: 10px;
+}
+.naranjas-subgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+/* Fila Inferior: 2 columnas naranjas */
+.container4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* ESTILOS VISUALES (Colores y bordes) */
+div {
+    border: 6px solid #808000; /* Borde verde oliva grueso */
+    min-height: 40px;
+}
+
+.claro { background-color: #fce4d6; } /* Color melocotón clarito */
+.naranja { background-color: #ed7d31; } /* Naranja fuerte */
