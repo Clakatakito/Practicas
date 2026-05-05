@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="vols.xsl"?>
+<aeroport>
+  <vol id="IB354">
+    <companyia web="http://www.iberia.com">IBERIA</companyia>
+    <sortida>24/03</sortida>
+    <origen>Barcelona</origen>
+    <desti>Madrid</desti>
+    <places>24</places>
+    <escala>no</escala>
+  </vol>
+  <vol id="AL222">
+    <companyia web="http://www.alitalia.com">ALITALIA</companyia>
+    <sortida>26/03</sortida>
+    <origen>Milan</origen>
+    <desti>Barcelona</desti>
+    <places>0</places> <escala>no</escala>
+  </vol>
+  <vol id="IS612">
+    <companyia web="http://www.intersky.com">INTER SKY</companyia>
+    <sortida>29/03</sortida>
+    <origen>Madrid</origen>
+    <desti>Lima</desti>
+    <places>2</places>
+    <escala>si</escala> </vol>
+</aeroport>
