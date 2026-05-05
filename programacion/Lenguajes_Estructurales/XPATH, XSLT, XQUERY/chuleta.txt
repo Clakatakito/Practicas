@@ -1,0 +1,60 @@
+Practicas
+
+Practica 1
+
+1) Quins cicles formatius s’imparteixen en l’institut?  
+//cicle
+2) Quins cicles formatius de grau mitjà s’imparteixen en l’institut?
+//cicle[@grau = "Mig"]
+3) Quins són els noms dels alumnes suspesos?  
+//alumne[@aprovat="NO"]/nom/text()
+4) Quantes dones cursen el cicle d’ASIX?  
+count(//classe[@nom="ASIX"]/alumne[genere="Dona"])
+5) Quins alumnes suspesos tenen un compte a Hotmail?  
+//alumne[@aprovat="SI" and contains(email, "hotmail")]/nom
+6) Quina és la llista de classe d’SMX?  
+//classe[@nom="SMX"]/alumne/nom/text()
+7) En quins cicles hi ha alumnes que han tret un 10?  
+//alumne[nota=10]/parent::classe/@nom
+8) Quants alumnes han aprovat ASIX?  
+count(//classe[@nom="ASIX"]/alumne[@aprovat="SI"])
+09) Quin percentatge d’aprovats té el centre?  
+count(//alumne[@aprovat="SI"]) div count(//alumne)*100
+
+Practica 2
+
+1) Quants partits han jugat els Vermells?  
+count(//partit[equip/nom="Vermells"])
+2) Quins partits han jugat a casa els Blancs?
+//partit[equip[@juga="local"]/nom="Blancs"]
+3) Quants partits en els quals jugaven els Blancs han quedat empatats?  
+count(//partit[equip/nom="Blancs" and equip[1]/resultat = equip[2]/resultat])
+4) Quants partits en els quals jugaven els Blancs han quedat empatats?
+Es lo mismo que la 3
+5) En quines jornades els Verds han jugat a casa?
+ //jornada[partit/equip[@juga='local' and nom='Verds']]/@num
+6) En quina jornada s’han fet més gols?  
+//jornada[sum(partit/equip/resultat) = 7]/@num
+7) Quina és la mitjana de gols per partit dels Vermells?  
+avg(//jornada/partit/equip[nom='Vermells']/resultat)
+8) Quants punts han fet els Blaus?  
+sum(//jornada/partit/equip[nom='Blaus']/resultat)
+
+Practica 3
+
+1) Quin temps farà a Girona el 23 de maig a les 14.00? 
+//poblacio[nom='Girona']/data[@dia='23-05-2018']/previsio[@hora='14:00']
+2) Quina quantitat de pluja caurà a Salt el dia 22 de maig?
+//poblacio[nom='Salt']/data[@dia='22-05-2018']/pluja
+3) Quins dies plourà a Olot?
+//poblacio[nom='Olot']/data[previsio/estat="pluja lleu"]/@dia
+4) En quines poblacions plourà durant aquests dies?
+//poblacio[data/pluja]/nom
+5) Quines són totes les temperatures previstes per a les 8 del matí a Camprodon?
+//poblacio[nom = "Camprodon"]/data/previsio[@hora = "08:00"]/graus
+6) En quina població hi haurà 24 graus a les 8 del matí?  
+//poblacio[data/previsio[@hora = "08:00"]/graus = 24]/nom
+7) Quina és la mitjana de temperatures de l’Alt Empordà?
+avg(//poblacio[comarca='Alt Empordà']/data/previsio/graus)
+8) En quin lloc hi haurà la temperatura més alta?  
+//poblacio[data/maxima = max(//maxima)]/nom/text()
