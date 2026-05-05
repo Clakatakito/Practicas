@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="alumnes.xsl"?>
+<escola>
+  <alumne>
+    <nom>Carles</nom>
+    <cognom1>Barberà</cognom1>
+    <cognom2>Adrià</cognom2>
+    <adreca>Avinguda Meridiana 77</adreca>
+    <telefon>658452152</telefon>
+    <foto>img/foto1.avif</foto>
+    <notes>
+      <assignatura nom="Història" nota="5"/>
+      <assignatura nom="Literatura" nota="6"/>
+      <assignatura nom="Anglès" nota="8"/>
+      <assignatura nom="Matemàtiques" nota="4"/>
+    </notes>
+  </alumne>
+  <alumne>
+    <nom>Susanna</nom>
+    <cognom1>Barberà</cognom1>
+    <cognom2>García</cognom2>
+    <adreca>Avinguda Meridiana 77</adreca>
+    <telefon>658452152</telefon>
+    <foto>img/foto2.avif</foto>
+    <notes>
+      <assignatura nom="C1" nota="6"/>
+      <assignatura nom="C2" nota="7"/>
+      <assignatura nom="C3" nota="3"/>
+      <assignatura nom="C4" nota="4"/>
+    </notes>
+  </alumne>
+  <alumne>
+    <nom>Carles</nom>
+    <cognom1>Cáceres</cognom1>
+    <cognom2>López</cognom2>
+    <adreca>Avinguda Meridiana 77</adreca>
+    <telefon>658452152</telefon>
+    <foto>img/foto3.avif</foto>
+    <notes>
+      <assignatura nom="Anglès" nota="5"/>
+      <assignatura nom="Alemany" nota="6"/>
+      <assignatura nom="Francès" nota="8"/>
+      <assignatura nom="Català" nota="6"/>
+    </notes>
+  </alumne>
+  <alumne>
+    <nom>Anna</nom>
+    <cognom1>Estévez</cognom1>
+    <cognom2>Jiménez</cognom2>
+    <adreca>Avinguda Meridiana 77</adreca>
+    <telefon>658452152</telefon>
+    <foto>img/foto4.avif</foto>
+    <notes>
+      <assignatura nom="Sistemes Operatius" nota="4"/>
+      <assignatura nom="Ofimàtica" nota="6"/>
+      <assignatura nom="Xarxes" nota="3"/>
+      <assignatura nom="Hardware" nota="4"/>
+    </notes>
+  </alumne>
+  <alumne>
+    <nom>Carles</nom>
+    <cognom1>Fernández</cognom1>
+    <cognom2>Bueno</cognom2>
+    <adreca>Avinguda Meridiana 77</adreca>
+    <telefon>658452152</telefon>
+    <foto>img/images.jpeg</foto>
+    <notes>
+      <assignatura nom="Ciències Socials" nota="6"/>
+      <assignatura nom="Ciències Naturals" nota="7"/>
+      <assignatura nom="Llenguatge" nota="5"/>
+      <assignatura nom="Educació Física" nota="9"/>
+    </notes>
+  </alumne>
+</escola>
