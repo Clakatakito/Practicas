@@ -10,7 +10,6 @@
           td { border: 1px solid black; padding: 10px; text-align: center; background-color: black; color: white; }
           .ple { background-color: red; color: white; font-weight: bold; }
           img { width: 30px; }
-          a { text-decoration: none; color: blue; }
         </style>
       </head>
       <body>
@@ -32,9 +31,7 @@
               <td><xsl:value-of select="@id"/></td>
               
               <td>
-                <a href="{companyia/@web}" target="_blank">
                   <xsl:value-of select="companyia"/>
-                </a>
               </td>
               
               <td><xsl:value-of select="sortida"/></td>
