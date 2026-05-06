@@ -58,3 +58,34 @@ Practica 3
 avg(//poblacio[comarca='Alt Empordà']/data/previsio/graus)
 8) En quin lloc hi haurà la temperatura més alta?  
 //poblacio[data/maxima = max(//maxima)]/nom/text()
+
+
+
+
+
+xsl:for-each>
+
+Función: Es un bucle (loop).
+
+Uso: Recorre una lista de nodos en el documento XML (en tu caso, cada elemento <vol> dentro de aeroport). 
+Te permite repetir un bloque de código por cada elemento que encuentre. En tu código, crea una fila <tr> por cada vuelo.
+
+<xsl:choose>, <xsl:when> y <xsl:otherwise>
+
+Función: Trabajan juntos como una estructura condicional múltiple.
+
+Uso: Es el equivalente al if / else if / else en otros lenguajes. 
+
+Se utilizan cuando tienes varias opciones excluyentes.
+
+<xsl:choose>: Es el contenedor que inicia la estructura.
+
+<xsl:when test="...">: Evalúa una condición específica.
+
+<xsl:otherwise>: Es el caso por defecto (el "si no se cumple ninguna de las anteriores")
+
+2. Diferencia entre <xsl:if> y <xsl:when>
+
+cuando tú usas un if no puedes hacer un "else", con el choose si
+
+
