@@ -44,7 +44,7 @@
                     <xsl:attribute name="class">ple</xsl:attribute>
                     PLE
                   </xsl:when>
-                  <xsl:otherwise>
+                  <xsl:otherwise> <!--es un else-->
                     <xsl:value-of select="places"/>
                   </xsl:otherwise>
                 </xsl:choose>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="prueba.xsl"?>
+<catalogo>
+    <categoria nombre="Frutas">
+        <descripcion>Todo tipo de frutas frescas y naturales.</descripcion>
+        <producto>
+            <nombre>Manzanas</nombre>
+            <precio>2.99</precio>
+            <comentarios>
+                <comentario usuario="Juan Perez">Muy buenas, frescas y jugosas.</comentario>
+                <comentario usuario="Maria Lopez">Excelente calidad, totalmente recomendadas.</comentario>
+            </comentarios>
+        </producto>
+    </categoria>
+    
+    <categoria nombre="Lácteos">
+        <descripcion>Productos derivados de la leche como quesos, yogures y leches.</descripcion>
+        <producto>
+            <nombre>Leche Entera</nombre>
+            <precio>1.29</precio>
+            <comentarios>
+                <comentario usuario="Carlos Gomez">Está bien, pero un poco cara.</comentario>
+            </comentarios>
+        </producto>
+        <producto>
+            <nombre>Queso Fresco</nombre>
+            <precio>4.99</precio>
+            <comentarios/>
+        </producto>
+    </categoria>
+</catalogo>
