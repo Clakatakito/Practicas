@@ -4,14 +4,7 @@
     <html>
       <head>
         <title>Informació de Vols - Aeroport del Prat</title>
-       <!-- <link rel="stylesheet" type="text/css" href="estilos.css"/> Fichero css -->
-        <style>
-          table { border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; border-collapse: separate; }
-          th { background-color: grey; border: 1px solid black; padding: 10px; }
-          td { border: 1px solid black; padding: 10px; text-align: center; background-color: black; color: white; }
-          .ple { background-color: red; color: white; font-weight: bold; }
-          img { width: 30px; }
-        </style>
+       <link rel="stylesheet" type="text/css" href="style.css"/>
       </head>
       <body>
         <h2>Llistat de Vols de l'Aeroport</h2>

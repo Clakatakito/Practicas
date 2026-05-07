@@ -1,0 +1,5 @@
+table { border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; border-collapse: separate; }
+th { background-color: grey; border: 1px solid black; padding: 10px; }
+td { border: 1px solid black; padding: 10px; text-align: center; background-color: black; color: white; }
+.ple { background-color: red; color: white; font-weight: bold; }
+img { width: 30px; }
