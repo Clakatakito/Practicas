@@ -4,7 +4,7 @@
     <html>
       <head>
         <title>Informació de Vols - Aeroport del Prat</title>
-        <link rel="stylesheet" type="text/css" href="estilos.css"/> <!-- Fichero css -->
+       <!-- <link rel="stylesheet" type="text/css" href="estilos.css"/> Fichero css -->
         <style>
           table { border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; border-collapse: separate; }
           th { background-color: grey; border: 1px solid black; padding: 10px; }
