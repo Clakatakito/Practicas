@@ -90,3 +90,8 @@ function limpiarHTML(){
 function transformarLocalStorage(){
     localStorage.setItem("mensajes", JSON.stringify(arrayMensajes))
 }
+
+trabajo, trabajo, 
+hshs
+smjs
+smkqamssal,
